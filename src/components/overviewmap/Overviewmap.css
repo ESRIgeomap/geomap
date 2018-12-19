@@ -1,0 +1,18 @@
+.overviewMapDiv {
+  position: absolute;
+  z-index: 10000;
+  bottom: 20px;
+  left: 20px;
+}
+.overviewDiv {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+  z-index: 9999;
+}
+
+.extentDiv {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
+}

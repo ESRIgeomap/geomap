@@ -1,0 +1,225 @@
+.wrap {
+  flex: 0 1 auto;
+  margin-top: 4px;
+  width: 368px;
+  background: white;
+  pointer-events: all;
+}
+
+.headerWrap {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+.lineStationIcon {
+  display: inline-block;
+  background-image: url(../../assets/icons.png);
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+}
+
+.lineSubject {
+}
+
+.lineSubjectTitle {
+  color: #3285ff;
+  font-size: 14px;
+}
+
+.lineSubjectSep {
+  color: #3285ff;
+  margin: 0 2px;
+}
+
+.lineDesc {
+  margin-top: 4px;
+  color: #666;
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lineDescSep {
+  margin: 0 12px;
+}
+
+.lineDetailWrap {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.lineDetailBusWrap {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background: #f0f6ff;
+}
+
+.lineDetailIcon {
+  flex: none;
+  width: 40px;
+  text-align: center;
+}
+
+.lineDetailStartIconWrap {
+  width: 3px;
+  background: #e6e6e6;
+  position: absolute;
+  top: 15px;
+  bottom: 0;
+  left: 15px;
+}
+
+.lineDetailEndIconWrap {
+  width: 3px;
+  background: #e6e6e6;
+  position: absolute;
+  top: 0;
+  bottom: 15px;
+  left: 15px;
+}
+
+.lineDetailBusIconWrap {
+  width: 3px;
+  background: #b1cffc;
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 15px;
+}
+
+.lineDetailStartIcon {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+}
+
+.lineDetailEndIcon {
+  position: absolute;
+  bottom: 15px;
+  left: 5px;
+}
+
+.lineDetailBusIcon {
+  position: absolute;
+  top: 56px;
+  left: 5px;
+}
+
+.lineDetailBusLine {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  color: #3285ff;
+  font-size: 14px;
+}
+
+.lineDetailBusLineSolution {
+  margin-left: 25px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.lineDetailBusLineSolution > span {
+  margin-bottom: 4px;
+}
+
+.lineDetailWalkIconWrap {
+  width: 3px;
+  background: #e6e6e6;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+}
+
+.lineDetailContentWrap {
+  flex: auto;
+  padding: 15px 0 15px 25px;
+}
+
+.lineDetailStartContent {
+  margin-left: 25px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #666;
+  font-family: 'Microsoft YaHei';
+}
+
+.lineDetailStartWalk {
+}
+
+.startEndIcon {
+  display: inline-block;
+  width: 12px;
+  height: 11px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  margin-left: 3px;
+}
+
+.segIcon {
+  display: inline-block;
+  background-image: url(../../assets/icons.png);
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+}
+
+.lineDetailContent {
+  flex: auto;
+}
+
+.lineDetailSegment {
+  margin-left: 25px;
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  border-bottom: 1px solid #fcfcff;
+}
+
+.lineDetailSegment:hover {
+  background-color: #ebf1fb;
+}
+
+:global(.busline-result-collapse) {
+  margin: 20px 0;
+  border: none;
+  background: white;
+}
+
+:global(.busline-result-collapse) > :global(.ant-collapse-item) {
+  background: #f0f6ff;
+  margin: 20px 20px 0 20px;
+  box-sizing: border-box;
+  border: 1px solid #ececec;
+}
+
+:global(.busline-result-collapse)
+  > :global(.ant-collapse-item)
+  > :global(.ant-collapse-header) {
+  padding: 20px 21px 19px;
+}
+
+:global(.busline-result-collapse)
+  > :global(.ant-collapse-item)
+  > :global(.ant-collapse-header)
+  > :global(.arrow) {
+  left: unset;
+  right: 20px;
+  top: 34px;
+  color: #666;
+}

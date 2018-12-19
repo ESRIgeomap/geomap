@@ -1,0 +1,64 @@
+.box {
+  -webkit-transition: max-height 1s ease-in;
+  transition: max-height 1s ease-in;
+  overflow: hidden;
+  flex: none;
+  background-color: #fff;
+  width: 368px;
+  pointer-events: all;
+}
+
+.searchbox {
+  float: left;
+  height: auto;
+  width: 329px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.revertbox {
+  padding: 43px 23px 42px 23px;
+  flex: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputbox {
+  flex: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.routeinputbox {
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-items: center;
+}
+
+.routeinputicon {
+
+}
+
+.routeinput {
+  height: 100%;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+  border: none;
+  line-height: 20px;
+  margin-left: 12px;
+  margin-right: 27px;
+}
+
+.routeinput:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+

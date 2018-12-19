@@ -1,0 +1,53 @@
+.wrap {
+  flex: 0 1 auto;
+  margin-top: 4px;
+  width: 368px;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar {
+  flex: none;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  background: white;
+}
+
+.returnIcon {
+  color: #3285ff;
+}
+
+.barText {
+  color: #3285ff;
+  font-size: 14px;
+}
+
+.content {
+  flex: auto;
+  margin-top: 4px;
+  background: white;
+  padding: 10px 0;
+}
+
+.itemwrap {
+  padding: 6px 10px;
+}
+
+.itemwrap:hover {
+  background: #f6f6f6;
+}
+
+.itemtitle {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.itemdesc {
+  font-size: 12px;
+}

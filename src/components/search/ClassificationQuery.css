@@ -1,0 +1,119 @@
+.wrap {
+  pointer-events: all;
+  background: white;
+  margin-top: 4px;
+  width: 368px;
+}
+
+.contentUl {
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.titleLi {
+  margin: 0;
+  margin-left: 10px;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 58px;
+  cursor: pointer;
+}
+
+.titleLi:hover .groupSpan {
+  color: blue;
+}
+
+.titleLi:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Icons */
+
+.icon {
+  padding: 4px;
+  height: 36px;
+  width: 36px;
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.dining {
+  composes: icon;
+  background-image: url(../../assets/category/dining.png);
+}
+.hotel {
+  composes: icon;
+  background-image: url(../../assets/category/hotel.png);
+}
+.shopping {
+  composes: icon;
+  background-image: url(../../assets/category/shopping.png);
+}
+.organization {
+  composes: icon;
+  background-image: url(../../assets/category/organization.png);
+}
+.education {
+  composes: icon;
+  background-image: url(../../assets/category/education.png);
+}
+.health {
+  composes: icon;
+  background-image: url(../../assets/category/health.png);
+}
+.featurespot {
+  composes: icon;
+  background-image: url(../../assets/category/featurespot.png);
+}
+.service {
+  composes: icon;
+  background-image: url(../../assets/category/service.png);
+}
+.transport {
+  composes: icon;
+  background-image: url(../../assets/category/transport.png);
+}
+.finance {
+  composes: icon;
+  background-image: url(../../assets/category/finance.png);
+}
+.place {
+  composes: icon;
+  background-image: url(../../assets/category/place.png);
+}
+.enterprise {
+  composes: icon;
+  background-image: url(../../assets/category/enterprise.png);
+}
+.entertain {
+  composes: icon;
+  background-image: url(../../assets/category/entertain.png);
+}
+.community {
+  composes: icon;
+  background-image: url(../../assets/category/community.png);
+}
+.carservice {
+  composes: icon;
+  background-image: url(../../assets/category/carservice.png);
+}
+.publicfacilities {
+  composes: icon;
+  background-image: url(../../assets/category/publicfacilities.png);
+}
+.other {
+  composes: icon;
+  background-image: url(../../assets/category/other.png);
+}
+
+/* End of Icons */

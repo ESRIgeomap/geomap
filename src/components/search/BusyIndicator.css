@@ -1,0 +1,17 @@
+.wrap {
+  margin-top: 10px;
+  width: 368px;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.loadingimg {
+  width:140px;
+  height:70px;
+}
+
+.text {
+
+}

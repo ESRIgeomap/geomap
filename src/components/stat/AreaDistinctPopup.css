@@ -1,0 +1,35 @@
+.wrap {
+  height: 240px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: auto;
+}
+
+.itemwrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.linkitem {
+  display: inline-block;
+  padding: 3px 6px;
+  width: 75px;
+}
+
+.linkitem:hover {
+  background-color: #ddd;
+}
+
+.btnwrap {
+  flex: none;
+}
+
+.hint {
+  margin-left: 8px;
+  color: darkgray;
+}

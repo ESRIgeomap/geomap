@@ -1,0 +1,45 @@
+.wrap {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.attrWrap {
+  padding: 10px;
+  display: flex;
+}
+
+.attrRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.attrLabel {
+  flex: none;
+  width: 42px;
+}
+
+.nearbyBar {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #f8f8f8;
+  padding: 4px 8px;
+}
+
+.nearbyBar img {
+  position: relative;
+  height: 14px;
+  width: 14px;
+  margin-right: 8px;
+  top: -1px;
+  border: 0;
+  background-image: url(../../assets/iw_bg.png);
+  background-position: -30px -136px;
+  overflow: hidden;
+}
+
+.nearbyBar span {
+  color: #3d6dcc;
+}

@@ -1,0 +1,93 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow: hidden;
+}
+/*img{margin:10px;}*/
+.map-container {
+  height: 100%;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+}
+canvas {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+svg {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#view1Div {
+  height: 100%;
+  flex: auto;
+  border: 2px #285c95 solid;
+  padding: 5px;
+}
+#view2Div {
+  height: 100%;
+  flex: auto;
+  border: 2px #285c95 solid;
+  padding: 5px;
+}
+
+#time_layers_select_time_hidden1 {
+  padding-right: 40px;
+  width: 500px;
+  height: 49px;
+  left: 100px;
+  bottom: 60px;
+  position: absolute;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#time_layers_select_time_hidden2 {
+  padding-right: 40px;
+  width: 500px;
+  height: 49px;
+  right: 80px;
+  bottom: 60px;
+  position: absolute;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#timepan1,
+#timepan2 {
+  margin-top: 8px;
+}
+.slider-container {
+  margin-top: 10px;
+  float: right;
+}
+
+.time_con_le {
+  float: left;
+  display: inline;
+  width: 17px;
+  height: 17px;
+  background: url(./image/time_rt.png) no-repeat;
+  background-size: cover;
+  margin: 5px 5px 0px 0px;
+  position: absolute;
+  left: 15px;
+  cursor: pointer;
+}
+
+.left-dir,
+.right-dir {
+  width: 50%;
+  float: left;
+}
+.esriSimpleSliderTL {
+  right: 20px;
+  left: auto;
+}

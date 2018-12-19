@@ -1,0 +1,74 @@
+.wrap {
+  flex: 0 1 auto;
+  margin-top: 4px;
+  width: 368px;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar {
+  flex: none;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  background: white;
+}
+
+.returnIcon {
+  color: #3285ff;
+}
+
+.barText {
+  color: #666;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.content {
+  flex: auto;
+  margin-top: 4px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemtitle {
+  height: 96px;
+  background: #3285FF;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.itembar {
+  height: 38px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #3285FF;
+  font-size: 12px;
+  padding: 0 15px;
+  border-bottom: 1px solid #ececec;
+}
+
+.itemdesc {
+  padding: 15px;
+}
+
+.itemdesc > section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.itemdesc > section > h2 {
+  flex: none;
+}
+
+.itemdesc > section > p {
+  flex: auto;
+  margin-left: 15px;
+}

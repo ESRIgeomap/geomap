@@ -1,0 +1,57 @@
+.toolbar {
+  z-index: 10;
+  position: absolute;
+  top: 40px;
+  right: 5%;
+}
+.noradius {
+  border-radius: 0px;
+}
+.btnStyle {
+  border: 0px;
+  /* border-radius: 0px; */
+  border-radius: 10px;
+  font-size: 12px;
+  background-color: rgb(54, 52, 52);
+  opacity: 0.8;
+}
+.btnStyle:hover {
+  border: 0px;
+  border-radius: 0px;
+  background-color: #fff;
+}
+.btnStyle:focus {
+  background: rgb(54, 52, 52);
+}
+.btnA {
+  border: 0px;
+  border-radius: 0px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+.btnA:hover {
+  background-color: red;
+}
+
+.btnImg {
+  border: 0px;
+  border-radius: 0px;
+  width: 20px;
+  height: 20px;
+}
+.buttonGroup {
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.15);
+}
+.btnStyle:not(:last-child):after {
+  content: '';
+  display: block;
+  z-index: 9;
+  visibility: visible;
+  width: 1px;
+  height: 21px;
+  background: #eee;
+  position: absolute;
+  top: 7px;
+  right: -1px;
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>一张图应用</title>
+  <link rel="shortcut icon" type="image/ico" href="./favicon.png">
+  <link rel="stylesheet" href="http://geomap.arcgisonline.cn/jsapi/4.9/esri/css/main.css">
+  <link rel="stylesheet" href="./baseMapGallery.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    var apiRoot = 'http://geomap.arcgisonline.cn/jsapi/4.9/init.js';
+    var dojoConfig = {
+      async: true,
+      deps: ['@dojo/framework/shim/main'],
+      has: {
+        "esri-promise-compatibility": 1,  // Use native Promises by default
+        "esri-featurelayer-webgl": 1      // Enable FeatureLayer WebGL capabilities
+      }
+    };
+  </script>
+  <script src="./config/config.js"></script>
+  <script src="./config/classconfig.js"></script>
+  <script src="./config/poi.js"></script>
+</body>
+
+</html>

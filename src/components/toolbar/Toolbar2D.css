@@ -1,0 +1,29 @@
+.toolbar {
+  z-index: 10;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+.noradius {
+  border-radius: 0px;
+}
+.btnStyle {
+  border: 0px;
+  border-radius: 0px;
+  font-size: 12px;
+}
+.buttonGroup{
+  box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+}
+.btnStyle:not(:last-child):after {
+  content: '';
+  display: block;
+  z-index: 9;
+  visibility: visible;
+  width: 1px;
+  height: 21px;
+  background: #eee;
+  position: absolute;
+  top: 7px;
+  right: -1px;
+}

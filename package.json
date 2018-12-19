@@ -1,0 +1,52 @@
+{
+  "name": "geomap",
+  "private": true,
+  "scripts": {
+    "start": "cross-env PORT=8013 HOST=localhost umi dev",
+    "build": "umi build",
+    "test": "umi test",
+    "lint": "eslint --ext .js src mock tests"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "enquire-js": "^0.2.1",
+    "esri-loader": "^2.5.0",
+    "lodash": "^4.17.11",
+    "nprogress": "^0.2.0",
+    "rc-queue-anim": "^1.6.10",
+    "rc-scroll-anim": "^2.5.6",
+    "rc-tween-one": "^2.2.19",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-document-title": "^2.0.3",
+    "react-github-button": "^0.1.11",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "@types/arcgis-js-api": "^4.9.0",
+    "@types/react": "^16.4.18",
+    "@types/react-dom": "^16.0.9",
+    "babel-eslint": "^9.0.0",
+    "cross-env": "^5.1.4",
+    "dojo-typings": "^1.11.9",
+    "eslint": "^5.4.0",
+    "eslint-config-geomap": "^0.1.0",
+    "eslint-config-umi": "^0.1.5",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "umi": "^2.2.0",
+    "umi-plugin-react": "^1.1.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
