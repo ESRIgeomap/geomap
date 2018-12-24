@@ -21,7 +21,7 @@ const ID_LABEL_LAYER = 'layer-search-label';
 
 const DRAW_SYMBOL = {
   type: 'picture-marker',
-  url: './images/svg_location_red.png',
+  url: './images/busline/svg_location_red.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',
@@ -29,7 +29,7 @@ const DRAW_SYMBOL = {
 
 const HIGHLIGHT_SYMBOL = {
   type: 'picture-marker',
-  url: './images/svg_location_highlight.png',
+  url: './images/busline/svg_location_highlight.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',
@@ -47,7 +47,7 @@ const BUFFER_SYMBOL = {
 
 const PIN_SYMBOL = {
   type: 'picture-marker',
-  url: './images/pin.png',
+  url: './images/busline/pin.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',

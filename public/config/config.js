@@ -1,8 +1,8 @@
 (function(window) {
   var config = {
     portal: 'http://geomap.arcgisonline.cn/arcgis/',
-    /** 
-     * 
+    /**
+     *
      * App Info */
     signin: 'https://geomap.arcgisonline.cn/arcgis/cxghgeoplat/viewer/login.html',
 
@@ -15,13 +15,13 @@
     * webMapId：二维地图基础底图
     * webSceneId：三维地图基础底图
     * */
-    webMapId: '6a3cc3c01d804736aa27242798a6dc75',
+    webMapId: '89d52b73eecb4e8aae4ed2f2aaac63c5',
     webSceneId: '2b5583be57624afab5852e457523b8bb',
-    
-    /** 
-    * 代理配置项
-    * 说明：所有的代理均需要在此配置，例如登录
-    * */
+
+    /**
+     * 代理配置项
+     * 说明：所有的代理均需要在此配置，例如登录
+     * */
     proxy: 'http://geomap.arcgisonline.cn/Java/proxy.jsp',
 
     //打印服务
@@ -37,18 +37,15 @@
 
     // --------------------多时相功能配置项----------------------------
 
+    multidateItemone: '6a3cc3c01d804736aa27242798a6dc75',
 
-    multidateItemone: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer',
+    multidateItemtwo: '46af0c1e6a03401dbbaad015335df3dc',
 
-    multidateItemtwo:
-      'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+    multidateItemthree: '6c23d560ff4148e6af54caa4b523cc1d',
 
-    multidateItemthree: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer',
+    multidateItemfour: '15ebe38d5b9448fca8ad47c1adf7cdec',
 
-    multidateItemfour:
-      'http://thematic.geoq.cn/arcgis/rest/services/ThematicMaps/administrative_division_boundaryandlabel/MapServer',
-
-    multidateItemfive: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineCommunityENG/MapServer',
+    multidateItemfive: 'c0f8bff30a2e4589892c9c909a383880',
 
     initialExtent: {
       center: [116.3, 39.9],

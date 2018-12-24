@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 
-import imgSrc from '../../assets/fail.gif';
+import imgSrc from './images/fail.gif';
 
 import styles from './ErrorIndicator.css';
 

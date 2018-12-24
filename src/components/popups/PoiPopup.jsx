@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Popup.css';
 
-import transparentSrc from '../../assets/transparent.gif';
+import transparentSrc from './images/transparent.gif';
 
 class PoiPopup extends React.Component {
   render() {

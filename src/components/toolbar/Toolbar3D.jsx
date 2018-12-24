@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
-import panMapIcon from '../../assets/toolbar/移动.png';
-import searchIcon from '../../assets/toolbar/手指.png';
-import personViewIcon from '../../assets/toolbar/人视角.png';
-import surroundRoamIcon from '../../assets/toolbar/旋转.png';
-import yuYanIcon from '../../assets/toolbar/鱼眼.png';
-import measurement3DIcon from '../../assets/toolbar/量高.png';
-import measurement2DIcon from '../../assets/toolbar/量面.png';
-import exportImageIcon from '../../assets/toolbar/导图.png';
-import sunImageIcon from '../../assets/toolbar/光照.jpg';
+import panMapIcon from './images/移动.png';
+import searchIcon from './images/手指.png';
+import personViewIcon from './images/人视角.png';
+import surroundRoamIcon from './images/旋转.png';
+import yuYanIcon from './images/鱼眼.png';
+import measurement3DIcon from './images/量高.png';
+import measurement2DIcon from './images/量面.png';
+import exportImageIcon from './images/导图.png';
+import sunImageIcon from './images/光照.jpg';
 
 import {
   ACTION_MEASURE_LINE_3D,

@@ -49,71 +49,71 @@
 
 .dining {
   composes: icon;
-  background-image: url(../../assets/category/dining.png);
+  background-image: url(./images/dining.png);
 }
 .hotel {
   composes: icon;
-  background-image: url(../../assets/category/hotel.png);
+  background-image: url(./images/hotel.png);
 }
 .shopping {
   composes: icon;
-  background-image: url(../../assets/category/shopping.png);
+  background-image: url(./images/shopping.png);
 }
 .organization {
   composes: icon;
-  background-image: url(../../assets/category/organization.png);
+  background-image: url(./images/organization.png);
 }
 .education {
   composes: icon;
-  background-image: url(../../assets/category/education.png);
+  background-image: url(./images/education.png);
 }
 .health {
   composes: icon;
-  background-image: url(../../assets/category/health.png);
+  background-image: url(./images/health.png);
 }
 .featurespot {
   composes: icon;
-  background-image: url(../../assets/category/featurespot.png);
+  background-image: url(./images/featurespot.png);
 }
 .service {
   composes: icon;
-  background-image: url(../../assets/category/service.png);
+  background-image: url(./images/service.png);
 }
 .transport {
   composes: icon;
-  background-image: url(../../assets/category/transport.png);
+  background-image: url(./images/transport.png);
 }
 .finance {
   composes: icon;
-  background-image: url(../../assets/category/finance.png);
+  background-image: url(./images/finance.png);
 }
 .place {
   composes: icon;
-  background-image: url(../../assets/category/place.png);
+  background-image: url(./images/place.png);
 }
 .enterprise {
   composes: icon;
-  background-image: url(../../assets/category/enterprise.png);
+  background-image: url(./images/enterprise.png);
 }
 .entertain {
   composes: icon;
-  background-image: url(../../assets/category/entertain.png);
+  background-image: url(./images/entertain.png);
 }
 .community {
   composes: icon;
-  background-image: url(../../assets/category/community.png);
+  background-image: url(./images/community.png);
 }
 .carservice {
   composes: icon;
-  background-image: url(../../assets/category/carservice.png);
+  background-image: url(./images/carservice.png);
 }
 .publicfacilities {
   composes: icon;
-  background-image: url(../../assets/category/publicfacilities.png);
+  background-image: url(./images/publicfacilities.png);
 }
 .other {
   composes: icon;
-  background-image: url(../../assets/category/other.png);
+  background-image: url(./images/other.png);
 }
 
 /* End of Icons */

@@ -184,7 +184,7 @@ class Toolbar2D extends React.Component {
         }}
       >
         <ButtonGroup className={styles.buttonGroup}>
-          <AreaSelector className={styles.btnStyle} />
+          {/* <AreaSelector className={styles.btnStyle} /> */}
           <Button onClick={this.visblechangebook} className={styles.btnStyle}>
             <Icon type="book" />
             书签
@@ -205,7 +205,7 @@ class Toolbar2D extends React.Component {
           <Button
             className={styles.btnStyle}
             onClick={() => {
-              window.open('multiDate.html');
+              window.open('./multiDate/multiDate.html');
             }}
           >
             <Icon type="clock-circle-o" />

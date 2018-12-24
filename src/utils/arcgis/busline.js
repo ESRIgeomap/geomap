@@ -215,7 +215,7 @@ class BusLine {
         },
         symbol: {
           type: 'picture-marker',
-          url: './images/start.png',
+          url: './images/busline/start.png',
           height: '24px',
           width: '24px',
         },

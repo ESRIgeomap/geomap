@@ -2,19 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // 组件
-// import Expand from '../../../components/widgets/Expand';
+// import Expand from '../../../components/expand/Expand';
 // import LayerList from 'esri/widgets/LayerList';
-// import Home from '../../../components/widgets/Home';
 import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import Sketch from '../../../utils/arcgis/sketchUtil';
 import SurfaceLabel from '../../../utils/arcgis/surface-label';
 // import DrawSimple from '../../../utils/drawpoint';
-import MapCorrect from '../../../utils/mapcorrection';
 import AgsSearchUtil from '../../../utils/arcgis/search';
-import Zoom from '../../../components/widgets/Zoom';
-import Getpoints from '../../../components/widgets/Getpoints';
-import Compass from '../../../components/widgets/Compass';
+import Zoom from '../../../components/zoom/Zoom';
+import Getpoints from '../../../components/getpoints/Getpoints';
+import Compass from '../../../components/compass/Compass';
 import Overviewmap from '../../../components/overviewmap/Overviewmap';
 
 import {
@@ -35,8 +33,6 @@ import {
   ACTION_DELETBOOKMARK_2D,
   ACTION_DELETTHISBOOKMARK_2D,
   ACTION_EDITBOOKMARK_2D,
-  ACTION_MAP_2D_CORRECT,
-  ACTION_ADDMAPCORRECT_2D,
   ACTION_VIEW_EXTENT,
   ACTION_PRINT_2D_MAP,
 } from '../../../constants/action-types';
@@ -171,9 +167,8 @@ function createMap(opts = {}) {
         break;
       }
       case MAP_ACTION_CLEAR_GRAPHICS: {
-        if (ags.view) {
-          ags.view.graphics.removeAll();
-        }
+        MeasureUtil.mapView = ags.view;
+        MeasureUtil.active('clearmeasure');
         break;
       }
       case ACTION_MEASURE_2D_LINE: {
@@ -204,25 +199,6 @@ function createMap(opts = {}) {
       case ACTION_DRAW_FLAT_2D: {
         const sketchUtil = new Sketch(ags.view);
         sketchUtil.DrawPolygon();
-        break;
-      }
-      case ACTION_MAP_2D_CORRECT: {
-        if (store.getState().agsmap.correctflags) {
-          store.dispatch({
-            type: 'agsmap/mapcorrectChangeState',
-            payload: false,
-          });
-        } else {
-          store.dispatch({
-            type: 'agsmap/mapcorrectChangeState',
-            payload: true,
-          });
-        }
-        break;
-      }
-      case ACTION_ADDMAPCORRECT_2D: {
-        MapCorrect.mapTwoView = ags.view;
-        MapCorrect.active('point');
         break;
       }
       case ACTION_ADDBOOKMARK_2D: {
@@ -582,13 +558,6 @@ async function createToolButtons() {
     'dojo/dom-construct',
     'esri/widgets/BasemapGallery',
   ]);
-
-  // Home
-  // const homeDiv = domConstruct.create('div');
-  // ags.view.ui.add(homeDiv, {
-  //   position: 'bottom-right',
-  // });
-  // ReactDOM.render(<Home view={ags.view} />, homeDiv);
 
   // Zoom
   const zoomDiv = domConstruct.create('div');
