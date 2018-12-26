@@ -331,7 +331,7 @@ class Bookmark extends Component {
               <Button
                 type="primary"
                 style={{
-                  'margin-left': '168px',
+                  marginLeft: '168px',
                   borderRadius: 0,
                 }}
                 onClick={this.edit}

@@ -11,7 +11,7 @@ import {
 } from '../../constants/search';
 import { IDX_LAYER_SEARCH } from '../../constants/layer-index';
 
-import * as jsapi from '../jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 import env from '../env';
 
 let inst;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tooltip } from 'antd';
-import * as jsapi from '../../utils/jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 import styles from './Expand.css';
 
 const CSS = {

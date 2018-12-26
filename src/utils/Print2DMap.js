@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {Icon} from 'antd';
-import * as jsapi from './jsapi';
+import { Icon } from 'antd';
+import { jsapi } from '../constants/geomap-utils';
 
 class Print2DMap {
   static async show() {
@@ -17,8 +17,8 @@ class Print2DMap {
     closeDiv.style.height = '25px';
     closeDiv.style.cursor = 'pointer';
     closeDiv.title = '关闭';
-    ReactDom.render(<Icon type="close"/>, closeDiv);
-    closeDiv.addEventListener("click",function() {
+    ReactDom.render(<Icon type="close" />, closeDiv);
+    closeDiv.addEventListener('click', function() {
       window.printmap.destroy();
       window.printmap = undefined;
     });

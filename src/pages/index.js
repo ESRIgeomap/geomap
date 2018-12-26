@@ -11,16 +11,6 @@ import Toolbar3D from '../components/toolbar/Toolbar3D';
 import Bookmark from '../components/bookmark/Bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
-// import AreaSelector from '../components/stat/AreaSelector';
-// function generateSigninUrl() {
-//   const signUrl = env.getSigninUrl();
-//   const clientId = env.getClientId();
-//   const clientSecret = env.getClientSecret();
-//   const callback = `${window.location.origin}${window.location.pathname}/login_callback.html`;
-//   const returnUrl = encodeURIComponent(`${callback}?returnUrl=${window.location.href}`);
-
-//   return `${signUrl}?returnUrl=${returnUrl}&client_id=${clientId}&client_secret=${clientSecret}`;
-// }
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -40,14 +30,6 @@ class IndexPage extends React.Component {
         viewMode: this.props.agsmap.mode,
       },
     });
-
-    // dispatch({
-    //   type: 'agsmap/initsplitMap',
-    //   payload: {
-    //     container: this.viewsplitDiv,
-    //     basemap: env.getDefaultBasemap3D(),
-    //   },
-    // });
   }
 
   render() {

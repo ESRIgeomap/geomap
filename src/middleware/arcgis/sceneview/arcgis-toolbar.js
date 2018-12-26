@@ -1,6 +1,5 @@
 import Measure3DUtil from '../../../utils/measure3D';
 import NavigationToggle from '../../../utils/NavigationToggle';
-import Eyeview from '../../../utils/Eyeview';
 import SurroundRoam from '../../../utils/SurroundRoam';
 import Print3DMap from '../../../utils/Print3DMap';
 import {
@@ -9,7 +8,6 @@ import {
   ACTION_MAP_PAN,
   ACTION_MAP_ROTATE,
   ACTION_MAP_OVERVIEW,
-  ACTION_MAP_EYEVIEW,
   ACTION_MAP_ROAM,
   ACTION_MAP_PRINT_3D,
 } from '../../../constants/action-types';
@@ -51,16 +49,13 @@ function toolbar(opts = {}) {
         NavigationToggle.active(ags.view, 'rotate');
         break;
       }
-      case ACTION_MAP_EYEVIEW: {
-        // Eyeview.sceneView = ags.view;
-        Eyeview.active(ags.view,'eyeview');
-        break;
-      }
       // lih 20180725 工具条-环绕漫游
       case ACTION_MAP_ROAM: {
-        SurroundRoam.sceneView = ags.view;
-        SurroundRoam.active('roam');
-        break;
+        if (ags.view) {
+          SurroundRoam.sceneView = ags.view;
+          SurroundRoam.active('roam');
+          break;
+        }
       }
       // liugh 20180928 工具条-地图截图
       case ACTION_MAP_PRINT_3D: {

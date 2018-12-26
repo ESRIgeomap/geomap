@@ -17,7 +17,6 @@ import {
   ACTION_MAP_PAN,
   ACTION_MAP_ROTATE,
   ACTION_MAP_OVERVIEW,
-  ACTION_MAP_EYEVIEW,
   ACTION_MAP_ROAM,
   VIEW_MODE_2D,
   ACTION_MAP_PRINT_3D,
@@ -39,7 +38,6 @@ class Toolbar3D extends React.Component {
     this.mapPan = this.mapPan.bind(this);
     this.mapRotate = this.mapRotate.bind(this);
     this.overviewmap = this.overviewmap.bind(this);
-    this.eyeView = this.eyeView.bind(this);
     this.mapRoam = this.mapRoam.bind(this);
     this.sunShine = this.sunShine.bind(this);
     this.windowPrint = this.windowPrint.bind(this);
@@ -77,23 +75,6 @@ class Toolbar3D extends React.Component {
     this.props.dispatch({
       type: ACTION_MAP_ROAM,
     });
-  }
-  eyeView(e) {
-    e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_EYEVIEW,
-    });
-    if (this.props.agsmap.eyeviewformvisible) {
-      this.props.dispatch({
-        type: 'agsmap/eyeviewformvisibleChangeState',
-        payload: false,
-      });
-    } else {
-      this.props.dispatch({
-        type: 'agsmap/eyeviewformvisibleChangeState',
-        payload: true,
-      });
-    }
   }
   // 控制是否显示鹰眼
   overviewmap(e) {
@@ -200,8 +181,3 @@ export default connect(({ agsmap }) => {
     agsmap,
   };
 })(Toolbar3D);
-// <Button onClick={this.eyeView} className={styles.btnStyle}>
-// <a className={styles.btnA} title="人眼视角">
-// <img src={personViewIcon} alt="" className={styles.btnImg} />
-// </a>
-// </Button>

@@ -1,4 +1,4 @@
-import * as jsapi from './jsapi';
+import { jsapi } from '../constants/geomap-utils';
 
 // 三维长度测量
 class NavigationToggle {

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import PopupContent from '../../components/callout/CalloutPopupTemplat';
 
-import * as jsapi from '../jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 
 class Sketch {
   constructor(view) {
@@ -36,14 +36,15 @@ class Sketch {
           // url: './images/pointSymbol.png',
           // width: '18px',
           // height: '27px',
-          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-          style: "square",
-          color: "#8A2BE2",
-          size: "16px",
-          outline: { // autocasts as new SimpleLineSymbol()
+          type: 'simple-marker', // autocasts as new SimpleMarkerSymbol()
+          style: 'square',
+          color: '#8A2BE2',
+          size: '16px',
+          outline: {
+            // autocasts as new SimpleLineSymbol()
             color: [255, 255, 255],
-            width: 3
-          }
+            width: 3,
+          },
         },
         polylineSymbol: {
           type: 'simple-line', // autocasts as new SimpleLineSymbol()

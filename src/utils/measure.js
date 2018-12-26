@@ -1,4 +1,4 @@
-import * as jsapi from './jsapi';
+import { jsapi } from '../constants/geomap-utils';
 
 class MeasureLine2D {
   constructor(view) {

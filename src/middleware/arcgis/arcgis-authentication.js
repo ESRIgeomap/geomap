@@ -8,7 +8,7 @@ import {
   SET_USER_WEBSCENES,
 } from '../../constants/action-types';
 
-import * as jsapi from '../../utils/jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 
 let oauthInfo;
 let portal;

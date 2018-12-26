@@ -1,5 +1,6 @@
+// 罗盘微件
 import React from 'react';
-import * as jsapi from '../../utils/jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 import styles from './Compass.css';
 
 function toRotationTransform(orientation) {
@@ -44,14 +45,7 @@ class Compass extends React.Component {
     const { orientation } = this.state;
 
     return (
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '160px',
-          right: '0',
-          zIndex: 12,
-        }}
-      >
+      <div className={styles.compassContent}>
         <a className={styles.compassBtn} onClick={this.reset}>
           <span className="esri-icon-compass" style={toRotationTransform(orientation)} />
         </a>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import Map from 'esri/Map';
 // import MapView from 'esri/views/MapView';
 // import * as WatchUtils from 'esri/core/watchUtils';
-import * as jsapi from '../../utils/jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 import styles from './Overviewmap.css';
 
 class Overviewmap extends Component {
@@ -22,10 +22,7 @@ class Overviewmap extends Component {
   }
   buildOverview() {
     this.props.view.when(async view => {
-      const [Map, MapView] = await jsapi.load([
-        'esri/Map',
-        'esri/views/MapView',
-      ]);
+      const [Map, MapView] = await jsapi.load(['esri/Map', 'esri/views/MapView']);
       const overviewMap = new Map({
         basemap: 'osm',
         zoom: 2,
@@ -40,9 +37,7 @@ class Overviewmap extends Component {
       mapView.ui.components = [];
 
       this.props.view.when(async view => {
-        const [WatchUtils] = await jsapi.load([
-          'esri/core/watchUtils',
-        ]);
+        const [WatchUtils] = await jsapi.load(['esri/core/watchUtils']);
         view.watch('extent', () => {
           this.updateOverviewExtent(view, mapView);
         });
@@ -50,7 +45,7 @@ class Overviewmap extends Component {
           updateOverview(view, mapView);
         });
       });
-    })
+    });
   }
   updateOverviewExtent(mainView, mapView) {
     const extent = mainView.extent;
@@ -71,7 +66,7 @@ class Overviewmap extends Component {
     return (
       <div className={styles.overviewMapDiv}>
         <div
-          ref={(node) => {
+          ref={node => {
             this.viewDiv = node;
           }}
           className={styles.overviewDiv}
@@ -100,10 +95,7 @@ function updateOverview(mainView, mapView) {
       scale:
         mainView.scale *
         2 *
-        Math.max(
-          mainView.width / mapView.width,
-          mainView.height / mapView.height,
-        ),
+        Math.max(mainView.width / mapView.width, mainView.height / mapView.height),
     });
   });
 }

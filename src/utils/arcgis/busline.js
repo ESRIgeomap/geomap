@@ -1,7 +1,7 @@
 import { DOMParser } from 'xmldom';
 
 import { IDX_LAYER_BUS } from '../../constants/layer-index';
-import * as jsapi from '../jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 import env from '../env';
 
 let xmlDoc = null;

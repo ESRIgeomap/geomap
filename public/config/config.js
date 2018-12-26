@@ -66,7 +66,7 @@
 
   var searchConfig = {
     tianditu: {
-      key: '3d1fdc740ed3a782d22e916adb43c36e',
+      key: '2b4dbd63705acef3a76f69a71aff5a0d',
 
       queryBound: '-180,90,180,90',
     },

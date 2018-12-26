@@ -1,4 +1,4 @@
-import * as jsapi from './jsapi';
+import { jsapi } from '../constants/geomap-utils';
 import env from './env';
 
 import { queryPoi, queryNearbyPoi } from '../services/tianditu/searchpoi';

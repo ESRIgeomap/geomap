@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
-import * as jsapi from '../../utils/jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 
 import styles from './Zoom.css';
 
@@ -80,24 +80,6 @@ class Zoom extends React.Component {
         <a className={styles.zoomBtnbottom} onClick={this.zoomOut} disabled={this.state.minZoomed}>
           <Icon type="minus" className={styles.iconstyle} />
         </a>
-        {/* <div
-          style={{
-            position: 'relative',
-            bottom: '53px',
-            right: '0px',
-            zIndex: 12,
-            width: '25px',
-            height: '25px',
-            fontSize: '12px',
-            fontFamily: 'Microsoft YaHei',
-            background: '#1890ff',
-            color: 'white',
-            textAlign: 'center',
-            lineHeight: '25px',
-          }}
-        >
-          {this.state.zoomVal}
-        </div> */}
       </div>
     );
   }
