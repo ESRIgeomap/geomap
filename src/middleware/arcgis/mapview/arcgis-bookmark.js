@@ -5,9 +5,8 @@ import {
   ACTION_DELETTHISBOOKMARK_2D,
   ACTION_EDITBOOKMARK_2D,
 } from '../../../constants/action-types';
-import env from '../../../utils/env';
 // 获取全局ags对象，用于其他组件获取其中的view对象
-const ags = env.getParamAgs();
+const ags = window.agsGlobal;
 
 function bookmarks(opts = {}) {
   if (opts.getState && opts.dispatch) {
@@ -16,10 +15,9 @@ function bookmarks(opts = {}) {
 
   return store => next => async action => {
     switch (action.type) {
-
       case ACTION_ADDBOOKMARK_2D: {
-        if (ags.view) {
-          const extent = ags.view.extent;
+        if (window.agsGlobal.view) {
+          const extent = window.agsGlobal.extent;
           // 保存
           store.dispatch({
             type: 'agsmap/updateBookmarks',
@@ -35,19 +33,19 @@ function bookmarks(opts = {}) {
         break;
       }
       case ACTION_GOTOBOOKMARK_2D: {
-        if (ags.view) {
+        if (window.agsGlobal.view) {
           const bookname = action.payload;
           const books = store.getState().agsmap.bookmarks;
           books.forEach(element => {
             if (element.name === bookname) {
-              ags.view.goTo(element.newextent.extent);
+              window.agsGlobal.view.goTo(element.newextent.extent);
             }
           });
         }
         break;
       }
       case ACTION_DELETBOOKMARK_2D: {
-        if (ags.view) {
+        if (window.agsGlobal.view) {
           store.dispatch({
             type: 'agsmap/updateBookmarks',
             payload: [],
@@ -56,7 +54,7 @@ function bookmarks(opts = {}) {
         break;
       }
       case ACTION_DELETTHISBOOKMARK_2D: {
-        if (ags.view) {
+        if (window.agsGlobal.view) {
           const bookname = action.payload;
           const books = store.getState().agsmap.bookmarks;
           books.forEach(element => {
@@ -73,11 +71,11 @@ function bookmarks(opts = {}) {
         break;
       }
       case ACTION_EDITBOOKMARK_2D: {
-        if (ags.view) {
+        if (window.agsGlobal.view) {
           const oldname = action.payload.oldname;
           const newname = action.payload.newname;
           const books = store.getState().agsmap.bookmarks;
-          const extent = ags.view.extent;
+          const extent = window.agsGlobal.view.extent;
           const newelement = {
             name: newname,
             newextent: extent,

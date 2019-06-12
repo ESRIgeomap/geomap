@@ -8,6 +8,8 @@ import TerminalSelector from './TerminalSelector';
 import RouteLocationSelector from './RouteLocationSelector';
 import BusLineResult from './BusLineResult';
 import DriveLineResult from './DriveLineResult';
+import RideLineResult from './RideLineResult';
+import WalkLineResult from './WalkLineResult';
 import BusyIndicator from './BusyIndicator';
 import ErrorIndicator from './ErrorIndicator';
 import SearchResultList from './SearchResultList';
@@ -406,6 +408,14 @@ class GeoSearch extends React.Component {
       } else if (this.props.search.dirmode === SearchConsts.MODE_DIR_DRIVE) {
         if (this.props.search.driveresult) {
           return <DriveLineResult />;
+        }
+      }else if (this.props.search.dirmode === SearchConsts.MODE_DIR_WALK) {
+        if (this.props.search.walkresult) {
+          return <WalkLineResult />;
+        }
+      } else if (this.props.search.dirmode === SearchConsts.MODE_DIR_RIDE) {
+        if (this.props.search.rideresult) {
+          return <RideLineResult />;
         }
       }
     }

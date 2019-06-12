@@ -3,6 +3,7 @@ import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import Sketch from '../../../utils/arcgis/sketchUtil';
 import AgsSearchUtil from '../../../utils/arcgis/search';
+import LegendList from '../../../utils/legend';
 
 import {
   INIT_MAP,
@@ -18,21 +19,26 @@ import {
   ACTION_DRAW_FLAT_2D,
   ACTION_VIEW_EXTENT,
   ACTION_PRINT_2D_MAP,
+  MAP_ACTION_CLIP_MAP,
+  ACTION_LEGENDLIST_SHOW,
+  ACTION_LEGENDLIST_DEACTIVATE,
 } from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
-import env from '../../../utils/env';
+import { AppProxy, Portal, WebsceneID, WebmapID, SplitWebmap } from '../../../utils/env';
 import widgets from '../../../utils/widgets';
 import { synchronizeViews } from '../../../utils/synchronizeView';
 
+// debug obj
 const ags = {};
-const agstwo = {};
-env.setParamAgs(ags);
-env.setParamAgstwo(agstwo);
+window.agsGlobal = ags;
+window.agstwoGlobal = {};
+
+const agstwo = window.agstwoGlobal;
 
 async function prepare() {
   const [esriConfig] = await jsapi.load(['esri/config']);
-  esriConfig.request.proxyUrl = env.getProxyUrl();
-  esriConfig.portalUrl = env.getPortal();
+  esriConfig.request.proxyUrl = AppProxy;
+  esriConfig.portalUrl = Portal;
 }
 
 function initMapUtils(store) {
@@ -69,19 +75,25 @@ function createMapView(opts = {}) {
 
         if (viewMode === VIEW_MODE_2D) {
           await initMapView(store);
-          widgets.getPoints(ags.view);
+          await widgets.createBasemapGallery(ags.view);
         } else if (viewMode === VIEW_MODE_3D) {
           await initSceneView();
           await widgets.createOverView(ags.view);
         }
-        // create buttons
-        await createToolButtons();
 
+        // after view created
+        window.agsGlobal = ags;
+        store.dispatch({ type: 'agsmap/afterViewCreated' });
+
+        // TODO: to be continued
         initMapUtils(store);
 
         // When initialized...
         return ags.view.when(() => {
           // Update the environment settings (either from the state or from the scene)
+          ags.view.map.layers.on('change',function(event){
+             console.log(event);
+          });
         });
       }
 
@@ -106,18 +118,15 @@ function createMapView(opts = {}) {
         });
       }
       case SWITCH_MAP: {
-        // const basemap = env.getDefaultBasemap3D();
         const { payload } = action;
         if (payload === VIEW_MODE_2D) {
           await initMapView();
-          widgets.getPoints(ags.view);
         } else if (payload === VIEW_MODE_3D) {
-          const showl = document.getElementById('showl');
-          showl.innerHTML = '';
           await initSceneView();
           await widgets.createOverView(ags.view);
+          await widgets.createBasemapGallery(ags.view);
         }
-        await createToolButtons();
+        // await createToolButtons();
         break;
       }
       case MAP_ACTION_CLEAR_GRAPHICS: {
@@ -140,6 +149,11 @@ function createMapView(opts = {}) {
         Print2DMap.show();
         break;
       }
+      case MAP_ACTION_CLIP_MAP: {
+        Print2DMap.mapView = ags.view;
+        Print2DMap.clipMap();
+        break;
+      }
       case ACTION_DRAW_POINT_2D: {
         const sketchUtil = new Sketch(ags.view);
         sketchUtil.Drawpoint();
@@ -153,6 +167,16 @@ function createMapView(opts = {}) {
       case ACTION_DRAW_FLAT_2D: {
         const sketchUtil = new Sketch(ags.view);
         sketchUtil.DrawPolygon();
+        break;
+      }
+      case ACTION_LEGENDLIST_SHOW: {
+        LegendList.mapView = ags.view;
+        LegendList.show();
+        break;
+      }
+      case ACTION_LEGENDLIST_DEACTIVATE: {
+        LegendList.mapView = ags.view;
+        LegendList.deactivate();
         break;
       }
 
@@ -206,8 +230,8 @@ async function initMapView(store) {
   const [WebMap, MapView] = await jsapi.load(['esri/WebMap', 'esri/views/MapView']);
   const webmap = new WebMap({
     portalItem: {
-      id: env.getWebMapId(),
-      portal: env.getPortal(),
+      id: WebmapID,
+      portal: Portal,
     },
   });
   ags.view = new MapView({
@@ -227,8 +251,8 @@ async function initsplitMapView() {
   ]);
   const webmap = new WebMap({
     portalItem: {
-      id: env.getSplitWebMapId(),
-      portal: env.getPortal(),
+      id: SplitWebmap,
+      portal: Portal,
     },
   });
   agstwo.view = new MapView({
@@ -238,7 +262,7 @@ async function initsplitMapView() {
       components: [],
     },
   });
-  widgets.createBasemapGallery(agstwo.view);
+  // widgets.createBasemapGallery(agstwo.view);
   synchronizeViews([ags.view, agstwo.view], watchUtils);
 }
 
@@ -246,8 +270,8 @@ async function initSceneView() {
   const [WebScene, Sceneview] = await jsapi.load(['esri/WebScene', 'esri/views/SceneView']);
   const scene = new WebScene({
     portalItem: {
-      id: env.getWebSceneId(),
-      portal: env.getPortal(),
+      id: WebsceneID,
+      portal: Portal,
     },
   });
   ags.view = new Sceneview({
@@ -271,12 +295,6 @@ async function initSceneView() {
       components: [],
     },
   });
-}
-
-function createToolButtons() {
-  widgets.createZoom(ags.view);
-  widgets.createCompass(ags.view);
-  widgets.createBasemapGallery(ags.view);
 }
 
 export { createMapView };

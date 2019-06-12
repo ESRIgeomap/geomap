@@ -35,10 +35,10 @@ class RouteLocationSelector extends React.Component {
   render() {
     return (
       <div className={styles.wrap}>
-        <div className={styles.banner}>
+        {/*<div className={styles.banner}>
           <Icon type="question-circle-o" className={styles.icon} />
           <h4 className={styles.title}>{this.props.title}</h4>
-        </div>
+        </div>*/}
         <div className={styles.diroptlist}>{this.renderItems()}</div>
       </div>
     );

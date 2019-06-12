@@ -1,11 +1,13 @@
-
 import AgsSearchUtil from '../../../utils/arcgis/search';
 
 import {
   PIN_START,
   PIN_END,
+  PIN_START_END,
   MAP_ACTION_DRAWLINE,
   MAP_ACTION_DRAW_DRIVELINE,
+  MAP_ACTION_DRAW_WALKLINE,
+  MAP_ACTION_DRAW_RIDELINE,
   MAP_ACTION_HIGHLIGHT_DRIVE,
   MAP_ACTION_CLEAR,
   MAP_ACTION_HIGHLIGHT,
@@ -15,13 +17,15 @@ import {
   MAP_ACTION_DRAW_NEARBY,
   MAP_ACTION_HIGHLIGHT_NEARBY,
   MAP_ACTION_CLEAR_HIGHLIGHT_NEARBY,
+  SEARCH_MILEAGECHART_DATA,
+  SEARCH_MILEAGECHART_CLOSE,
 } from '../../../constants/search';
 import BusLineUtil from '../../../utils/arcgis/busline';
 import { jsapi } from '../../../constants/geomap-utils';
 
-import env from '../../../utils/env';
+import envs from '../../../utils/envs';
 // 获取全局ags对象，用于其他组件获取其中的view对象
-const ags = env.getParamAgs();
+
 
 function search(opts = {}) {
   // Detect if 'createLogger' was passed directly to 'applyMiddleware'.
@@ -30,26 +34,13 @@ function search(opts = {}) {
   }
 
   return store => next => async action => {
+    const ags = envs.getParamAgs();
     switch (action.type) {
       case PIN_START: {
         const { payload } = action;
         const { lonlat } = payload;
         const coordArr = lonlat.split(' ');
         if (ags.view) {
-          const [Point] = await jsapi.load(['esri/geometry/Point']);
-          ags.view.goTo({
-            target: new Point({
-              x: +coordArr[0],
-              y: +coordArr[1],
-              spatialReference:
-                ags.view.spatialReference.wkid === 102100
-                  ? {
-                      wkid: 4326,
-                    }
-                  : ags.view.spatialReference,
-            }),
-            zoom: 17,
-          });
           BusLineUtil.addStartLocation(ags.view, +coordArr[0], +coordArr[1]);
         }
         break;
@@ -59,21 +50,15 @@ function search(opts = {}) {
         const { lonlat } = payload;
         const coordArr = lonlat.split(' ');
         if (ags.view) {
-          const [Point] = await jsapi.load(['esri/geometry/Point']);
-          ags.view.goTo({
-            target: new Point({
-              x: +coordArr[0],
-              y: +coordArr[1],
-              spatialReference:
-                ags.view.spatialReference.wkid === 102100
-                  ? {
-                      wkid: 4326,
-                    }
-                  : ags.view.spatialReference,
-            }),
-            zoom: 17,
-          });
           BusLineUtil.addEndLocation(ags.view, +coordArr[0], +coordArr[1]);
+        }
+        break;
+      }
+      case PIN_START_END: {
+        let payload = action.payload;
+        const { start, end } = payload;
+        if (ags.view) {
+          BusLineUtil.zoomToPoints(ags.view, start, end);
         }
         break;
       }
@@ -87,6 +72,16 @@ function search(opts = {}) {
       case MAP_ACTION_DRAW_DRIVELINE: {
         const { payload } = action;
         BusLineUtil.drawDriveLine(ags.view, payload);
+        break;
+      }
+      case MAP_ACTION_DRAW_WALKLINE: {
+        const { payload } = action;
+        BusLineUtil.drawWalkLine(ags.view, payload);
+        break;
+      }
+      case MAP_ACTION_DRAW_RIDELINE: {
+        const { payload } = action;
+        BusLineUtil.drawRideLine(ags.view, payload);
         break;
       }
       case MAP_ACTION_HIGHLIGHT_DRIVE: {

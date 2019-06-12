@@ -29,17 +29,14 @@ class Trans3D extends React.Component {
       <div
         style={{
           position: 'absolute',
-          bottom: '135px',
-          right: '14px',
-          zIndex: 12,
+          bottom: '150px',
+          right: '0px',
+          zIndex: 1,
           width: '36px',
           height: '36px',
         }}
       >
-        <a
-          className={styles.tranfBtn}
-          onClick={this.transform}
-        >
+        <a className={styles.tranfBtn} onClick={this.transform}>
           {this.props.agsmap.mode === VIEW_MODE_2D ? '2D' : '3D'}
         </a>
       </div>

@@ -1,5 +1,4 @@
 import { jsapi } from '../constants/geomap-utils';
-import env from './env';
 
 import { queryPoi, queryNearbyPoi } from '../services/tianditu/searchpoi';
 
@@ -212,7 +211,7 @@ export default class BatchSearch {
             distance: tolerence,
             units: 'meters',
             where: serv.catquery.replace('$code$', keyword),
-            outSpatialReference: env.getParamAgs().view.spatialReference,
+            outSpatialReference: window.agsGlobal.view.spatialReference,
           })
         )
       )

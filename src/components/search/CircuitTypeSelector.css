@@ -2,13 +2,14 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #3385ff;
+  border-bottom: 1px solid #ececec;
+  background: white;
 }
 
 .btn {
   flex: auto;
-  background: white;
-  color: #333;
+  /*background: white;*/
+  color: #fff;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -22,6 +23,7 @@
   position: relative;
   background-image: url(./images/route-icon_2c25ce2.png);
   background-repeat: no-repeat;
+  color: #fff;
 }
 
 .triangle {
@@ -29,7 +31,7 @@
   height: 0px;
   width: 0px;
   border-left: 5px solid transparent;
-  border-bottom: 5px solid #3385ff;
+  border-bottom: 5px solid #1870ff;
   border-right: 5px solid transparent;
   bottom: 0;
 }

@@ -4,7 +4,6 @@ import { Slider, DatePicker, Row, Col, Checkbox, Button, Icon } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import styles from './Lightshadow.css';
-import env from '../../utils/env';
 
 class LightshadowListTwo extends Component {
   constructor(props) {
@@ -62,9 +61,7 @@ class LightshadowListTwo extends Component {
       type: 'agsmap/valuetimeState',
       payload: value,
     });
-    env.getParamAgs().view.environment.lighting.date = Number(
-      value.format('x'),
-    );
+    window.agsGlobal.view.environment.lighting.date = Number(value.format('x'));
   }
 
   // 时间播放按钮
@@ -92,10 +89,7 @@ class LightshadowListTwo extends Component {
             const tempTime1 = this.props.agsmap.valuetime
               .hour(parseInt(temp / 60, 10))
               .minute(temp % 60);
-            // console.log(env.getParamAgs().view);
-            env.getParamAgs().view.environment.lighting.date = Number(
-              tempTime1.format('x'),
-            );
+            window.agsGlobal.view.environment.lighting.date = Number(tempTime1.format('x'));
             // slidervalue数据同步
             this.props.dispatch({
               type: 'agsmap/sliderValueState',
@@ -138,13 +132,8 @@ class LightshadowListTwo extends Component {
       this.props.dispatch({
         type: 'agsmap/timerOfDatepickerState',
         payload: setInterval(() => {
-          const tempNowTime = this.props.agsmap.valuetime.add(
-            1,
-            'days',
-          );
-          env.getParamAgs().view.environment.lighting.date = Number(
-            tempNowTime.format('x'),
-          );
+          const tempNowTime = this.props.agsmap.valuetime.add(1, 'days');
+          window.agsGlobal.view.environment.lighting.date = Number(tempNowTime.format('x'));
           this.props.dispatch({
             type: 'agsmap/valuetimeState',
             payload: tempNowTime,
@@ -176,9 +165,7 @@ class LightshadowListTwo extends Component {
 
   onSliderChange(value) {
     // 将传入的value转换为小时，分钟
-    const tempTime2 = this.props.agsmap.valuetime
-      .hour(parseInt(value / 60, 10))
-      .minute(value % 60);
+    const tempTime2 = this.props.agsmap.valuetime.hour(parseInt(value / 60, 10)).minute(value % 60);
     this.props.dispatch({
       type: 'agsmap/valuetimeState',
       payload: tempTime2,
@@ -187,16 +174,14 @@ class LightshadowListTwo extends Component {
       type: 'agsmap/sliderValueState',
       payload: value,
     });
-    env.getParamAgs().view.environment.lighting.date = Number(
-      tempTime2.format('x'),
-    );
+    window.agsGlobal.view.environment.lighting.date = Number(tempTime2.format('x'));
   }
 
   onCheckBoxChange(e) {
     if (e.target.checked) {
-      env.getParamAgs().view.environment.lighting.directShadowsEnabled = true;
+      window.agsGlobal.view.environment.lighting.directShadowsEnabled = true;
     } else {
-      env.getParamAgs().view.environment.lighting.directShadowsEnabled = false;
+      window.agsGlobal.view.environment.lighting.directShadowsEnabled = false;
     }
     this.props.dispatch({
       type: 'agsmap/shadowInitDataState',
@@ -249,9 +234,7 @@ class LightshadowListTwo extends Component {
       <div
         className={styles.modlediv}
         style={{
-          display: this.props.agsmap.lightshadowlistflags
-            ? 'block'
-            : 'none',
+          display: this.props.agsmap.lightshadowlistflags ? 'block' : 'none',
         }}
         // style={{
         //   display: 'block',

@@ -1,20 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import {
-  ACTION_MAP_OVERVIEW,
-} from '../../../constants/action-types';
-import { jsapi } from '../../../constants/geomap-utils';
-import env from '../../../utils/env';
-
-// 获取全局ags对象，用于其他组件获取其中的view对象
-
-async function prepare() {
-  const [esriConfig] = await jsapi.load(['esri/config']);
-  esriConfig.request.proxyUrl = env.getProxyUrl();
-  esriConfig.portalUrl = env.getPortal();
-}
-
+import { ACTION_MAP_OVERVIEW } from '../../../constants/action-types';
 
 function createSceneView(opts = {}) {
   // Detect if 'createLogger' was passed directly to 'applyMiddleware'.

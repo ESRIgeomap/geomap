@@ -1,9 +1,10 @@
 .wrap {
   flex: 0 1 auto;
   margin-top: 4px;
-  width: 368px;
-  background: white;
+  width: 395px;
+  background: #fff;
   pointer-events: all;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
 .headerWrap {
@@ -22,6 +23,7 @@
 }
 
 .lineSubject {
+  color: #000;
 }
 
 .lineSubjectTitle {
@@ -36,7 +38,7 @@
 
 .lineDesc {
   margin-top: 4px;
-  color: #666;
+  color: #000;
   font-size: 12px;
   display: flex;
   flex-direction: row;
@@ -58,7 +60,7 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  background: #f0f6ff;
+  /* background: #f0f6ff; */
 }
 
 .lineDetailIcon {
@@ -78,6 +80,7 @@
 
 .lineDetailEndIconWrap {
   width: 3px;
+  color: white;
   background: #e6e6e6;
   position: absolute;
   top: 0;
@@ -122,7 +125,7 @@
 
 .lineDetailBusLineSolution {
   margin-left: 25px;
-  height: 70px;
+  /* height: 70px; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -140,6 +143,12 @@
   bottom: 0;
   left: 15px;
 }
+.lineDetailWalkIcon {
+  position: absolute;
+    top: 13px;
+    left: 5px;
+    width: 26px;
+}
 
 .lineDetailContentWrap {
   flex: auto;
@@ -150,7 +159,7 @@
   margin-left: 25px;
   font-weight: bold;
   font-size: 14px;
-  color: #666;
+  /*color: rgba(255, 255, 255, 0.5);*/
   font-family: 'Microsoft YaHei';
 }
 
@@ -182,28 +191,24 @@
 .lineDetailSegment {
   margin-left: 25px;
   font-size: 12px;
-  color: #666;
+  /* color: rgba(255, 255, 255, 0.5);; */
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   cursor: pointer;
-  border-bottom: 1px solid #fcfcff;
-}
-
-.lineDetailSegment:hover {
-  background-color: #ebf1fb;
+  /* border-bottom: 1px solid #fcfcff; */
 }
 
 :global(.busline-result-collapse) {
-  margin: 20px 0;
+  margin: 12px 0;
   border: none;
   background: white;
 }
 
 :global(.busline-result-collapse) > :global(.ant-collapse-item) {
-  background: #f0f6ff;
-  margin: 20px 20px 0 20px;
+  /* background: #f0f6ff; */
+  margin: 15px 15px 0 15px;
   box-sizing: border-box;
   border: 1px solid #ececec;
 }
@@ -211,13 +216,13 @@
 :global(.busline-result-collapse)
   > :global(.ant-collapse-item)
   > :global(.ant-collapse-header) {
-  padding: 20px 21px 19px;
+  padding: 12px 12px 12px;
 }
 
 :global(.busline-result-collapse)
   > :global(.ant-collapse-item)
   > :global(.ant-collapse-header)
-  > :global(.arrow) {
+  > :global(.ant-collapse-arrow) {
   left: unset;
   right: 20px;
   top: 34px;

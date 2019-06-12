@@ -12,7 +12,6 @@ import {
 import { IDX_LAYER_SEARCH } from '../../constants/layer-index';
 
 import { jsapi } from '../../constants/geomap-utils';
-import env from '../env';
 
 let inst;
 const ID_GROUP_LAYER = 'layer-search-group';
@@ -224,9 +223,9 @@ class SearchGraphicUtil {
         x: res.geometry.x,
         y: res.geometry.y,
         spatialReference:
-          env.getParamAgs().view.spatialReference === '102100'
+          window.agsGlobal.view.spatialReference === '102100'
             ? { wkid: 4326 }
-            : env.getParamAgs().view.spatialReference,
+            : window.agsGlobal.view.spatialReference,
       };
 
       const [Graphic] = await jsapi.load(['esri/Graphic']);
@@ -355,9 +354,9 @@ class SearchGraphicUtil {
           radiusUnit: 'meters',
           center: point.geometry,
           spatialReference:
-            env.getParamAgs().view.spatialReference === '102100'
+            window.agsGlobal.view.spatialReference === '102100'
               ? { wkid: 4326 }
-              : env.getParamAgs().view.spatialReference,
+              : window.agsGlobal.view.spatialReference,
         }),
         symbol: BUFFER_SYMBOL,
       })
@@ -376,7 +375,7 @@ class SearchGraphicUtil {
         type: 'point',
         x: res.geometry.x,
         y: res.geometry.y,
-        spatialReference: env.getParamAgs().view.spatialReference,
+        spatialReference: window.agsGlobal.view.spatialReference,
       };
       lyr.add(
         new Graphic({

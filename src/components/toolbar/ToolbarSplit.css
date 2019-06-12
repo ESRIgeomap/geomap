@@ -1,0 +1,35 @@
+.toolbarSplit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: red;
+  z-index: 10;
+}
+
+.btnStyle {
+  color: #5f6477;
+  border: none;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  border-radius: 0px !important;
+  height: 38px;
+}
+
+.btnStyle:not(:last-child):after {
+  content: '';
+  display: block;
+  z-index: 1;
+  visibility: visible;
+  width: 1px;
+  background: #e8e8e8;
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  right: -1px;
+  margin-right: 1px
+}
+
+
+.buttonGroup {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

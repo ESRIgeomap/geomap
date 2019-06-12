@@ -1,4 +1,4 @@
-import { arcgisAuth } from './middleware/arcgis/arcgis-authentication';
+// import { arcgisAuth } from './middleware/arcgis/arcgis-authentication';
 import { createMapView } from './middleware/arcgis/mapview/arcgis-mapview';
 import { bookmarks } from './middleware/arcgis/mapview/arcgis-bookmark';
 import { search } from './middleware/arcgis/mapview/arcgis-search';
@@ -9,7 +9,7 @@ import { toolbar } from './middleware/arcgis/sceneview/arcgis-toolbar';
 export const dva = {
   config: {
     onAction: [
-      arcgisAuth(),
+      // arcgisAuth(),
       createSceneView(),
       createMapView(),
       createPopup(),

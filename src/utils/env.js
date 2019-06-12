@@ -1,85 +1,24 @@
-export default {
-  getPortal() {
-    return window.appcfg.portal;
-  },
+export const AppConfig = window.appcfg;
 
-  getWebMapId() {
-    return window.appcfg.webMapId;
-  },
+export const Portal = AppConfig.portal;
+export const AppProxy = AppConfig.proxy;
+export const WebmapID = AppConfig.webMapId;
+export const WebsceneID = AppConfig.webSceneId;
 
-  getSplitWebMapId() {
-    return window.appcfg.websplitMapId;
-  }, // 分屏用底图
+// --- Portal Auth
+export const SignInUrl = AppConfig.signin;
+export const ClientID = AppConfig.clientId;
+export const ClientSecret = AppConfig.clientSecret;
+// --- END
 
-  getWebSceneId() {
-    return window.appcfg.webSceneId;
-  },
+export const InitialExtent = AppConfig.initialExtent;
 
-  getParamAgs() {
-    return window.agsGlobal;
-  },
+export const SplitWebmap = AppConfig.websplitMapId;
+export const SplitItem1 = AppConfig.splitItemIdone;
+export const SplitItem2 = AppConfig.splitItemIdtwo;
 
-  setParamAgs(paramAgs) {
-    window.agsGlobal = paramAgs;
-  },
-
-  setParamAgstwo(paramAgs) {
-    window.agstwoGlobal = paramAgs;
-  },
-
-  getSplitItemIdone() {
-    return window.appcfg.splitItemIdone;
-  },
-
-  getSplitItemIdtwo() {
-    return window.appcfg.splitItemIdtwo;
-  },
-
-  getMultidateItemone() {
-    return window.appcfg.multidateItemone;
-  },
-  getMultidateItemtwo() {
-    return window.appcfg.multidateItemtwo;
-  },
-  getMultidateItemthree() {
-    return window.appcfg.multidateItemthree;
-  },
-  getMultidateItemfour() {
-    return window.appcfg.multidateItemfour;
-  },
-  getMultidateItemfive() {
-    return window.appcfg.multidateItemfive;
-  },
-
-  getProxyUrl() {
-    return window.appcfg.proxy;
-  },
-
-  getSigninUrl() {
-    return window.appcfg.signin;
-  },
-
-  getClientId() {
-    return window.appcfg.clientId;
-  },
-
-  getClientSecret() {
-    return window.appcfg.clientSecret;
-  },
-
-  getInitialExtent() {
-    return window.appcfg.initialExtent;
-  },
-
-  getDefaultBasemap2D() {
-    return window.appcfg.basemaps.default2d;
-  },
-
-  getDefaultBasemap3D() {
-    return window.appcfg.basemaps.default3d;
-  },
-
-  getDojoConfig() {
-    return window.dojoConfig;
-  },
-};
+export const MultiDateItem1 = AppConfig.multidateItemone;
+export const MultiDateItem2 = AppConfig.multidateItemtwo;
+export const MultiDateItem3 = AppConfig.multidateItemthree;
+export const MultiDateItem4 = AppConfig.multidateItemfour;
+export const MultiDateItem5 = AppConfig.multidateItemfive;

@@ -1,17 +1,17 @@
 .wrap {
   margin-top: 10px;
-  width: 368px;
-  background: white;
+  width: 374px;
+  background: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .loadingimg {
-  width:140px;
-  height:70px;
+  width: 140px;
+  height: 70px;
 }
 
 .text {
-
+  color: #000;
 }

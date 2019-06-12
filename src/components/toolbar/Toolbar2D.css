@@ -7,23 +7,30 @@
 .noradius {
   border-radius: 0px;
 }
+
+
 .btnStyle {
-  border: 0px;
-  border-radius: 0px;
+  color: #5f6477;
+  border: none;
+  font-family: Arial, sans-serif;
   font-size: 12px;
+  border-radius: 0px !important;
+  height: 38px;
 }
 .buttonGroup{
-  box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .btnStyle:not(:last-child):after {
   content: '';
   display: block;
-  z-index: 9;
+  z-index: 1;
   visibility: visible;
   width: 1px;
-  height: 21px;
-  background: #eee;
+  background: #e8e8e8;
   position: absolute;
-  top: 7px;
+  top: 9px;
+  bottom: 9px;
   right: -1px;
+  margin-right: 1px
 }
+

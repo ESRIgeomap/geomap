@@ -14,33 +14,31 @@ import styles from './TerminalSelector.css';
 class TerminalSelector extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.onStartInputChange = ::this.onStartInputChange;
-    this.onStartInputPressEnter = ::this.onStartInputPressEnter;
-    this.onEndInputChange = ::this.onEndInputChange;
-    this.onEndInputPressEnter = ::this.onEndInputPressEnter;
   }
 
-  onStartInputChange(evt) {
+  onStartInputChange=(evt)=> {
     this.props.dispatch({
       type: 'search/updateStartText',
       payload: evt.target.value,
     });
+    this.props.onStartInput(evt.target.value);
   }
 
-  onEndInputChange(evt) {
+  onEndInputChange=(evt) =>{
     this.props.dispatch({
       type: 'search/updateEndText',
       payload: evt.target.value,
     });
+    this.props.onEndInput(evt.target.value);
   }
 
-  onStartInputPressEnter() {
+  onStartInputPressEnter=() =>{
     if (this.props.onStartInput) {
       this.props.onStartInput(this.props.search.starttext);
     }
   }
 
-  onEndInputPressEnter() {
+  onEndInputPressEnter=()=> {
     if (this.props.onEndInput) {
       this.props.onEndInput(this.props.search.endtext);
     }
@@ -50,7 +48,7 @@ class TerminalSelector extends React.PureComponent {
     return (
       <div className={styles.box}>
         <div className={styles.searchbox}>
-          <div className={styles.revertbox}>
+          <div className={styles.revertbox} onClick={this.props.onReverDir}>
             <img src={revertSrc} alt="" />
           </div>
           <div className={styles.inputbox}>
@@ -61,7 +59,7 @@ class TerminalSelector extends React.PureComponent {
               <img alt="" src={startSrc} className={styles.routeinputicon} />
               <Input
                 className={styles.routeinput}
-                placeholder="输入起点或在图区上选点"
+                placeholder={"输入起点"}
                 value={this.props.search.starttext}
                 onChange={this.onStartInputChange}
                 onPressEnter={this.onStartInputPressEnter}
@@ -74,7 +72,7 @@ class TerminalSelector extends React.PureComponent {
               <img alt="" src={endSrc} className={styles.routeinputicon} />
               <Input
                 className={styles.routeinput}
-                placeholder="输入终点或在图区上选点"
+                placeholder={"输入终点"}
                 value={this.props.search.endtext}
                 onChange={this.onEndInputChange}
                 onPressEnter={this.onEndInputPressEnter}

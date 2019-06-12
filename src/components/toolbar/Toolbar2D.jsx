@@ -6,17 +6,20 @@ import {
   MAP_ACTION_CLEAR_GRAPHICS,
   ACTION_MEASURE_LINE_3D,
   ACTION_MEASURE_AREA_3D,
-  VIEW_MODE_3D,
   VIEW_MODE_2D,
   ACTION_MEASURE_2D_LINE,
   ACTION_MEASURE_2D_AREA,
   ACTION_MAP_2D_CORRECT,
   ACTION_PRINT_2D_MAP,
+  INIT_SPLITMAP,
+  ACTION_LEGENDLIST_DEACTIVATE,
+  ACTION_LEGENDLIST_SHOW,
+  MAP_ACTION_CLIP_MAP,
 } from '../../constants/action-types';
 
 import styles from './Toolbar2D.css';
 import Callout from '../callout/Callout';
-import AreaSelector from '../stat/AreaSelector';
+import imageDivideTool from '../../utils/arcgis/image-divide';
 
 const ButtonGroup = Button.Group;
 
@@ -27,9 +30,22 @@ class Toolbar2D extends React.Component {
     this.state = {};
     this.measureLine = this.measureLine.bind(this);
     this.visblechangebook = this.visblechangebook.bind(this);
+    this.visibleLegend = this.visibleLegend.bind(this);
     this.splitScreen = this.splitScreen.bind(this);
+    this.imageTool = this.imageTool.bind(this);
+    this.rollerScreen = this.rollerScreen.bind(this);
   }
   componentDidMount() {}
+  imageTool({ key }) {
+    switch (key) {
+      case 'imageDivide': {
+        imageDivideTool.init();
+        break;
+      }
+      default:
+        break;
+    }
+  }
   measureLine({ key }) {
     switch (key) {
       case 'measure3DLine':
@@ -55,6 +71,11 @@ class Toolbar2D extends React.Component {
       case 'print2DMap':
         this.props.dispatch({
           type: ACTION_PRINT_2D_MAP,
+        });
+        break;
+      case 'clipMap':
+        this.props.dispatch({
+          type: MAP_ACTION_CLIP_MAP,
         });
         break;
       case 'mapCorrection':
@@ -89,14 +110,30 @@ class Toolbar2D extends React.Component {
     }
   }
 
-  splitScreen(e) {
-    e.stopPropagation();
-    const el = e.target.children[1];
-    if (el.innerText === '分屏') {
-      el.innerText = '退出';
+  rollerScreen(e) {
+    if (this.props.agsmap.rollerflags) {
+      // prepare();
+      this.props.dispatch({
+        type: 'agsmap/rollscreenChangeState',
+        payload: false,
+      });
     } else {
-      el.innerText = '分屏';
+      this.props.dispatch({
+        type: 'agsmap/rollscreenChangeState',
+        payload: true,
+      });
+      if (document.getElementById('rollerBlind')) {
+        this.props.dispatch({
+          type: INIT_SPLITMAP,
+          payload: {
+            containers: document.getElementById('rollerBlind'),
+          },
+        });
+      }
     }
+  }
+
+  splitScreen(e) {
     if (this.props.agsmap.splitflags) {
       // prepare();
       this.props.dispatch({
@@ -120,23 +157,32 @@ class Toolbar2D extends React.Component {
     }
   }
 
+  visibleLegend = () => {
+    // this.props.dispatch({
+    //   type: ACTION_LEGENDLIST_SHOW,
+    // });
+    if (this.props.agsmap.legendflags) {
+      // prepare();
+      this.props.dispatch({
+        type: 'agsmap/legendChangeState',
+        payload: false,
+      });
+      this.props.dispatch({
+        type: ACTION_LEGENDLIST_DEACTIVATE,
+      });
+    } else {
+      this.props.dispatch({
+        type: 'agsmap/legendChangeState',
+        payload: true,
+      });
+      this.props.dispatch({
+        type: ACTION_LEGENDLIST_SHOW,
+      });
+    }
+  };
+
   renderMenuItems() {
     const items = [];
-    if (this.props.agsmap.mode === VIEW_MODE_3D) {
-      items.push(
-        <Menu.Item key="measure3DLine" style={{ textAlign: 'center' }}>
-          <Icon type="mail" />
-          <span>&nbsp;测距</span>
-        </Menu.Item>
-      );
-
-      items.push(
-        <Menu.Item key="measure3DArea" style={{ textAlign: 'center' }}>
-          <Icon type="ant-design" />
-          <span>&nbsp;测面</span>
-        </Menu.Item>
-      );
-    } else if (this.props.agsmap.mode === VIEW_MODE_2D) {
       items.push([
         <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
           <Icon type="edit" />
@@ -154,17 +200,24 @@ class Toolbar2D extends React.Component {
           <Icon type="printer" />
           <span>&nbsp;打印</span>
         </Menu.Item>,
+        <Menu.Item key="clipMap" style={{ textAlign: 'center' }}>
+          <Icon type="scissor" />
+          <span>&nbsp;截屏</span>
+        </Menu.Item>,
+        <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
+          <Icon type="bars" />
+          <span>&nbsp;图例</span>
+        </Menu.Item>,
       ]);
-      // items.push(
-      //   <Menu.Item key="mapCorrection" style={{ textAlign: 'center' }}>
-      //     <Icon type="ant-design" />
-      //     <span>&nbsp;地图纠错</span>
-      //   </Menu.Item>,
-      // );
-    }
+
     return items;
   }
-
+  timerSilder = () => {
+    this.props.dispatch({
+      type: 'agsmap/showTimerSliderCompare',
+      payload: !this.props.agsmap.timerLayersSelectvisible,
+    });
+  };
   render() {
     const menu = (
       <Menu className={styles.noradius} onClick={this.measureLine}>
@@ -184,7 +237,6 @@ class Toolbar2D extends React.Component {
         }}
       >
         <ButtonGroup className={styles.buttonGroup}>
-          {/* <AreaSelector className={styles.btnStyle} /> */}
           <Button onClick={this.visblechangebook} className={styles.btnStyle}>
             <Icon type="book" />
             书签
@@ -194,6 +246,49 @@ class Toolbar2D extends React.Component {
               <Icon type="environment-o" />标 注<Icon type="down" />
             </Button>
           </Dropdown>
+
+          <Dropdown
+            overlay={
+              <Menu className={styles.noradius} onClick={this.imageTool}>
+                <Menu.Item
+                  key="juanMap"
+                  onClick={this.rollerScreen}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="border-horizontal" />
+                  <span>&nbsp;卷帘对比</span>
+                </Menu.Item>
+
+                <Menu.Item
+                  key="splitMap"
+                  onClick={this.splitScreen}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="border-horizontal" />
+                  <span>&nbsp;分屏对比</span>
+                </Menu.Item>
+                <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
+                  <Icon type="border-outer" />
+                  <span>&nbsp;全域划分</span>
+                </Menu.Item>
+                <Menu.Item
+                  key="timeslider"
+                  onClick={this.timerSilder}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="play-circle" theme="filled" />
+                  <span>&nbsp;多时相</span>
+                </Menu.Item>
+              </Menu>
+            }
+            trigger={['click']}
+          >
+            <Button className={styles.btnStyle}>
+              <Icon type="picture" theme="filled" />
+              影像工具
+              <Icon type="down" />
+            </Button>
+          </Dropdown>
           <Dropdown overlay={menu} trigger={['click']}>
             <Button className={styles.btnStyle}>
               <Icon type="medicine-box" theme="filled" />
@@ -201,20 +296,6 @@ class Toolbar2D extends React.Component {
               <Icon type="down" />
             </Button>
           </Dropdown>
-
-          <Button
-            className={styles.btnStyle}
-            onClick={() => {
-              window.open('./multiDate/multiDate.html');
-            }}
-          >
-            <Icon type="clock-circle-o" />
-            多时相
-          </Button>
-          <Button className={styles.btnStyle} onClick={this.splitScreen}>
-            <Icon type="switcher" />
-            分屏
-          </Button>
         </ButtonGroup>
         <Avatar
           style={{ marginLeft: '20px', backgroundColor: '#87d068' }}

@@ -20,6 +20,7 @@ export const MAP_ACTION_CLEAR_GRAPHICS = 'map-action-clear-graphics';
 export const ACTION_MEASURE_2D_LINE = 'action-measure-2d-line';
 export const ACTION_MEASURE_2D_AREA = 'action-measure-2d-area';
 export const ACTION_PRINT_2D_MAP = 'action-print-2d-map';
+export const MAP_ACTION_CLIP_MAP = 'map-action-clip-map';
 
 export const ACTION_VIEW_EXTENT = 'action-goto-view-extent';
 
@@ -75,3 +76,4 @@ export const ACTION_MAP_OVERVIEW = 'action-map-overview';
 export const ACTION_MAP_EYEVIEW = 'action-map-eyeview';
 export const ACTION_MAP_ROAM = 'action-map-roam';
 export const ACTION_MAP_PRINT_3D = 'action-map-print-3d';
+

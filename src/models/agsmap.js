@@ -1,7 +1,8 @@
 import {
   INIT_MAP,
   INIT_SPLITMAP,
-  VIEW_MODE_2D, SWITCH_MAP,
+  VIEW_MODE_2D,
+  SWITCH_MAP,
   ACTION_ADDBOOKMARK_2D,
   ACTION_GOTOBOOKMARK_2D,
   ACTION_DELETBOOKMARK_2D,
@@ -9,15 +10,24 @@ import {
   ACTION_EDITBOOKMARK_2D,
 } from '../constants/action-types';
 
+const delay = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+};
+
 export default {
   namespace: 'agsmap',
 
   state: {
+    viewCreated: false,
+
     mode: VIEW_MODE_2D,
     callflags: false,
     bookflags: false,
     splitflags: false,
     correctflags: false,
+    rollerflags: false,
     bookmarks: [],
     bookname: null,
     // 日照分析参数 wangp 20180823
@@ -33,32 +43,51 @@ export default {
     activeHeadCode: '1',
     lightshadowlistflags: false,
     menusflags: false,
+    legendflags: false,
+    timerLayersSelectvisible:false,
   },
 
   subscriptions: {
-    setup({ dispatch, history }) { // eslint-disable-line
-
+    setup({ dispatch, history }) {
+      // eslint-disable-line
     },
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) { // eslint-disable-line
+    *fetch({ payload }, { call, put }) {
+      // eslint-disable-line
       yield put({ type: 'save' });
     },
 
-    *init({ payload }, { call, put }) { // eslint-disable-line
+    *init({ payload }, { call, put }) {
+      // eslint-disable-line
       yield put({ type: INIT_MAP, payload });
     },
-    *initsplitMap({ payload }, { call, put }) { // eslint-disable-line
+    *initsplitMap({ payload }, { call, put }) {
+      // eslint-disable-line
       yield put({ type: INIT_SPLITMAP, payload });
     },
-    *transMode2d({ payload }, { put }) {
-      yield put({ type: 'transMode2dState', payload });
+    *transMode2d({ payload }, { put, call }) {
       yield put({ type: SWITCH_MAP, payload });
+      while (true) {
+        yield call(delay, 300);
+
+        if (window.agsGlobal.view.type === '2d') {
+          yield put({ type: 'transMode2dState', payload });
+          break;
+        }
+      }
     },
-    *transMode3d({ payload }, { put }) {
-      yield put({ type: 'transMode3dState', payload });
+    *transMode3d({ payload }, { put, call }) {
       yield put({ type: SWITCH_MAP, payload });
+      while (true) {
+        yield call(delay, 300);
+
+        if (window.agsGlobal.view.type === '3d') {
+          yield put({ type: 'transMode3dState', payload });
+          break;
+        }
+      }
     },
     *addBookmark({ payload }, { put }) {
       yield put({ type: ACTION_ADDBOOKMARK_2D, payload });
@@ -78,8 +107,11 @@ export default {
   },
 
   reducers: {
-    save(state, action) {
-      return { ...state, ...action.payload };
+    afterViewCreated(state, action) {
+      return { ...state, viewCreated: true };
+    },
+    rollscreenChangeState(state, action) {
+      return { ...state, rollerflags: action.payload };
     },
     transMode3dState(state, action) {
       return { ...state, mode: action.payload };
@@ -231,6 +263,15 @@ export default {
       return {
         ...state,
         activeHeadCode: action.payload,
+      };
+    },
+    showTimerSliderCompare(state, action) {
+      return { ...state, timerLayersSelectvisible: action.payload };
+    },
+    legendChangeState(state, action) {
+      return {
+        ...state,
+        legendflags: action.payload,
       };
     },
   },
