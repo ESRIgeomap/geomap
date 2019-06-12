@@ -1,0 +1,139 @@
+.wrap {
+  //width: 420px;
+  //height: 130px;
+  //overflow: hidden;
+  //margin-top: -10px;
+  padding-left:8px;
+  padding-right: 8px;
+      .item {
+        cursor: pointer;
+        margin-bottom: 8px;
+        &:hover{
+          
+        }
+        .active,
+        .selected{
+            -webkit-transition: all 200ms linear;
+            -o-transition: all 200ms linear;
+            //box-shadow: 0 0 0 1px #007ac2;
+            border: 1px solid #007ac2;
+        }
+      }   
+      .topone{
+          z-index: 99;
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          width: 40px;
+          height: 20px;
+          font-size: 8px !important;
+          padding: 0px;
+          border: 1px solid #40a9ff;
+          background-color: rgba(255,255,255,0.5);
+          color: #40a9ff;
+      }
+
+      .up{
+          z-index: 99;
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          width: 40px;
+          height: 20px;
+          font-size: 8px !important;
+          padding: 0px;
+          background-color: rgba(255,255,255,0.5);
+          display: none;
+      }
+
+      .check{
+        z-index: 99;
+        position: absolute;
+        left: 5px;
+        top: 1px;
+        //display: none;
+      }
+      .check:hover{
+        display: block;
+      }
+      .toolbar{
+        //padding: 5px 0;
+
+      }
+      .countbar{
+        float:left;
+        line-height: 32px;
+        list-style: none;
+        margin-left: -30px;
+        margin-bottom: 0px;
+      }
+      .actionbar{
+        float: right;
+        text-align: right;
+        list-style: none;
+        margin-bottom: 0px;
+        li{
+          float: left;
+          margin-right: 10px;
+        }
+        .noeffect{
+          box-shadow: none;
+          border:none;
+          padding-left:0;
+          padding-right:0;
+        }
+      }
+      .noeffect{
+        box-shadow: none;
+        border:none;
+        padding-left:0;
+        padding-right:0;
+      }
+      .goPrev{
+        float: left;
+        font-size: 28px;
+        position: absolute;
+        left: 0px;
+        top: 125px;
+        color: hsl(210, 5%, 53%);
+      } 
+      .goNext{
+        float: right;
+        font-size: 28px;
+        position: absolute;
+        right: 0px;
+        top: 125px;
+        color: hsl(210, 5%, 53%);
+      }
+      .del{
+        color: #5f6477;
+        margin-left: 5px;
+      }
+
+      .disablea{
+        touch-action: none;
+        cursor: default;
+      }
+      .disablea:hover{
+        color: rgba(0,0,0,0.45);
+      }
+
+      .loadingDiv {
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 99999;
+      }
+
+  .delCollection {
+    float: right;
+    margin-right: 10px;
+    .btnStyle {
+      border: 0px;
+      border-radius: 6px;
+      font-size: 14px;
+      height: 30px;
+      margin-right: 5px;     
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+  }
+}

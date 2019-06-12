@@ -26,6 +26,10 @@ import styles from './index.css';
 
 import LegendList from '../components/legend/LegendList';
 
+//pensiveant:加载LayerList组件
+import LayerList from '../components/layerList/LayerList';
+
+
 class IndexPage extends React.Component {
 
   constructor(props) {
@@ -203,6 +207,8 @@ class IndexPage extends React.Component {
             display: this.props.agsmap.rollerflags ? 'block' : 'none',
           }}
         ></div>
+
+        <LayerList />
         {/* <FullscreenButton/> */}
       </div>
     );

@@ -36,6 +36,16 @@ class Toolbar2D extends React.Component {
     this.rollerScreen = this.rollerScreen.bind(this);
   }
   componentDidMount() {}
+
+   //pensiveant:数据选择
+   showLayerList = () => {
+    this.props.dispatch({
+      type: 'layerList/changeLayerListVisible',
+      payload: !this.props.layerList.layerListVisible,
+    });
+  };
+  
+
   imageTool({ key }) {
     switch (key) {
       case 'imageDivide': {
@@ -237,6 +247,11 @@ class Toolbar2D extends React.Component {
         }}
       >
         <ButtonGroup className={styles.buttonGroup}>
+            {/*pensiveant:数据选择 */}
+            <Button className={styles.btnStyle} onClick={this.showLayerList}>
+            <Icon type="profile" />
+              数据选择
+          </Button>
           <Button onClick={this.visblechangebook} className={styles.btnStyle}>
             <Icon type="book" />
             书签
@@ -307,8 +322,9 @@ class Toolbar2D extends React.Component {
   }
 }
 
-export default connect(({ agsmap }) => {
+export default connect(({ agsmap ,layerList}) => {
   return {
     agsmap,
+    layerList,
   };
 })(Toolbar2D);

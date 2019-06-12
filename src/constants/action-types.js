@@ -77,3 +77,22 @@ export const ACTION_MAP_EYEVIEW = 'action-map-eyeview';
 export const ACTION_MAP_ROAM = 'action-map-roam';
 export const ACTION_MAP_PRINT_3D = 'action-map-print-3d';
 
+
+/**
+ * layerlist
+ */
+export const LAYERLIST_WEBMAP_CHANGE = 'layerlist-webmap-change';
+export const LAYERLIST_WEBMAP_LIST = 'layerlist-webmap-list';
+export const SUBJECTLAYERLIST_ADD_OR_REMOVE = 'subjectlayer-add-or-remove';
+export const SUBJECTLAYERLIST_SAVE = 'subjectlayer-save';
+export const LAYERLIST_GET_TREE = 'layerlist-get-tree';
+export const LAYERLIST_ADD_LAYERS = 'layerlist-add-layers';
+export const LAYERLIST_REMOVE_LAYERS = 'layerlist-remove-layers';
+export const LAYERLIST_CHANGE_INDEX = 'layerlist-change-index';
+export const LAYERLIST_POLT_BYTYPE = 'layerlist-polt-bytype';
+export const LAYERLIST_POLT_LAYER_SAVE = 'layerlist-polt-layer-save';
+export const LAYERLIST_SUBJECT_SWITCH = 'layerlist-subject-switch';
+export const LAYERLIST_RELOAD_WEATHER_LAYERS = 'layerlist-reload-weather-layers';
+export const LAYERLIST_TOP_COLLECTION = 'layerlist-top-collection';
+export const LAYERLIST_SUBJECT_REMOVE = 'layerlist-subject-remove';
+
