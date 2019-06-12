@@ -13,7 +13,7 @@
     /** 
     * 此项目配置地图基础底图，需要从portal进行设置
     * webMapId：二维地图基础底图
-    * webSceneId：三维地图基础底图
+    * webSceneId：三维地图基础底图1
     * */
     webMapId: '89d52b73eecb4e8aae4ed2f2aaac63c5',
     webSceneId: '2b5583be57624afab5852e457523b8bb',
