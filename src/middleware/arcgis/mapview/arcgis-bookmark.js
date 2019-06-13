@@ -17,7 +17,7 @@ function bookmarks(opts = {}) {
     switch (action.type) {
       case ACTION_ADDBOOKMARK_2D: {
         if (window.agsGlobal.view) {
-          const extent = window.agsGlobal.extent;
+          const extent = window.agsGlobal.view.extent;
           // 保存
           store.dispatch({
             type: 'agsmap/updateBookmarks',
