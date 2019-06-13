@@ -41,7 +41,7 @@ class ToolbarSplit extends React.Component {
                 <ButtonGroup className={styles.buttonGroup}>
                     <Button className={styles.btnStyle} onClick={this.showLayerList}>
                         <Icon type="profile" />
-                        数据采集
+                        数据选择
                     </Button>
                     <Button className={styles.btnStyle} onClick={this.closeSplitLayer}>
                         <Icon type="close-circle" />
