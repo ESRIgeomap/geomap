@@ -309,7 +309,7 @@ class Toolbar2D extends React.Component {
                   style={{ textAlign: 'center' }}
                 >
                   <Icon type="play-circle" theme="filled" />
-                  <span>&nbsp;多时相</span>
+                  <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
                 </Menu.Item>
               </Menu>
             }
