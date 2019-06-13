@@ -23,6 +23,8 @@ class Bookmark extends Component {
     this.showModal = this.showModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.drag = this.drag.bind(this);
+    this.removeDrag = this.removeDrag.bind(this);
   }
 
   visblechange() {
@@ -49,6 +51,7 @@ class Bookmark extends Component {
     this.setState({
       visible: true,
       geteditbookname: '',
+      bookname: '',
     });
   }
 
@@ -121,11 +124,13 @@ class Bookmark extends Component {
     this.setState({
       visible: true,
       geteditbookname: e.target.offsetParent.firstChild.innerText,
+      bookname: e.target.offsetParent.firstChild.innerText,
     });
   }
   handleOk() {
     this.setState({
       visible: false,
+      bookname: '',
     });
   }
   handleCancel() {
@@ -133,6 +138,28 @@ class Bookmark extends Component {
       visible: false,
     });
   }
+
+  //onMouseDown
+  drag = e => {
+    const Drag = this.refs.bookMarkDiv;
+    const ev = e || window.event;
+    e.stopPropagation();
+    const disX = ev.clientX - Drag.offsetLeft;
+    const disY = ev.clientY - Drag.offsetTop;
+    document.onmousemove = function(event) {
+      const ev = event || window.event;
+      Drag.style.left = ev.clientX - disX + 'px';
+      Drag.style.top = ev.clientY - disY + 'px';
+      Drag.style.cursor = 'move';
+    };
+  }
+  //onMouseUp
+  removeDrag = e => {
+    document.onmousemove = null;
+    const Drag = this.refs.bookMarkDiv;
+    Drag.style.cursor = 'default';
+  }
+
   edit() {
     if (
       this.state.geteditbookname === null ||
@@ -203,11 +230,11 @@ class Bookmark extends Component {
   }
 
   renderBookmarks() {
-    return this.props.agsmap.bookmarks.map((bookmark) => {
+    return this.props.agsmap.bookmarks.map((bookmark, index) => {
       const ButtonGroup = Button.Group;
       return (
-        <div>
-          <p>
+        <div key={index}>
+          <div>
             <ButtonGroup>
               <Button
                 style={{
@@ -244,7 +271,7 @@ class Bookmark extends Component {
                 </Button>
               </Tooltip>
             </ButtonGroup>
-          </p>
+          </div>
         </div>
       );
     });
@@ -254,61 +281,47 @@ class Bookmark extends Component {
     return (
       <div
         id="shuqian"
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0',
-        }}
+        className={styles.modal}
+        style={{ display: this.props.agsmap.bookflags ? 'block' : 'none' }}
+        ref="bookMarkDiv"
       >
-        <Modal
-          title="书签列表"
-          visible={this.props.agsmap.bookflags}
-          mask={false}
-          style={{
-            top: 66,
-            right: '-20%',
-            pointerEvents: 'all',
-            overflow: 'auto',
-            maxHeight: '400px',
-            borderRadius: 0,
-          }}
-          maskClosable={false}
-          width="288px"
-          footer={null}
-          onCancel={this.visblechange}
-          wrapClassName={styles.wrapClassName}
-          bodyStyle={{ padding: '10px', textAlign: 'center' }}
-        >
-          <div style={{ minHeight: '245px', overflow: 'auto' }}>
-            {this.renderBookmarks()}
-          </div>
-          <p>
-            <Button
-              type="primary"
-              onClick={this.addBookmark}
-              style={{
-                width: '80px',
-                borderRadius: 0,
-              }}
-            >
-              <Icon type="plus-circle" />添加
-            </Button>
-            <Button
-              type="danger"
-              style={{
-                marginLeft: '24px',
-                width: '80px',
-                borderRadius: 0,
-              }}
-              onClick={this.deletBookmark}
-            >
-              <Icon type="close-circle" />清空
-            </Button>
-          </p>
-        </Modal>
+        <div className={styles.title} onMouseDown={this.drag} onMouseUp={this.removeDrag}>
+          书签
+          <Tooltip title="关闭">
+            <div onClick={this.visblechange} className={styles.close}>
+              <Icon type="close" />
+            </div>
+          </Tooltip>
+        </div>
+        <div className={styles.modalbody}>{this.renderBookmarks()}</div>
+        <p className={styles.btnDiv}>
+          <Button
+            type="primary"
+            onClick={this.addBookmark}
+            style={{
+              width: '120px',
+              borderRadius: 2,
+            }}
+          >
+            <Icon type="plus-circle" />
+            添加
+          </Button>
+          <Button
+            type="danger"
+            style={{
+              marginLeft: '24px',
+              width: '120px',
+              borderRadius: 2,
+            }}
+            onClick={this.deletBookmark}
+          >
+            <Icon type="close-circle" />
+            清空
+          </Button>
+        </p>
         <div>
           <Modal
-            title="书签编辑"
+            title={this.state.status === 'add' ? '添加书签' : '编辑书签'}
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
@@ -317,17 +330,17 @@ class Bookmark extends Component {
             mask={false}
             maskClosable={false}
           >
-            <p>书签名称： </p>
-            <p>
+            <p className={styles.labelmargin}>书签名称： </p>
+            <div className={styles.labelmargin}>
               <Input
                 onChange={this.nide}
-                placeholder={this.state.geteditbookname}
-                // value={this.state.geteditbookname}
-                defaultValue={this.state.geteditbookname}
-                style={{ borderRadius: 0 }}
+                // placeholder={this.state.geteditbookname}
+                value={this.state.bookname}
+                // defaultValue={this.state.geteditbookname}
+                style={{ borderRadius: 0, backgroundColor: 'transparent' }}
               />
-            </p>
-            <p>
+            </div>
+            <div>
               <Button
                 type="primary"
                 style={{
@@ -338,7 +351,7 @@ class Bookmark extends Component {
               >
                 确定
               </Button>
-            </p>
+            </div>
           </Modal>
         </div>
       </div>

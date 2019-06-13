@@ -31,6 +31,7 @@ import LayerList from '../components/layerList/LayerList';
 //pensiveant:加载疑点标绘PoltPanel组件
 import PoltPanel from '../components/layerList/PoltPanel';
 
+import SplitLayerList from '../components/layerList/SplitLayerList';
 
 class IndexPage extends React.Component {
 
@@ -209,10 +210,10 @@ class IndexPage extends React.Component {
             display: this.props.agsmap.rollerflags ? 'block' : 'none',
           }}
         ></div>
-
         <LayerList />
         {/*疑点标绘 */}
         <PoltPanel />
+        <SplitLayerList />
         {/* <FullscreenButton/> */}
       </div>
     );

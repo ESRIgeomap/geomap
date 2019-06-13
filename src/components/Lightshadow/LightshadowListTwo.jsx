@@ -253,7 +253,7 @@ class LightshadowListTwo extends Component {
                 marginBottom: '8px',
               }}
             >
-              <Col offset="1" span="18">
+              <Col offset={1} span={18}>
                 <Slider
                   marks={marks}
                   max={1440}
@@ -263,7 +263,7 @@ class LightshadowListTwo extends Component {
                   onChange={this.onSliderChange}
                 />
               </Col>
-              <Col span="2" offset="1" className={styles.settingItem}>
+              <Col span={2} offset={1} className={styles.settingItem}>
                 <Button
                   style={{
                     marginTop: '5px',
@@ -281,7 +281,7 @@ class LightshadowListTwo extends Component {
                 marginBottom: '8px',
               }}
             >
-              <Col span="18" offset="1">
+              <Col span={18} offset={1}>
                 <DatePicker
                   showToday={false}
                   allowClear={false}
@@ -291,7 +291,7 @@ class LightshadowListTwo extends Component {
                   onChange={this.onDatepickerChange}
                 />
               </Col>
-              <Col span="2" offset="1" className={styles.settingItem}>
+              <Col span={2} offset={1} className={styles.settingItem}>
                 <Button
                   style={{
                     marginTop: '5px',
@@ -305,7 +305,7 @@ class LightshadowListTwo extends Component {
               </Col>
             </Row>
             <Row>
-              <Col span="8" offset="8">
+              <Col span={8} offset={8}>
                 <Checkbox
                   // defaultChecked={this.state.showShadow}
                   // checked={this.state.showShadow}

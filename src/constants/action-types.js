@@ -22,7 +22,6 @@ export const ACTION_MEASURE_2D_AREA = 'action-measure-2d-area';
 export const ACTION_PRINT_2D_MAP = 'action-print-2d-map';
 export const MAP_ACTION_CLIP_MAP = 'map-action-clip-map';
 
-export const ACTION_VIEW_EXTENT = 'action-goto-view-extent';
 
 export const ACTION_MAP_2D_CORRECT = 'action-map-2d-correct';
 

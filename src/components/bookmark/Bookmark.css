@@ -1,3 +1,79 @@
 .wrapClassName {
   pointer-events: none;
 }
+.addBtn {
+  width: 180;
+  border: 'none';
+  text-align: 'left';
+  margin-right: '12px';
+  background: #001529;
+  color: #fff;
+}
+.modal {
+  position: fixed;
+  right: 85px;
+  top: 116px;
+  /*bottom: 25px;*/
+  pointer-events: all;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+  width: 360px;
+  max-height: 840px;
+  background: #fff;
+  z-index: 5;
+  display: flex;
+  /* border: 1px solid #1870ff; */
+  box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+}
+.modalbody {
+  padding: 10px 0px 10px 10px;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+  min-height: 245px;
+  max-height: 750px;
+  overflow: auto;
+}
+.listdiv {
+  min-height: 245px;
+  overflow: auto;
+  max-height: 745px;
+}
+.wrapClassName {
+  pointer-events: none;
+}
+
+.title {
+  font-size: 15px;
+  width: 100%;
+  line-height: 20px;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 12px;
+  color: #fff;
+  background: #1870ff;
+  border: none;
+}
+.close {
+  float: right;
+  font-size: 16px;
+  color: #ffffff;
+}
+.btnDiv {
+  text-align: center;
+  padding-bottom: 10px;
+  background-color: #fff;
+}
+.listbtn {
+  width: 250px;
+  text-align: left;
+  margin-right: 2px;
+  background: transparent;
+  border: none;
+}
+.editbtn {
+  border: 'none';
+}
+
+.labelmargin{
+  margin-bottom: 10px;
+}
