@@ -17,7 +17,6 @@ import {
   ACTION_DRAW_POINT_2D,
   ACTION_DRAW_LINE_2D,
   ACTION_DRAW_FLAT_2D,
-  ACTION_VIEW_EXTENT,
   ACTION_PRINT_2D_MAP,
   MAP_ACTION_CLIP_MAP,
   ACTION_LEGENDLIST_SHOW,
@@ -177,43 +176,6 @@ function createMapView(opts = {}) {
       case ACTION_LEGENDLIST_DEACTIVATE: {
         LegendList.mapView = ags.view;
         LegendList.deactivate();
-        break;
-      }
-
-      case ACTION_VIEW_EXTENT: {
-        const { payload } = action;
-        const extent = payload.country ? payload.country.extent : payload.city.extent;
-        const coords = extent.split('_');
-        const [Extent, GeometryService, ProjectParameters] = await jsapi.load([
-          'esri/geometry/Extent',
-          'esri/tasks/GeometryService',
-          'esri/tasks/support/ProjectParameters',
-        ]);
-        const ext = new Extent({
-          xmin: coords[0],
-          ymin: coords[1],
-          xmax: coords[2],
-          ymax: coords[3],
-          spatialReference: { wkid: 102100 },
-        });
-
-        const geomServ = new GeometryService({
-          url: window.appcfg.geometryService,
-        });
-        const params = new ProjectParameters({
-          geometries: [ext],
-          outSpatialReference: ags.view.spatialReference,
-        });
-        geomServ.project(params).then(result => {
-          const geometry = new Extent({
-            xmin: result[0].xmin,
-            ymin: result[0].ymin,
-            xmax: result[0].xmax,
-            ymax: result[0].ymax,
-            spatialReference: ags.view.spatialReference,
-          });
-          ags.view.goTo(geometry);
-        });
         break;
       }
       default: {
