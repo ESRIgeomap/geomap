@@ -67,3 +67,9 @@
   text-align: center;
   margin-bottom: 10px;
 }
+.ant-menu-vertical > .ant-menu-item{
+    height:32px;
+    font-size: 12px;
+    line-height: 32px;
+    padding: 5px 15px;
+}

@@ -17,7 +17,7 @@
     /**
      * 此项目配置地图基础底图，需要从portal进行设置
      * webMapId：二维地图基础底图
-     * webSceneId：三维地图基础底图1
+     * webSceneId：三维地图基础底图
      * */
     webMapId: '80655ac21acd49e08e5658bab737c349',
     webSceneId: '2b5583be57624afab5852e457523b8bb',
@@ -38,13 +38,6 @@
     // --------------------分屏对比功能配置项----------------------------
     // 此项目配置分屏对比的左侧底图  右侧采用原有基础底图
     websplitMapId: 'c10bb7199ef94e36b8d1d6235b1259ec',
-
-    // --------------------多时相功能配置项----------------------------
-    multidateItemone: '6a3cc3c01d804736aa27242798a6dc75',
-    multidateItemtwo: '46af0c1e6a03401dbbaad015335df3dc',
-    multidateItemthree: '6c23d560ff4148e6af54caa4b523cc1d',
-    multidateItemfour: '15ebe38d5b9448fca8ad47c1adf7cdec',
-    multidateItemfive: 'c0f8bff30a2e4589892c9c909a383880',
 
     initialExtent: {
       center: [116.3, 39.9],
