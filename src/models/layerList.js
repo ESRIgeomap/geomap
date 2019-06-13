@@ -254,6 +254,8 @@ export default {
     setLayerPanelFlag(state, action) {
       return { ...state, layerPanelFlag: action.payload };
     },
+
+    //pensiveant:更改标绘功能中编辑组件的可见性
     changePoltPanelVisible(state, action) {
       return { ...state, poltPanelVisible: action.payload };
     },

@@ -1,0 +1,194 @@
+.wrap {
+  width: 100%;
+  //max-height: 550px;
+  overflow-y: auto;
+
+  .barsdiv {
+    margin-top: 5px;
+    //padding: 5px 20px;
+    width: 100%;
+    height: auto;
+    .bars {
+      width: 100%;
+      //height: 100px;
+      //border: solid 1px #e8e8e8;
+      margin-bottom: 10px;
+      //padding: 5px;
+      border-radius: 3px;
+      overflow-y: auto;
+
+      .bar {
+        float: left;
+        width: 35px;
+        height: 35px;
+        margin: 10px 10px;
+        border-radius: 3px;
+        line-height: 32px;
+        background: #e8e8e8;
+        border: solid 1px #eee;
+        &:hover {
+          cursor: pointer;
+        }
+        &:active {
+          border: solid 1px #419eef;
+        }
+        .point {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/point.svg);
+        }
+        .polyline {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/polyline.svg);
+        }
+        .polygon {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/polygon.svg);
+        }
+        .rectangle {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/rectangle.svg);
+        }
+        .circle {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/circle.svg);
+        }
+        .general_arrow {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/general_arrow.svg);
+        }
+        .double_arrow {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/double_arrow.svg);
+        }
+        .swallowtail_arrow {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/swallowtail_arrow.svg);
+        }
+        .font {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/font.svg);
+        }
+        .clear {
+          width: 32px;
+          height: 32px;
+          background: url(./img/polticon/clear.svg);
+        }
+      }
+      .selected {
+        border: solid 1px #419eef;
+      }
+    }
+    .preview {
+      width: 100%;
+      height: 100%;
+    }
+    .advance {
+      cursor: pointer;
+    }
+    .pointbars {
+      width: 100%;
+      height: 80px;
+      overflow-y: auto;
+      border: solid 1px #e8e8e8;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 3px;
+      .pointbar {
+        width: 25px;
+        height: 25x;
+        border: solid 1px #ddd;
+        border-radius: 2px;
+        cursor: pointer;
+        margin: 5px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .btnWrap {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    .btnStyle {
+      border: 0px;
+      border-radius: 6px;
+      font-size: 14px;
+      height: 38px;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 5px 10px;
+      margin-left: 20px;
+    }
+  }
+  table {
+    width: 95%;
+    tr {
+      height: 50px;
+    }
+  }
+
+  .settingdiv {
+    height: 50px;
+    .leftsetting {
+      height: 50px;
+      display: inline;
+      width: 100px;
+      line-height: 50px;
+      float: left;
+      text-align: center;
+    }
+    .rightsetting {
+      height: 50px;
+      display: inline;
+      line-height: 50px;
+      width: 220px;
+      float: left;
+      .fillcolor {
+        margin-top: 9px;
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .popover {
+        position: fixed;
+        z-index: 999;
+        .cover {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .morediv {
+    display: inline;
+    height: 40px;
+    padding-top: 20px;
+    float: right;
+    padding-right: 10px;
+  }
+
+  :global {
+    .ant-select {
+      width: 90px;
+    }
+    .ant-divider-horizontal {
+      margin: 12px 0;
+    }
+  }
+}

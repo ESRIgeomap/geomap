@@ -22,3 +22,9 @@ export const MultiDateItem2 = AppConfig.multidateItemtwo;
 export const MultiDateItem3 = AppConfig.multidateItemthree;
 export const MultiDateItem4 = AppConfig.multidateItemfour;
 export const MultiDateItem5 = AppConfig.multidateItemfive;
+
+export default {
+    getParamAgs() {
+        return window.agsGlobal;
+    }
+}

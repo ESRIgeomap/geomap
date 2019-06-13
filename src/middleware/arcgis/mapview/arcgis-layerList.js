@@ -162,7 +162,7 @@ function layerList(opts = {}) {
         break;
       }
       case layerlistTypes.LAYERLIST_ADD_LAYERS: {
-        const { view, addedlayers } = action.payload;
+        const {  addedlayers,view } = action.payload;
         store.dispatch({
           type: 'agsmap/changegloballoadingstate',
           payload: true,

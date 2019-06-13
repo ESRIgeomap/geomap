@@ -1,9 +1,14 @@
+//pensiveant:图层列表组件
+
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Collapse, Button, Icon, message, Tooltip, Modal, Input } from 'antd';
+import styles from './LayerList.less';
+
+//引入子组件
 import CollectionLayer from './CollectionLayer';
 import SystemLayer from './SystemLayer';
-import styles from './LayerList.less';
+
 //import { FormattedMessage, setLocale, getLocale, formatMessage } from 'umi/locale';
 
 import {
@@ -20,6 +25,7 @@ import {
 } from '../../services/portal';
 
 const { Panel } = Collapse;
+
 class LayerList extends Component {
   constructor(props) {
     super(props);
@@ -73,6 +79,7 @@ class LayerList extends Component {
     });
   };
 
+  //图层列表关闭“X”回调
   changeLayerListVisible = e => {
     e.stopPropagation();
 

@@ -35,16 +35,28 @@ class Toolbar2D extends React.Component {
     this.imageTool = this.imageTool.bind(this);
     this.rollerScreen = this.rollerScreen.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
-   //pensiveant:数据选择
-   showLayerList = () => {
+  //pensiveant:数据选择
+  showLayerList = () => {
     this.props.dispatch({
       type: 'layerList/changeLayerListVisible',
       payload: !this.props.layerList.layerListVisible,
     });
   };
-  
+
+  //pensiveant:疑点标绘
+  showPoltPanel = () => {
+    this.props.dispatch({
+      type: 'layerList/changePoltPanelVisible',
+      payload: !this.props.layerList.poltPanelVisible,
+    });
+    this.props.dispatch({
+      type: 'agsmap/identifyChangeState',
+      payload: !this.props.agsmap.identifyflags,
+    });
+  };
+
 
   imageTool({ key }) {
     switch (key) {
@@ -193,32 +205,32 @@ class Toolbar2D extends React.Component {
 
   renderMenuItems() {
     const items = [];
-      items.push([
-        <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
-          <Icon type="edit" />
-          <span>&nbsp;测距</span>
-        </Menu.Item>,
-        <Menu.Item key="measure2DArea" style={{ textAlign: 'center' }}>
-          <Icon type="picture" />
-          <span>&nbsp;测面</span>
-        </Menu.Item>,
-        <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
-          <Icon type="delete" theme="outlined" />
-          <span>&nbsp;清除</span>
-        </Menu.Item>,
-        <Menu.Item key="print2DMap" style={{ textAlign: 'center' }}>
-          <Icon type="printer" />
-          <span>&nbsp;打印</span>
-        </Menu.Item>,
-        <Menu.Item key="clipMap" style={{ textAlign: 'center' }}>
-          <Icon type="scissor" />
-          <span>&nbsp;截屏</span>
-        </Menu.Item>,
-        <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
-          <Icon type="bars" />
-          <span>&nbsp;图例</span>
-        </Menu.Item>,
-      ]);
+    items.push([
+      <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
+        <Icon type="edit" />
+        <span>&nbsp;测距</span>
+      </Menu.Item>,
+      <Menu.Item key="measure2DArea" style={{ textAlign: 'center' }}>
+        <Icon type="picture" />
+        <span>&nbsp;测面</span>
+      </Menu.Item>,
+      <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
+        <Icon type="delete" theme="outlined" />
+        <span>&nbsp;清除</span>
+      </Menu.Item>,
+      <Menu.Item key="print2DMap" style={{ textAlign: 'center' }}>
+        <Icon type="printer" />
+        <span>&nbsp;打印</span>
+      </Menu.Item>,
+      <Menu.Item key="clipMap" style={{ textAlign: 'center' }}>
+        <Icon type="scissor" />
+        <span>&nbsp;截屏</span>
+      </Menu.Item>,
+      <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
+        <Icon type="bars" />
+        <span>&nbsp;图例</span>
+      </Menu.Item>,
+    ]);
 
     return items;
   }
@@ -247,20 +259,25 @@ class Toolbar2D extends React.Component {
         }}
       >
         <ButtonGroup className={styles.buttonGroup}>
-            {/*pensiveant:数据选择 */}
-            <Button className={styles.btnStyle} onClick={this.showLayerList}>
+          {/*pensiveant:数据选择 */}
+          <Button className={styles.btnStyle} onClick={this.showLayerList}>
             <Icon type="profile" />
-              数据选择
+            数据选择
           </Button>
           <Button onClick={this.visblechangebook} className={styles.btnStyle}>
             <Icon type="book" />
             书签
           </Button>
-          <Dropdown overlay={drawmenu} trigger={['click']}>
+          {/*<Dropdown overlay={drawmenu} trigger={['click']}>
             <Button className={styles.btnStyle}>
               <Icon type="environment-o" />标 注<Icon type="down" />
             </Button>
-          </Dropdown>
+      </Dropdown>*/}
+
+          <Button className={styles.btnStyle} onClick={this.showPoltPanel}>
+            <Icon type="highlight" />
+            疑点标绘
+          </Button>
 
           <Dropdown
             overlay={
@@ -322,7 +339,7 @@ class Toolbar2D extends React.Component {
   }
 }
 
-export default connect(({ agsmap ,layerList}) => {
+export default connect(({ agsmap, layerList }) => {
   return {
     agsmap,
     layerList,

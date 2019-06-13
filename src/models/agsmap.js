@@ -45,6 +45,7 @@ export default {
     menusflags: false,
     legendflags: false,
     timerLayersSelectvisible:false,
+    identifyflags: true, // pensiveant：标绘，是否进行属性查询
   },
 
   subscriptions: {
@@ -272,6 +273,13 @@ export default {
       return {
         ...state,
         legendflags: action.payload,
+      };
+    },
+
+    identifyChangeState(state, action) {
+      return {
+        ...state,
+        identifyflags: action.payload,
       };
     },
   },

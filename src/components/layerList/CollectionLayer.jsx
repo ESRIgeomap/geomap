@@ -1,3 +1,5 @@
+//pensiveant:LayerList的子组件
+
 import React from 'react';
 import { connect } from 'dva';
 import { Button, message, Checkbox, Tooltip, Carousel, Icon, Card, Row, Col, Spin } from 'antd';

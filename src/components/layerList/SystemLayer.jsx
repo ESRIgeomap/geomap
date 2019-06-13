@@ -21,6 +21,7 @@ const { TreeNode } = Tree;
 const Search = Input.Search;
 const dataList = [];
 class SystemLayer extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -37,8 +38,11 @@ class SystemLayer extends React.Component {
       datapickervisible: false,
     };
   }
+
   componentDidMount = () => {};
+
   onDragEnter = info => {};
+
   onDrop = info => {
     console.log(info);
     if (!info.node.props.checked) {
@@ -110,6 +114,7 @@ class SystemLayer extends React.Component {
     });
   };
   
+  //图层列表树形结构check处理回调
   treeNodeCheckHandle = (checkedKeys, { checked, checkedNodes, node, event }) => {
     let checkedTreeNode = checkedKeys;
     const key = node.props.eventKey;
@@ -375,6 +380,7 @@ class SystemLayer extends React.Component {
       datapickervisible: false,
     });
   };
+
   getTreeTitle = (key, title) => {
     const index = title.indexOf(this.state.searchValue);
     const beforeStr = title.substr(0, index);
@@ -419,6 +425,7 @@ class SystemLayer extends React.Component {
       return <span>{titl}</span>;
     }
   };
+
   weatherDateChange = (date, dateString, treeTitle) => {
     const dstr = date.format('YYYY/M/D');
     this.props.dispatch({
@@ -426,6 +433,12 @@ class SystemLayer extends React.Component {
       payload: dstr,
     });
   };
+
+  //清除图层回调
+  clearLayer=()=>{
+
+  }
+
   render() {
     return (
       <div className={styles.wrap}>
@@ -474,16 +487,16 @@ class SystemLayer extends React.Component {
                   />
                 </Tooltip>
               </li>
-              {/*<li>
-                <Tooltip title={formatMessage({ id: 'systemlayer.reset' })}>
+              <li>
+                <Tooltip title='清除图层'>
                   <Button
                     key="undo"
                     className={styles.noeffect}
                     icon="undo"
-                    onClick={this.resetTree}
+                    onClick={this.clearLayer}
                   />
                 </Tooltip>
-              </li>*/}
+              </li>
               {/* <li>
                 <Tooltip title={formatMessage({id:"systemlayer.save"})}>     
                   <Button key="save" className={styles.noeffect} icon="save" onClick={this.saveTree}></Button>
