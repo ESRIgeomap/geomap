@@ -51,6 +51,7 @@ class Bookmark extends Component {
     this.setState({
       visible: true,
       geteditbookname: '',
+      bookname: '',
     });
   }
 
@@ -123,11 +124,13 @@ class Bookmark extends Component {
     this.setState({
       visible: true,
       geteditbookname: e.target.offsetParent.firstChild.innerText,
+      bookname: e.target.offsetParent.firstChild.innerText,
     });
   }
   handleOk() {
     this.setState({
       visible: false,
+      bookname: '',
     });
   }
   handleCancel() {
