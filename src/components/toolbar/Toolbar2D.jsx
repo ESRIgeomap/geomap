@@ -156,6 +156,10 @@ class Toolbar2D extends React.Component {
   }
 
   splitScreen(e) {
+    this.props.dispatch({
+      type: 'layerList/changeSplitState',
+      payload: true,
+    });
     if (this.props.agsmap.splitflags) {
       // prepare();
       this.props.dispatch({

@@ -17,10 +17,10 @@ class ToolbarSplit extends React.Component {
     /* 点击显示图层列表*/
     showLayerList = () => {
         this.props.dispatch({
-          type: 'layerList/changeLayerListVisible',
-          payload: !this.props.layerList.layerListVisible,
+            type: 'splitLayerList/changeLayerListVisible',
+            payload: !this.props.splitLayerList.layerListVisible,
         });
-      };
+    };
 
     /*退出分屏对比*/
     closeSplitLayer = () => {
@@ -41,7 +41,7 @@ class ToolbarSplit extends React.Component {
                 <ButtonGroup className={styles.buttonGroup}>
                     <Button className={styles.btnStyle} onClick={this.showLayerList}>
                         <Icon type="profile" />
-                        数据选择
+                        数据采集
                     </Button>
                     <Button className={styles.btnStyle} onClick={this.closeSplitLayer}>
                         <Icon type="close-circle" />
@@ -55,9 +55,9 @@ class ToolbarSplit extends React.Component {
 
 ToolbarSplit.propTypes = {};
 
-export default connect(({ agsmap ,layerList}) => {
+export default connect(({ agsmap, splitLayerList }) => {
     return {
-      agsmap,
-      layerList,
+        agsmap,
+        splitLayerList,
     };
 })(ToolbarSplit);
