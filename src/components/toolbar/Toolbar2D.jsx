@@ -308,7 +308,7 @@ class Toolbar2D extends React.Component {
                   onClick={this.timerSilder}
                   style={{ textAlign: 'center' }}
                 >
-                  <Icon type="play-circle" theme="filled" />
+                  <Icon type="clock-circle" />
                   <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
                 </Menu.Item>
               </Menu>
