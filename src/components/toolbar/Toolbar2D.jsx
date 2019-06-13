@@ -34,6 +34,7 @@ class Toolbar2D extends React.Component {
     this.splitScreen = this.splitScreen.bind(this);
     this.imageTool = this.imageTool.bind(this);
     this.rollerScreen = this.rollerScreen.bind(this);
+    this.outputSubmenuOnClick = this.outputSubmenuOnClick.bind(this);
   }
   componentDidMount() {}
 
@@ -44,7 +45,6 @@ class Toolbar2D extends React.Component {
       payload: !this.props.layerList.layerListVisible,
     });
   };
-  
 
   imageTool({ key }) {
     switch (key) {
@@ -76,16 +76,6 @@ class Toolbar2D extends React.Component {
       case 'measure2DArea':
         this.props.dispatch({
           type: ACTION_MEASURE_2D_AREA,
-        });
-        break;
-      case 'print2DMap':
-        this.props.dispatch({
-          type: ACTION_PRINT_2D_MAP,
-        });
-        break;
-      case 'clipMap':
-        this.props.dispatch({
-          type: MAP_ACTION_CLIP_MAP,
         });
         break;
       case 'mapCorrection':
@@ -140,6 +130,28 @@ class Toolbar2D extends React.Component {
           },
         });
       }
+    }
+  }
+
+  /**
+   * 输出结果子菜单点击事件
+   * @param {Object} param0 事件参数
+   * @param {string} param0.key 被点击子菜单的key值
+   */
+  outputSubmenuOnClick({ key }) {
+    switch (key) {
+      case 'print2DMap':
+        this.props.dispatch({
+          type: ACTION_PRINT_2D_MAP,
+        });
+        break;
+      case 'clipMap':
+        this.props.dispatch({
+          type: MAP_ACTION_CLIP_MAP,
+        });
+        break;
+      default:
+        break;
     }
   }
 
@@ -206,14 +218,6 @@ class Toolbar2D extends React.Component {
           <Icon type="delete" theme="outlined" />
           <span>&nbsp;清除</span>
         </Menu.Item>,
-        <Menu.Item key="print2DMap" style={{ textAlign: 'center' }}>
-          <Icon type="printer" />
-          <span>&nbsp;打印</span>
-        </Menu.Item>,
-        <Menu.Item key="clipMap" style={{ textAlign: 'center' }}>
-          <Icon type="scissor" />
-          <span>&nbsp;截屏</span>
-        </Menu.Item>,
         <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
           <Icon type="bars" />
           <span>&nbsp;图例</span>
@@ -238,6 +242,19 @@ class Toolbar2D extends React.Component {
       // <Menu className={styles.noradius} onClick={this.measureLine}>
       <Callout />
       // </Menu>
+    );
+    // 结果输出子菜单
+    const OutputSubmenu = (
+      <Menu className={styles.noradius} onClick={this.outputSubmenuOnClick}>
+        <Menu.Item key="print2DMap" style={{ textAlign: 'center' }}>
+          <Icon type="printer" />
+          <span>&nbsp;打印</span>
+        </Menu.Item>
+        <Menu.Item key="clipMap" style={{ textAlign: 'center' }}>
+          <Icon type="scissor" />
+          <span>&nbsp;截屏</span>
+        </Menu.Item>
+      </Menu>
     );
     return (
       <div
@@ -301,6 +318,13 @@ class Toolbar2D extends React.Component {
             <Button className={styles.btnStyle}>
               <Icon type="picture" theme="filled" />
               影像工具
+              <Icon type="down" />
+            </Button>
+          </Dropdown>
+          <Dropdown overlay={OutputSubmenu} trigger={['click']}>
+            <Button className={styles.btnStyle}>
+              <Icon type="picture" theme="filled" />
+              结果输出
               <Icon type="down" />
             </Button>
           </Dropdown>
