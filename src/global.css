@@ -7,7 +7,9 @@ body,
   width: 100%;
 }
 
-
+/*
+  修改toolbar2d下拉框样式
+ */
 .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
   font-size: 12px;
   padding: 5px 15px;
