@@ -46,6 +46,18 @@ class Toolbar2D extends React.Component {
     });
   };
 
+   //pensiveant:疑点标绘
+   showPoltPanel = () => {
+    this.props.dispatch({
+      type: 'layerList/changePoltPanelVisible',
+      payload: !this.props.layerList.poltPanelVisible,
+    });
+    this.props.dispatch({
+      type: 'agsmap/identifyChangeState',
+      payload: !this.props.agsmap.identifyflags,
+    });
+  };
+
   imageTool({ key }) {
     switch (key) {
       case 'imageDivide': {
@@ -271,75 +283,79 @@ class Toolbar2D extends React.Component {
           display: this.props.agsmap.mode === VIEW_MODE_2D ? 'block' : 'none',
         }}
       >
-          <ButtonGroup className={styles.buttonGroup}>
-            {/*pensiveant:数据选择 */}
-            <Button className={styles.btnStyle} onClick={this.showLayerList}>
-              <Icon type="profile" />
-              数据选择
+        <ButtonGroup className={styles.buttonGroup}>
+          {/*pensiveant:数据选择 */}
+          <Button className={styles.btnStyle} onClick={this.showLayerList}>
+            <Icon type="profile" />
+            数据选择
             </Button>
-            <Dropdown overlay={drawmenu} trigger={['click']}>
+          {/*<Dropdown overlay={drawmenu} trigger={['click']}>
               <Button className={styles.btnStyle}>
                 <Icon type="environment-o" />标 注<Icon type="down" />
               </Button>
-            </Dropdown>
+      </Dropdown>*/}
+          <Button className={styles.btnStyle} onClick={this.showPoltPanel}>
+            <Icon type="highlight" />
+            疑点标绘
+          </Button>
 
-            <Dropdown
-              overlay={
-                <Menu className={styles.noradius} onClick={this.imageTool}>
-                  <Menu.Item
-                    key="juanMap"
-                    onClick={this.rollerScreen}
-                    style={{ textAlign: 'center' }}
-                  >
-                    <Icon type="border-horizontal" />
-                    <span>&nbsp;卷帘对比</span>
-                  </Menu.Item>
+          <Dropdown
+            overlay={
+              <Menu className={styles.noradius} onClick={this.imageTool}>
+                <Menu.Item
+                  key="juanMap"
+                  onClick={this.rollerScreen}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="border-horizontal" />
+                  <span>&nbsp;卷帘对比</span>
+                </Menu.Item>
 
-                  <Menu.Item
-                    key="splitMap"
-                    onClick={this.splitScreen}
-                    style={{ textAlign: 'center' }}
-                  >
-                    <Icon type="border-horizontal" />
-                    <span>&nbsp;分屏对比</span>
-                  </Menu.Item>
-                  {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
+                <Menu.Item
+                  key="splitMap"
+                  onClick={this.splitScreen}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="border-horizontal" />
+                  <span>&nbsp;分屏对比</span>
+                </Menu.Item>
+                {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
                   <Icon type="border-outer" />
                   <span>&nbsp;全域划分</span>
                 </Menu.Item> */}
-                  <Menu.Item
-                    key="timeslider"
-                    onClick={this.timerSilder}
-                    style={{ textAlign: 'center' }}
-                  >
-                    <Icon type="clock-circle" />
-                    <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
-                  </Menu.Item>
-                </Menu>
-              }
-              trigger={['click']}
-            >
-              <Button className={styles.btnStyle}>
-                <Icon type="picture" theme="filled" />
-                影像工具
+                <Menu.Item
+                  key="timeslider"
+                  onClick={this.timerSilder}
+                  style={{ textAlign: 'center' }}
+                >
+                  <Icon type="clock-circle" />
+                  <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
+                </Menu.Item>
+              </Menu>
+            }
+            trigger={['click']}
+          >
+            <Button className={styles.btnStyle}>
+              <Icon type="picture" theme="filled" />
+              影像工具
                 <Icon type="down" />
-              </Button>
-            </Dropdown>
-            <Dropdown overlay={OutputSubmenu} trigger={['click']}>
-              <Button className={styles.btnStyle}>
-                <Icon type="picture" theme="filled" />
-                结果输出
+            </Button>
+          </Dropdown>
+          <Dropdown overlay={OutputSubmenu} trigger={['click']}>
+            <Button className={styles.btnStyle}>
+              <Icon type="picture" theme="filled" />
+              结果输出
                 <Icon type="down" />
-              </Button>
-            </Dropdown>
-            <Dropdown overlay={menu} trigger={['click']}>
-              <Button className={styles.btnStyle}>
-                <Icon type="medicine-box" theme="filled" />
-                工具箱
+            </Button>
+          </Dropdown>
+          <Dropdown overlay={menu} trigger={['click']}>
+            <Button className={styles.btnStyle}>
+              <Icon type="medicine-box" theme="filled" />
+              工具箱
                 <Icon type="down" />
-              </Button>
-            </Dropdown>
-          </ButtonGroup>
+            </Button>
+          </Dropdown>
+        </ButtonGroup>
 
         <Avatar
           style={{ marginLeft: '20px', backgroundColor: '#87d068' }}
