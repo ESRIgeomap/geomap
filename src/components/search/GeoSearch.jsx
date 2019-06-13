@@ -180,7 +180,11 @@ class GeoSearch extends React.Component {
       type: 'search/switchMode',
       payload: SearchConsts.MODE_LOCATION,
     });
-    this.props.dispatch({ type: 'search/clearSearch' });
+    // this.props.dispatch({ type: 'search/clearSearch' });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: SearchConsts.MODE_LOCATION,
+    });
   }
 
   clearSearchResult() {
@@ -346,7 +350,7 @@ class GeoSearch extends React.Component {
           );
         default:
           return (
-            <Tooltip title="路线">
+            <Tooltip title="路线ll">
               <div className={styles.dirbtnwrap}>
                 <span className={styles.dirbtnstub} />
                 <Button icon="swap" className={styles.dirbtn} onClick={this.enterDirectionMode} />
