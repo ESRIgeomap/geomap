@@ -95,7 +95,7 @@ class Toolbar2D extends React.Component {
   }
 
   visblechangebook(e) {
-    e.stopPropagation();
+    // e.stopPropagation();
     if (this.props.agsmap.bookflags) {
       // prepare();
       this.props.dispatch({
@@ -222,6 +222,10 @@ class Toolbar2D extends React.Component {
           <Icon type="bars" />
           <span>&nbsp;图例</span>
         </Menu.Item>,
+        <Menu.Item key="bookmark" style={{ textAlign: 'center' }} onClick={this.visblechangebook}>
+          <Icon type="book" />
+          <span>&nbsp;书签</span>
+        </Menu.Item>,
       ]);
 
     return items;
@@ -268,10 +272,6 @@ class Toolbar2D extends React.Component {
             <Button className={styles.btnStyle} onClick={this.showLayerList}>
             <Icon type="profile" />
               数据选择
-          </Button>
-          <Button onClick={this.visblechangebook} className={styles.btnStyle}>
-            <Icon type="book" />
-            书签
           </Button>
           <Dropdown overlay={drawmenu} trigger={['click']}>
             <Button className={styles.btnStyle}>
