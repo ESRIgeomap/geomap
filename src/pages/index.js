@@ -28,7 +28,7 @@ import LegendList from '../components/legend/LegendList';
 
 //pensiveant:加载LayerList组件
 import LayerList from '../components/layerList/LayerList';
-
+import SplitLayerList from '../components/layerList/SplitLayerList';
 
 class IndexPage extends React.Component {
 
@@ -207,8 +207,8 @@ class IndexPage extends React.Component {
             display: this.props.agsmap.rollerflags ? 'block' : 'none',
           }}
         ></div>
-
         <LayerList />
+        <SplitLayerList />
         {/* <FullscreenButton/> */}
       </div>
     );
