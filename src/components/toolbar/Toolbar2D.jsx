@@ -299,10 +299,10 @@ class Toolbar2D extends React.Component {
                   <Icon type="border-horizontal" />
                   <span>&nbsp;分屏对比</span>
                 </Menu.Item>
-                <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
+                {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
                   <Icon type="border-outer" />
                   <span>&nbsp;全域划分</span>
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item
                   key="timeslider"
                   onClick={this.timerSilder}
