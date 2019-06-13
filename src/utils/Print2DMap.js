@@ -326,7 +326,7 @@ class ScreenshotPreview extends React.Component {
           <label>设置标题</label>
           <Input placeholder="图片标题"
             size="large"
-            style={{width: '200px', marginLeft: '10px'}}
+            style={{width: '200px', marginLeft: '10px', borderRadius: 0}}
             onChange={this.imgTitleOnChange}
           />
         </div>
@@ -335,13 +335,15 @@ class ScreenshotPreview extends React.Component {
           <Button type="primary"
             icon="download"
             size="large"
+            style={{borderRadius: 0}}
             onClick={this.downloadBtnOnClick}>
             下载图片
           </Button>
           <Button
             type="normal"
             icon="rollback"
-            size="large" style={{'marginLeft': '10px'}}
+            size="large"
+            style={{marginLeft: '10px', borderRadius: 0}}
             onClick={this.backToWebscene}>
             返回场景
           </Button>
