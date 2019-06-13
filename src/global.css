@@ -7,26 +7,8 @@ body,
   width: 100%;
 }
 
-.governmentstyle .ant-table-content {
-  padding-left: 30px !important;
-}
 
-.governmentstyle .ant-table-row > td {
-  border: none !important;
-}
-
-.governmentstyle .ant-table-body > table {
-  border: none !important;
-}
-
-.governmentstyle
-  .ant-table-small
-  > .ant-table-content
-  > .ant-table-scroll
-  > .ant-table-body
-  > table
-  > .ant-table-tbody
-  > .ant-table-row
-  > td {
-  padding: 2px 8px !important;
+.ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
+  font-size: 12px;
+  padding: 5px 15px;
 }

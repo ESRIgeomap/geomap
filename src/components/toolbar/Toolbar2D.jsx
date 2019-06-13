@@ -38,8 +38,8 @@ class Toolbar2D extends React.Component {
   }
   componentDidMount() {}
 
-   //pensiveant:数据选择
-   showLayerList = () => {
+  //pensiveant:数据选择
+  showLayerList = () => {
     this.props.dispatch({
       type: 'layerList/changeLayerListVisible',
       payload: !this.props.layerList.layerListVisible,
@@ -205,28 +205,28 @@ class Toolbar2D extends React.Component {
 
   renderMenuItems() {
     const items = [];
-      items.push([
-        <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
-          <Icon type="edit" />
-          <span>&nbsp;测距</span>
-        </Menu.Item>,
-        <Menu.Item key="measure2DArea" style={{ textAlign: 'center' }}>
-          <Icon type="picture" />
-          <span>&nbsp;测面</span>
-        </Menu.Item>,
-        <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
-          <Icon type="delete" theme="outlined" />
-          <span>&nbsp;清除</span>
-        </Menu.Item>,
-        <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
-          <Icon type="bars" />
-          <span>&nbsp;图例</span>
-        </Menu.Item>,
-        <Menu.Item key="bookmark" style={{ textAlign: 'center' }} onClick={this.visblechangebook}>
-          <Icon type="book" />
-          <span>&nbsp;书签</span>
-        </Menu.Item>,
-      ]);
+    items.push([
+      <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
+        <Icon type="edit" />
+        <span>&nbsp;测距</span>
+      </Menu.Item>,
+      <Menu.Item key="measure2DArea" style={{ textAlign: 'center' }}>
+        <Icon type="picture" />
+        <span>&nbsp;测面</span>
+      </Menu.Item>,
+      <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
+        <Icon type="delete" theme="outlined" />
+        <span>&nbsp;清除</span>
+      </Menu.Item>,
+      <Menu.Item key="legend" style={{ textAlign: 'center' }} onClick={this.visibleLegend}>
+        <Icon type="bars" />
+        <span>&nbsp;图例</span>
+      </Menu.Item>,
+      <Menu.Item key="bookmark" style={{ textAlign: 'center' }} onClick={this.visblechangebook}>
+        <Icon type="book" />
+        <span>&nbsp;书签</span>
+      </Menu.Item>,
+    ]);
 
     return items;
   }
@@ -267,75 +267,76 @@ class Toolbar2D extends React.Component {
           display: this.props.agsmap.mode === VIEW_MODE_2D ? 'block' : 'none',
         }}
       >
-        <ButtonGroup className={styles.buttonGroup}>
+          <ButtonGroup className={styles.buttonGroup}>
             {/*pensiveant:数据选择 */}
             <Button className={styles.btnStyle} onClick={this.showLayerList}>
-            <Icon type="profile" />
+              <Icon type="profile" />
               数据选择
-          </Button>
-          <Dropdown overlay={drawmenu} trigger={['click']}>
-            <Button className={styles.btnStyle}>
-              <Icon type="environment-o" />标 注<Icon type="down" />
             </Button>
-          </Dropdown>
+            <Dropdown overlay={drawmenu} trigger={['click']}>
+              <Button className={styles.btnStyle}>
+                <Icon type="environment-o" />标 注<Icon type="down" />
+              </Button>
+            </Dropdown>
 
-          <Dropdown
-            overlay={
-              <Menu className={styles.noradius} onClick={this.imageTool}>
-                <Menu.Item
-                  key="juanMap"
-                  onClick={this.rollerScreen}
-                  style={{ textAlign: 'center' }}
-                >
-                  <Icon type="border-horizontal" />
-                  <span>&nbsp;卷帘对比</span>
-                </Menu.Item>
+            <Dropdown
+              overlay={
+                <Menu className={styles.noradius} onClick={this.imageTool}>
+                  <Menu.Item
+                    key="juanMap"
+                    onClick={this.rollerScreen}
+                    style={{ textAlign: 'center' }}
+                  >
+                    <Icon type="border-horizontal" />
+                    <span>&nbsp;卷帘对比</span>
+                  </Menu.Item>
 
-                <Menu.Item
-                  key="splitMap"
-                  onClick={this.splitScreen}
-                  style={{ textAlign: 'center' }}
-                >
-                  <Icon type="border-horizontal" />
-                  <span>&nbsp;分屏对比</span>
-                </Menu.Item>
-                {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
+                  <Menu.Item
+                    key="splitMap"
+                    onClick={this.splitScreen}
+                    style={{ textAlign: 'center' }}
+                  >
+                    <Icon type="border-horizontal" />
+                    <span>&nbsp;分屏对比</span>
+                  </Menu.Item>
+                  {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
                   <Icon type="border-outer" />
                   <span>&nbsp;全域划分</span>
                 </Menu.Item> */}
-                <Menu.Item
-                  key="timeslider"
-                  onClick={this.timerSilder}
-                  style={{ textAlign: 'center' }}
-                >
-                  <Icon type="clock-circle" />
-                  <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
-                </Menu.Item>
-              </Menu>
-            }
-            trigger={['click']}
-          >
-            <Button className={styles.btnStyle}>
-              <Icon type="picture" theme="filled" />
-              影像工具
-              <Icon type="down" />
-            </Button>
-          </Dropdown>
-          <Dropdown overlay={OutputSubmenu} trigger={['click']}>
-            <Button className={styles.btnStyle}>
-              <Icon type="picture" theme="filled" />
-              结果输出
-              <Icon type="down" />
-            </Button>
-          </Dropdown>
-          <Dropdown overlay={menu} trigger={['click']}>
-            <Button className={styles.btnStyle}>
-              <Icon type="medicine-box" theme="filled" />
-              工具箱
-              <Icon type="down" />
-            </Button>
-          </Dropdown>
-        </ButtonGroup>
+                  <Menu.Item
+                    key="timeslider"
+                    onClick={this.timerSilder}
+                    style={{ textAlign: 'center' }}
+                  >
+                    <Icon type="clock-circle" />
+                    <span>&nbsp;&nbsp;多&nbsp;时&nbsp;相</span>
+                  </Menu.Item>
+                </Menu>
+              }
+              trigger={['click']}
+            >
+              <Button className={styles.btnStyle}>
+                <Icon type="picture" theme="filled" />
+                影像工具
+                <Icon type="down" />
+              </Button>
+            </Dropdown>
+            <Dropdown overlay={OutputSubmenu} trigger={['click']}>
+              <Button className={styles.btnStyle}>
+                <Icon type="picture" theme="filled" />
+                结果输出
+                <Icon type="down" />
+              </Button>
+            </Dropdown>
+            <Dropdown overlay={menu} trigger={['click']}>
+              <Button className={styles.btnStyle}>
+                <Icon type="medicine-box" theme="filled" />
+                工具箱
+                <Icon type="down" />
+              </Button>
+            </Dropdown>
+          </ButtonGroup>
+
         <Avatar
           style={{ marginLeft: '20px', backgroundColor: '#87d068' }}
           icon="user"
@@ -346,7 +347,7 @@ class Toolbar2D extends React.Component {
   }
 }
 
-export default connect(({ agsmap ,layerList}) => {
+export default connect(({ agsmap, layerList }) => {
   return {
     agsmap,
     layerList,
