@@ -95,3 +95,29 @@ export const LAYERLIST_RELOAD_WEATHER_LAYERS = 'layerlist-reload-weather-layers'
 export const LAYERLIST_TOP_COLLECTION = 'layerlist-top-collection';
 export const LAYERLIST_SUBJECT_REMOVE = 'layerlist-subject-remove';
 
+/**
+ * polt
+ */
+export const POLT_CLEAR_LAYER = 'polt-clear-layer';
+export const POLT_CANCLE_LASTONE = 'polt-canel-lastone';
+export const POLT_EDIT_UPDATE = 'polt-edit-update';
+export const POLT_EDIT_DELETE = 'polt-edit-delete';
+export const POLT_EDIT_UNDO = 'polt-edit-undo';
+export const POLT_EDIT_REDO = 'polt-edit-redo';
+export const POLT_EDIT_CLEAR = 'polt-edit-clear';
+export const POLT_SHOWLAYER_BYITEMID = 'polt-showlayer-byitemid';
+export const POLT_EDIT_ACTIVE = 'polt-edit-active';
+export const POLT_EDIT_SAVE = 'polt-edit-save';
+export const POLT_EDIT_CANCEL = 'polt-edit-cancel';
+export const POLT_EDIT_COMPLETE = 'polt-edit-complete';
+export const POLT_EDIT_DEACTIVE = 'polt-edit-deactive';
+
+export const POLT_EDITOR_REMOVE = 'polt-editor-remove';
+export const POLT_EDITOR_CREATE = 'polt-editor-create';
+
+export const POLT_EDIT_ACTIVE_COLLECTION = 'polt-edit-active-collection';
+export const POLT_EDIT_SAVE_COLLECTIN = 'polt-edit-save-collection';
+export const POLT_DOWNLOAD_FILE_BYTYPE = 'polt-download-file-bytype';
+export const POLT_DOWNLOAD_COLLECTION_BYTYPE = 'polt-download-collection-bytype';
+export const POLT_REMOVElAYER_BY_ITEMID = 'polt-removelayer-by-itemid';
+export const POLT_ADDPOLTFILE_LAYERITEM = 'polt-polt-addpoltfile-layeritem';

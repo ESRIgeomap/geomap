@@ -281,6 +281,7 @@ class poltUtils {
     poltlayer.remove(poltlayer.graphics.items[poltlayer.graphics.items.length - 1]);
     // this.sketchViewModel.undo();
   }
+  
   //清除标绘
   static editClear() {
     const poltlayerid = window.poltlayerid ? window.poltlayerid : 'poltlayer';
@@ -298,6 +299,7 @@ class poltUtils {
       if (gs) this.editSketch.update([gs.items[0]]);
     }
   }
+
   //删除编辑
   static editDelete() {
     if (!this.editSketch) {
