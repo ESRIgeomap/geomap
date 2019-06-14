@@ -9,6 +9,10 @@ export default {
   targets: {
     ie: 11,
   },
+  exportStatic: {
+    htmlSuffix: true,
+    dynamicRoot: true,
+  },
   plugins: [
     // new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
     //   PUBLIC_URL: publicUrl,
