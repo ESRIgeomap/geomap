@@ -13,9 +13,12 @@ import {
   SUBJECTLAYERLIST_SAVE,
   LAYERLIST_CHANGE_INDEX,
   LAYERLIST_RELOAD_WEATHER_LAYERS,
+  ACTION_DRAW_CLEAR_2D,
 } from '../../constants/action-types';
 import common from '../../utils/common';
 import treeUtil from '../../utils/layertreeutils';
+import * as SearchConsts from '../../constants/search';
+
 
 const { TreeNode } = Tree;
 const Search = Input.Search;
@@ -436,7 +439,41 @@ class SystemLayer extends React.Component {
 
   //清除图层回调
   clearLayer=()=>{
+    this.props.dispatch({
+      type: ACTION_DRAW_CLEAR_2D,
+    });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: {
+        mode: SearchConsts.MODE_LOCATION,
+      },
+    });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: {
+        mode: SearchConsts.MODE_IDENTIFY,
+      },
+    });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: {
+        mode: SearchConsts.MODE_DIRECTION,
+      },
+    });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: {
+        mode: SearchConsts.MODE_SPACE,
+      },
+    });
 
+    if (window.agsGlobal.view.map.findLayerById('graphicLayer')) {
+      window.agsGlobal.view.map.findLayerById('graphicLayer').clear();
+    }
+
+
+    //清除所有图层
+    window.agsGlobal.view.map.removeAll();
   }
 
   render() {
