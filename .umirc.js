@@ -40,6 +40,5 @@ export default {
         hardSource: false,
       },
     ],
-  ],
-  browserslist: ['> 1%', 'last 2 versions'],
+  ]
 };
