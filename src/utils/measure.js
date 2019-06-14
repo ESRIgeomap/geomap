@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDom from 'react-dom';
+import { Icon } from 'antd';
 import { jsapi } from '../constants/geomap-utils';
 
 class MeasureLine2D {
@@ -12,6 +15,20 @@ class MeasureLine2D {
     measureDiv.style.position = 'absolute';
     measureDiv.style.top = '70px';
     measureDiv.style.right = '100px';
+    // 关闭按钮
+    const closeDiv = document.createElement('div');
+    closeDiv.style.float = 'right';
+    closeDiv.style.width = '25px';
+    closeDiv.style.height = '25px';
+    closeDiv.style.cursor = 'pointer';
+    closeDiv.style.paddingTop = '5px';
+    closeDiv.title = '关闭';
+    ReactDom.render(<Icon type="close" />, closeDiv);
+    closeDiv.addEventListener('click', function() {
+      this.deactivate();
+    }.bind(this));
+    measureDiv.appendChild(closeDiv);
+
     const [DistanceMeasurement2D] = await jsapi.load(['esri/widgets/DistanceMeasurement2D']);
     this.activeWidget = new DistanceMeasurement2D({
       view: this.view,
@@ -40,6 +57,19 @@ class MeasureArea2D {
     measureDiv.style.position = 'absolute';
     measureDiv.style.top = '70px';
     measureDiv.style.right = '100px';
+    // 关闭按钮
+    const closeDiv = document.createElement('div');
+    closeDiv.style.float = 'right';
+    closeDiv.style.width = '25px';
+    closeDiv.style.height = '25px';
+    closeDiv.style.cursor = 'pointer';
+    closeDiv.style.paddingTop = '5px';
+    closeDiv.title = '关闭';
+    ReactDom.render(<Icon type="close" />, closeDiv);
+    closeDiv.addEventListener('click', function() {
+      this.deactivate();
+    }.bind(this));
+    measureDiv.appendChild(closeDiv);
     const [AreaMeasurement2D] = await jsapi.load(['esri/widgets/AreaMeasurement2D']);
     this.activeWidget = new AreaMeasurement2D({
       view: this.mapView,
@@ -60,7 +90,7 @@ class MeasureArea2D {
 
 class MeasureUtil {
   static active(tool) {
-    if (this.activeTool !== undefined && this.activeTool !== null) {
+    if (this.activeTool && this.activeTool.activeWidget) {
       this.activeTool.deactivate();
     }
     if (tool === 'line') {
