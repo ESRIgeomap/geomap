@@ -297,6 +297,14 @@ async function drawbuffer(view, point, radius, radiusUnit) {
  * @param {string} radius 半径 radiusUnit 单位
  * @param {string} radiusUnit 单位  三维场景里画圆形会出现变形
  */
+/**
+ *
+ *
+ * @param {*} view
+ * @param {*} point
+ * @param {*} radius
+ * @param {*} radiusUnit
+ */
 async function pointBuffer(view, point, radius, radiusUnit) {
   const [GraphicsLayer, Graphic, geometryEngine] = await jsapi.load([
     'esri/layers/GraphicsLayer',

@@ -2,11 +2,9 @@ import React from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
 import _ from 'lodash';
-import classnames from 'classnames';
 
 import GeoSearch from '../components/search/GeoSearch';
 import Trans3D from '../components/trans3d/Trans3D';
-import FullscreenButton from '../components/fullscreenButton/FullscreenButton';
 
 import Toolbar2D from '../components/toolbar/Toolbar2D';
 import ToolbarSplit from '../components/toolbar/ToolbarSplit'
@@ -18,7 +16,6 @@ import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
 import Zoom from '../components/Zoom';
 import Compass from '../components/Compass';
 import ViewInfo from '../components/ViewInfo';
-import BasemapGallery from '../components/BasemapGallery';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
 import { VIEW_MODE_2D } from '../constants/action-types';
