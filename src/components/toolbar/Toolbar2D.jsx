@@ -18,7 +18,6 @@ import {
 } from '../../constants/action-types';
 
 import styles from './Toolbar2D.css';
-import Callout from '../callout/Callout';
 import imageDivideTool from '../../utils/arcgis/image-divide';
 
 const ButtonGroup = Button.Group;
@@ -257,11 +256,6 @@ class Toolbar2D extends React.Component {
       <Menu className={styles.noradius} onClick={this.measureLine}>
         {this.renderMenuItems()}
       </Menu>
-    );
-    const drawmenu = (
-      // <Menu className={styles.noradius} onClick={this.measureLine}>
-      <Callout />
-      // </Menu>
     );
     // 结果输出子菜单
     const OutputSubmenu = (

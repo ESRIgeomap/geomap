@@ -15,17 +15,17 @@ export default {
     // 默认2d不显示鹰眼
     overmapDiv.style.display = 'none';
   },
-    // 底图
-    async createBasemapGallery(view) {
-      // BasemapGallery
-      const basemapGalleryDiv = document.createElement('div');
-      basemapGalleryDiv.style.position = 'absolute';
-      basemapGalleryDiv.style.bottom = '25px';
-      basemapGalleryDiv.style.right = '10px';
-      basemapGalleryDiv.style.zIndex = '6';
-      basemapGalleryDiv.id = 'basemapGalleryDiv';
-  
-      agsGlobal.container.appendChild(basemapGalleryDiv);
-      ReactDOM.render(<Basemap />, basemapGalleryDiv);
-    },
+  // 底图
+  async createBasemapGallery(view) {
+    // BasemapGallery
+    const basemapGalleryDiv = document.createElement('div');
+    basemapGalleryDiv.style.position = 'absolute';
+    basemapGalleryDiv.style.bottom = '25px';
+    basemapGalleryDiv.style.right = '10px';
+    basemapGalleryDiv.style.zIndex = '6';
+    basemapGalleryDiv.id = 'basemapGalleryDiv';
+
+    agsGlobal.container.appendChild(basemapGalleryDiv);
+    ReactDOM.render(<Basemap />, basemapGalleryDiv);
+  },
 };

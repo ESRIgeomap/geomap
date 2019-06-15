@@ -1,10 +1,51 @@
 import * as jsapi from '../../jsapi';
+//---------------------------------场景初始化----------------------------------------
+/**
+ * 初始化三维场景
+ * @author  lee  
+ * @param {object} portal  portal地址
+ * @param {string} itemid  webscenenId
+ * @param {string} container  地图的div
+ * @returns {object}  view 场景
+ */
+
+async function initSceneView(portal, itemid, container) {
+  const [WebScene, Sceneview] = await jsapi.load(['esri/WebScene', 'esri/views/SceneView']);
+  const scene = new WebScene({
+    portalItem: {
+      id: itemid,
+      portal: portal,
+    },
+  });
+
+  const view = new Sceneview({
+    container: container,
+    map: scene,
+    environment: {
+      atmosphere: {
+        // creates a realistic view of the atmosphere
+        quality: 'high',
+      },
+      // wangfh 修改光照
+      lighting: {
+        date: new Date(),
+        directShadowsEnabled: false,
+        // don't update the view time when user pans.
+        // The clock widget drives the time
+        cameraTrackingEnabled: false,
+      },
+    },
+    ui: {
+      components: [], // 'zoom', 'navigation-toggle', 'compass'
+    },
+  });
+  return view;
+}
+export { initSceneView };
 //---------------------------------图层获取----------------------------------------
-
-
 /**
  * 根据图层的title获取图层
- * @author  lee  20181209
+ * @author  lee  
  * @param {object} view  场景
  * @param {string} title  图层名称
  */
@@ -17,7 +58,7 @@ function getLayerByTitle(view, title) {
 export { getLayerByTitle };
 /**
  * 根据图层的title获取图层
- * @author  lee  20181209
+ * @author  lee 
  * @param {object} view  场景
  * @param {string} id  图层id
  */
@@ -32,7 +73,7 @@ export { getLayerById };
 
 /**
  * 添加切片图层
- * @author  lee  20190313
+ * @author  lee  
  * @param {object} view  场景
  * @param {string} url  服务地址
  */
@@ -47,7 +88,7 @@ export { addTileLayer };
 
 /**
  * 添加影像图层
- * @author  lee  20190313
+ * @author  lee  
  * @param {object} view  场景
  * @param {string} url  服务地址
  */
@@ -62,9 +103,9 @@ async function addImageryLayer(view, url, title, extent) {
   view.map.add(layer);
   layer.when(function () {
     if (extent) {
-      ags.view.goTo(extent);
+      view.goTo(extent);
     } else {
-      ags.view.goTo(layer.fullExent);
+      view.goTo(layer.fullExent);
     }
   });
 
@@ -74,7 +115,7 @@ export { addImageryLayer };
 
 /**
  * 根据条件添加影像图层
- * @author  lee  20190313
+ * @author  lee  
  * @param {object} view  场景
  * @param {string} url  服务地址
  * @param {string} type  条件类型
@@ -96,44 +137,7 @@ async function addImageryLayerByCondition(view, url, type, value, title) {
 }
 export { addImageryLayerByCondition };
 
-/**
- * 初始化三维场景
- * @author  lee  20190313
- * @param {object} portal  portal地址
- * @param {string} itemid  webscenenId
- * @param {string} container  地图的div
- */
-async function initSceneView(portal, itemid, container, layer, lyr) {
-  const [WebScene, Sceneview] = await jsapi.load(['esri/WebScene', 'esri/views/SceneView']);
-  const scene = new WebScene({
-    portalItem: {
-      id: itemid,
-      portal: portal,
-    },
-  });
 
-  const view = new Sceneview({
-    container: container,
-    map: scene,
-    environment: {
-      atmosphere: {
-        // creates a realistic view of the atmosphere
-        quality: 'high',
-      },
-    },
-    ui: {
-      components: [], // 'zoom', 'navigation-toggle', 'compass'
-    },
-  });
-  if (layer) {
-    view.map.add(layer);
-  }
-
-  if (lyr) {
-    view.map.add(lyr);
-  }
-  return view;
-}
 
 /**
  * 根据幻灯片的名称，切换到对应的视角
@@ -620,7 +624,6 @@ export {
   highLightPolygonOutline,
   highlightByLayerGraphic,
   clearhightlight,
-  initSceneView,
   addfeatureLayer,
   gotoBySliderName,
   addBufferTextLayer,

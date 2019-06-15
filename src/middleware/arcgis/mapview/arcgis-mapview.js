@@ -1,9 +1,9 @@
 // 组件
 import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
-import Sketch from '../../../utils/arcgis/sketchUtil';
 import AgsSearchUtil from '../../../utils/arcgis/search';
 import LegendList from '../../../utils/legend';
+import * as mapUitls from '../../../utils/arcgis/map/LayerUtil';
 
 import {
   INIT_MAP,
@@ -14,9 +14,6 @@ import {
   MAP_ACTION_CLEAR_GRAPHICS,
   ACTION_MEASURE_2D_AREA,
   ACTION_MEASURE_2D_LINE,
-  ACTION_DRAW_POINT_2D,
-  ACTION_DRAW_LINE_2D,
-  ACTION_DRAW_FLAT_2D,
   ACTION_PRINT_2D_MAP,
   MAP_ACTION_CLIP_MAP,
   ACTION_LEGENDLIST_SHOW,
@@ -76,7 +73,7 @@ function createMapView(opts = {}) {
           await initMapView(store);
           await widgets.createBasemapGallery(ags.view);
         } else if (viewMode === VIEW_MODE_3D) {
-          await initSceneView();
+          ags.view = await  mapUitls.initSceneView(Portal,WebsceneID,ags.container);
           await widgets.createOverView(ags.view);
         }
 
@@ -121,7 +118,7 @@ function createMapView(opts = {}) {
         if (payload === VIEW_MODE_2D) {
           await initMapView();
         } else if (payload === VIEW_MODE_3D) {
-          await initSceneView();
+          ags.view = await  mapUitls.initSceneView(Portal,WebsceneID,ags.container);
           await widgets.createOverView(ags.view);
           await widgets.createBasemapGallery(ags.view);
         }
@@ -151,21 +148,6 @@ function createMapView(opts = {}) {
       case MAP_ACTION_CLIP_MAP: {
         Print2DMap.mapView = ags.view;
         Print2DMap.clipMap();
-        break;
-      }
-      case ACTION_DRAW_POINT_2D: {
-        const sketchUtil = new Sketch(ags.view);
-        sketchUtil.Drawpoint();
-        break;
-      }
-      case ACTION_DRAW_LINE_2D: {
-        const sketchUtil = new Sketch(ags.view);
-        sketchUtil.Drawline();
-        break;
-      }
-      case ACTION_DRAW_FLAT_2D: {
-        const sketchUtil = new Sketch(ags.view);
-        sketchUtil.DrawPolygon();
         break;
       }
       case ACTION_LEGENDLIST_SHOW: {
@@ -224,39 +206,8 @@ async function initsplitMapView() {
       components: [],
     },
   });
-  // widgets.createBasemapGallery(agstwo.view);
   synchronizeViews([ags.view, agstwo.view], watchUtils);
 }
 
-async function initSceneView() {
-  const [WebScene, Sceneview] = await jsapi.load(['esri/WebScene', 'esri/views/SceneView']);
-  const scene = new WebScene({
-    portalItem: {
-      id: WebsceneID,
-      portal: Portal,
-    },
-  });
-  ags.view = new Sceneview({
-    container: ags.container,
-    map: scene,
-    environment: {
-      atmosphere: {
-        // creates a realistic view of the atmosphere
-        quality: 'high',
-      },
-      // wangfh 修改光照
-      lighting: {
-        date: new Date(),
-        directShadowsEnabled: false,
-        // don't update the view time when user pans.
-        // The clock widget drives the time
-        cameraTrackingEnabled: false,
-      },
-    },
-    ui: {
-      components: [],
-    },
-  });
-}
 
 export { createMapView };
