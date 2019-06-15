@@ -67,11 +67,6 @@ class IndexPage extends React.Component {
           className={styles.componentCompass}
         />,
         <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view')} />,
-        // <BasemapGallery
-        //   key="ui-component-basemap"
-        //   view={_.get(window.agsGlobal, 'view')}
-        //   className={classnames(styles.componentBasemap, 'map-basemaps')}
-        // />,
       ];
     }
 
@@ -87,11 +82,6 @@ class IndexPage extends React.Component {
         view={_.get(window.agsGlobal, 'view')}
         className={styles.componentCompass}
       />,
-      // <BasemapGallery
-      //   key="ui-component-basemap"
-      //   view={_.get(window.agsGlobal, 'view')}
-      //   className={classnames(styles.componentBasemap, 'map-basemaps')}
-      // />,
     ];
   }
 
