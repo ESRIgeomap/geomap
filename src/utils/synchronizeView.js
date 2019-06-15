@@ -1,9 +1,13 @@
+import { jsapi } from '../constants/geomap-utils';
 let viewpointWatchHandle;
 let viewStationaryHandle;
 let otherInteractHandlers;
 let scheduleId;
 
-function synchronizeView(view, others, watchUtils) {
+async function synchronizeView(view, others) {
+  const [watchUtils] = await jsapi.load([
+    'esri/core/watchUtils',
+  ]);
   const others1 = Array.isArray(others) ? others : [others];
   const clear = () => {
     if (otherInteractHandlers) {
@@ -66,14 +70,12 @@ function synchronizeView(view, others, watchUtils) {
 
 let handles;
 
-function synchronizeViews(views, watchUtils) {
+function synchronizeViews(views) {
   handles = views.map((view, idx) => {
     const others = views.concat();
     others.splice(idx, 1);
-    // console.log(others);
-    return synchronizeView(view, others, watchUtils);
+    return synchronizeView(view, others);
   });
-  // console.log(handles);
   return {
     remove: () => {
       this.remove = () => {};

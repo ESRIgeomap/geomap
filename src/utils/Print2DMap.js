@@ -151,31 +151,6 @@ class Print2DMap {
 
       ReactDom.render(<ScreenshotPreview screenshot={screenshot}/>, screenshotDiv);
     }
-
-    /** API方式 */
-    // Print2DMap.mapView.takeScreenshot({format: 'png' }).then(function(screenshot) {
-    //   const aLink = document.createElement('a');
-    //   aLink.download = 'clipmap.png';
-    //   aLink.href = screenshot.dataUrl;
-    //   aLink.click();
-    // });
-    /**html2canvas方式 */
-    // html2canvas(document.body, {
-    //   useCORS: true,
-    //   proxy: window.appcfg.proxy,
-    //   width: window.screen.availWidth,
-    //   height: window.screen.availHeight,
-    //   windowWidth: document.body.scrollWidth,
-    //   windowHeight: document.body.scrollHeight,
-    //   x: 0,
-    //   y: window.pageYOffset,
-    // }).then(function(canvas) {
-    //   const imgUrl = canvas.toDataURL('image/png', 1);
-    //   const aLink = document.createElement('a');
-    //   aLink.download = 'clipMap.png';
-    //   aLink.href = imgUrl;
-    //   aLink.click();
-    // });
   }
 }
 

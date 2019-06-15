@@ -25,7 +25,7 @@ export default {
     basemapGalleryDiv.style.zIndex = '6';
     basemapGalleryDiv.id = 'basemapGalleryDiv';
 
-    agsGlobal.container.appendChild(basemapGalleryDiv);
+    window.agsGlobal.container.appendChild(basemapGalleryDiv);
     ReactDOM.render(<Basemap />, basemapGalleryDiv);
   },
 };

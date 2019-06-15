@@ -1,24 +1,14 @@
-// 组件
+/**
+ * 二维地图初始化工作
+ * @author  lee  
+ */
+
 import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
 import LegendList from '../../../utils/legend';
 import * as mapUitls from '../../../utils/arcgis/map/LayerUtil';
-
-import {
-  INIT_MAP,
-  INIT_SPLITMAP,
-  SWITCH_MAP,
-  VIEW_MODE_2D,
-  VIEW_MODE_3D,
-  MAP_ACTION_CLEAR_GRAPHICS,
-  ACTION_MEASURE_2D_AREA,
-  ACTION_MEASURE_2D_LINE,
-  ACTION_PRINT_2D_MAP,
-  MAP_ACTION_CLIP_MAP,
-  ACTION_LEGENDLIST_SHOW,
-  ACTION_LEGENDLIST_DEACTIVATE,
-} from '../../../constants/action-types';
+import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
 import { AppProxy, Portal, WebsceneID, WebmapID, SplitWebmap } from '../../../utils/env';
 import widgets from '../../../utils/widgets';
@@ -31,15 +21,32 @@ window.agstwoGlobal = {};
 
 const agstwo = window.agstwoGlobal;
 
+// 设置esriconfig 
 async function prepare() {
   const [esriConfig] = await jsapi.load(['esri/config']);
+  // 设置跨域处理地址
   esriConfig.request.proxyUrl = AppProxy;
+  // 设置portal地址
   esriConfig.portalUrl = Portal;
 }
 
 function initMapUtils(store) {
   AgsSearchUtil.instance().view = ags.view;
   AgsSearchUtil.instance().store = store;
+}
+// 初始化地图
+async function initMap(viewMode) {
+  if (viewMode === actions.VIEW_MODE_2D) {
+    // 初始化二维地图
+    ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
+    // 创建底图切换微件
+    await widgets.createBasemapGallery(ags.view);
+  } else if (viewMode === actions.VIEW_MODE_3D) {
+    // 初始化三维地图
+    ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
+    // 创建鹰眼微件
+    await widgets.createOverView(ags.view);
+  }
 }
 
 function createMapView(opts = {}) {
@@ -50,7 +57,8 @@ function createMapView(opts = {}) {
 
   return store => next => async action => {
     switch (action.type) {
-      case INIT_MAP: {
+      // 初始化地图
+      case actions.INIT_MAP: {
         const { payload } = action;
         const { container, viewMode } = payload;
 
@@ -62,20 +70,15 @@ function createMapView(opts = {}) {
           container.appendChild(ags.container);
           break;
         }
-
+        
         // Otherwise, create a new container element and a new scene view.
         ags.container = document.createElement('div');
         container.appendChild(ags.container);
 
         await prepare();
 
-        if (viewMode === VIEW_MODE_2D) {
-          await initMapView(store);
-          await widgets.createBasemapGallery(ags.view);
-        } else if (viewMode === VIEW_MODE_3D) {
-          ags.view = await  mapUitls.initSceneView(Portal,WebsceneID,ags.container);
-          await widgets.createOverView(ags.view);
-        }
+        // 初始化地图
+        await initMap(viewMode);
 
         // after view created
         window.agsGlobal = ags;
@@ -86,14 +89,10 @@ function createMapView(opts = {}) {
 
         // When initialized...
         return ags.view.when(() => {
-          // Update the environment settings (either from the state or from the scene)
-          ags.view.map.layers.on('change',function(event){
-             console.log(event);
-          });
         });
       }
 
-      case INIT_SPLITMAP: {
+      case actions.INIT_SPLITMAP: {
         const { payload } = action;
         const { containers } = payload;
         // DOM container not defined
@@ -108,54 +107,50 @@ function createMapView(opts = {}) {
         agstwo.containers.style.height = '100%';
         containers.appendChild(agstwo.containers);
         await prepare();
-        await initsplitMapView();
+        // 初始化分屏对比地图
+        agstwo.view = await mapUitls.initMapView(Portal, SplitWebmap, agstwo.containers);
+        // 保持左右侧地图保持同步
+        synchronizeViews([ags.view, agstwo.view]);
         return agstwo.view.when(() => {
           // Update the environment settings (either from the state or from the scene)
         });
       }
-      case SWITCH_MAP: {
+      case actions.SWITCH_MAP: {
         const { payload } = action;
-        if (payload === VIEW_MODE_2D) {
-          await initMapView();
-        } else if (payload === VIEW_MODE_3D) {
-          ags.view = await  mapUitls.initSceneView(Portal,WebsceneID,ags.container);
-          await widgets.createOverView(ags.view);
-          await widgets.createBasemapGallery(ags.view);
-        }
-        // await createToolButtons();
+        await initMap(payload);
         break;
       }
-      case MAP_ACTION_CLEAR_GRAPHICS: {
+      case actions.MAP_ACTION_CLEAR_GRAPHICS: {
         MeasureUtil.mapView = ags.view;
         MeasureUtil.active('clearmeasure');
         break;
       }
-      case ACTION_MEASURE_2D_LINE: {
+      case actions.ACTION_MEASURE_2D_LINE: {
         MeasureUtil.mapView = ags.view;
         MeasureUtil.active('line');
         break;
       }
-      case ACTION_MEASURE_2D_AREA: {
+      case actions.ACTION_MEASURE_2D_AREA: {
         MeasureUtil.mapView = ags.view;
         MeasureUtil.active('area');
         break;
       }
-      case ACTION_PRINT_2D_MAP: {
+      case actions.ACTION_PRINT_2D_MAP: {
         Print2DMap.mapView = ags.view;
         Print2DMap.show();
         break;
       }
-      case MAP_ACTION_CLIP_MAP: {
+      case actions.MAP_ACTION_CLIP_MAP: {
         Print2DMap.mapView = ags.view;
         Print2DMap.clipMap();
         break;
       }
-      case ACTION_LEGENDLIST_SHOW: {
+      case actions.ACTION_LEGENDLIST_SHOW: {
         LegendList.mapView = ags.view;
         LegendList.show();
         break;
       }
-      case ACTION_LEGENDLIST_DEACTIVATE: {
+      case actions.ACTION_LEGENDLIST_DEACTIVATE: {
         LegendList.mapView = ags.view;
         LegendList.deactivate();
         break;
@@ -169,45 +164,4 @@ function createMapView(opts = {}) {
     return Promise.resolve();
   };
 }
-
-async function initMapView(store) {
-  const [WebMap, MapView] = await jsapi.load(['esri/WebMap', 'esri/views/MapView']);
-  const webmap = new WebMap({
-    portalItem: {
-      id: WebmapID,
-      portal: Portal,
-    },
-  });
-  ags.view = new MapView({
-    container: ags.container,
-    map: webmap,
-    ui: {
-      components: [],
-    },
-  });
-}
-
-async function initsplitMapView() {
-  const [WebMap, MapView, watchUtils] = await jsapi.load([
-    'esri/WebMap',
-    'esri/views/MapView',
-    'esri/core/watchUtils',
-  ]);
-  const webmap = new WebMap({
-    portalItem: {
-      id: SplitWebmap,
-      portal: Portal,
-    },
-  });
-  agstwo.view = new MapView({
-    container: agstwo.containers,
-    map: webmap,
-    ui: {
-      components: [],
-    },
-  });
-  synchronizeViews([ags.view, agstwo.view], watchUtils);
-}
-
-
 export { createMapView };

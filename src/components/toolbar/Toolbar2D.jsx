@@ -1,11 +1,13 @@
+/**
+ * 二维地图toolbar功能
+ * @author  lee  
+ */
 import React from 'react';
 import { connect } from 'dva';
 import { Menu, Dropdown, Button, Icon, Avatar } from 'antd';
 
 import {
   MAP_ACTION_CLEAR_GRAPHICS,
-  ACTION_MEASURE_LINE_3D,
-  ACTION_MEASURE_AREA_3D,
   VIEW_MODE_2D,
   ACTION_MEASURE_2D_LINE,
   ACTION_MEASURE_2D_AREA,
@@ -19,6 +21,7 @@ import {
 
 import styles from './Toolbar2D.css';
 import imageDivideTool from '../../utils/arcgis/image-divide';
+// import MeasureUtil from '../../../utils/measure';
 
 const ButtonGroup = Button.Group;
 
@@ -69,16 +72,6 @@ class Toolbar2D extends React.Component {
   }
   measureLine({ key }) {
     switch (key) {
-      case 'measure3DLine':
-        this.props.dispatch({
-          type: ACTION_MEASURE_LINE_3D,
-        });
-        break;
-      case 'measure3DArea':
-        this.props.dispatch({
-          type: ACTION_MEASURE_AREA_3D,
-        });
-        break;
       case 'measure2DLine':
         this.props.dispatch({
           type: ACTION_MEASURE_2D_LINE,
@@ -195,9 +188,6 @@ class Toolbar2D extends React.Component {
   }
 
   visibleLegend = () => {
-    // this.props.dispatch({
-    //   type: ACTION_LEGENDLIST_SHOW,
-    // });
     if (this.props.agsmap.legendflags) {
       // prepare();
       this.props.dispatch({
@@ -278,16 +268,10 @@ class Toolbar2D extends React.Component {
         }}
       >
         <ButtonGroup className={styles.buttonGroup}>
-          {/*pensiveant:数据选择 */}
           <Button className={styles.btnStyle} onClick={this.showLayerList}>
             <Icon type="profile" />
             数据选择
             </Button>
-          {/*<Dropdown overlay={drawmenu} trigger={['click']}>
-              <Button className={styles.btnStyle}>
-                <Icon type="environment-o" />标 注<Icon type="down" />
-              </Button>
-      </Dropdown>*/}
           <Button className={styles.btnStyle} onClick={this.showPoltPanel}>
             <Icon type="highlight" />
             疑点标绘
@@ -313,10 +297,6 @@ class Toolbar2D extends React.Component {
                   <Icon type="border-horizontal" />
                   <span>&nbsp;分屏对比</span>
                 </Menu.Item>
-                {/* <Menu.Item key="imageDivide" style={{ textAlign: 'center' }}>
-                  <Icon type="border-outer" />
-                  <span>&nbsp;全域划分</span>
-                </Menu.Item> */}
                 <Menu.Item
                   key="timeslider"
                   onClick={this.timerSilder}

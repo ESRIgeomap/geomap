@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Button } from 'antd';
 import panMapIcon from './images/移动.png';
 import searchIcon from './images/手指.png';
-import personViewIcon from './images/人视角.png';
 import surroundRoamIcon from './images/旋转.png';
 import yuYanIcon from './images/鱼眼.png';
 import measurement3DIcon from './images/量高.png';
