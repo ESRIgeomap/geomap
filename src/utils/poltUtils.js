@@ -18,7 +18,6 @@ import { requestArrayBuffer } from '../utils/request';
 import request from '../utils/request';
 import layerUtils from '../utils/layerUtils';
 import GeometrySymbolEditor from '../components/layerList/GeometrySymbolEditor';
-import * as mapUtils from './arcgis/map/LayerUtil';
 
 class poltUtils {
 

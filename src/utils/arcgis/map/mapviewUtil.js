@@ -53,26 +53,46 @@ async function initSceneView(portal, itemid, container) {
     map: scene,
     environment: {
       atmosphere: {
-        // creates a realistic view of the atmosphere
         quality: 'high',
       },
-      // wangfh 修改光照
+      // 修改光照
       lighting: {
         date: new Date(),
         directShadowsEnabled: false,
-        // don't update the view time when user pans.
-        // The clock widget drives the time
         cameraTrackingEnabled: false,
       },
     },
     ui: {
-      components: [], // 'zoom', 'navigation-toggle', 'compass'
+      components: [], 
     },
   });
   return view;
 }
 export { initSceneView };
 //---------------------------------场景初始化 end--------------------------------
+
+//---------------------------------底图切换 start------------------------------
+/**
+ * 通过webmapid 切换底图
+ * @author  lee  
+ * @param {object} view 场景
+ * @param {string} webmapId webmap的itmid
+ */
+async function switchBaseMapByWebmapId(view, webmapId) {
+  const [WebMap] = await jsapi.load(['esri/WebMap']);
+  const map = new WebMap({
+    portalItem: {
+      id: webmapId,
+    },
+  });
+  map.load().then(function () {
+    map.basemap.load().then(function () {
+      view.map.basemap = map.basemap;
+    });
+  });
+}
+export { switchBaseMapByWebmapId }
+//---------------------------------底图切换 start------------------------------
 
 //---------------------------------图层获取----------------------------------------
 /**

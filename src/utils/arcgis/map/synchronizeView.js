@@ -1,4 +1,8 @@
-import { jsapi } from '../constants/geomap-utils';
+/**
+ * 保持两个view同步
+ * @author  lee  
+ */
+import { jsapi } from '../../../constants/geomap-utils';
 let viewpointWatchHandle;
 let viewStationaryHandle;
 let otherInteractHandlers;
@@ -70,6 +74,12 @@ async function synchronizeView(view, others) {
 
 let handles;
 
+/**
+ * 将两个场景同步
+ * @author lee
+ * @param {object} views 两个需要同步的场景
+ * @returns
+ */
 function synchronizeViews(views) {
   handles = views.map((view, idx) => {
     const others = views.concat();

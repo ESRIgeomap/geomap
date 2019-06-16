@@ -7,12 +7,12 @@ import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
 import LegendList from '../../../utils/legend';
-import * as mapUitls from '../../../utils/arcgis/map/LayerUtil';
+import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
 import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
 import { AppProxy, Portal, WebsceneID, WebmapID, SplitWebmap } from '../../../utils/env';
 import widgets from '../../../utils/widgets';
-import { synchronizeViews } from '../../../utils/synchronizeView';
+import { synchronizeViews } from '../../../utils/arcgis/map/synchronizeView';
 
 // debug obj
 const ags = {};

@@ -10,7 +10,7 @@ import request from './../../../utils/request';
 import poltUtils from '../../../utils/poltUtils';
 import GeometryAttribute from '../../../components/layerList/GeometryAttribute';
 import treeUtil from '../../../utils/layertreeutils';
-import * as mapUtils from '../../../utils/arcgis/map/LayerUtil';
+import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
 import {
   deleteItems,
   updateItemByItemId,

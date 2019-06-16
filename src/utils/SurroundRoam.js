@@ -1,4 +1,3 @@
-// import Camera from 'esri/Camera';
 // 三维长度测量
 // 静态类，可不用new，直接使用
 class SurroundRoamUtil {

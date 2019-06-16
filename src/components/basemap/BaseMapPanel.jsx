@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import styles from './BaseMapPanel.less';
-import switchBaseMapByWebmapId from '../../utils/switchBaseMap';
+import * as mapUtils from '../../utils/arcgis/map/mapviewUtil';
 
 class BaseMapPanel extends Component {
   constructor(props) {
@@ -10,8 +10,9 @@ class BaseMapPanel extends Component {
     this.state = {};
   }
   switchBmap = e => {
+    const view = window.agsGlobal.view;
     const itemId = e.target.dataset.itemid;
-    switchBaseMapByWebmapId(itemId);
+    mapUtils.switchBaseMapByWebmapId(view,itemId);
     this.props.setBmapIcon(e.target.src);
     this.props.hide();
   };

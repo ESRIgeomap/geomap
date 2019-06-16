@@ -20,8 +20,6 @@ import {
 } from '../../constants/action-types';
 
 import styles from './Toolbar2D.css';
-import imageDivideTool from '../../utils/arcgis/image-divide';
-// import MeasureUtil from '../../../utils/measure';
 
 const ButtonGroup = Button.Group;
 
@@ -34,7 +32,6 @@ class Toolbar2D extends React.Component {
     this.visblechangebook = this.visblechangebook.bind(this);
     this.visibleLegend = this.visibleLegend.bind(this);
     this.splitScreen = this.splitScreen.bind(this);
-    this.imageTool = this.imageTool.bind(this);
     this.rollerScreen = this.rollerScreen.bind(this);
     this.outputSubmenuOnClick = this.outputSubmenuOnClick.bind(this);
   }
@@ -59,17 +56,6 @@ class Toolbar2D extends React.Component {
       payload: !this.props.agsmap.identifyflags,
     });
   };
-
-  imageTool({ key }) {
-    switch (key) {
-      case 'imageDivide': {
-        imageDivideTool.init();
-        break;
-      }
-      default:
-        break;
-    }
-  }
   measureLine({ key }) {
     switch (key) {
       case 'measure2DLine':
@@ -279,7 +265,7 @@ class Toolbar2D extends React.Component {
 
           <Dropdown
             overlay={
-              <Menu className={styles.noradius} onClick={this.imageTool}>
+              <Menu className={styles.noradius}>
                 <Menu.Item
                   key="juanMap"
                   onClick={this.rollerScreen}
