@@ -69,10 +69,6 @@ class FullscreenButton extends Component {
       <div
         className={styles.fullScreen}
         onClick={this.toggleFullScreen}
-        // style={{
-        //   left: this.props.agsmap.menusflags ? '280px' : '70px',
-        // }}
-      >
         <Icon type={this.state.icontype} theme="outlined" style={{ fontSize: '24px' }} />
       </div>
     );
