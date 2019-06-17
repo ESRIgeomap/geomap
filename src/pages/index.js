@@ -22,7 +22,6 @@ import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 import { VIEW_MODE_2D } from '../constants/action-types';
 import styles from './index.css';
 
-import LegendList from '../components/legend/LegendList';
 
 //pensiveant:加载LayerList组件
 import LayerList from '../components/layerList/LayerList';
@@ -170,7 +169,7 @@ class IndexPage extends React.Component {
           <TimerSlider />
           {this.renderMapUIWidgets()}
         </div>
-        <LegendList />
+        {/* <LegendList /> */}
         <GeoSearch />
         {/*分屏对比dom*/}
         <div

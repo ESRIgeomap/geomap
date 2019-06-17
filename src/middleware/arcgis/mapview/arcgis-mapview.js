@@ -5,7 +5,6 @@
 
 import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
-import LegendList from '../../../utils/legend';
 import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
 import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
@@ -126,16 +125,6 @@ function createMapView(opts = {}) {
       case actions.MAP_ACTION_CLIP_MAP: {
         Print2DMap.mapView = ags.view;
         Print2DMap.clipMap();
-        break;
-      }
-      case actions.ACTION_LEGENDLIST_SHOW: {
-        LegendList.mapView = ags.view;
-        LegendList.show();
-        break;
-      }
-      case actions.ACTION_LEGENDLIST_DEACTIVATE: {
-        LegendList.mapView = ags.view;
-        LegendList.deactivate();
         break;
       }
       default: {

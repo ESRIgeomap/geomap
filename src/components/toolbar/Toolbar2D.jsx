@@ -11,8 +11,6 @@ import {
   VIEW_MODE_2D,
   ACTION_PRINT_2D_MAP,
   INIT_SPLITMAP,
-  ACTION_LEGENDLIST_DEACTIVATE,
-  ACTION_LEGENDLIST_SHOW,
   MAP_ACTION_CLIP_MAP,
 } from '../../constants/action-types';
 
