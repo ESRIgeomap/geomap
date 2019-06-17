@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
+/*
+ * 日照分析组件
+ * author:pensiveant
+ */
+
+import React, {useEffect } from 'react';
 import { connect } from 'dva';
 import { Slider, DatePicker, Row, Col, Checkbox, Button, Icon } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import styles from './Lightshadow.css';
 
-class LightshadowListTwo extends Component {
-  constructor(props) {
-    super(props);
-    // this.props.dispatch({
-    //   type: 'planningreview/valuetimeState',
-    //   payload: moment(new Date(), 'YYYY/MM/DD'),
-    // });
-    // this.props.dispatch({
-    //   type: 'planningreview/sliderValueState',
-    //   payload: moment().hour() * 60 + moment().minute(),
-    // });
-    // this.props.dispatch({
-    //   type: 'planningreview/timerOfDatepickerState',
-    //   payload: setInterval(null, null),
-    // });
-    // this.props.dispatch({
-    //   type: 'planningreview/timerOfSliderState',
-    //   payload: setInterval(null, null),
-    // });
-    this.props.dispatch({
-      type: 'agsmap/rebackInitlightState',
+
+const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
+
+  useEffect(() => {
+    dispatch({
+      type: 'Lightshadow/rebackInitlightState',
       payload: {
         showShadow: false,
         sliderPlay: false,
@@ -38,65 +28,59 @@ class LightshadowListTwo extends Component {
         iconOfSlider: 'caret-right',
       },
     });
-    this.state = {
-      // valuetime: moment(new Date(), 'YYYY/MM/DD'),
-      // sliderValue: moment().hour() * 60 + moment().minute(),
-      // sliderPlayState: false,
-      // datepickerPlayState: false,
-      // timerOfSlider: setInterval(null, null),
-      // timerOfDatepicker: setInterval(null, null),
-      // iconOfDatePicker: 'caret-right',
-      // iconOfSlider: 'caret-right',
-    };
-    this.listvisible = this.listvisible.bind(this);
-    this.onDatepickerChange = this.onDatepickerChange.bind(this);
-    this.onSliderValueAdd = this.onSliderValueAdd.bind(this);
-    this.onSliderChange = this.onSliderChange.bind(this);
-    this.onDatepickerValueAdd = this.onDatepickerValueAdd.bind(this);
-    this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
-  }
 
-  onDatepickerChange(value) {
-    this.props.dispatch({
-      type: 'agsmap/valuetimeState',
+  }, [dispatch]);
+
+
+  /**
+   * 日期控件选择change事件
+   * author:pensiveant
+   */
+  const onDatepickerChange = (value) => {
+    dispatch({
+      type: 'Lightshadow/valuetimeState',
       payload: value,
     });
     window.agsGlobal.view.environment.lighting.date = Number(value.format('x'));
   }
 
-  // 时间播放按钮
-  onSliderValueAdd() {
-    // 时间播放与暂停
-    if (this.props.agsmap.sliderValue < 1440) {
-      this.props.dispatch({
-        type: 'agsmap/sliderPlayState',
-        payload: !this.props.agsmap.sliderPlay,
+  /**
+   * 时间播放按钮回调
+   * author:pensiveant
+   */
+  const onSliderValueAdd = () => {
+    if (Lightshadow.sliderValue < 1440) {
+      dispatch({
+        type: 'Lightshadow/sliderPlayState',
+        payload: !Lightshadow.sliderPlay,
       });
-      if (this.props.agsmap.sliderPlay) {
-        clearInterval(this.props.agsmap.timerOfSlider);
-        this.props.dispatch({
-          type: 'agsmap/iconOfSliderState',
+      
+      if (Lightshadow.sliderPlay) { //暂停
+        clearInterval(Lightshadow.timerOfSlider);
+        dispatch({
+          type: 'Lightshadow/iconOfSliderState',
           payload: 'caret-right',
         });
         // this.setState({
         //   iconOfSlider: 'caret-right',
         // });
-      } else {
-        this.props.dispatch({
-          type: 'agsmap/timerOfSliderState',
+      } else { //播放
+
+        dispatch({
+          type: 'Lightshadow/timerOfSliderState',
           payload: setInterval(() => {
-            let temp = this.props.agsmap.sliderValue;
-            const tempTime1 = this.props.agsmap.valuetime
+            let temp =Lightshadow.sliderValue;
+            const tempTime1 =Lightshadow.valuetime
               .hour(parseInt(temp / 60, 10))
               .minute(temp % 60);
             window.agsGlobal.view.environment.lighting.date = Number(tempTime1.format('x'));
             // slidervalue数据同步
-            this.props.dispatch({
-              type: 'agsmap/sliderValueState',
+            dispatch({
+              type: 'Lightshadow/sliderValueState',
               payload: (temp += 5),
             });
-            this.props.dispatch({
-              type: 'agsmap/iconOfSliderState',
+            dispatch({
+              type: 'Lightshadow/iconOfSliderState',
               payload: 'pause',
             });
             // this.setState({
@@ -104,16 +88,16 @@ class LightshadowListTwo extends Component {
             // });
             if (temp > 1440) {
               clearInterval(this.state.timerOfSlider);
-              this.props.dispatch({
-                type: 'agsmap/iconOfSliderState',
+              dispatch({
+                type: 'Lightshadow/iconOfSliderState',
                 payload: 'caret-right',
               });
               // this.setState({
               //   iconOfSlider: 'caret-right',
               // });
-              this.props.dispatch({
-                type: 'agsmap/sliderPlayState',
-                payload: !this.props.agsmap.sliderPlay,
+              dispatch({
+                type: 'Lightshadow/sliderPlayState',
+                payload: !Lightshadow.sliderPlay,
               });
             }
           }, 10),
@@ -122,24 +106,28 @@ class LightshadowListTwo extends Component {
     }
   }
 
-  // 日期播放按钮
-  onDatepickerValueAdd() {
-    this.props.dispatch({
-      type: 'agsmap/datepickerPlayState',
-      payload: !this.props.agsmap.datepickerPlay,
+
+  /**
+   * 日期播放按钮回调
+   * author:pensiveant
+   */
+  const onDatepickerValueAdd = () => {
+    dispatch({
+      type: 'Lightshadow/datepickerPlayState',
+      payload: !Lightshadow.datepickerPlay,
     });
-    if (!this.props.agsmap.datepickerPlay) {
-      this.props.dispatch({
-        type: 'agsmap/timerOfDatepickerState',
+    if (!Lightshadow.datepickerPlay) {
+      dispatch({
+        type: 'Lightshadow/timerOfDatepickerState',
         payload: setInterval(() => {
-          const tempNowTime = this.props.agsmap.valuetime.add(1, 'days');
+          const tempNowTime =Lightshadow.valuetime.add(1, 'days');
           window.agsGlobal.view.environment.lighting.date = Number(tempNowTime.format('x'));
-          this.props.dispatch({
-            type: 'agsmap/valuetimeState',
+          dispatch({
+            type: 'Lightshadow/valuetimeState',
             payload: tempNowTime,
           });
-          this.props.dispatch({
-            type: 'agsmap/iconOfDatePickerState',
+          dispatch({
+            type: 'Lightshadow/iconOfDatePickerState',
             payload: 'pause',
           });
           // this.setState({
@@ -148,13 +136,13 @@ class LightshadowListTwo extends Component {
         }, 100),
       });
     } else {
-      clearInterval(this.props.agsmap.timerOfDatepicker);
-      // this.props.dispatch({
+      clearInterval(Lightshadow.timerOfDatepicker);
+      //dispatch({
       //   type: 'planningreview/timerOfDatepickerState',
       //   payload: setInterval(null, null),
       // });
-      this.props.dispatch({
-        type: 'agsmap/iconOfDatePickerState',
+      dispatch({
+        type: 'Lightshadow/iconOfDatePickerState',
         payload: 'caret-right',
       });
       // this.setState({
@@ -163,36 +151,50 @@ class LightshadowListTwo extends Component {
     }
   }
 
-  onSliderChange(value) {
+
+
+  /**
+   * 时间轴点击回调
+   * author:pensiveant
+   */
+  const onSliderChange = (value) => {
     // 将传入的value转换为小时，分钟
-    const tempTime2 = this.props.agsmap.valuetime.hour(parseInt(value / 60, 10)).minute(value % 60);
-    this.props.dispatch({
-      type: 'agsmap/valuetimeState',
+    const tempTime2 =Lightshadow.valuetime.hour(parseInt(value / 60, 10)).minute(value % 60);
+    dispatch({
+      type: 'Lightshadow/valuetimeState',
       payload: tempTime2,
     });
-    this.props.dispatch({
-      type: 'agsmap/sliderValueState',
+    dispatch({
+      type: 'Lightshadow/sliderValueState',
       payload: value,
     });
     window.agsGlobal.view.environment.lighting.date = Number(tempTime2.format('x'));
   }
 
-  onCheckBoxChange(e) {
+
+  /**
+   * 显示阴影checkbox check事件回调
+   * author:pensiveant
+   */
+  const onCheckBoxChange = (e) => {
     if (e.target.checked) {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = true;
     } else {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = false;
     }
-    this.props.dispatch({
-      type: 'agsmap/shadowInitDataState',
+    dispatch({
+      type: 'Lightshadow/shadowInitDataState',
       payload: e.target.checked,
     });
-    // console.log('NOTHING:', this.props.planningreview.valuetime);
   }
 
-  listvisible() {
-    this.props.dispatch({
-      type: 'agsmap/listChangeState',
+  /**
+   * 关闭按钮点击回调
+   * author:pensiveant
+   */
+  const listvisible = () => {
+    dispatch({
+      type: 'Lightshadow/listChangeState',
       payload: {
         prolistflags: false,
         progralistflags: false,
@@ -200,131 +202,114 @@ class LightshadowListTwo extends Component {
         lightshadowlistflags: false,
       },
     });
-    this.props.dispatch({
+    dispatch({
       type: 'init_lightshadow',
     });
-    // initLightShadow();
-    // this.props.dispatch({
-    //   type: 'planningreview/rebackInitlightState',
-    //   payload: {
-    //     showShadow: false,
-    //     sliderPlay: false,
-    //     datepickerPlay: false,
-    //     valuetime: moment(new Date(), 'YYYY/MM/DD'),
-    //     sliderValue: moment().hour() * 60 + moment().minute(),
-    //     timerOfSlider: setInterval(null, null),
-    //     timerOfDatepicker: setInterval(null, null),
-    //     iconOfDatePicker: 'caret-right',
-    //     iconOfSlider: 'caret-right',
-    //   },
-    // });
-    // clearInterval(this.props.planningreview.timerOfSlider);
-    // clearInterval(this.props.planningreview.timerOfDatepicker);
   }
 
-  render() {
-    const marks = {
-      0: '0点',
-      360: '6点',
-      720: '12点',
-      1080: '18点',
-      1440: '24点',
-    };
-    return (
-      <div
-        className={styles.modlediv}
-        style={{
-          display: this.props.agsmap.lightshadowlistflags ? 'block' : 'none',
-        }}
-        // style={{
-        //   display: 'block',
-        // }}
-      >
-        <div className={styles.listdiv}>
-          <p className={styles.ptitle}>
-            日照分析
-            <span className={styles.spantitle} onClick={this.listvisible}>
-              ×
+  const marks = {
+    0: '0点',
+    360: '6点',
+    720: '12点',
+    1080: '18点',
+    1440: '24点',
+  };
+
+  return (
+    <div
+      className={styles.modlediv}
+      style={{
+        display:Lightshadow.lightshadowlistflags ? 'block' : 'none',
+      }}
+    // style={{
+    //   display: 'block',
+    // }}
+    >
+      <div className={styles.listdiv}>
+        <p className={styles.ptitle}>
+          日照分析
+            <span className={styles.spantitle} onClick={listvisible}>
+            ×
             </span>
-          </p>
-          <div className={styles.settingInfo}>
-            <Row
-              style={{
-                marginBottom: '8px',
-              }}
-            >
-              <Col offset={1} span={18}>
-                <Slider
-                  marks={marks}
-                  max={1440}
-                  defaultValue={this.props.agsmap.sliderValue}
-                  tipFormatter={null}
-                  value={this.props.agsmap.sliderValue}
-                  onChange={this.onSliderChange}
-                />
-              </Col>
-              <Col span={2} offset={1} className={styles.settingItem}>
-                <Button
-                  style={{
-                    marginTop: '5px',
-                  }}
-                  type="primary"
-                  shape="circle"
-                  onClick={this.onSliderValueAdd}
-                >
-                  <Icon type={this.props.agsmap.iconOfSlider} />
-                </Button>
-              </Col>
-            </Row>
-            <Row
-              style={{
-                marginBottom: '8px',
-              }}
-            >
-              <Col span={18} offset={1}>
-                <DatePicker
-                  showToday={false}
-                  allowClear={false}
-                  defaultValue={this.props.agsmap.valuetime}
-                  value={this.props.agsmap.valuetime}
-                  format="YYYY-MM-DD"
-                  onChange={this.onDatepickerChange}
-                />
-              </Col>
-              <Col span={2} offset={1} className={styles.settingItem}>
-                <Button
-                  style={{
-                    marginTop: '5px',
-                  }}
-                  type="primary"
-                  shape="circle"
-                  onClick={this.onDatepickerValueAdd}
-                >
-                  <Icon type={this.props.agsmap.iconOfDatePicker} />
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8} offset={8}>
-                <Checkbox
-                  // defaultChecked={this.state.showShadow}
-                  // checked={this.state.showShadow}
-                  checked={this.props.agsmap.showShadow}
-                  onChange={this.onCheckBoxChange}
-                >
-                  显示阴影
+        </p>
+        <div className={styles.settingInfo}>
+          <Row
+            style={{
+              marginBottom: '8px',
+            }}
+          >
+            <Col offset={1} span={18}>
+              <Slider
+                marks={marks}
+                max={1440}
+                defaultValue={Lightshadow.sliderValue}
+                tipFormatter={null}
+                value={Lightshadow.sliderValue}
+                onChange={onSliderChange}
+              />
+            </Col>
+            <Col span={2} offset={1} className={styles.settingItem}>
+              <Button
+                style={{
+                  marginTop: '5px',
+                }}
+                type="primary"
+                shape="circle"
+                onClick={onSliderValueAdd}
+              >
+                <Icon type={Lightshadow.iconOfSlider} />
+              </Button>
+            </Col>
+          </Row>
+          <Row
+            style={{
+              marginBottom: '8px',
+            }}
+          >
+            <Col span={18} offset={1}>
+              <DatePicker
+                showToday={false}
+                allowClear={false}
+                defaultValue={Lightshadow.valuetime}
+                value={Lightshadow.valuetime}
+                format="YYYY-MM-DD"
+                onChange={onDatepickerChange}
+              />
+            </Col>
+            <Col span={2} offset={1} className={styles.settingItem}>
+              <Button
+                style={{
+                  marginTop: '5px',
+                }}
+                type="primary"
+                shape="circle"
+                onClick={onDatepickerValueAdd}
+              >
+                <Icon type={Lightshadow.iconOfDatePicker} />
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8} offset={8}>
+              <Checkbox
+                // defaultChecked={this.state.showShadow}
+                // checked={this.state.showShadow}
+                checked={Lightshadow.showShadow}
+                onChange={onCheckBoxChange}
+              >
+                显示阴影
                 </Checkbox>
-              </Col>
-            </Row>
-          </div>
+            </Col>
+          </Row>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+
 }
 
-export default connect(({ agsmap }) => {
+export default connect(({ Lightshadow }) => {
   return {
-    agsmap,
+    Lightshadow,
   };
 })(LightshadowListTwo);

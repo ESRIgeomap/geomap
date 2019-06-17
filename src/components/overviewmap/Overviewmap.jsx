@@ -1,27 +1,16 @@
-import React, { Component } from 'react';
-// import { connect } from 'dva';
-// import Map from 'esri/Map';
-// import MapView from 'esri/views/MapView';
-// import * as WatchUtils from 'esri/core/watchUtils';
+import React, { useState, useEffect } from 'react';
 import { jsapi } from '../../constants/geomap-utils';
 import styles from './Overviewmap.css';
 
-class Overviewmap extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      extentDivWidth: '',
-      extentDivHeight: '',
-      extentDivTop: '',
-      extentDivLeft: '',
-    };
-    this.viewDiv = null;
-  }
-  componentDidMount() {
-    this.buildOverview();
-  }
-  buildOverview() {
-    this.props.view.when(async view => {
+const Overviewmap = ({view}) => {
+  const [extentDivWidth, setExtentDivWidth] = useState('');
+  const [extentDivHeight, setExtentDivHeight] = useState('');
+  const [extentDivTop, setExtentDivTop] = useState('');
+  const [extentDivLeft, setExtentDivLeft] = useState('');
+  let viewDiv = null;
+
+  useEffect(() => {
+    view.when(async view => {
       const [Map, MapView] = await jsapi.load(['esri/Map', 'esri/views/MapView']);
       const overviewMap = new Map({
         basemap: 'osm',
@@ -29,64 +18,61 @@ class Overviewmap extends Component {
       });
       // Create the MapView for overview map
       const mapView = new MapView({
-        container: this.viewDiv,
+        container: viewDiv,
         map: overviewMap,
       });
 
       // Remove the default widgets
       mapView.ui.components = [];
 
-      this.props.view.when(async view => {
+      view.when(async view => {
         const [WatchUtils] = await jsapi.load(['esri/core/watchUtils']);
         view.watch('extent', () => {
-          this.updateOverviewExtent(view, mapView);
+          updateOverviewExtent(view, mapView);
         });
         WatchUtils.when(view, 'stationary', () => {
           updateOverview(view, mapView);
         });
       });
     });
-  }
-  updateOverviewExtent(mainView, mapView) {
+  }, []);
+
+  function updateOverviewExtent(mainView, mapView) {
     const extent = mainView.extent;
 
     const bottomLeft = mapView.toScreen(extent.xmin, extent.ymin);
     const topRight = mapView.toScreen(extent.xmax, extent.ymax);
     if (bottomLeft !== null && topRight !== null) {
-      this.setState({
-        extentDivTop: topRight.y + 'px',
-        extentDivLeft: bottomLeft.x + 'px',
-        extentDivHeight: bottomLeft.y - topRight.y + 'px',
-        extentDivWidth: topRight.x - bottomLeft.x + 'px',
-      });
+      setExtentDivWidth(topRight.x - bottomLeft.x + 'px');
+      setExtentDivHeight(bottomLeft.y - topRight.y + 'px');
+      setExtentDivTop(topRight.y + 'px');
+      setExtentDivLeft(bottomLeft.x + 'px');
     }
   }
 
-  render() {
-    return (
-      <div className={styles.overviewMapDiv}>
+  return (
+    <div className={styles.overviewMapDiv}>
+      <div
+        ref={node => {
+          viewDiv = node;
+        }}
+        className={styles.overviewDiv}
+      >
         <div
-          ref={node => {
-            this.viewDiv = node;
+          style={{
+            top: extentDivTop,
+            left: extentDivLeft,
+            width: extentDivWidth,
+            height: extentDivHeight,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            position: 'absolute',
+            zIndex: 20000,
           }}
-          className={styles.overviewDiv}
-        >
-          <div
-            style={{
-              top: this.state.extentDivTop,
-              left: this.state.extentDivLeft,
-              width: this.state.extentDivWidth,
-              height: this.state.extentDivHeight,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              position: 'absolute',
-              zIndex: 20000,
-            }}
-          />
-        </div>
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 function updateOverview(mainView, mapView) {
   mapView.when(() => {
