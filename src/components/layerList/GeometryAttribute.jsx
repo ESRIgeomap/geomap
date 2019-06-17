@@ -1,32 +1,30 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
-import { message, Divider , Input, Button } from 'antd';
+import { message, Divider, Input, Button } from 'antd';
 import styles from './GeometryAttribute.less';
-//import { FormattedMessage, setLocale, getLocale, formatMessage } from 'umi/locale';
 
 class GeometryAttribute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      description:  '',
+      description: '',
       type: '',
     };
   }
-  componentDidMount(){
-    // debugger
-    if(this.props.geo){
+  componentDidMount() {
+    debugger;
+    if (this.props.geo) {
       this.setState({
         name: (this.props.geo.attributes && this.props.geo.attributes.name) || '',
         description: (this.props.geo.attributes && this.props.geo.attributes.description) || '',
         type: (this.props.geo.attributes && this.props.geo.attributes.type) || '',
       });
-    }else{
+    } else {
       message.warn('请选择图形');
-      return
+      return;
     }
-    
   }
   handleOk = async () => {
     const attributes = {
@@ -35,7 +33,6 @@ class GeometryAttribute extends React.Component {
       description: this.state.description,
     };
     this.props.geo.attributes = attributes;
-
 
     ReactDom.unmountComponentAtNode(document.getElementById('geoattr'));
     ReactDom.unmountComponentAtNode(document.getElementById('geosymbol'));
@@ -65,13 +62,14 @@ class GeometryAttribute extends React.Component {
   render() {
     return (
       <div className={styles.wrap}>
-      <Divider />
-      
-      <h4 className={styles.title}>属性设置</h4>
-       
-      
+        <Divider />
+
+        <h4 className={styles.title}>属性设置:</h4>
+
         <div className={styles.settingdiv}>
-          <div className={styles.leftsetting}>名称：</div>
+          <div className={styles.leftsetting}>
+           名称：
+          </div>
           <div className={styles.rightsetting}>
             {' '}
             <Input value={this.state.name} onChange={this.nameValueChange} />
@@ -79,7 +77,9 @@ class GeometryAttribute extends React.Component {
         </div>
 
         <div className={styles.settingdiv}>
-          <div className={styles.leftsetting}>类型：</div>
+          <div className={styles.leftsetting}>
+           类型：
+          </div>
           <div className={styles.rightsetting}>
             {' '}
             <Input value={this.state.type} onChange={this.typeValueChange} />
@@ -87,7 +87,9 @@ class GeometryAttribute extends React.Component {
         </div>
 
         <div className={styles.settingdiv}>
-          <div className={styles.leftsetting}>描述：</div>
+          <div className={styles.leftsetting}>
+           简述：
+          </div>
           <div className={styles.rightsetting}>
             {' '}
             <Input value={this.state.description} onChange={this.descriptionValueChange} />
@@ -98,16 +100,15 @@ class GeometryAttribute extends React.Component {
           <div className={styles.leftsetting} />
           <div className={styles.rightsetting}>
             <Button type="primary" onClick={this.handleOk}>
-            确定
+              确定
             </Button>
           </div>
         </div>
-       
       </div>
     );
   }
 }
-GeometryAttribute.propTypes ={
+GeometryAttribute.propTypes = {
   geo: PropTypes.object,
-}
+};
 export default GeometryAttribute;

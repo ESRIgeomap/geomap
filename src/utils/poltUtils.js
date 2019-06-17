@@ -30,7 +30,6 @@ class poltUtils {
     if (!type) return
     const view = env.getParamAgs().view;
     const poltlayerid = window.poltlayerid ? window.poltlayerid : 'poltlayer';
-
     this.deactivePolt();
     /**获取绘图初始化属性参数 */
     poltUtils.symbolparam = symbolparam;
@@ -63,10 +62,10 @@ class poltUtils {
           offset: 10,
           unit: 'meters',
         },
-        popupTemplate: {
-          title: '标绘',
-          content: '{*}',
-        },
+        // popupTemplate: {
+        //   title: '标绘',
+        //   content: '{*}',
+        // },
       });
       view.map.add(this.poltlayer);
     } else {
@@ -184,9 +183,7 @@ class poltUtils {
       const graphic = event.graphics[0];
       if (event.state === 'start') {
         // action at the start time
-        // const attrDom = document.getElementById('geoattr');
-        // const res = ReactDOM.unmountComponentAtNode(attrDom);       
-        // ReactDOM.render(<GeometryAttribute geo={graphic} />, attrDom);
+       
         ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
         ReactDOM.unmountComponentAtNode(document.getElementById('geoattr'));
         if (showeditbar) {
@@ -201,7 +198,7 @@ class poltUtils {
         //update geometry attributes
         const attrDom = document.getElementById('geoattr');
         const res = ReactDOM.unmountComponentAtNode(attrDom);
-        ReactDOM.render(<GeometryAttribute geo={graphic} />, attrDom);
+        // ReactDOM.render(<GeometryAttribute geo={graphic} />, attrDom);
       }
       if (event.state === 'cancel') {
         // update geometry symbol
@@ -263,7 +260,7 @@ class poltUtils {
   static deactivePolt() {
     if (this.sketchViewModel) this.sketchViewModel.reset();
     if (this.poltFreeBar) this.poltFreeBar.reSet();
-    ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
+    // ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
   }
   static clearPoltLayer() {
     const view = env.getParamAgs().view;
@@ -334,11 +331,11 @@ class poltUtils {
   //完成
   static editComplete() {
     const gs = this.sketchViewModel && this.sketchViewModel.updateGraphics;
-    if (!gs) {
+    if(!gs){
       message.info('请选择图形');
       return
     }
-    if (gs.items && gs.items.length === 0)
+    if(gs.items&&gs.items.length===0)
       message.warn('请选择图形');
     if (!this.editSketch) {
       this.sketchViewModel && this.sketchViewModel.complete();
