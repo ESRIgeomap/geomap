@@ -14,7 +14,7 @@ import Bookmark from '../components/bookmark/Bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
 
-import Zoom from '../components/Zoom';
+import Zoom from '../components/zoom/';
 import Compass from '../components/Compass';
 import ViewInfo from '../components/ViewInfo';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
@@ -169,7 +169,6 @@ class IndexPage extends React.Component {
           <TimerSlider />
           {this.renderMapUIWidgets()}
         </div>
-        {/* <LegendList /> */}
         <GeoSearch />
         {/*分屏对比dom*/}
         <div

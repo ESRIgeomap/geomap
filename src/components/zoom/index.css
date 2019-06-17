@@ -1,0 +1,36 @@
+.zoomBtn {
+  display: inline-block;
+  cursor: pointer;
+  width: 25px !important;
+  height: 25px !important;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: rgba(0, 0, 0, 0.15) 1px 2px 1px;
+  transition: color 0.3s;
+  background: #fff;
+  font-size: 16px;
+}
+.zoomBtnbottom {
+  display: inline-block;
+  cursor: pointer;
+  width: 25px !important;
+  height: 25px !important;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s;
+  background: #fff;
+  font-size: 19px;
+}
+
+.iconstyle {
+  color: #4c4c4c;
+}
+.iconstyle:hover {
+  color: #1890ff;
+}
+
+
