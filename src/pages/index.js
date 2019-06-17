@@ -60,11 +60,11 @@ class IndexPage extends React.Component {
     // 类似MapViewer初始化ui.components数组
     if (this.props.agsmap.mode === VIEW_MODE_2D) {
       return [
-        <Zoom
-          key="ui-component-zoom"
-          view={_.get(window.agsGlobal, 'view')}
-          className={styles.componentZoom}
-        />,
+        // <Zoom
+        //   key="ui-component-zoom"
+        //   view={_.get(window.agsGlobal, 'view')}
+        //   className={styles.componentZoom}
+        // />,
         <Compass
           key="ui-component-compass"
           view={_.get(window.agsGlobal, 'view')}
@@ -76,11 +76,11 @@ class IndexPage extends React.Component {
 
     // 3D
     return [
-      <Zoom
-        key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentZoom}
-      />,
+      // <Zoom
+      //   key="ui-component-zoom"
+      //   view={_.get(window.agsGlobal, 'view')}
+      //   className={styles.componentZoom}
+      // />,
       <Compass
         key="ui-component-compass"
         view={_.get(window.agsGlobal, 'view')}
