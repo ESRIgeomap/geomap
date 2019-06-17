@@ -197,7 +197,8 @@ class PointSymbolEditor extends React.Component {
           style={{ display: this.state.settingssvisible ? 'block' : 'none' }}
         >
           <div className={styles.leftsetting}>
-            {formatMessage({ id: 'plottoolbar.outlinewidth' })}：
+            {/* {formatMessage({ id: 'plottoolbar.outlinewidth' })}： */}
+            轮廓宽度:
           </div>
           <div className={styles.rightsetting}>
             <InputNumber

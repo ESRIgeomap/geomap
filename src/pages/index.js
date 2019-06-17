@@ -14,15 +14,14 @@ import Bookmark from '../components/bookmark/Bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
 
-import Zoom from '../components/Zoom';
+import Zoom from '../components/zoom/';
 import Compass from '../components/Compass';
-import ViewInfo from '../components/ViewInfo';
+import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
 import { VIEW_MODE_2D } from '../constants/action-types';
 import styles from './index.css';
 
-import LegendList from '../components/legend/LegendList';
 
 //pensiveant:加载LayerList组件
 import LayerList from '../components/layerList/LayerList';
@@ -170,7 +169,6 @@ class IndexPage extends React.Component {
           <TimerSlider />
           {this.renderMapUIWidgets()}
         </div>
-        <LegendList />
         <GeoSearch />
         {/*分屏对比dom*/}
         <div

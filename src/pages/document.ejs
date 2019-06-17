@@ -15,13 +15,18 @@
   <div id="root"></div>
   <script>
     var apiRoot = 'http://geomap.arcgisonline.cn/jsapi/4.10/init.js';
+    var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')); 
     var dojoConfig = {
       async: true,
       deps: ['@dojo/framework/shim/main'],
       has: {
         "esri-promise-compatibility": 1,  // Use native Promises by default
         "esri-featurelayer-webgl": 1      // Enable FeatureLayer WebGL capabilities
-      }
+      },
+      packages: [{
+          name: "modules",
+          location: package_path + "/libs/poltmodules"
+     }]
     };
   </script>
   <script src="./config/config.js"></script>
@@ -29,6 +34,7 @@
   <script src="./config/classconfig.js"></script>
   <script src="./config/poi.js"></script>
   <script src="./libs/geomap-utils.min.js"></script>
+  <script src="./libs/jquery-1.11.1.min.js"></script>
   <script type="text/javascript" src="./libs/fetch-jsonp.js"></script>
 </body>
 

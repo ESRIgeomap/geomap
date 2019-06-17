@@ -43,7 +43,6 @@ export default {
     activeHeadCode: '1',
     lightshadowlistflags: false,
     menusflags: false,
-    legendflags: false,
     timerLayersSelectvisible:false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
   },
@@ -268,12 +267,6 @@ export default {
     },
     showTimerSliderCompare(state, action) {
       return { ...state, timerLayersSelectvisible: action.payload };
-    },
-    legendChangeState(state, action) {
-      return {
-        ...state,
-        legendflags: action.payload,
-      };
     },
 
     identifyChangeState(state, action) {

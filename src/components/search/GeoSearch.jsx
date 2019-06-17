@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Input, Button, Tooltip } from 'antd';
 
-import RouteComponents from './routes';
+import * as RouteComponents from './routes';
 
 // import CircuitTypeSelector from './CircuitTypeSelector';
 import TerminalSelector from './TerminalSelector';
@@ -305,7 +305,7 @@ class GeoSearch extends React.Component {
     }
 
     return (
-      <RouteComponents.CircuitTypeSelector
+      <RouteComponents.TypeSelector
         className={styles.dirselector}
         onChange={this.onDirectionModeChange}
       />
@@ -355,7 +355,7 @@ class GeoSearch extends React.Component {
           );
         default:
           return (
-            <Tooltip title="路线ll">
+            <Tooltip title="路线">
               <div className={styles.dirbtnwrap}>
                 <span className={styles.dirbtnstub} />
                 <Button icon="swap" className={styles.dirbtn} onClick={this.enterDirectionMode} />
