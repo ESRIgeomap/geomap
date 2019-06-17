@@ -99,9 +99,9 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   sunShine() {
-    if (!this.props.agsmap.lightshadowlistflags) {
+    if (!this.props.Lightshadow.lightshadowlistflags) {
       this.props.dispatch({
-        type: 'agsmap/listChangeState',
+        type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
           progralistflags: false,
@@ -111,7 +111,7 @@ class Toolbar3D extends React.Component {
       });
     } else {
       this.props.dispatch({
-        type: 'agsmap/listChangeState',
+        type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
           progralistflags: false,
@@ -192,8 +192,10 @@ class Toolbar3D extends React.Component {
   }
 }
 
-export default connect(({ agsmap }) => {
+export default connect(({ agsmap,Lightshadow }) => {
   return {
     agsmap,
+    //日照分析
+    Lightshadow,
   };
 })(Toolbar3D);
