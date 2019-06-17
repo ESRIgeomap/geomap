@@ -45,20 +45,28 @@ class Toolbar3D extends React.Component {
 
   measure3DLine(e) {
     e.stopPropagation();
+    // this.props.dispatch({
+    //   type: ACTION_MEASURE_LINE_3D,
+    // });
     this.props.dispatch({
-      type: ACTION_MEASURE_LINE_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'measure-line-3d',
     });
   }
 
   /**
    * 面积测量回调
    * author:pensiveant
-   * @param {*} e 
+   * @param {*} e
    */
   measure3DArea(e) {
     e.stopPropagation();
+    // this.props.dispatch({
+    //   type: ACTION_MEASURE_AREA_3D,
+    // });
     this.props.dispatch({
-      type: ACTION_MEASURE_AREA_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'measure-area-3d',
     });
   }
 
@@ -131,7 +139,7 @@ class Toolbar3D extends React.Component {
       type: ACTION_MAP_PRINT_3D,
     });
   }
-  
+
   render() {
     return (
       <div

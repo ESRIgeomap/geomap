@@ -34,6 +34,20 @@ const RightContent = ({ dispatch, toolbar, maxHeight }) => {
           </ClosePanel>
         );
       }
+      case 'measure-line-3d': {
+        return (
+          <ClosePanel title="3D 测距" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureLine3D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-area-3d': {
+        return (
+          <ClosePanel title="3D 测面" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureArea3D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
       default:
         break;
     }
