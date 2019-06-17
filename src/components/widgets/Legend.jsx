@@ -8,18 +8,18 @@ import * as jsapi from '../../utils/jsapi';
 
 let widget;
 
-const MeasureLine2D = ({ view }) => {
+const Legendlist = ({ view }) => {
   const domRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (domRef.current) {
-      jsapi.load(['esri/widgets/DistanceMeasurement2D']).then(([DistanceMeasurement2D]) => {
+      jsapi.load(['esri/widgets/Legend']).then(([Legend]) => {
         setLoading(false);
 
         const div = document.createElement('div');
-        // 调用jsapi的二维测距微件
-        widget = new DistanceMeasurement2D({
+        // 调用jsapi的图例功能
+        widget = new Legend({
           view,
           container: div,
         });
@@ -57,4 +57,4 @@ const MeasureLine2D = ({ view }) => {
   );
 };
 
-export default MeasureLine2D;
+export default Legendlist;

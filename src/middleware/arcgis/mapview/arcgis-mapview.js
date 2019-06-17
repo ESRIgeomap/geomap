@@ -3,7 +3,6 @@
  * @author  lee  
  */
 
-import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
 import LegendList from '../../../utils/legend';
@@ -91,7 +90,6 @@ function createMapView(opts = {}) {
         return ags.view.when(() => {
         });
       }
-
       case actions.INIT_SPLITMAP: {
         const { payload } = action;
         const { containers } = payload;
@@ -118,17 +116,6 @@ function createMapView(opts = {}) {
       case actions.SWITCH_MAP: {
         const { payload } = action;
         await initMap(payload);
-        break;
-      }
-      case actions.MAP_ACTION_CLEAR_GRAPHICS: {
-        MeasureUtil.mapView = ags.view;
-        MeasureUtil.active('clearmeasure');
-        break;
-      }
-      // 二维测面积
-      case actions.ACTION_MEASURE_2D_AREA: {
-        MeasureUtil.mapView = ags.view;
-        MeasureUtil.active('area');
         break;
       }
       case actions.ACTION_PRINT_2D_MAP: {

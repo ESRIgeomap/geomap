@@ -9,7 +9,7 @@ import * as jsapi from '../../utils/jsapi';
 
 let widget;
 
-const Measure = ({ view }) => {
+const MeasureArea2D = ({ view }) => {
   const domRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
@@ -58,4 +58,4 @@ const Measure = ({ view }) => {
   );
 };
 
-export default Measure;
+export default MeasureArea2D;

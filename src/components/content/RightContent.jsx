@@ -27,6 +27,13 @@ const RightContent = ({ dispatch, toolbar, maxHeight }) => {
           </ClosePanel>
         );
       }
+      case 'legend': {
+        return (
+          <ClosePanel title="地图图例" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.Legend view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
       default:
         break;
     }
