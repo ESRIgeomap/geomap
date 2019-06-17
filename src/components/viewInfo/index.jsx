@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 
-import styles from './ViewInfo.css';
+import styles from './index.css';
 
 const ViewInfo = props => {
   const [latitude, setLatitude] = useState('');
@@ -28,7 +28,6 @@ const ViewInfo = props => {
         'pointer-move',
         _.throttle(event => {
           // 将屏幕点坐标转化为map点坐标
-          // console.log(event);
           const point = view.toMap({ x: event.x, y: event.y });
           const lng = (point.x / 20037508.34) * 180;
           const mmy = (point.y / 20037508.34) * 180;

@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { connect } from 'dva';
-// import Map from 'esri/Map';
-// import MapView from 'esri/views/MapView';
-// import * as WatchUtils from 'esri/core/watchUtils';
 import { jsapi } from '../../constants/geomap-utils';
 import styles from './Overviewmap.css';
 
