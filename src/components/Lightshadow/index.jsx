@@ -14,6 +14,8 @@ import styles from './Lightshadow.css';
 const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
 
   useEffect(() => {
+    
+    //设置日照分析的初始状态
     dispatch({
       type: 'Lightshadow/rebackInitlightState',
       payload: {
@@ -177,15 +179,17 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
    * author:pensiveant
    */
   const onCheckBoxChange = (e) => {
+
+    dispatch({
+      type: 'Lightshadow/shadowInitDataState',
+      payload: e.target.checked,
+    });
+
     if (e.target.checked) {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = true;
     } else {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = false;
     }
-    dispatch({
-      type: 'Lightshadow/shadowInitDataState',
-      payload: e.target.checked,
-    });
   }
 
   /**
@@ -196,15 +200,22 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
     dispatch({
       type: 'Lightshadow/listChangeState',
       payload: {
+        lightshadowlistflags: false,
         prolistflags: false,
         progralistflags: false,
-        controllistflags: false,
-        lightshadowlistflags: false,
+        controllistflags: false,   
       },
     });
     dispatch({
       type: 'init_lightshadow',
     });
+
+    //设置toolbar的状态
+    dispatch({
+      type: 'toolbar/updateCurrentView',
+      payload: null,
+    });
+
   }
 
   const marks = {
@@ -221,9 +232,6 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
       style={{
         display:Lightshadow.lightshadowlistflags ? 'block' : 'none',
       }}
-    // style={{
-    //   display: 'block',
-    // }}
     >
       <div className={styles.listdiv}>
         <p className={styles.ptitle}>
@@ -308,8 +316,9 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
 
 }
 
-export default connect(({ Lightshadow }) => {
+export default connect(({ Lightshadow,toolbar }) => {
   return {
     Lightshadow,
+    toolbar,
   };
 })(LightshadowListTwo);

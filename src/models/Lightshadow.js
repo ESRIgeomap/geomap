@@ -8,7 +8,7 @@ export default {
   namespace: 'Lightshadow',
   state: {
     lightshadowlistflags: false, //是否显示日照分析控件
-    valuetime: null,//日期控件的值
+    valuetime: null,//日期控件的值，对应Lighting对象的date属性
     showShadow: false, //是否勾选显示阴影
     sliderPlay: false, //时间轴播放状态
     sliderValue: 0, //时间轴的值
@@ -16,6 +16,13 @@ export default {
     timerOfDatepicker: setInterval(null, null),//
     iconOfDatePicker: 'caret-right', // 日期控件图标
     iconOfSlider: 'caret-right',
+
+    // prolistflags: ,
+    // progralistflags: ,
+    // controllistflags: ,
+    // layerlistcontrol: ,
+    // viewpointflags: ,
+
   },
 
   subscriptions: {
@@ -30,7 +37,7 @@ export default {
 
   reducers: {
     /**
-     * 
+     * 回到初始状态
      * author:pesiveant
      * @param {*} state 
      * @param {*} action 
@@ -65,7 +72,7 @@ export default {
 
     
     /**
-     * 
+     * 设置按时间轴播放的循环函数
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -77,8 +84,8 @@ export default {
       };
     },
 
-      /**
-     * 
+    /**
+     * 设置时间轴播放按钮的图标
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -91,7 +98,7 @@ export default {
     },
     
     /**
-     * 
+     * 设置日照分析组件的显隐
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -109,7 +116,7 @@ export default {
     },
 
     /**
-     * 
+     * 设置是否勾选显示阴影 
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -122,7 +129,7 @@ export default {
     },
 
     /**
-     * 
+     * 设置日期播放状态
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -135,7 +142,7 @@ export default {
     },
 
     /**
-     * 
+     * 设置当前日期值
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -161,7 +168,7 @@ export default {
     },
 
     /**
-     * 
+     * 设置日期播放定时器
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 
@@ -174,7 +181,7 @@ export default {
     },
 
     /**
-     * 
+     * 设置日期播放按钮图标
      * author:pensiveant
      * @param {*} state 
      * @param {*} action 

@@ -49,12 +49,6 @@ const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
           </ClosePanel>
         );
       }
-      case 'map-print-3d': {
-        dispatch({
-          type: ACTION_MAP_PRINT_3D,
-        });
-        break;
-      }
       default:break;
     }
 
