@@ -158,6 +158,7 @@ class IndexPage extends React.Component {
         </div>
         <LegendList />
         <GeoSearch />
+         {/*分屏对比dom*/}
         <div
           id="splitscreenDom"
           className={styles.viewsplitDiv}
@@ -172,6 +173,7 @@ class IndexPage extends React.Component {
         }}
           onClick={this.exitRoller}
         >退出卷帘</Button>
+        {/*卷帘对比dom*/}
         <div
           id="rollerBlind"
           ref="splitsDom"
@@ -180,7 +182,7 @@ class IndexPage extends React.Component {
             display: this.props.agsmap.rollerflags ? 'block' : 'none',
           }}
         ></div>
-
+        {/*卷帘对比左侧红线dom*/}
         <div className={styles.leftslider} id="verticalSlider"
           onMouseDown={this.handleMouseDown}
           onMouseUp={this.handleMouseUp}
@@ -189,6 +191,7 @@ class IndexPage extends React.Component {
             display: this.props.agsmap.rollerflags ? 'block' : 'none',
           }}
         ></div>
+         {/*卷帘对比右侧红线dom*/}
         <div className={styles.topslider} id="verticalTSlider"
           onMouseDown={this.MouseDown}
           onMouseUp={this.MouseUp}

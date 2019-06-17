@@ -125,11 +125,13 @@ function createMapView(opts = {}) {
         MeasureUtil.active('clearmeasure');
         break;
       }
+      // 二维测距离
       case actions.ACTION_MEASURE_2D_LINE: {
         MeasureUtil.mapView = ags.view;
         MeasureUtil.active('line');
         break;
       }
+      // 二维测面积
       case actions.ACTION_MEASURE_2D_AREA: {
         MeasureUtil.mapView = ags.view;
         MeasureUtil.active('area');
