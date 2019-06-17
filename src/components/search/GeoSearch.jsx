@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Input, Button, Tooltip } from 'antd';
 
-import CircuitTypeSelector from './CircuitTypeSelector';
+import RouteComponents from './routes';
+
+// import CircuitTypeSelector from './CircuitTypeSelector';
 import TerminalSelector from './TerminalSelector';
 import RouteLocationSelector from './RouteLocationSelector';
 import BusLineResult from './BusLineResult';
@@ -303,7 +305,10 @@ class GeoSearch extends React.Component {
     }
 
     return (
-      <CircuitTypeSelector className={styles.dirselector} onChange={this.onDirectionModeChange} />
+      <RouteComponents.CircuitTypeSelector
+        className={styles.dirselector}
+        onChange={this.onDirectionModeChange}
+      />
     );
   }
 
@@ -413,7 +418,7 @@ class GeoSearch extends React.Component {
         if (this.props.search.driveresult) {
           return <DriveLineResult />;
         }
-      }else if (this.props.search.dirmode === SearchConsts.MODE_DIR_WALK) {
+      } else if (this.props.search.dirmode === SearchConsts.MODE_DIR_WALK) {
         if (this.props.search.walkresult) {
           return <WalkLineResult />;
         }

@@ -1,0 +1,33 @@
+.panelWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+  pointer-events: all;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.38);
+}
+
+.panelWrap .panelHead {
+  flex: none;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 4px 4px 0 0;
+  background-color: #eee;
+}
+
+.panelWrap .panelHead span:nth-child(2) {
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.panelWrap .panelContent {
+  flex: 1;
+  padding: 10px;
+}

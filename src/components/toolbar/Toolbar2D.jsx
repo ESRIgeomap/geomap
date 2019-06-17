@@ -1,6 +1,6 @@
 /**
  * 二维地图toolbar功能
- * @author  lee  
+ * @author  lee
  */
 import React from 'react';
 import { connect } from 'dva';
@@ -35,7 +35,7 @@ class Toolbar2D extends React.Component {
     this.rollerScreen = this.rollerScreen.bind(this);
     this.outputSubmenuOnClick = this.outputSubmenuOnClick.bind(this);
   }
-  componentDidMount() { }
+  componentDidMount() {}
 
   //pensiveant:数据选择
   showLayerList = () => {
@@ -45,8 +45,8 @@ class Toolbar2D extends React.Component {
     });
   };
 
-   //pensiveant:疑点标绘
-   showPoltPanel = () => {
+  //pensiveant:疑点标绘
+  showPoltPanel = () => {
     this.props.dispatch({
       type: 'layerList/changePoltPanelVisible',
       payload: !this.props.layerList.poltPanelVisible,
@@ -59,8 +59,12 @@ class Toolbar2D extends React.Component {
   measureLine({ key }) {
     switch (key) {
       case 'measure2DLine':
+        // this.props.dispatch({
+        //   type: ACTION_MEASURE_2D_LINE,
+        // });
         this.props.dispatch({
-          type: ACTION_MEASURE_2D_LINE,
+          type: 'toolbar/updateCurrentView',
+          payload: 'measure-2d',
         });
         break;
       case 'measure2DArea':
@@ -257,7 +261,7 @@ class Toolbar2D extends React.Component {
           <Button className={styles.btnStyle} onClick={this.showLayerList}>
             <Icon type="profile" />
             数据选择
-            </Button>
+          </Button>
           <Button className={styles.btnStyle} onClick={this.showPoltPanel}>
             <Icon type="highlight" />
             疑点标绘
@@ -298,21 +302,21 @@ class Toolbar2D extends React.Component {
             <Button className={styles.btnStyle}>
               <Icon type="picture" theme="filled" />
               影像工具
-                <Icon type="down" />
+              <Icon type="down" />
             </Button>
           </Dropdown>
           <Dropdown overlay={OutputSubmenu} trigger={['click']}>
             <Button className={styles.btnStyle}>
               <Icon type="picture" theme="filled" />
               结果输出
-                <Icon type="down" />
+              <Icon type="down" />
             </Button>
           </Dropdown>
           <Dropdown overlay={menu} trigger={['click']}>
             <Button className={styles.btnStyle}>
               <Icon type="medicine-box" theme="filled" />
               工具箱
-                <Icon type="down" />
+              <Icon type="down" />
             </Button>
           </Dropdown>
         </ButtonGroup>
