@@ -5,8 +5,9 @@ import { ScrollContent } from '../layout';
 import ClosePanel from './ClosePanel';
 
 import * as Widgets from '../widgets';
+import {ACTION_MAP_PRINT_3D} from '../../constants/action-types';
 
-const RightContent = ({ dispatch, toolbar, maxHeight }) => {
+const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
   function clear() {
     dispatch({ type: 'toolbar/updateCurrentView', payload: null });
   }
@@ -48,8 +49,13 @@ const RightContent = ({ dispatch, toolbar, maxHeight }) => {
           </ClosePanel>
         );
       }
-      default:
+      case 'map-print-3d': {
+        dispatch({
+          type: ACTION_MAP_PRINT_3D,
+        });
         break;
+      }
+      default:break;
     }
 
     return null;
@@ -58,6 +64,9 @@ const RightContent = ({ dispatch, toolbar, maxHeight }) => {
   return renderContent();
 };
 
-export default connect(({ toolbar }) => {
-  return { toolbar };
+export default connect(({ toolbar,Lightshadow }) => {
+  return { 
+    toolbar,
+    Lightshadow,
+   };
 })(RightContent);

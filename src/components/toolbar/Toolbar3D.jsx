@@ -135,9 +135,15 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   windowPrint() {
+    // this.props.dispatch({
+    //   type: ACTION_MAP_PRINT_3D,
+    // });
+
     this.props.dispatch({
-      type: ACTION_MAP_PRINT_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'map-print-3d',
     });
+
   }
 
   render() {
