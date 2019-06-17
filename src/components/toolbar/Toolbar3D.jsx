@@ -61,8 +61,12 @@ class Toolbar3D extends React.Component {
    */
   measure3DArea(e) {
     e.stopPropagation();
+    // this.props.dispatch({
+    //   type: ACTION_MEASURE_AREA_3D,
+    // });
     this.props.dispatch({
-      type: ACTION_MEASURE_AREA_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'measure-area-3d',
     });
   }
 
