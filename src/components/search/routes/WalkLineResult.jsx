@@ -4,9 +4,8 @@ import { Collapse } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { DOMParser } from 'xmldom';
-
-import startLocSrc from './images/icon_起.png';
-import endLocSrc from './images/icon_终.png';
+import startLocSrc from '../images/icon_起.png';
+import endLocSrc from '../images/icon_终.png';
 
 import styles from './BusLineResult.css';
 
@@ -25,7 +24,7 @@ function toDecimal(x) {
   return f;
 }
 
-class RideLineResult extends React.Component {
+class WalkLineResult extends React.Component {
   constructor(props) {
     super(props);
     this.handleSwitchLine = ::this.handleSwitchLine;
@@ -34,7 +33,7 @@ class RideLineResult extends React.Component {
 
   handleSwitchLine(key) {
     if (key) {
-      const index = key.replace('rideline-', '');
+      const index = key.replace('walkline-', '');
       this.props.dispatch({ type: 'search/drawBusLine', payload: index });
     }
   }
@@ -43,7 +42,9 @@ class RideLineResult extends React.Component {
     this.props.dispatch({ type: 'search/highlightSegment', payload: index });
   }
 
+
   renderLineDetails(line) {
+
     const details = [];
 
     // start
@@ -58,21 +59,21 @@ class RideLineResult extends React.Component {
     );
 
     line.steps.forEach((segment, index) => {
-      const { instruction, name, distance } = segment;
+      const { instruction, duration, distance } = segment;
       const zhuan = html2Escape(instruction);
       details.push(
         <div className={styles.lineDetailBusWrap} key={`linedetail-${index}`}>
           <span className={styles.lineDetailBusIconWrap} />
           <div className={styles.lineDetailContentWrap}>
-            <div className={styles.lineDetailBusLineSolution}>
-              <span>{name}</span>
-            </div>
             <div
               className={styles.lineDetailSegment}
               onMouseDown={() => this.highlightSegment(index)}
             >
               <div className={styles.lineDetailBusLine}>{zhuan}</div>
             </div>
+            {/*<div className={styles.lineDetailBusLineSolution}>
+              <span>{zhuan}</span>
+      </div>*/}
           </div>
         </div>
       );
@@ -92,10 +93,10 @@ class RideLineResult extends React.Component {
   }
 
   renderLines() {
-    if (this.props.search.rideresult) {
+    if (this.props.search.walkresult) {
       return (
         <Panel
-          key="rideline-result"
+          key="walkline-result"
           header={
             <div className={styles.headerWrap}>
               <div className={styles.lineSubject}>
@@ -103,19 +104,19 @@ class RideLineResult extends React.Component {
               </div>
               <div className={styles.lineDesc}>
                 <span>
-                  约<strong>{Math.round(this.props.search.rideresult.duration / 60)}</strong>
+                  约<strong>{Math.round(this.props.search.walkresult.duration / 60)}</strong>
                   分钟
                 </span>
                 <span className={styles.lineDescSep}>|</span>
                 <span>
-                  约<strong>{toDecimal(this.props.search.rideresult.distance)}</strong>
+                  约<strong>{toDecimal(this.props.search.walkresult.distance)}</strong>
                   公里
                 </span>
               </div>
             </div>
           }
         >
-          {this.renderLineDetails(this.props.search.rideresult)}
+          {this.renderLineDetails(this.props.search.walkresult)}
         </Panel>
       );
     }
@@ -140,4 +141,4 @@ export default connect(({ search }) => {
   return {
     search,
   };
-})(RideLineResult);
+})(WalkLineResult);

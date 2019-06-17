@@ -15,7 +15,7 @@
 
 .lineStationIcon {
   display: inline-block;
-  background-image: url(./images/icons.png);
+  background-image: url(../images/icons.png);
   background-repeat: no-repeat;
   height: 16px;
   width: 16px;
@@ -178,7 +178,7 @@
 
 .segIcon {
   display: inline-block;
-  background-image: url(./images/icons.png);
+  background-image: url(../images/icons.png);
   background-repeat: no-repeat;
   height: 16px;
   width: 16px;
