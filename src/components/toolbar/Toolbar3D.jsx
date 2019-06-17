@@ -16,6 +16,7 @@ import {
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   VIEW_MODE_2D,
+  ACTION_MAP_PRINT_3D
 } from '../../constants/action-types';
 
 import styles from './Toolbar3D.css';
