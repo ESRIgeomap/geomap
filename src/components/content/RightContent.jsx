@@ -13,10 +13,17 @@ const RightContent = ({ dispatch, toolbar, maxHeight }) => {
 
   function renderContent() {
     switch (toolbar.current) {
-      case 'measure-2d': {
+      case 'measure-line-2d': {
         return (
           <ClosePanel title="2D 测距" maxHeight={maxHeight} onClose={clear}>
             <Widgets.MeasureLine2D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-area-2d': {
+        return (
+          <ClosePanel title="2D 测面" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureArea2D view={_.get(window.agsGlobal, 'view')} />
           </ClosePanel>
         );
       }
