@@ -155,15 +155,6 @@ class PoltPanel extends React.Component {
     this.props.dispatch({
       type: POLT_EDITOR_REMOVE,
     });
-    this.props.dispatch({
-      type: POLT_EDIT_CLEAR,
-    });
-    this.props.dispatch({
-      type: 'agsmap/identifyChangeState',
-      payload: !this.props.agsmap.identifyflags,
-    });
-
-
   };
 
   deActivePolt = () => {

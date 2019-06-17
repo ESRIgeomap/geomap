@@ -439,40 +439,11 @@ class SystemLayer extends React.Component {
 
   //清除图层回调
   clearLayer=()=>{
-    this.props.dispatch({
-      type: ACTION_DRAW_CLEAR_2D,
-    });
-    this.props.dispatch({
-      type: 'search/clearSearch',
-      payload: {
-        mode: SearchConsts.MODE_LOCATION,
-      },
-    });
-    this.props.dispatch({
-      type: 'search/clearSearch',
-      payload: {
-        mode: SearchConsts.MODE_IDENTIFY,
-      },
-    });
-    this.props.dispatch({
-      type: 'search/clearSearch',
-      payload: {
-        mode: SearchConsts.MODE_DIRECTION,
-      },
-    });
-    this.props.dispatch({
-      type: 'search/clearSearch',
-      payload: {
-        mode: SearchConsts.MODE_SPACE,
-      },
-    });
-
-    if (window.agsGlobal.view.map.findLayerById('graphicLayer')) {
-      window.agsGlobal.view.map.findLayerById('graphicLayer').clear();
-    }
-
-
     //清除所有图层
+    this.props.dispatch({
+      type: 'layerList/setCheckedTreeNode',
+      payload: [],
+    });
     window.agsGlobal.view.map.removeAll();
   }
 
@@ -529,7 +500,7 @@ class SystemLayer extends React.Component {
                   <Button
                     key="undo"
                     className={styles.noeffect}
-                    icon="undo"
+                    icon="delete"
                     onClick={this.clearLayer}
                   />
                 </Tooltip>

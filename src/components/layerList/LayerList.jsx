@@ -214,11 +214,11 @@ class LayerList extends Component {
           <div className={styles.content}
               style={{height: this.state.contentheight}}
           >
-            <Collapse>
+            {/* <Collapse>
               <Panel header='我的收藏' key="1" showArrow={false} extra={this.genExtra()}>
                 <CollectionLayer />
               </Panel>
-            </Collapse>
+            </Collapse> */}
             <h4 className={styles.header}> 图层列表</h4>
             <SystemLayer />
           </div>
