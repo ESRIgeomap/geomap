@@ -260,7 +260,7 @@ class poltUtils {
   static deactivePolt() {
     if (this.sketchViewModel) this.sketchViewModel.reset();
     if (this.poltFreeBar) this.poltFreeBar.reSet();
-    // ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
   }
   static clearPoltLayer() {
     const view = env.getParamAgs().view;
