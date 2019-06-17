@@ -1,3 +1,8 @@
+/**
+ * 底图选择框组件
+ * @author  lee  
+ */
+
 import React from 'react';
 import { Row, Col } from 'antd';
 import styles from './index.less';
@@ -9,9 +14,12 @@ const BaseMapPanel = props => {
     const itemId = e.target.dataset.itemid;
     // 通过webmap的id切换底图
     mapUtils.switchBaseMapByWebmapId(view, itemId);
+    // 调用父组件的设置图片地址功能
     props.setBmapIcon(e.target.src);
+    // 调用父组件的隐藏功能
     props.hide();
   }
+  // 根据配置文件渲染可选择的底图库
   function renderBmapList() {
     return window.basemapConfig.map(item => {
       return (
