@@ -3,11 +3,11 @@ import { connect } from 'dva';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import startLocSrc from './images/icon_起.png';
-import endLocSrc from './images/icon_终.png';
-import busSrc from './images/icon_bus.png';
-import walkSrc from './images/icon_walk.png';
-import metroSrc from './images/icon_subway.png';
+import startLocSrc from '../images/icon_起.png';
+import endLocSrc from '../images/icon_终.png';
+import busSrc from '../images/icon_bus.png';
+import walkSrc from '../images/icon_walk.png';
+import metroSrc from '../images/icon_subway.png';
 
 import styles from './BusLineResult.css';
 
