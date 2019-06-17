@@ -9,7 +9,6 @@ import { Menu, Dropdown, Button, Icon, Avatar } from 'antd';
 import {
   MAP_ACTION_CLEAR_GRAPHICS,
   VIEW_MODE_2D,
-  ACTION_MEASURE_2D_LINE,
   ACTION_MEASURE_2D_AREA,
   ACTION_MAP_2D_CORRECT,
   ACTION_PRINT_2D_MAP,
@@ -80,17 +79,15 @@ class Toolbar2D extends React.Component {
   measureLine({ key }) {
     switch (key) {
       case 'measure2DLine':
-        // this.props.dispatch({
-        //   type: ACTION_MEASURE_2D_LINE,
-        // });
         this.props.dispatch({
           type: 'toolbar/updateCurrentView',
-          payload: 'measure-2d',
+          payload: 'measure-line-2d',
         });
         break;
       case 'measure2DArea':
         this.props.dispatch({
-          type: ACTION_MEASURE_2D_AREA,
+          type: 'toolbar/updateCurrentView',
+          payload: 'measure-area-2d',
         });
         break;
       case 'mapclear': {

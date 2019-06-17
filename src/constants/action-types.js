@@ -17,7 +17,6 @@ export const INIT_SPLITMAP = 'INIT_SPLITMAP';
 
 export const MAP_ACTION_CLEAR_GRAPHICS = 'map-action-clear-graphics';
 
-export const ACTION_MEASURE_2D_LINE = 'action-measure-2d-line'; // 二维测距离
 export const ACTION_MEASURE_2D_AREA = 'action-measure-2d-area'; // 二维测面积
 export const ACTION_PRINT_2D_MAP = 'action-print-2d-map';
 export const MAP_ACTION_CLIP_MAP = 'map-action-clip-map';

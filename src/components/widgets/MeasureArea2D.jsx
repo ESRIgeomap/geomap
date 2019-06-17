@@ -1,7 +1,8 @@
 /**
- * 二维长度测量
+ * 二维面积测量
  * @author  lee  
  */
+
 import { useRef, useState, useEffect } from 'react';
 import { Spin, Icon } from 'antd';
 import * as jsapi from '../../utils/jsapi';
@@ -14,12 +15,12 @@ const Measure = ({ view }) => {
 
   useEffect(() => {
     if (domRef.current) {
-      jsapi.load(['esri/widgets/DistanceMeasurement2D']).then(([DistanceMeasurement2D]) => {
+      jsapi.load(['esri/widgets/AreaMeasurement2D']).then(([AreaMeasurement2D]) => {
         setLoading(false);
 
         const div = document.createElement('div');
-        // 调用jsapi的二维测距微件
-        widget = new DistanceMeasurement2D({
+        // 调用jsapi的二维测面微件
+        widget = new AreaMeasurement2D({
           view,
           container: div,
         });
@@ -29,7 +30,7 @@ const Measure = ({ view }) => {
 
     return () => {
       if (widget) {
-        // 如果widget存在，则删除该widget
+          // 如果widget存在，则删除该widget
         widget.destroy();
       }
     };
