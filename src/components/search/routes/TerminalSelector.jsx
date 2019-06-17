@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'dva';
 import { Icon, Input } from 'antd';
 
-import revertSrc from './images/icon_往返.png';
-import startSrc from './images/icon_circle_green.png';
-import endSrc from './images/icon_circle_red.png';
+import revertSrc from '../images/icon_往返.png';
+import startSrc from '../images/icon_circle_green.png';
+import endSrc from '../images/icon_circle_red.png';
 
 import styles from './TerminalSelector.css';
 

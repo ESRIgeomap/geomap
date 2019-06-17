@@ -23,6 +23,7 @@ const MeasureLine3D = ({ view }) => {
           container: div,
         });
         domRef.current.appendChild(div);
+        changeLineUnit();
       });
     }
 
@@ -32,6 +33,45 @@ const MeasureLine3D = ({ view }) => {
       }
     };
   }, []);
+
+  /**
+   * 修改测量微件默认单位
+   */
+  function changeLineUnit() {
+    const interval4distanceMeasureUnit = setInterval(() => {
+      if (view.activeTool) {
+        view.activeTool.unit = 'meters';
+        clearInterval(interval4distanceMeasureUnit);
+      }
+    }, 10);
+    const interval4distanceMeasurePanel = setInterval(() => {
+      if (
+        document.getElementsByClassName('esri-direct-line-measurement-3d__units-select esri-select')
+      ) {
+        if (
+          document.getElementsByClassName(
+            'esri-direct-line-measurement-3d__units-select esri-select'
+          ).length > 0
+        ) {
+          clearInterval(interval4distanceMeasurePanel);
+          const dom = document.getElementsByClassName(
+            'esri-direct-line-measurement-3d__units-select esri-select'
+          );
+          const ops = dom[0];
+          if (ops) {
+            if (ops.length > 0) {
+              for (let i = 0; i < ops.length; i += 1) {
+                const tempValue = ops[i].value;
+                if (tempValue === 'meters') {
+                  ops[i].selected = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }, 10);
+  }
 
   return (
     <div>

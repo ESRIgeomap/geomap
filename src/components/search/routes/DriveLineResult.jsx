@@ -4,8 +4,8 @@ import { Collapse } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { DOMParser } from 'xmldom';
 
-import startLocSrc from './images/icon_起.png';
-import endLocSrc from './images/icon_终.png';
+import startLocSrc from '../images/icon_起.png';
+import endLocSrc from '../images/icon_终.png';
 
 import styles from './BusLineResult.css';
 
