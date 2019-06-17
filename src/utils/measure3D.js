@@ -1,6 +1,8 @@
 import { jsapi } from '../constants/geomap-utils';
 
-// 三维长度测量
+/**
+ * 三维长度测量
+ */
 class Measure3Dline {
   constructor(view) {
     this.sceneView = view;
@@ -9,6 +11,10 @@ class Measure3Dline {
       deactivate: false,
     };
   }
+
+  /**
+   * 加载测量线
+   */
   async Measureline() {
     const [DirectLineMeasurement3D] = await jsapi.load(['esri/widgets/DirectLineMeasurement3D']);
     this.activeWidget = new DirectLineMeasurement3D({
@@ -17,7 +23,10 @@ class Measure3Dline {
     this.sceneView.ui.add(this.activeWidget, 'bottom-left');
     this.changeLineUnit();
   }
-  // 修改测量微件默认单位
+
+  /**
+   * 修改测量微件默认单位
+   */
   changeLineUnit() {
     const interval4distanceMeasureUnit = setInterval(() => {
       if (this.sceneView.activeTool) {
@@ -54,13 +63,20 @@ class Measure3Dline {
     }, 10);
     // 修改测量微件默认单位 end
   }
+
+  /**
+   * 销毁该widget
+   */
   deactivate() {
     if (this.activeWidget) {
       this.activeWidget.destroy();
     }
   }
 }
-// 三维面积测量
+
+/**
+ * 三维面积测量
+ */
 class Measure3DArea {
   constructor(view) {
     this.sceneView = view;
@@ -69,6 +85,10 @@ class Measure3DArea {
       deactivate: false,
     };
   }
+
+  /**
+   * 加载测量区域
+   */
   async MeasureArea() {
     const [AreaMeasurement3D] = await jsapi.load(['esri/widgets/AreaMeasurement3D']);
     this.activeWidget = new AreaMeasurement3D({
@@ -77,7 +97,10 @@ class Measure3DArea {
     this.sceneView.ui.add(this.activeWidget, 'bottom-left');
     this.changeAreaUnit();
   }
-  // 修改测量微件默认单位 end
+
+  /**
+   * 修改测量微件默认单位
+   */
   changeAreaUnit() {
     const interval4areaMeasureUnit = setInterval(() => {
       if (this.sceneView.activeTool) {
@@ -110,12 +133,17 @@ class Measure3DArea {
       }
     }, 10);
   }
+
+  /**
+   * 销毁该widget
+   */
   deactivate() {
     if (this.activeWidget) {
       this.activeWidget.destroy();
     }
   }
 }
+
 // 静态类，可不用new，直接使用
 class MeasureUtil {
   static active(tool) {
@@ -134,4 +162,5 @@ class MeasureUtil {
     }
   }
 }
+
 export default MeasureUtil;
