@@ -355,7 +355,7 @@ class GeoSearch extends React.Component {
           );
         default:
           return (
-            <Tooltip title="路线ll">
+            <Tooltip title="路线">
               <div className={styles.dirbtnwrap}>
                 <span className={styles.dirbtnstub} />
                 <Button icon="swap" className={styles.dirbtn} onClick={this.enterDirectionMode} />
