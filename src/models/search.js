@@ -42,7 +42,7 @@ export default {
     starttext: '',
     startsearching: false,
     locationStartSearching: false,
-    
+
     end: null,
     endtext: '',
     endsearching: false,
@@ -91,7 +91,7 @@ export default {
 
     // 标识各查询结果面板更多类型是否显示
     moreTypesVisible:{},
-    
+
     // 标识各查询结果面板当前展示的数据类型
     queryDataType:{},
 
@@ -322,7 +322,7 @@ export default {
             lineName:lineName,
             segments:segments
           };
-         
+
           lines.push(line);
         });
         data.results.lines = lines;
@@ -342,7 +342,7 @@ export default {
                 payload: lines,
               });
             }
-            
+
             break;
           }
           case 1:
@@ -412,7 +412,7 @@ export default {
                 payload: lines.steps,
               });
             }
-            
+
             break;
           }
           case 1:
@@ -482,7 +482,7 @@ export default {
                 payload: lines.steps,
               });
             }
-            
+
             break;
           }
           case 1:
@@ -582,10 +582,10 @@ export default {
             payload: SearchConst.SUBMODE_IDENTIFY_LIST,
           });
       }
-      
+
       yield put({ type: 'clearSelectedPoi', payload });
       yield put({ type: SearchConst.MAP_ACTION_CLEAR_HIGHLIGHT_POI });
-      
+
       if(mode !== SearchConst.MODE_LOCATION){
         // yield put({ type: 'changMoreTypesVisible',payload:{ mode:mode, bShowMoreTypes: false} });
       }
@@ -593,14 +593,14 @@ export default {
       yield put({ type: 'updateSearchOrder', mode: mode });
 
       let tempResult = yield call(searchCategory, keyword, bound, types, param, pageInfo, bSmartTips);
-    
+
       if(mode === SearchConst.MODE_SPACE&&tempResult.results.length ===0){
         yield put({type:ACTION_SPACE_QUERY_CLEAR});
         message.info('No Data');
       }
       let result = {};
       result[mode] = tempResult;
-      
+
       yield put({ type: 'updateSearchList', payload: result, mode: mode });
       // pageInfo = result.pageInfo;
       result = result[mode].results;
@@ -613,12 +613,12 @@ export default {
       let result = yield call(searchCategory, keyword, bound, types, param, pageInfo, bSmartTips);
       yield put({ type: 'updateSmartTipList', payload: result });
     },
-    
+
     *searchCategory({ payload }, { put, call }) {
       const { mode, keyword, bound, types, param, pageInfo, bSmartTips } = payload;
       yield put({ type: 'startSearching' });
       yield put({ type: 'locationStartSearching' });
-      
+
       yield put({
         type: 'switchSubmode',
         payload: SearchConst.SUBMODE_LOCATION_LIST,
@@ -631,7 +631,7 @@ export default {
       yield put({ type: 'updateSearchList', payload: result, mode: mode });
       // 这里因为Antd的pager组件分页是从1开始计数，
       // 所以第一页传1保持与modal的值一致
-      result = result.results;
+      result = result;
       yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result, page: 1 } });
     },
     *selectPoiByLabel({ payload }, { put }) {
@@ -672,7 +672,7 @@ export default {
     //   yield put({ type: 'startSearching' });
     //   // let result = yield call(searchCategory, keyword, bound, types,  param, pageInfo,bSmartTips);
     //   yield put({ type: 'updateSearchList', payload: result });
-   
+
     //   yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result, page: 1, pageInfo } });
 
 
@@ -820,7 +820,7 @@ export default {
       const {mode, list} = payload;
       yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result: list.results, page: list.pageInfo.pageIndex, pageInfo: list.pageInfo, bFromIdentify: false } });
     },
-    
+
     // *changMoreTypesVisible({ payload }, { put, select }) {
     //   yield put({ type: 'changMoreTypesVisible', payload });
     // },
@@ -837,7 +837,7 @@ export default {
         moreTypesVisible: state.moreTypesVisible
       }
     },
-    
+
     setQueryDataType(state, action) {
       let { mode, featureType } = action.payload;
       state.queryDataType[mode] = featureType;
@@ -893,7 +893,7 @@ export default {
     switchToolbarSubmode(state, action) {
       return { ...state, toolbarSubmode: action.payload };
     },
-    
+
     updateDirOptions(state, action) {
       return {
         ...state,
@@ -987,10 +987,10 @@ export default {
       if(list['order'].indexOf(mode) > -1){
         list['order'].splice(list['order'].indexOf(mode), 1);
       }
-      list['order'].push(mode); 
+      list['order'].push(mode);
 
       // if(list['order'].indexOf(mode) < 0){
-      //   list['order'].push(mode); 
+      //   list['order'].push(mode);
       // }
       let foldFlag = state.foldFlag;
       Object.keys(foldFlag).map(key => {
@@ -1000,7 +1000,7 @@ export default {
           foldFlag[key] = true;
         }
       });
-      
+
       return { ...state, list: list, foldFlag: foldFlag, searching: false, locationStartSearching: false };
     },
     updateSearchOrder(state, action) {
@@ -1010,8 +1010,8 @@ export default {
       if(list['order'].indexOf(mode) > -1){
         list['order'].splice(list['order'].indexOf(mode), 1);
       }
-      list['order'].push(mode); 
-      
+      list['order'].push(mode);
+
       return { ...state, list: list};
     },
     updateSmartTipList(state, action) {
@@ -1019,7 +1019,7 @@ export default {
     },
     updateFoldFlag(state, action) {
       const {mode, bFoldReuslt} = action.payload;
-      
+
       if (!bFoldReuslt){
         Object.keys(state.foldFlag).map(key => {
           if (key !== mode)
@@ -1038,10 +1038,10 @@ export default {
       Object.keys(state.foldFlag).map(key => {
           state.foldFlag[key] = true;
       });
-      
+
       return { ...state, foldFlag: state.foldFlag };
     },
-    
+
     updateSelectedPoi(state, action) {
       return { ...state, poi: action.payload };
     },
@@ -1103,7 +1103,7 @@ export default {
           starttext: '',
           end: null,
           endtext: '',
-  
+
           submode: '',
           toolbarSubmode: '',
           list: list,
@@ -1121,13 +1121,13 @@ export default {
           starttext: '',
           end: null,
           endtext: '',
-  
+
           submode: '',
           list: list,
           poi: null,
         };
       }
-      
+
       return state;
     },
     showError(state, action) {

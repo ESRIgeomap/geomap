@@ -157,6 +157,7 @@ class SearchResultList extends React.Component {
             }}
             dataSource={
               this.props.data &&
+              this.props.data &&
               this.props.data.slice(6 * (pager.current - 1), 6 * pager.current)
             }
             renderItem={this.renderItem}

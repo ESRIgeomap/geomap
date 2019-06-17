@@ -158,9 +158,19 @@
   z-index: 100;
 }
 
-.exitroll{
+.exitroll {
   position: absolute;
   top: 76px;
   left: 70px;
   z-index: 200000;
+}
+
+.mapRightWrap {
+  position: absolute;
+  top: 70px;
+  bottom: 10px;
+  right: 50px;
+  width: 360px;
+  z-index: 10;
+  pointer-events: none;
 }

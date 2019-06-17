@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { MODE_DIR_BUS, MODE_DIR_DRIVE, MODE_DIR_WALK, MODE_DIR_RIDE } from '../../constants/search';
+import {
+  MODE_DIR_BUS,
+  MODE_DIR_DRIVE,
+  MODE_DIR_WALK,
+  MODE_DIR_RIDE,
+} from '../../../constants/search';
 import styles from './CircuitTypeSelector.css';
 
 /**
@@ -71,7 +76,7 @@ export default class CircuitTypeSelector extends React.PureComponent {
             style={this.getModeColor(MODE_DIR_BUS)}
             onMouseDown={() => this.onButtonClick(MODE_DIR_BUS)}
           >
-            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_BUS)} title="公交"/>
+            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_BUS)} title="公交" />
             {/*<span>&nbsp;&nbsp;&nbsp;{formatMessage({id: 'circuittypeselector.bus'})}</span>*/}
             <span
               className={styles.triangle}
@@ -85,8 +90,8 @@ export default class CircuitTypeSelector extends React.PureComponent {
             style={this.getModeColor(MODE_DIR_DRIVE)}
             onMouseDown={() => this.onButtonClick(MODE_DIR_DRIVE)}
           >
-            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_DRIVE)} title="驾车"/>
-             {/*<span>&nbsp;&nbsp;&nbsp;{formatMessage({id: 'circuittypeselector.drive'})}</span>*/}
+            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_DRIVE)} title="驾车" />
+            {/*<span>&nbsp;&nbsp;&nbsp;{formatMessage({id: 'circuittypeselector.drive'})}</span>*/}
             <span
               className={styles.triangle}
               style={{
@@ -100,7 +105,7 @@ export default class CircuitTypeSelector extends React.PureComponent {
             style={this.getModeColor(MODE_DIR_WALK)}
             onMouseDown={() => this.onButtonClick(MODE_DIR_WALK)}
           >
-            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_WALK)} title="步行"/>
+            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_WALK)} title="步行" />
             {/*<span>&nbsp;&nbsp;&nbsp;{formatMessage({id: 'circuittypeselector.walk'})}</span>*/}
             <span
               className={styles.triangle}
@@ -114,7 +119,7 @@ export default class CircuitTypeSelector extends React.PureComponent {
             style={this.getModeColor(MODE_DIR_RIDE)}
             onMouseDown={() => this.onButtonClick(MODE_DIR_RIDE)}
           >
-            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_RIDE)} title="骑行"/>
+            <i className={styles.icon} style={this.getIconPosition(MODE_DIR_RIDE)} title="骑行" />
             {/*<span>&nbsp;&nbsp;&nbsp;{formatMessage({id: 'circuittypeselector.riding'})}</span>*/}
             <span
               className={styles.triangle}
