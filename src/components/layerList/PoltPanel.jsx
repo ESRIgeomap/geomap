@@ -175,12 +175,12 @@ class PoltPanel extends React.Component {
 
   //“编辑节点”回调
   editActive = e => {
-    // this.childPoltToolBar.deActivePolt();
-    // message.info(formatMessage({ id: 'ploatpanel.startedittip' }));
+    this.childPoltToolBar.deActivePolt();
   };
 
   //“属性/样式”回调
   editComplete = e => {
+    this.childPoltToolBar.deActivePolt();
     this.props.dispatch({
       type: POLT_EDIT_COMPLETE,
     });
@@ -246,7 +246,7 @@ class PoltPanel extends React.Component {
                   />
                 </TabPane>
                 {/* 去掉我的标绘 */}
-                {/* <TabPane tab={formatMessage({ id: 'ploatpanel.myplot' })} key="2">
+                {/* <TabPane tab='我的标绘' key="2">
                   <PoltLayer changeTab={this.changeTabPane} />
                 </TabPane> */}
               </Tabs>
@@ -259,8 +259,7 @@ class PoltPanel extends React.Component {
               >
                 <ButtonGroup>
                   <Button onClick={(e) => { this.editActive(e) }}>
-                    <Icon type="edit" />
-                    {/* {formatMessage({ id: 'edit' })} */}
+                    <Icon type="edit" />                  
                     编辑节点
                   </Button>
                   <Button onClick={this.editComplete}>
