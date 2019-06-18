@@ -25,9 +25,9 @@ import styles from './index.css';
 import LegendList from '../components/legend/LegendList';
 
 //pensiveant:加载LayerList组件
-import LayerList from '../components/layerList/LayerList';
+import LayerList from '../components/layerTree';
 //pensiveant:加载疑点标绘PoltPanel组件
-import PoltPanel from '../components/layerList/PoltPanel';
+import PoltPanel from '../components/plot';
 
 import SplitLayerList from '../components/layerList/SplitLayerList';
 
