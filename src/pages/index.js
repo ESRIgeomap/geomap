@@ -89,9 +89,8 @@ class IndexPage extends React.Component {
       />,
     ];
   }
-
+// 卷帘对比功能左侧红线鼠标点击拖动事件
   handleMouseDown(e) {
-    //onMouseDown
     const TDrag = this.refs.lineTmove;
     const Drag = this.refs.linemove;
     const Spdom = this.refs.splitsDom;
@@ -100,47 +99,45 @@ class IndexPage extends React.Component {
     const disX = ev.clientX - Drag.offsetLeft;
     TDrag.style.top = 0;
     TDrag.style.left = 0;
-    // const disY = ev.clientY - Drag.offsetTop;
     document.onmousemove = function(event) {
       const ev = event || window.event;
       Drag.style.left = ev.clientX - disX + 'px';
-      // Drag.style.top = ev.clientY - disY + 'px';
       Drag.style.cursor = 'move';
       Spdom.style.clip = 'rect(0px, ' + ev.clientX + 'px' + ', 1000px , 0px)';
     };
   }
+  // 卷帘对比功能左侧红线鼠标点击松开事件
   handleMouseUp(e) {
     e.preventDefault();
     document.onmousemove = null;
     const Drag = this.refs.linemove;
     Drag.style.cursor = 'default';
   }
+  // 卷帘对比功能上侧红线鼠标点击拖动事件
   MouseDown(e) {
-    //onMouseDown
     const TDrag = this.refs.lineTmove;
     const Drag = this.refs.linemove;
     const Spdom = this.refs.splitsDom;
     const ev = event || window.event;
     event.stopPropagation();
-    //  const disX = ev.clientX - TDrag.offsetLeft;
     const disY = ev.clientY - TDrag.offsetTop;
     Drag.style.top = 0;
     Drag.style.left = 0;
     document.onmousemove = function(event) {
       const ev = event || window.event;
-      //  TDrag.style.left = ev.clientX - disX + 'px';
       TDrag.style.top = ev.clientY - disY + 'px';
       TDrag.style.cursor = 'move';
       Spdom.style.clip = 'rect(0, 2000px,' + ev.clientY + 'px' + ' , 0px)';
     };
   }
+  // 卷帘对比功能上侧红线鼠标点击松开事件
   MouseUp(e) {
     e.preventDefault();
     document.onmousemove = null;
     const Drag = this.refs.lineTmove;
     Drag.style.cursor = 'default';
   }
-
+// 退出卷帘display:none卷帘的dom元素
   exitRoller() {
     this.props.dispatch({
       type: 'agsmap/rollscreenChangeState',
