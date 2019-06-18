@@ -13,7 +13,6 @@ import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil';
 
 import {
   ACTION_MAP_OVERVIEW,
-  ACTION_MAP_ROAM,
   VIEW_MODE_2D,
   ACTION_MAP_PRINT_3D,
 } from '../../constants/action-types';
@@ -60,21 +59,20 @@ class Toolbar3D extends React.Component {
       payload: 'measure-area-3d',
     });
   }
-
+  // 平移功能
   mapPan(e) {
     e.stopPropagation();
     sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
   }
-
+  // 旋转功能
   mapRotate(e) {
     e.stopPropagation();
     sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
   }
+  // 环绕漫游
   mapRoam(e) {
     e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_ROAM,
-    });
+    sceneviewUtils.surroundRoam(window.agsGlobal.view);
   }
   // 控制是否显示鹰眼
   overviewmap(e) {
