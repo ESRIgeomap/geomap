@@ -71,7 +71,7 @@ class IndexPage extends React.Component {
           view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
           className={styles.componentCompass}
         />,
-        // <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view')} />,
+        <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type} />,
       ];
     }
 
@@ -101,7 +101,7 @@ class IndexPage extends React.Component {
     TDrag.style.top = 0;
     TDrag.style.left = 0;
     // const disY = ev.clientY - Drag.offsetTop;
-    document.onmousemove = function(event) {
+    document.onmousemove = function (event) {
       const ev = event || window.event;
       Drag.style.left = ev.clientX - disX + 'px';
       // Drag.style.top = ev.clientY - disY + 'px';
@@ -126,7 +126,7 @@ class IndexPage extends React.Component {
     const disY = ev.clientY - TDrag.offsetTop;
     Drag.style.top = 0;
     Drag.style.left = 0;
-    document.onmousemove = function(event) {
+    document.onmousemove = function (event) {
       const ev = event || window.event;
       //  TDrag.style.left = ev.clientX - disX + 'px';
       TDrag.style.top = ev.clientY - disY + 'px';
