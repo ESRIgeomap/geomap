@@ -9,6 +9,7 @@ import measurement3DIcon from './images/量高.png';
 import measurement2DIcon from './images/量面.png';
 import exportImageIcon from './images/导图.png';
 import sunImageIcon from './images/光照.jpg';
+import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil'
 
 import {
   ACTION_MAP_PAN,
@@ -67,16 +68,18 @@ class Toolbar3D extends React.Component {
 
   mapPan(e) {
     e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_PAN,
-    });
+    sceneviewUtils.changeToggle(window.agsGlobal.view,'pan');
+    // this.props.dispatch({
+    //   type: ACTION_MAP_PAN,
+    // });
   }
 
   mapRotate(e) {
     e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_ROTATE,
-    });
+    sceneviewUtils.changeToggle(window.agsGlobal.view,'rotate');
+    // this.props.dispatch({
+    //   type: ACTION_MAP_ROTATE,
+    // });
   }
   mapRoam(e) {
     e.stopPropagation();
