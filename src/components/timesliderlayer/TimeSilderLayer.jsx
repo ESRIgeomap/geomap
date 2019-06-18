@@ -41,7 +41,7 @@ const TimeSliderLayer = props => {
           layerUtils.addTimeCompareLayerByTitle(compareLayerTitle);
         }
       }
-    }, 1000);
+    }, 5000);
   }
   // 展示某一年的图层要素
   const displayFeatruesByYear = () => {
