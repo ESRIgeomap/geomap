@@ -21,3 +21,22 @@ async function changeToggle(view, tool) {
   }
 }
 export { changeToggle }
+
+/**
+ * 环绕漫游
+ * @author  lee  
+ * @param {object} view  三维场景
+ */
+let roamHandle
+function surroundRoam(view) {
+  if (roamHandle) {
+    clearInterval(roamHandle);
+    roamHandle = null;
+  } else {
+    roamHandle = setInterval(() => {
+      view.goTo({ heading: view.camera.heading + 0.5 });
+    }, 100);
+  }
+
+}
+export { surroundRoam }
