@@ -33,15 +33,17 @@ function initMapUtils(store) {
   AgsSearchUtil.instance().store = store;
 }
 // 初始化地图
-async function initMap(viewMode) {
+async function initMap(viewMode,store) {
   if (viewMode === actions.VIEW_MODE_2D) {
     // 初始化二维地图
     ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
+    store.dispatch({ type: 'agsmap/afterViewCreated' });
     // 创建底图切换微件
     await widgets.createBasemapGallery(ags.view);
   } else if (viewMode === actions.VIEW_MODE_3D) {
     // 初始化三维地图
     ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
+    store.dispatch({ type: 'agsmap/afterSceneviewCreated' });
     // 创建鹰眼微件
     await widgets.createOverView(ags.view);
   }
@@ -76,11 +78,11 @@ function createMapView(opts = {}) {
         await prepare();
 
         // 初始化地图
-        await initMap(viewMode);
+        await initMap(viewMode,store);
 
         // after view created
         window.agsGlobal = ags;
-        store.dispatch({ type: 'agsmap/afterViewCreated' });
+
 
         // TODO: to be continued
         initMapUtils(store);
@@ -114,7 +116,7 @@ function createMapView(opts = {}) {
       }
       case actions.SWITCH_MAP: {
         const { payload } = action;
-        await initMap(payload);
+        await initMap(payload,store);
         break;
       }
       case actions.ACTION_PRINT_2D_MAP: {

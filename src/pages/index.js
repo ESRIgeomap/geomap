@@ -15,7 +15,7 @@ import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
 
 import Zoom from '../components/zoom/';
-import Compass from '../components/Compass';
+import Compass from '../components/compass/Compass';
 import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
