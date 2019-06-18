@@ -16,6 +16,7 @@ import {
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   VIEW_MODE_2D,
+  ACTION_MAP_PRINT_3D
 } from '../../constants/action-types';
 
 import styles from './Toolbar3D.css';
@@ -38,7 +39,7 @@ class Toolbar3D extends React.Component {
     this.sunShine = this.sunShine.bind(this);
     this.windowPrint = this.windowPrint.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   measure3DLine(e) {
     e.stopPropagation();
@@ -100,6 +101,12 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   sunShine() {
+
+    this.props.dispatch({
+      type: 'toolbar/updateCurrentView',
+      payload: 'light-shadow-3d',
+    });
+
     if (!this.props.Lightshadow.lightshadowlistflags) {
       this.props.dispatch({
         type: 'Lightshadow/listChangeState',
@@ -128,15 +135,15 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   windowPrint() {
-    // this.props.dispatch({
-    //   type: ACTION_MAP_PRINT_3D,
-    // });
 
     this.props.dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'map-print-3d',
     });
 
+    this.props.dispatch({
+      type: ACTION_MAP_PRINT_3D,
+    });
   }
 
   render() {
@@ -199,10 +206,11 @@ class Toolbar3D extends React.Component {
   }
 }
 
-export default connect(({ agsmap,Lightshadow }) => {
+export default connect(({ agsmap, Lightshadow, toolbar }) => {
   return {
     agsmap,
     //日照分析
     Lightshadow,
+    toolbar,
   };
 })(Toolbar3D);

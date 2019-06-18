@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -75,23 +75,21 @@ function buildLineDescription(line, idx) {
   ];
 }
 
-class BusLineResult extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
-  handleSwitchLine = (key) => {
+  const BusLineResult = props => {
+
+  function handleSwitchLine (key){
     if (key) {
       const index = key.replace('busline-', '');
-      this.props.dispatch({ type: 'search/drawBusLine', payload: index });
+      props.dispatch({ type: 'search/drawBusLine', payload: index });
     }
   }
 
-  highlightSegment = (index) => {
-    this.props.dispatch({ type: 'search/highlightSegment', payload: index });
+  function highlightSegment(index) {
+    props.dispatch({ type: 'search/highlightSegment', payload: index });
   }
 
-  renderWalkSegment(segment, index) {
+  function renderWalkSegment(segment, index) {
     const { stationEnd } = segment;
     // const start = stationStart.uuid ? stationStart.name : '起点';
     const end = stationEnd.uuid ? stationEnd.name : '终点';
@@ -111,7 +109,7 @@ class BusLineResult extends React.Component {
           <div className={styles.lineDetailContentWrap}>
             <span
               className={styles.lineDetailSegment}
-              onMouseDown={() => this.highlightSegment(index)}
+              onMouseDown={() => {highlightSegment(index)}}
             >
               {/* <span>步行至</span>
               <span>&nbsp;{`${end}`}&nbsp;</span> */}
@@ -123,7 +121,7 @@ class BusLineResult extends React.Component {
     );
   }
 
-  renderMetroSegment(segment, index, name) {
+  function renderMetroSegment(segment, index, name) {
     const { stationStart, stationEnd } = segment;
 
     return (
@@ -133,7 +131,7 @@ class BusLineResult extends React.Component {
         <div className={styles.lineDetailContentWrap}>
           <div
             className={styles.lineDetailSegment}
-            onMouseDown={() => this.highlightSegment(index)}
+            onMouseDown={() => {highlightSegment(index)}}
           >
             <div className={styles.lineDetailBusLine}>{name}</div>
           </div>
@@ -146,7 +144,7 @@ class BusLineResult extends React.Component {
     );
   }
 
-  renderBusSegment(segment, index, name) {
+  function renderBusSegment(segment, index, name) {
     const { stationStart, stationEnd } = segment;
 
     return (
@@ -156,7 +154,7 @@ class BusLineResult extends React.Component {
         <div className={styles.lineDetailContentWrap}>
           <div
             className={styles.lineDetailSegment}
-            onMouseDown={() => this.highlightSegment(index)}
+            onMouseDown={() => {highlightSegment(index)}}
           >
             <div className={styles.lineDetailBusLine}>{name}</div>
           </div>
@@ -169,7 +167,7 @@ class BusLineResult extends React.Component {
     );
   }
 
-  renderLineDetails(line) {
+  function renderLineDetails(line) {
     const { lineName, segments } = line;
     const lineNames = lineName.split('|');
     const details = [];
@@ -210,11 +208,11 @@ class BusLineResult extends React.Component {
         //   break;
         // }
         case 5: {
-          details.push(this.renderWalkSegment(segment, index));
+          details.push(renderWalkSegment(segment, index));
           break;
         }
         case 3: {
-          details.push(this.renderBusSegment(segment, index, lineNames[lineNameIndex]));
+          details.push(renderBusSegment(segment, index, lineNames[lineNameIndex]));
           lineNameIndex += 1;
           break;
         }
@@ -245,9 +243,9 @@ class BusLineResult extends React.Component {
     return <div>{details}</div>;
   }
 
-  renderLines() {
-    if (this.props.search.lines) {
-      return this.props.search.lines.map((l, idx) => {
+  function renderLines() {
+    if (props.search.lines) {
+      return props.search.lines.map((l, idx) => {
         const names = l.lineName.split('|').filter(n => n.trim() !== '');
 
         return (
@@ -260,7 +258,7 @@ class BusLineResult extends React.Component {
               </div>
             }
           >
-            {this.renderLineDetails(l)}
+            {renderLineDetails(l)}
           </Panel>
         );
       });
@@ -269,22 +267,19 @@ class BusLineResult extends React.Component {
     return [];
   }
 
-  render() {
+  
     return (
       <div className={styles.wrap}>
 
         {/* <Scrollbars style={{ height: 750 }}> */}
-        <Collapse accordion onChange={this.handleSwitchLine} className="busline-result-collapse">
-          {this.renderLines()}
+        <Collapse accordion onChange={handleSwitchLine} className="busline-result-collapse">
+          {renderLines()}
         </Collapse>
         {/* </Scrollbars> */}
       </div>
     );
-  }
 }
 
 export default connect(({ search }) => {
-  return {
-    search,
-  };
+  return {search};
 })(BusLineResult);

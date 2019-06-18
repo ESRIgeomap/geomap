@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -24,26 +24,22 @@ function toDecimal(x) {
   return f;
 }
 
-class WalkLineResult extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSwitchLine = ::this.handleSwitchLine;
-    this.highlightSegment = ::this.highlightSegment;
-  }
+  const WalkLineResult = props => {
 
-  handleSwitchLine(key) {
+
+  function handleSwitchLine(key) {
     if (key) {
       const index = key.replace('walkline-', '');
-      this.props.dispatch({ type: 'search/drawBusLine', payload: index });
+      props.dispatch({ type: 'search/drawBusLine', payload: index });
     }
   }
 
-  highlightSegment(index) {
-    this.props.dispatch({ type: 'search/highlightSegment', payload: index });
+  function highlightSegment(index) {
+    props.dispatch({ type: 'search/highlightSegment', payload: index });
   }
 
 
-  renderLineDetails(line) {
+  function renderLineDetails(line) {
 
     const details = [];
 
@@ -67,7 +63,7 @@ class WalkLineResult extends React.Component {
           <div className={styles.lineDetailContentWrap}>
             <div
               className={styles.lineDetailSegment}
-              onMouseDown={() => this.highlightSegment(index)}
+              onMouseDown={() =>{highlightSegment(index)}}
             >
               <div className={styles.lineDetailBusLine}>{zhuan}</div>
             </div>
@@ -92,8 +88,8 @@ class WalkLineResult extends React.Component {
     return <div>{details}</div>;
   }
 
-  renderLines() {
-    if (this.props.search.walkresult) {
+  function renderLines() {
+    if (props.search.walkresult) {
       return (
         <Panel
           key="walkline-result"
@@ -104,19 +100,19 @@ class WalkLineResult extends React.Component {
               </div>
               <div className={styles.lineDesc}>
                 <span>
-                  约<strong>{Math.round(this.props.search.walkresult.duration / 60)}</strong>
+                  约<strong>{Math.round(props.search.walkresult.duration / 60)}</strong>
                   分钟
                 </span>
                 <span className={styles.lineDescSep}>|</span>
                 <span>
-                  约<strong>{toDecimal(this.props.search.walkresult.distance)}</strong>
+                  约<strong>{toDecimal(props.search.walkresult.distance)}</strong>
                   公里
                 </span>
               </div>
             </div>
           }
         >
-          {this.renderLineDetails(this.props.search.walkresult)}
+          {renderLineDetails(props.search.walkresult)}
         </Panel>
       );
     }
@@ -124,17 +120,16 @@ class WalkLineResult extends React.Component {
     return [];
   }
 
-  render() {
+  
     return (
       <div className={styles.wrap}>
         {/* <Scrollbars style={{ height: 400 }}> */}
-          <Collapse accordion onChange={this.handleSwitchLine} className="busline-result-collapse">
-            {this.renderLines()}
+          <Collapse accordion onChange={handleSwitchLine} className="busline-result-collapse">
+            {renderLines()}
           </Collapse>
         {/* </Scrollbars> */}
       </div>
     );
-  }
 }
 
 export default connect(({ search }) => {

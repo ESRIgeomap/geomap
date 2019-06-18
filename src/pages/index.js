@@ -12,7 +12,8 @@ import ToolbarSplit from '../components/toolbar/ToolbarSplit';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
 import Bookmark from '../components/bookmark/Bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
-import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
+//加载日照分析组件
+import LightshadowList from '../components/Lightshadow';
 
 import Zoom from '../components/zoom/';
 import Compass from '../components/compass/Compass';
