@@ -35,7 +35,6 @@ const ViewInfo = props => {
         _.throttle(event => {
           // 将屏幕点坐标转化为map点坐标
           const point = view.toMap({ x: event.x, y: event.y });
-          console.log(point.x);
           const lng = (point.x / 20037508.34) * 180;
           const mmy = (point.y / 20037508.34) * 180;
           const lat =
