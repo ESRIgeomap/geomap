@@ -103,15 +103,15 @@ class Toolbar2D extends React.Component {
         break;
       }
       case 'bookmark': {
-        if (this.props.agsmap.bookflags) {
+        if (this.props.bookmark.bookflags) {
           // prepare();
           this.props.dispatch({
-            type: 'agsmap/bookmarkChangeState',
+            type: 'bookmark/bookmarkChangeState',
             payload: false,
           });
         } else {
           this.props.dispatch({
-            type: 'agsmap/bookmarkChangeState',
+            type: 'bookmark/bookmarkChangeState',
             payload: true,
           });
         }
@@ -321,9 +321,10 @@ class Toolbar2D extends React.Component {
   }
 }
 
-export default connect(({ agsmap, layerList }) => {
+export default connect(({ agsmap, layerList,bookmark }) => {
   return {
     agsmap,
     layerList,
+    bookmark,
   };
 })(Toolbar2D);

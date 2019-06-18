@@ -10,7 +10,7 @@ import Trans3D from '../components/trans3d/Trans3D';
 import Toolbar2D from '../components/toolbar/Toolbar2D';
 import ToolbarSplit from '../components/toolbar/ToolbarSplit';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
-import Bookmark from '../components/bookmark/Bookmark';
+import Bookmark from '../components/bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 //加载日照分析组件
 import LightshadowList from '../components/Lightshadow';
