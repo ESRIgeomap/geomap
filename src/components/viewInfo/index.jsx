@@ -4,16 +4,23 @@ import _ from 'lodash';
 import styles from './index.css';
 
 const ViewInfo = props => {
+  const {view }  = props;
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [scale, setScale] = useState('');
   const [lod, setLod] = useState('');
 
+
   useEffect(() => {
-    if (props.view) {
-      loadViewInfo(props.view);
+    let handle;
+    // view 有三种取值，undefine，2d，3d
+    if (view === '2d') {
+      if (handle) {
+        handle.remove();
+      }
+      handle = loadViewInfo(window.agsGlobal.view);
     }
-  });
+  }, [view]);
 
   function loadViewInfo(view) {
     view.when(view => {
@@ -23,12 +30,12 @@ const ViewInfo = props => {
         setLod(parseInt(view.zoom));
         setScale(parseInt(view.scale));
       });
-
       view.on(
         'pointer-move',
         _.throttle(event => {
           // 将屏幕点坐标转化为map点坐标
           const point = view.toMap({ x: event.x, y: event.y });
+          console.log(point.x);
           const lng = (point.x / 20037508.34) * 180;
           const mmy = (point.y / 20037508.34) * 180;
           const lat =

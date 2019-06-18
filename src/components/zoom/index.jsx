@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
-import { jsapi } from '../../constants/geomap-utils';
+import * as jsapi from '../../utils/jsapi';
 
 import styles from './index.css';
 /**
  * 放大缩小组件
- * @author  lee  
+ * @author  lee
  */
 
 const Zoom = props => {
-  let vm = null;
+  const { view } = props;
+  const [vm, setVm] = useState(null);
   // 监听是否是最大zoom
   const [maxZoomed, setMaxZoomed] = useState(false);
   // 监听是否是最小zoom
@@ -17,35 +18,40 @@ const Zoom = props => {
   const [zoomVal, setZoomVal] = useState(null);
 
   useEffect(() => {
-    if (props.view) {
-      createWidget(props.view);
+    let handle;
+    // view 有三种取值，undefine，2d，3d
+    if (view) {
+      if (handle) {
+        handle.remove();
+      }
+      handle = createWidget(window.agsGlobal.view);
     }
-  });
+  }, [view]);
   // 创建微件
+
   function createWidget(view) {
-    view.when(async view => {
-      const [ZoomViewModel, watchUtils] = await jsapi.load([
-        'esri/widgets/Zoom/ZoomViewModel',
-        'esri/core/watchUtils',
-      ]);
-      vm = new ZoomViewModel();
-      vm.view = view;
-      watchUtils.init(view, 'zoom', val => {
-        setMaxZoomed(val === view.constraints.maxZoom);
-        setMinZoomed(val === view.constraints.minZoom);
+    jsapi
+      .load(['esri/widgets/Zoom/ZoomViewModel', 'esri/core/watchUtils'])
+      .then(([ZoomViewModel, watchUtils]) => {
+        const vmstate = new ZoomViewModel();
+        vmstate.view = view;
+        setVm(vmstate);
+        watchUtils.init(view, 'zoom', val => {
+          setMaxZoomed(val === view.constraints.maxZoom);
+          setMinZoomed(val === view.constraints.minZoom);
+        });
       });
-    });
     watchZoom(view);
   }
   // 缩小功能
   function zoomIn() {
-    if (!maxZoomed) {
+    if (!maxZoomed && vm && vm.zoomIn()) {
       vm.zoomIn();
     }
   }
   // 放大功能
   function zoomOut() {
-    if (!minZoomed) {
+    if (!minZoomed && vm && vm.zoomOut()) {
       vm.zoomOut();
     }
   }

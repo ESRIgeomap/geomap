@@ -1,37 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { message } from 'antd';
 import PolyLineSymbolEditor from './PolyLineSymbolEditor';
 import PolyGonSymbolEditor from './PolyGonSymbolEditor';
 import PointSymbolEditor from './PointSymbolEditor';
 import TextSymbolEditor from './TextSymbolEditor';
 
-export default class GeometrySymbolEditor extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    if (!this.props.geometry) {
+const GeometrySymbolEditor = props => {
+  useEffect(() => {
+    if (!props.geometry) {
       message.warn('请选择图形');
     }
-  }
-  renderDom() {
-    const type = this.getType();
+  },[]);
+  //根据不同geometry类型加载不同的symbol编辑器
+  const renderDom = () => {
+    const type = getType();
     let com = null;
     switch (type) {
       case 'Point': {
-        com = <PointSymbolEditor geometry={this.props.geometry} />;
+        com = <PointSymbolEditor geometry={props.geometry} />;
         break;
       }
       case 'Polyline': {
-        com = <PolyLineSymbolEditor geometry={this.props.geometry} />;
+        com = <PolyLineSymbolEditor geometry={props.geometry} />;
         break;
       }
       case 'Polygon': {
-        com = <PolyGonSymbolEditor geometry={this.props.geometry} />;
+        com = <PolyGonSymbolEditor geometry={props.geometry} />;
         break;
       }
       case 'Text': {
-        com = <TextSymbolEditor geometry={this.props.geometry} />;
+        com = <TextSymbolEditor geometry={props.geometry} />;
         break;
       }
       default: {
@@ -39,9 +37,10 @@ export default class GeometrySymbolEditor extends React.Component {
       }
     }
     return com;
-  }
-  getType() {
-    const geo = this.props.geometry;
+  };
+  //获取 geometry类型
+  const getType = () => {
+    const geo = props.geometry;
     let geoType = null;
 
     switch (geo.geometry.type) {
@@ -65,8 +64,9 @@ export default class GeometrySymbolEditor extends React.Component {
       }
     }
     return geoType;
-  }
-  render() {
-    return <div>{this.renderDom()}</div>;
-  }
-}
+  };
+
+  return <div>{renderDom()}</div>;
+};
+
+export default GeometrySymbolEditor;

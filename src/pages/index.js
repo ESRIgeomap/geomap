@@ -5,18 +5,18 @@ import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
 import GeoSearch from '../components/search/GeoSearch';
-import Trans3D from '../components/trans3d/Trans3D';
+import Trans3D from '../components/trans3d/';
 
 import Toolbar2D from '../components/toolbar/Toolbar2D';
 import ToolbarSplit from '../components/toolbar/ToolbarSplit';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
-import Bookmark from '../components/bookmark/Bookmark';
+import Bookmark from '../components/bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 //加载日照分析组件
 import LightshadowList from '../components/Lightshadow';
 
 import Zoom from '../components/zoom/';
-import Compass from '../components/Compass';
+import Compass from '../components/compass';
 import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
@@ -25,9 +25,9 @@ import styles from './index.css';
 
 
 //pensiveant:加载LayerList组件
-import LayerList from '../components/layerList/LayerList';
+import LayerList from '../components/layerTree';
 //pensiveant:加载疑点标绘PoltPanel组件
-import PoltPanel from '../components/layerList/PoltPanel';
+import PoltPanel from '../components/plot';
 
 import SplitLayerList from '../components/layerList/SplitLayerList';
 
@@ -61,27 +61,27 @@ class IndexPage extends React.Component {
     // 类似MapViewer初始化ui.components数组
     if (this.props.agsmap.mode === VIEW_MODE_2D) {
       return [
-        // <Zoom
-        //   key="ui-component-zoom"
-        //   view={_.get(window.agsGlobal, 'view')}
-        //   className={styles.componentZoom}
-        // />,
+        <Zoom
+          key="ui-component-zoom"
+          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+          className={styles.componentZoom}
+        />,
         <Compass
           key="ui-component-compass"
-          view={_.get(window.agsGlobal, 'view')}
+          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
           className={styles.componentCompass}
         />,
-        <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view')} />,
+        <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type} />,
       ];
     }
 
     // 3D
     return [
-      // <Zoom
-      //   key="ui-component-zoom"
-      //   view={_.get(window.agsGlobal, 'view')}
-      //   className={styles.componentZoom}
-      // />,
+      <Zoom
+        key="ui-component-zoom"
+        view={_.get(window.agsGlobal, 'view')}
+        className={styles.componentZoom}
+      />,
       <Compass
         key="ui-component-compass"
         view={_.get(window.agsGlobal, 'view')}
@@ -123,7 +123,7 @@ class IndexPage extends React.Component {
     const disY = ev.clientY - TDrag.offsetTop;
     Drag.style.top = 0;
     Drag.style.left = 0;
-    document.onmousemove = function(event) {
+    document.onmousemove = function (event) {
       const ev = event || window.event;
       TDrag.style.top = ev.clientY - disY + 'px';
       TDrag.style.cursor = 'move';
