@@ -59,7 +59,8 @@ class Toolbar2D extends React.Component {
     switch (key) {
       case 'print2DMap':
         this.props.dispatch({
-          type: ACTION_PRINT_2D_MAP,
+          type: 'toolbar/updateCurrentView',
+          payload: 'print-map-2d',
         });
         break;
       case 'clipMap':
@@ -117,6 +118,7 @@ class Toolbar2D extends React.Component {
         }
         break;
       }
+     
       default:
         break;
     }

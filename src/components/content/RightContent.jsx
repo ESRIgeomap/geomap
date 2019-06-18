@@ -49,6 +49,13 @@ const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
           </ClosePanel>
         );
       }
+      case 'print-map-2d': {
+        return (
+          <ClosePanel title="2D 打印" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.PrintMap2D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
       default:break;
     }
 
