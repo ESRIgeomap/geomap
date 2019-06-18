@@ -17,7 +17,7 @@ import {
   ACTION_MAP_PRINT_3D,
 } from '../../constants/action-types';
 
-import styles from './Toolbar3D.css';
+import styles from './Toolbar3D.less';
 
 const ButtonGroup = Button.Group;
 
