@@ -5,7 +5,7 @@ import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
 import GeoSearch from '../components/search/GeoSearch';
-import Trans3D from '../components/trans3d/Trans3D';
+import Trans3D from '../components/trans3d/';
 
 import Toolbar2D from '../components/toolbar/Toolbar2D';
 import ToolbarSplit from '../components/toolbar/ToolbarSplit';
@@ -16,7 +16,7 @@ import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 import LightshadowList from '../components/Lightshadow';
 
 import Zoom from '../components/zoom/';
-import Compass from '../components/compass/Compass';
+import Compass from '../components/compass';
 import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
@@ -61,27 +61,27 @@ class IndexPage extends React.Component {
     // 类似MapViewer初始化ui.components数组
     if (this.props.agsmap.mode === VIEW_MODE_2D) {
       return [
-        // <Zoom
-        //   key="ui-component-zoom"
-        //   view={_.get(window.agsGlobal, 'view')}
-        //   className={styles.componentZoom}
-        // />,
+        <Zoom
+          key="ui-component-zoom"
+          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+          className={styles.componentZoom}
+        />,
         <Compass
           key="ui-component-compass"
-          view={_.get(window.agsGlobal, 'view')}
+          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
           className={styles.componentCompass}
         />,
-        <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view')} />,
+        // <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view')} />,
       ];
     }
 
     // 3D
     return [
-      // <Zoom
-      //   key="ui-component-zoom"
-      //   view={_.get(window.agsGlobal, 'view')}
-      //   className={styles.componentZoom}
-      // />,
+      <Zoom
+        key="ui-component-zoom"
+        view={_.get(window.agsGlobal, 'view')}
+        className={styles.componentZoom}
+      />,
       <Compass
         key="ui-component-compass"
         view={_.get(window.agsGlobal, 'view')}

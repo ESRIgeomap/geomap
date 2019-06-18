@@ -50,3 +50,4 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps)(Trans3D);
+
