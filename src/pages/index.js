@@ -78,15 +78,15 @@ class IndexPage extends React.Component {
     // 3D
     return [
       <Zoom
-        key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentZoom}
-      />,
-      <Compass
-        key="ui-component-compass"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentCompass}
-      />,
+      key="ui-component-zoom"
+      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+      className={styles.componentZoom}
+    />,
+    <Compass
+      key="ui-component-compass"
+      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+      className={styles.componentCompass}
+    />,
     ];
   }
 // 卷帘对比功能左侧红线鼠标点击拖动事件
@@ -219,10 +219,8 @@ class IndexPage extends React.Component {
           }}
         />
         <LayerList />
-        {/*疑点标绘 */}
         <PoltPanel />
         <SplitLayerList />
-        {/* <FullscreenButton/> */}
       </div>
     );
   }

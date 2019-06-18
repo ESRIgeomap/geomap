@@ -3,7 +3,10 @@ import { connect } from 'dva';
 
 import { VIEW_MODE_2D, VIEW_MODE_3D } from '../../constants/action-types';
 import styles from './index.css';
-
+/**
+ * 二三维切换微件
+ * @author  lee  
+ */
 const Trans3D = props => {
   const transform = () => {
     if (props.agsmap.mode === VIEW_MODE_2D) {
