@@ -76,15 +76,15 @@ class IndexPage extends React.Component {
     // 3D
     return [
       <Zoom
-        key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentZoom}
-      />,
-      <Compass
-        key="ui-component-compass"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentCompass}
-      />,
+      key="ui-component-zoom"
+      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+      className={styles.componentZoom}
+    />,
+    <Compass
+      key="ui-component-compass"
+      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+      className={styles.componentCompass}
+    />,
     ];
   }
 
@@ -139,10 +139,8 @@ class IndexPage extends React.Component {
         </Button>
         <RollerBlind/>
         <LayerList />
-        {/*疑点标绘 */}
         <PoltPanel />
         <SplitLayerList />
-        {/* <FullscreenButton/> */}
       </div>
     );
   }

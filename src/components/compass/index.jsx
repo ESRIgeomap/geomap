@@ -12,6 +12,7 @@ function toRotationTransform(orientation) {
 }
 /**
  * 罗盘微件
+ * @author  lee  
  */
 const Compass = props => {
   const { view } = props;
