@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as jsapi from '../../utils/jsapi';
-import styles from './Compass.css';
+import styles from './index.css';
 
 function toRotationTransform(orientation) {
   return {
@@ -12,26 +12,34 @@ function toRotationTransform(orientation) {
 }
 /**
  * 罗盘微件
+ * @author  lee  
  */
 const Compass = props => {
-  let vm = null;
+  const { view } = props;
+  const [vm,setVm] = useState(null);
   const [orientation, setOrientation] = useState({
     z: 0,
   });
 
   useEffect(() => {
-    if (props.agsmap.sceneviewCreated) {
-      createWidget(window.agsGlobal.view);
+    let handle;
+    // view 有三种取值，undefine，2d，3d
+    if (view) {
+      if (handle) {
+        handle.remove();
+      }
+      handle = createWidget(window.agsGlobal.view);
     }
-  }, [props.agsmap.sceneviewCreated]);
+  }, [view]);
 
   const createWidget = view => {
     jsapi.load(['esri/widgets/Compass/CompassViewModel']).then(([CompassViewModel]) => {
-      vm = new CompassViewModel();
-      vm.view = view;
-      vm.watch('orientation', orientation => {
+      const vmstate = new CompassViewModel();
+      vmstate.view = view;
+      vmstate.watch('orientation', orientation => {
         setOrientation(orientation);
       });
+      setVm(vmstate);
     });
   };
 

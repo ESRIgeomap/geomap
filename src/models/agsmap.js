@@ -24,12 +24,12 @@ export default {
     sceneviewCreated:false,
     mode: VIEW_MODE_2D,
     callflags: false,
-    bookflags: false,
+    // bookflags: false,
     splitflags: false,
     correctflags: false,
     rollerflags: false,
-    bookmarks: [],
-    bookname: null,
+    // bookmarks: [],
+    // bookname: null,
     // 日照分析参数 wangp 20180823
     showShadow: false,
     sliderPlay: false,
@@ -89,21 +89,21 @@ export default {
         }
       }
     },
-    *addBookmark({ payload }, { put }) {
-      yield put({ type: ACTION_ADDBOOKMARK_2D, payload });
-    },
-    *gotoBookmark({ payload }, { put }) {
-      yield put({ type: ACTION_GOTOBOOKMARK_2D, payload });
-    },
-    *deletBookmark({ payload }, { put }) {
-      yield put({ type: ACTION_DELETBOOKMARK_2D, payload });
-    },
-    *deletthisBookmark({ payload }, { put }) {
-      yield put({ type: ACTION_DELETTHISBOOKMARK_2D, payload });
-    },
-    *editBookmark({ payload }, { put }) {
-      yield put({ type: ACTION_EDITBOOKMARK_2D, payload });
-    },
+    // *addBookmark({ payload }, { put }) {
+    //   yield put({ type: ACTION_ADDBOOKMARK_2D, payload });
+    // },
+    // *gotoBookmark({ payload }, { put }) {
+    //   yield put({ type: ACTION_GOTOBOOKMARK_2D, payload });
+    // },
+    // *deletBookmark({ payload }, { put }) {
+    //   yield put({ type: ACTION_DELETBOOKMARK_2D, payload });
+    // },
+    // *deletthisBookmark({ payload }, { put }) {
+    //   yield put({ type: ACTION_DELETTHISBOOKMARK_2D, payload });
+    // },
+    // *editBookmark({ payload }, { put }) {
+    //   yield put({ type: ACTION_EDITBOOKMARK_2D, payload });
+    // },
   },
 
   reducers: {
@@ -122,18 +122,18 @@ export default {
     transMode2dState(state, action) {
       return { ...state, mode: action.payload };
     },
-    bookmarkChangeState(state, action) {
-      return { ...state, bookflags: action.payload };
-    },
+    // bookmarkChangeState(state, action) {
+    //   return { ...state, bookflags: action.payload };
+    // },
     splitscreenChangeState(state, action) {
       return { ...state, splitflags: action.payload };
     },
     mapcorrectChangeState(state, action) {
       return { ...state, correctflags: action.payload };
     },
-    updateBookmarks(state, action) {
-      return { ...state, bookmarks: action.payload };
-    },
+    // updateBookmarks(state, action) {
+    //   return { ...state, bookmarks: action.payload };
+    // },
     //菜单栏打开关闭
     menusChangeState(state, action) {
       return { ...state, menusflags: action.payload };

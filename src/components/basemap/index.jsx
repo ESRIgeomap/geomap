@@ -1,12 +1,11 @@
-/**
- * 底图切换功能组件
- * @author  lee  
- */
-
 import React, { useState } from 'react';
 import styles from './index.less';
 import defautBmap from './img/map.png';
 import BaseMapPanel from './baseMapPanel/';
+/**
+ * 底图切换功能组件
+ * @author  lee  
+ */
 
 const BaseMap = () => {
   // bmapPanelVisible 控制是否显示底图选择框

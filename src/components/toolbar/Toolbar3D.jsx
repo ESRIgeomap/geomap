@@ -9,14 +9,13 @@ import measurement3DIcon from './images/量高.png';
 import measurement2DIcon from './images/量面.png';
 import exportImageIcon from './images/导图.png';
 import sunImageIcon from './images/光照.jpg';
+import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil';
 
 import {
-  ACTION_MAP_PAN,
-  ACTION_MAP_ROTATE,
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   VIEW_MODE_2D,
-  ACTION_MAP_PRINT_3D
+  ACTION_MAP_PRINT_3D,
 } from '../../constants/action-types';
 
 import styles from './Toolbar3D.css';
@@ -39,7 +38,7 @@ class Toolbar3D extends React.Component {
     this.sunShine = this.sunShine.bind(this);
     this.windowPrint = this.windowPrint.bind(this);
   }
-  componentDidMount() { }
+  componentDidMount() {}
 
   measure3DLine(e) {
     e.stopPropagation();
@@ -67,16 +66,12 @@ class Toolbar3D extends React.Component {
 
   mapPan(e) {
     e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_PAN,
-    });
+    sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
   }
 
   mapRotate(e) {
     e.stopPropagation();
-    this.props.dispatch({
-      type: ACTION_MAP_ROTATE,
-    });
+    sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
   }
   mapRoam(e) {
     e.stopPropagation();
@@ -101,7 +96,6 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   sunShine() {
-
     this.props.dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'light-shadow-3d',
@@ -135,7 +129,6 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   windowPrint() {
-
     this.props.dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'map-print-3d',

@@ -20,9 +20,9 @@ function bookmarks(opts = {}) {
           const extent = window.agsGlobal.view.extent;
           // 保存
           store.dispatch({
-            type: 'agsmap/updateBookmarks',
+            type: 'bookmark/updateBookmarks',
             payload: [
-              ...store.getState().agsmap.bookmarks,
+              ...store.getState().bookmark.bookmarks,
               {
                 name: action.payload,
                 newextent: extent,
@@ -35,7 +35,7 @@ function bookmarks(opts = {}) {
       case ACTION_GOTOBOOKMARK_2D: {
         if (window.agsGlobal.view) {
           const bookname = action.payload;
-          const books = store.getState().agsmap.bookmarks;
+          const books = store.getState().bookmark.bookmarks;
           books.forEach(element => {
             if (element.name === bookname) {
               window.agsGlobal.view.goTo(element.newextent.extent);
@@ -47,7 +47,7 @@ function bookmarks(opts = {}) {
       case ACTION_DELETBOOKMARK_2D: {
         if (window.agsGlobal.view) {
           store.dispatch({
-            type: 'agsmap/updateBookmarks',
+            type: 'bookmark/updateBookmarks',
             payload: [],
           });
         }
@@ -56,7 +56,7 @@ function bookmarks(opts = {}) {
       case ACTION_DELETTHISBOOKMARK_2D: {
         if (window.agsGlobal.view) {
           const bookname = action.payload;
-          const books = store.getState().agsmap.bookmarks;
+          const books = store.getState().bookmark.bookmarks;
           books.forEach(element => {
             if (element.name === bookname) {
               const index = books.indexOf(element);
@@ -64,7 +64,7 @@ function bookmarks(opts = {}) {
             }
           });
           store.dispatch({
-            type: 'agsmap/updateBookmarks',
+            type: 'bookmark/updateBookmarks',
             payload: books,
           });
         }
@@ -74,7 +74,7 @@ function bookmarks(opts = {}) {
         if (window.agsGlobal.view) {
           const oldname = action.payload.oldname;
           const newname = action.payload.newname;
-          const books = store.getState().agsmap.bookmarks;
+          const books = store.getState().bookmark.bookmarks;
           const extent = window.agsGlobal.view.extent;
           const newelement = {
             name: newname,
@@ -87,7 +87,7 @@ function bookmarks(opts = {}) {
             }
           });
           store.dispatch({
-            type: 'agsmap/updateBookmarks',
+            type: 'bookmark/updateBookmarks',
             payload: books,
           });
         }
