@@ -1,23 +1,20 @@
 import { message, Modal, Input, Button } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { formatMessage } from 'umi/locale';
 import { jsapi } from '../constants/geomap-utils';
 import env from '../utils/env';
-import GeometryAttribute from '../components/layerList/GeometryAttribute';
+import GeometryAttribute from '../components/plot/geometryAttributeEditor/GeometryAttribute';
 import {
   addPoltlayerItem,
   getItemInfoByItemId,
   updateItemByItemId,
-  publishItem,
-  checkJobStatus,
   shareItem,
   getPoltItemData,
 } from '../services/portal';
 import { requestArrayBuffer } from '../utils/request';
 import request from '../utils/request';
 import layerUtils from '../utils/layerUtils';
-import GeometrySymbolEditor from '../components/layerList/GeometrySymbolEditor';
+import GeometrySymbolEditor from '../components/plot/geometrySymbolEditor';
 
 class poltUtils {
 

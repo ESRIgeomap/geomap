@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Collapse, Button, Icon, message, Tooltip, Modal, Input } from 'antd';
-import CollectionLayer from './CollectionLayer';
+// import CollectionLayer from './CollectionLayer';
 import SystemSplitLayer from './SystemSplitLayer';
 import styles from './SplitLayerList.less';
 // import { FormattedMessage, setLocale, getLocale, formatMessage } from 'umi/locale';
@@ -196,11 +196,11 @@ class SplitLayerList extends Component {
           <div className={styles.content}
               style={{height: this.state.contentheight}}
           >
-            <Collapse>
+            {/* <Collapse>
             <Panel header='我的收藏' key="1" showArrow={false} extra={this.genExtra()}>
                 <CollectionLayer />
               </Panel>
-            </Collapse>
+            </Collapse> */}
             <h4 className={styles.header}> 图层列表</h4>
             <SystemSplitLayer />
           </div>
