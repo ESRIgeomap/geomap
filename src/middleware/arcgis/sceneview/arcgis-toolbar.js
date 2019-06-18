@@ -1,10 +1,7 @@
-import Measure3DUtil from '../../../utils/measure3D';
 import NavigationToggle from '../../../utils/NavigationToggle';
 import SurroundRoam from '../../../utils/SurroundRoam';
 import Print3DMap from '../../../utils/Print3DMap';
 import {
-  ACTION_MEASURE_LINE_3D,
-  ACTION_MEASURE_AREA_3D,
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   ACTION_MAP_PRINT_3D,
@@ -19,18 +16,6 @@ function toolbar(opts = {}) {
   return () => next => action => {
     const ags = window.agsGlobal;
     switch (action.type) {
-      // lih 20180718  工具条-三维长度测量
-      case ACTION_MEASURE_LINE_3D: {
-        Measure3DUtil.sceneView = ags.view;
-        Measure3DUtil.active('line');
-        break;
-      }
-      // lih 20180718  工具条-三维面积测量
-      case ACTION_MEASURE_AREA_3D: {
-        Measure3DUtil.sceneView = ags.view;
-        Measure3DUtil.active('area');
-        break;
-      }
       // lih 20180718  工具条-地图鹰眼
       case ACTION_MAP_OVERVIEW: {
         NavigationToggle.active(ags.view, 'rotate');
