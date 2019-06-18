@@ -21,7 +21,7 @@ export default {
 
   state: {
     viewCreated: false,
-
+    sceneviewCreated:false,
     mode: VIEW_MODE_2D,
     callflags: false,
     // bookflags: false,
@@ -109,6 +109,9 @@ export default {
   reducers: {
     afterViewCreated(state, action) {
       return { ...state, viewCreated: true };
+    },
+    afterSceneviewCreated(state, action) {
+      return { ...state, sceneviewCreated: true };
     },
     rollscreenChangeState(state, action) {
       return { ...state, rollerflags: action.payload };

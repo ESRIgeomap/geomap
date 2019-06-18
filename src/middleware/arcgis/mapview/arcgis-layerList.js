@@ -8,7 +8,7 @@ import wmap from '../../../utils/arcgis/webMap';
 import { addWebMap, shareItem, searchItems } from '../../../services/portal';
 import request from './../../../utils/request';
 import poltUtils from '../../../utils/poltUtils';
-import GeometryAttribute from '../../../components/layerList/GeometryAttribute';
+import GeometryAttribute from '../../../components/plot/geometryAttributeEditor/GeometryAttribute';
 import treeUtil from '../../../utils/layertreeutils';
 import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
 import {
@@ -163,6 +163,7 @@ function layerList(opts = {}) {
       }
       case layerlistTypes.LAYERLIST_ADD_LAYERS: {
         const {  addedlayers,view } = action.payload;
+        
         store.dispatch({
           type: 'agsmap/changegloballoadingstate',
           payload: true,

@@ -254,6 +254,7 @@ class GeoSearch extends React.Component {
 
   renderContent() {
     if (this.props.search.mode === SearchConsts.MODE_LOCATION) {
+      console.log(this.props.search.submode)
       switch (this.props.search.submode) {
         case SearchConsts.SUBMODE_LOCATION_NEARBY:
         case SearchConsts.SUBMODE_LOCATION_NEARBY_DETAIL:
