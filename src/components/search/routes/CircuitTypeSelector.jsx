@@ -12,15 +12,12 @@ import styles from './CircuitTypeSelector.css';
  * 路线类型 - 选择器
  * 1. 公交
  * 2. 驾车
+ * 3. 步行
+ * 4. 骑行
  */
-// export default class CircuitTypeSelector extends React.PureComponent {
+
   const CircuitTypeSelector = props => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     mode: MODE_DIR_BUS,
-  //   };
-  // }
+  
   const [mode, setMode] = useState(MODE_DIR_BUS);
 
   function onButtonClick(inmode) {

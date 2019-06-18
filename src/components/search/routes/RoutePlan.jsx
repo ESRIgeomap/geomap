@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Input, Button, Tooltip, Tag, Icon, AutoComplete, Spin } from 'antd';
