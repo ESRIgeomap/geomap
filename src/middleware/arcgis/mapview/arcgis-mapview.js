@@ -3,10 +3,8 @@
  * @author  lee  
  */
 
-import MeasureUtil from '../../../utils/measure';
 import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
-import LegendList from '../../../utils/legend';
 import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
 import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
@@ -35,15 +33,17 @@ function initMapUtils(store) {
   AgsSearchUtil.instance().store = store;
 }
 // 初始化地图
-async function initMap(viewMode) {
+async function initMap(viewMode,store) {
   if (viewMode === actions.VIEW_MODE_2D) {
     // 初始化二维地图
     ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
+    store.dispatch({ type: 'agsmap/afterViewCreated' });
     // 创建底图切换微件
     await widgets.createBasemapGallery(ags.view);
   } else if (viewMode === actions.VIEW_MODE_3D) {
     // 初始化三维地图
     ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
+    store.dispatch({ type: 'agsmap/afterSceneviewCreated' });
     // 创建鹰眼微件
     await widgets.createOverView(ags.view);
   }
@@ -78,11 +78,11 @@ function createMapView(opts = {}) {
         await prepare();
 
         // 初始化地图
-        await initMap(viewMode);
+        await initMap(viewMode,store);
 
         // after view created
         window.agsGlobal = ags;
-        store.dispatch({ type: 'agsmap/afterViewCreated' });
+
 
         // TODO: to be continued
         initMapUtils(store);
@@ -91,7 +91,6 @@ function createMapView(opts = {}) {
         return ags.view.when(() => {
         });
       }
-
       case actions.INIT_SPLITMAP: {
         const { payload } = action;
         const { containers } = payload;
@@ -117,18 +116,7 @@ function createMapView(opts = {}) {
       }
       case actions.SWITCH_MAP: {
         const { payload } = action;
-        await initMap(payload);
-        break;
-      }
-      case actions.MAP_ACTION_CLEAR_GRAPHICS: {
-        MeasureUtil.mapView = ags.view;
-        MeasureUtil.active('clearmeasure');
-        break;
-      }
-      // 二维测面积
-      case actions.ACTION_MEASURE_2D_AREA: {
-        MeasureUtil.mapView = ags.view;
-        MeasureUtil.active('area');
+        await initMap(payload,store);
         break;
       }
       case actions.ACTION_PRINT_2D_MAP: {
@@ -139,16 +127,6 @@ function createMapView(opts = {}) {
       case actions.MAP_ACTION_CLIP_MAP: {
         Print2DMap.mapView = ags.view;
         Print2DMap.clipMap();
-        break;
-      }
-      case actions.ACTION_LEGENDLIST_SHOW: {
-        LegendList.mapView = ags.view;
-        LegendList.show();
-        break;
-      }
-      case actions.ACTION_LEGENDLIST_DEACTIVATE: {
-        LegendList.mapView = ags.view;
-        LegendList.deactivate();
         break;
       }
       default: {

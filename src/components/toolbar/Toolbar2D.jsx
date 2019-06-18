@@ -9,12 +9,8 @@ import { Menu, Dropdown, Button, Icon, Avatar } from 'antd';
 import {
   MAP_ACTION_CLEAR_GRAPHICS,
   VIEW_MODE_2D,
-  ACTION_MEASURE_2D_AREA,
-  ACTION_MAP_2D_CORRECT,
   ACTION_PRINT_2D_MAP,
   INIT_SPLITMAP,
-  ACTION_LEGENDLIST_DEACTIVATE,
-  ACTION_LEGENDLIST_SHOW,
   MAP_ACTION_CLIP_MAP,
 } from '../../constants/action-types';
 
@@ -78,12 +74,14 @@ class Toolbar2D extends React.Component {
   // 工具箱子菜单点击事件
   measureLine({ key }) {
     switch (key) {
+      // 地图二维长度测量
       case 'measure2DLine':
         this.props.dispatch({
           type: 'toolbar/updateCurrentView',
           payload: 'measure-line-2d',
         });
         break;
+      // 地图二维面积测量
       case 'measure2DArea':
         this.props.dispatch({
           type: 'toolbar/updateCurrentView',
@@ -96,25 +94,12 @@ class Toolbar2D extends React.Component {
         });
         break;
       }
+      // 地图图例
       case 'legend': {
-        if (this.props.agsmap.legendflags) {
-          // prepare();
-          this.props.dispatch({
-            type: 'agsmap/legendChangeState',
-            payload: false,
-          });
-          this.props.dispatch({
-            type: ACTION_LEGENDLIST_DEACTIVATE,
-          });
-        } else {
-          this.props.dispatch({
-            type: 'agsmap/legendChangeState',
-            payload: true,
-          });
-          this.props.dispatch({
-            type: ACTION_LEGENDLIST_SHOW,
-          });
-        }
+        this.props.dispatch({
+          type: 'toolbar/updateCurrentView',
+          payload: 'legend',
+        });
         break;
       }
       case 'bookmark': {
@@ -213,10 +198,6 @@ class Toolbar2D extends React.Component {
         <Icon type="picture" />
         <span>&nbsp;测面</span>
       </Menu.Item>,
-      <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
-        <Icon type="delete" theme="outlined" />
-        <span>&nbsp;清除</span>
-      </Menu.Item>,
       <Menu.Item key="legend" style={{ textAlign: 'center' }}>
         <Icon type="bars" />
         <span>&nbsp;图例</span>
@@ -224,6 +205,10 @@ class Toolbar2D extends React.Component {
       <Menu.Item key="bookmark" style={{ textAlign: 'center' }}>
         <Icon type="book" />
         <span>&nbsp;书签</span>
+      </Menu.Item>,
+      <Menu.Item key="mapclear" style={{ textAlign: 'center' }}>
+        <Icon type="delete" theme="outlined" />
+        <span>&nbsp;清除</span>
       </Menu.Item>,
     ]);
 

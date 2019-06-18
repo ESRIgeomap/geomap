@@ -177,6 +177,7 @@ class LightshadowListTwo extends Component {
     window.agsGlobal.view.environment.lighting.date = Number(tempTime2.format('x'));
   }
 
+
   onCheckBoxChange(e) {
     if (e.target.checked) {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = true;

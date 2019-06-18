@@ -11,14 +11,12 @@ import exportImageIcon from './images/导图.png';
 import sunImageIcon from './images/光照.jpg';
 
 import {
-  ACTION_MEASURE_LINE_3D,
-  ACTION_MEASURE_AREA_3D,
   ACTION_MAP_PAN,
   ACTION_MAP_ROTATE,
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   VIEW_MODE_2D,
-  ACTION_MAP_PRINT_3D,
+  ACTION_MAP_PRINT_3D
 } from '../../constants/action-types';
 
 import styles from './Toolbar3D.css';
@@ -41,24 +39,29 @@ class Toolbar3D extends React.Component {
     this.sunShine = this.sunShine.bind(this);
     this.windowPrint = this.windowPrint.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   measure3DLine(e) {
     e.stopPropagation();
     this.props.dispatch({
-      type: ACTION_MEASURE_LINE_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'measure-line-3d',
     });
   }
 
   /**
    * 面积测量回调
    * author:pensiveant
-   * @param {*} e 
+   * @param {*} e
    */
   measure3DArea(e) {
     e.stopPropagation();
+    // this.props.dispatch({
+    //   type: ACTION_MEASURE_AREA_3D,
+    // });
     this.props.dispatch({
-      type: ACTION_MEASURE_AREA_3D,
+      type: 'toolbar/updateCurrentView',
+      payload: 'measure-area-3d',
     });
   }
 
@@ -84,7 +87,6 @@ class Toolbar3D extends React.Component {
   // 控制是否显示鹰眼
   overviewmap(e) {
     e.stopPropagation();
-    console.log(this.state.visibleovermap);
     this.setState({
       visibleovermap: !this.state.visibleovermap,
     });
@@ -99,9 +101,15 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   sunShine() {
-    if (!this.props.agsmap.lightshadowlistflags) {
+
+    this.props.dispatch({
+      type: 'toolbar/updateCurrentView',
+      payload: 'light-shadow-3d',
+    });
+
+    if (!this.props.Lightshadow.lightshadowlistflags) {
       this.props.dispatch({
-        type: 'agsmap/listChangeState',
+        type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
           progralistflags: false,
@@ -111,7 +119,7 @@ class Toolbar3D extends React.Component {
       });
     } else {
       this.props.dispatch({
-        type: 'agsmap/listChangeState',
+        type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
           progralistflags: false,
@@ -127,11 +135,17 @@ class Toolbar3D extends React.Component {
    * author:pensiveant
    */
   windowPrint() {
+
+    this.props.dispatch({
+      type: 'toolbar/updateCurrentView',
+      payload: 'map-print-3d',
+    });
+
     this.props.dispatch({
       type: ACTION_MAP_PRINT_3D,
     });
   }
-  
+
   render() {
     return (
       <div
@@ -192,8 +206,11 @@ class Toolbar3D extends React.Component {
   }
 }
 
-export default connect(({ agsmap }) => {
+export default connect(({ agsmap, Lightshadow, toolbar }) => {
   return {
     agsmap,
+    //日照分析
+    Lightshadow,
+    toolbar,
   };
 })(Toolbar3D);

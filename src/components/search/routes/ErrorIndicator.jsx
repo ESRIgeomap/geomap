@@ -1,20 +1,19 @@
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 
-import imgSrc from './images/fail.gif';
+import imgSrc from '../images/fail.gif';
 
 import styles from './ErrorIndicator.css';
 
-class ErrorIndicator extends React.Component {
-  render() {
+const ErrorIndicator = props => {
     return (
       <div className={styles.wrap}>
         <img alt="" src={imgSrc} className={styles.icon} />
         <span className={styles.msg}>{this.props.msg}</span>
       </div>
     );
-  }
 }
 
 ErrorIndicator.propTypes = {

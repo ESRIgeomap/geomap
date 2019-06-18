@@ -12,17 +12,17 @@ import ToolbarSplit from '../components/toolbar/ToolbarSplit';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
 import Bookmark from '../components/bookmark/Bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
-import LightshadowList from '../components/Lightshadow/LightshadowListTwo';
+//加载日照分析组件
+import LightshadowList from '../components/Lightshadow';
 
-import Zoom from '../components/Zoom';
-import Compass from '../components/Compass';
-import ViewInfo from '../components/ViewInfo';
+import Zoom from '../components/zoom/';
+import Compass from '../components/compass/Compass';
+import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
 import { VIEW_MODE_2D } from '../constants/action-types';
 import styles from './index.css';
 
-import LegendList from '../components/legend/LegendList';
 
 //pensiveant:加载LayerList组件
 import LayerList from '../components/layerTree';
@@ -61,11 +61,11 @@ class IndexPage extends React.Component {
     // 类似MapViewer初始化ui.components数组
     if (this.props.agsmap.mode === VIEW_MODE_2D) {
       return [
-        <Zoom
-          key="ui-component-zoom"
-          view={_.get(window.agsGlobal, 'view')}
-          className={styles.componentZoom}
-        />,
+        // <Zoom
+        //   key="ui-component-zoom"
+        //   view={_.get(window.agsGlobal, 'view')}
+        //   className={styles.componentZoom}
+        // />,
         <Compass
           key="ui-component-compass"
           view={_.get(window.agsGlobal, 'view')}
@@ -77,11 +77,11 @@ class IndexPage extends React.Component {
 
     // 3D
     return [
-      <Zoom
-        key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view')}
-        className={styles.componentZoom}
-      />,
+      // <Zoom
+      //   key="ui-component-zoom"
+      //   view={_.get(window.agsGlobal, 'view')}
+      //   className={styles.componentZoom}
+      // />,
       <Compass
         key="ui-component-compass"
         view={_.get(window.agsGlobal, 'view')}
@@ -170,7 +170,6 @@ class IndexPage extends React.Component {
           <TimerSlider />
           {this.renderMapUIWidgets()}
         </div>
-        <LegendList />
         <GeoSearch />
         {/*分屏对比dom*/}
         <div

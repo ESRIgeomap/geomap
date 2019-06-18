@@ -1,6 +1,6 @@
 import React from 'react';
 
-import busyImg from './images/timg.gif';
+import busyImg from '../images/timg.gif';
 import styles from './BusyIndicator.css';
 
 const BusyIndicator = () => {

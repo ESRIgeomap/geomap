@@ -1,54 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import { Icon, Input } from 'antd';
 
-import revertSrc from './images/icon_往返.png';
-import startSrc from './images/icon_circle_green.png';
-import endSrc from './images/icon_circle_red.png';
+import revertSrc from '../images/icon_往返.png';
+import startSrc from '../images/icon_circle_green.png';
+import endSrc from '../images/icon_circle_red.png';
 
 import styles from './TerminalSelector.css';
 
 /**
  * 起点与终点 - 选择器
  */
-class TerminalSelector extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const TerminalSelector = props => {
 
-  onStartInputChange=(evt)=> {
-    this.props.dispatch({
+  function onStartInputChange (evt) {
+    props.dispatch({
       type: 'search/updateStartText',
       payload: evt.target.value,
     });
-    this.props.onStartInput(evt.target.value);
+    props.onStartInput(evt.target.value);
   }
 
-  onEndInputChange=(evt) =>{
-    this.props.dispatch({
+  function onEndInputChange(evt){
+    props.dispatch({
       type: 'search/updateEndText',
       payload: evt.target.value,
     });
-    this.props.onEndInput(evt.target.value);
+    props.onEndInput(evt.target.value);
   }
 
-  onStartInputPressEnter=() =>{
-    if (this.props.onStartInput) {
-      this.props.onStartInput(this.props.search.starttext);
+  function onStartInputPressEnter(){
+    if (props.onStartInput) {
+      props.onStartInput(props.search.starttext);
     }
   }
 
-  onEndInputPressEnter=()=> {
-    if (this.props.onEndInput) {
-      this.props.onEndInput(this.props.search.endtext);
+  function onEndInputPressEnter() {
+    if (props.onEndInput) {
+      props.onEndInput(props.search.endtext);
     }
   }
 
-  render() {
     return (
       <div className={styles.box}>
         <div className={styles.searchbox}>
-          <div className={styles.revertbox} onClick={this.props.onReverDir}>
+          <div className={styles.revertbox} onClick={props.onReverDir}>
             <img src={revertSrc} alt="" />
           </div>
           <div className={styles.inputbox}>
@@ -60,11 +56,11 @@ class TerminalSelector extends React.PureComponent {
               <Input
                 className={styles.routeinput}
                 placeholder={"输入起点"}
-                value={this.props.search.starttext}
-                onChange={this.onStartInputChange}
-                onPressEnter={this.onStartInputPressEnter}
+                value={props.search.starttext}
+                onChange={onStartInputChange}
+                onPressEnter={onStartInputPressEnter}
               />
-              {this.props.search.startsearching ? (
+              {props.search.startsearching ? (
                 <Icon type="loading" />
               ) : null}
             </div>
@@ -73,21 +69,18 @@ class TerminalSelector extends React.PureComponent {
               <Input
                 className={styles.routeinput}
                 placeholder={"输入终点"}
-                value={this.props.search.endtext}
-                onChange={this.onEndInputChange}
-                onPressEnter={this.onEndInputPressEnter}
+                value={props.search.endtext}
+                onChange={onEndInputChange}
+                onPressEnter={onEndInputPressEnter}
               />
-              {this.props.search.endsearching ? <Icon type="loading" /> : null}
+              {props.search.endsearching ? <Icon type="loading" /> : null}
             </div>
           </div>
         </div>
       </div>
     );
-  }
 }
 
 export default connect(({ search }) => {
-  return {
-    search,
-  };
+  return { search };
 })(TerminalSelector);

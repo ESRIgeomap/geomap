@@ -5,6 +5,11 @@ let maskDiv = null,
   imgDiv = null,
   buttonDownDiv = null,
   buttonBackSceneDiv = null;
+
+/**
+ * 初始化导出地图结果dom
+ * author:pensiveant
+ */
 function initDom() {
   maskDiv = document.createElement('div');
   maskDiv.style.display = 'none';
@@ -28,6 +33,7 @@ function initDom() {
   imgDiv.style.boxShadow = '2px 2px 5px 0 rgba(0, 0, 0, 0.5)';
   popupDiv.appendChild(imgDiv);
 
+  //下载图片DOM添加，start
   buttonDownDiv = document.createElement('div');
   buttonDownDiv.innerHTML = '<p>下载图片</p>';
   buttonDownDiv.style.position = 'absolute';
@@ -39,7 +45,9 @@ function initDom() {
   buttonDownDiv.style.color = '#ffffff';
   buttonDownDiv.style.cursor = 'pointer';
   popupDiv.appendChild(buttonDownDiv);
+  //下载图片DOM添加，end
 
+  //返回场景DOM添加，start
   buttonBackSceneDiv = document.createElement('div');
   buttonBackSceneDiv.innerHTML = '<p>返回场景</p>';
   buttonBackSceneDiv.style.position = 'absolute';
@@ -51,6 +59,7 @@ function initDom() {
   buttonBackSceneDiv.style.color = '#ffffff';
   buttonBackSceneDiv.style.cursor = 'pointer';
   popupDiv.appendChild(buttonBackSceneDiv);
+ //返回场景DOM添加，end
 
   document.body.append(popupDiv);
 }
@@ -78,6 +87,11 @@ function getImageWithText(screenshot, text) {
   return canvas.toDataURL();
 }
 
+/**
+ * 下载图片点击回调
+ * author:pensiveant
+ * @param {*} screenShot
+ */
 function downloadMap(screenShot) {
   const aLink = document.createElement('a');
   aLink.download = 'map.png';
@@ -85,10 +99,23 @@ function downloadMap(screenShot) {
   aLink.click();
 }
 
+/**
+ *
+ * author:pensiveant
+ * @param {*} value
+ * @param {*} from
+ * @param {*} to
+ * @returns
+ */
 function clamp(value, from, to) {
   return value < from ? from : value > to ? to : value;
 }
 
+/**
+ *
+ * author:pensiveant
+ * @param {*} area
+ */
 function setMaskPosition(area) {
   if (area) {
     maskDiv.style.display = 'block';
@@ -104,6 +131,7 @@ function setMaskPosition(area) {
 }
 
 class Print3DMap {
+
   static print() {
     initDom();
     let area = null;

@@ -1,15 +1,13 @@
-/**
- * 二维面积测量
- * @author  lee  
- */
-
 import { useRef, useState, useEffect } from 'react';
 import { Spin, Icon } from 'antd';
 import * as jsapi from '../../utils/jsapi';
 
 let widget;
-
-const Measure = ({ view }) => {
+/**
+ * 二维面积测量
+ * @author  lee  
+ */
+const MeasureArea2D = ({ view }) => {
   const domRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
@@ -58,4 +56,4 @@ const Measure = ({ view }) => {
   );
 };
 
-export default Measure;
+export default MeasureArea2D;

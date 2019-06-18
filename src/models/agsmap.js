@@ -21,7 +21,7 @@ export default {
 
   state: {
     viewCreated: false,
-
+    sceneviewCreated:false,
     mode: VIEW_MODE_2D,
     callflags: false,
     bookflags: false,
@@ -43,7 +43,6 @@ export default {
     activeHeadCode: '1',
     lightshadowlistflags: false,
     menusflags: false,
-    legendflags: false,
     timerLayersSelectvisible:false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
   },
@@ -110,6 +109,9 @@ export default {
   reducers: {
     afterViewCreated(state, action) {
       return { ...state, viewCreated: true };
+    },
+    afterSceneviewCreated(state, action) {
+      return { ...state, sceneviewCreated: true };
     },
     rollscreenChangeState(state, action) {
       return { ...state, rollerflags: action.payload };
@@ -268,12 +270,6 @@ export default {
     },
     showTimerSliderCompare(state, action) {
       return { ...state, timerLayersSelectvisible: action.payload };
-    },
-    legendChangeState(state, action) {
-      return {
-        ...state,
-        legendflags: action.payload,
-      };
     },
 
     identifyChangeState(state, action) {
