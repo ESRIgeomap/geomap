@@ -4,16 +4,23 @@ import _ from 'lodash';
 import styles from './index.css';
 
 const ViewInfo = props => {
+  const {view }  = props;
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [scale, setScale] = useState('');
   const [lod, setLod] = useState('');
 
+
   useEffect(() => {
-    if (props.view) {
-      loadViewInfo(props.view);
+    let handle;
+    // view 有三种取值，undefine，2d，3d
+    if (view === '2d') {
+      if (handle) {
+        handle.remove();
+      }
+      handle = loadViewInfo(window.agsGlobal.view);
     }
-  });
+  }, [view]);
 
   function loadViewInfo(view) {
     view.when(view => {
