@@ -46,14 +46,6 @@
   position: relative;
 }
 
-.viewsplitDiv {
-  flex: auto;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  position: relative;
-}
-
 .viewDiv > div {
   flex: auto;
 }

@@ -8,7 +8,6 @@ import GeoSearch from '../components/search/GeoSearch';
 import Trans3D from '../components/trans3d/';
 
 import Toolbar2D from '../components/toolbar/Toolbar2D';
-import ToolbarSplit from '../components/toolbar/ToolbarSplit';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
 import Bookmark from '../components/bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
@@ -23,7 +22,6 @@ import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 import { VIEW_MODE_2D } from '../constants/action-types';
 import styles from './index.css';
 
-
 //pensiveant:加载LayerList组件
 import LayerList from '../components/layerTree';
 //pensiveant:加载疑点标绘PoltPanel组件
@@ -34,6 +32,8 @@ import SplitLayerList from '../components/layerList/SplitLayerList';
 import RightContent from '../components/content/RightContent';
 //卷帘对比模块加载
 import RollerBlind from '../components/RollerBlind/';
+//分屏对比模块加载
+import SplitScreen from '../components/SplitScreen/';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -69,22 +69,25 @@ class IndexPage extends React.Component {
           view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
           className={styles.componentCompass}
         />,
-        <ViewInfo key="ui-component-viewinfo" view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type} />,
+        <ViewInfo
+          key="ui-component-viewinfo"
+          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+        />,
       ];
     }
 
     // 3D
     return [
       <Zoom
-      key="ui-component-zoom"
-      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-      className={styles.componentZoom}
-    />,
-    <Compass
-      key="ui-component-compass"
-      view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-      className={styles.componentCompass}
-    />,
+        key="ui-component-zoom"
+        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+        className={styles.componentZoom}
+      />,
+      <Compass
+        key="ui-component-compass"
+        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+        className={styles.componentCompass}
+      />,
     ];
   }
 
@@ -118,26 +121,13 @@ class IndexPage extends React.Component {
           {this.renderMapUIWidgets()}
         </div>
         <GeoSearch />
-        {/*分屏对比dom*/}
-        <div
-          id="splitscreenDom"
-          className={styles.viewsplitDiv}
-          style={{
-            display: this.props.agsmap.splitflags ? 'block' : 'none',
-          }}
-        >
-          <ToolbarSplit />
-        </div>
-        <Button
-          className={styles.exitroll}
-          style={{
-            display: this.props.agsmap.rollerflags ? 'block' : 'none',
-          }}
+        <SplitScreen />
+        <Button className={styles.exitroll} style={{ display: this.props.agsmap.rollerflags ? 'block' : 'none', }}
           onClick={this.exitRoller}
         >
           退出卷帘
         </Button>
-        <RollerBlind/>
+        <RollerBlind />
         <LayerList />
         <PoltPanel />
         <SplitLayerList />
