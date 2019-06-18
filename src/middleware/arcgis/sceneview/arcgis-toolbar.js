@@ -5,8 +5,6 @@ import Print3DMap from '../../../utils/Print3DMap';
 import {
   ACTION_MEASURE_LINE_3D,
   ACTION_MEASURE_AREA_3D,
-  ACTION_MAP_PAN,
-  ACTION_MAP_ROTATE,
   ACTION_MAP_OVERVIEW,
   ACTION_MAP_ROAM,
   ACTION_MAP_PRINT_3D,
@@ -31,16 +29,6 @@ function toolbar(opts = {}) {
       case ACTION_MEASURE_AREA_3D: {
         Measure3DUtil.sceneView = ags.view;
         Measure3DUtil.active('area');
-        break;
-      }
-      // lih 20180718  工具条-地图平移
-      case ACTION_MAP_PAN: {
-        NavigationToggle.active(ags.view, 'pan');
-        break;
-      }
-      // lih 20180718  工具条-地图旋转
-      case ACTION_MAP_ROTATE: {
-        NavigationToggle.active(ags.view, 'rotate');
         break;
       }
       // lih 20180718  工具条-地图鹰眼

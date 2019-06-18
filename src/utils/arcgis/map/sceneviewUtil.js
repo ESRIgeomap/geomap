@@ -5,10 +5,9 @@
 import * as jsapi from '../../jsapi';
 //---------------------------------场景初始化 start----------------------------------------
 /**
- * 初始化二维场景
+ * 切换三维的旋转方式：平移或者渲染
  * @author  lee  
  * @param {object} view  三维场景
- * @param {string} itemid  webmapId
  * @param {string} tool  pan or rotate
  */
 async function changeToggle(view, tool) {
