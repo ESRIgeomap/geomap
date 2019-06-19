@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
 import panMapIcon from './images/移动.png';
@@ -17,87 +17,119 @@ import {
   ACTION_MAP_PRINT_3D,
 } from '../../constants/action-types';
 
-import styles from './Toolbar3D.css';
+import styles from './Toolbar3D.less';
 
 const ButtonGroup = Button.Group;
 
-class Toolbar3D extends React.Component {
-  constructor(props) {
-    super(props);
+const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
 
-    this.state = {
-      visibleovermap: true,
-    };
-    this.measure3DLine = this.measure3DLine.bind(this);
-    this.measure3DArea = this.measure3DArea.bind(this);
-    this.mapPan = this.mapPan.bind(this);
-    this.mapRotate = this.mapRotate.bind(this);
-    this.overviewmap = this.overviewmap.bind(this);
-    this.mapRoam = this.mapRoam.bind(this);
-    this.sunShine = this.sunShine.bind(this);
-    this.windowPrint = this.windowPrint.bind(this);
-  }
-  componentDidMount() {}
+  const [state, setState] = useState(true);
 
-  measure3DLine(e) {
+
+  /**
+   * 3D【平移功能】回调
+   * author:
+   * @param {*} e
+   */
+  const mapPan = (e) => {
     e.stopPropagation();
-    this.props.dispatch({
+    sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
+  }
+
+   /**
+   * 3D【环绕旋转】回调
+   * author:
+   * @param {*} e
+   */
+  const mapRotate = (e) => {
+    e.stopPropagation();
+    sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
+  }
+
+   /**
+   * 3D【环绕漫游】回调
+   * author:
+   * @param {*} e
+   */
+  const mapRoam = (e) => {
+    e.stopPropagation();
+    sceneviewUtils.surroundRoam(window.agsGlobal.view);
+  }
+
+
+   /**
+   * 3D【鹰眼】回调
+   * author:
+   * @param {*} e
+   */
+  const overviewmap = (e) => {
+    e.stopPropagation();
+    setState({
+      visibleovermap: !state.visibleovermap,
+    });
+    dispatch({
+      type: ACTION_MAP_OVERVIEW,
+      payload: state.visibleovermap,
+    });
+  }
+
+  
+  /**
+   * 3D【三维测量】回调
+   * author:
+   * @param {*} e
+   */
+  const measure3DLine = (e) => {
+    e.stopPropagation();
+    dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'measure-line-3d',
     });
   }
 
   /**
-   * 面积测量回调
+   * 3D【面积测量】回调
    * author:pensiveant
    * @param {*} e
    */
-  measure3DArea(e) {
+  const measure3DArea = (e) => {
     e.stopPropagation();
-    this.props.dispatch({
+    dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'measure-area-3d',
     });
   }
-  // 平移功能
-  mapPan(e) {
-    e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
-  }
-  // 旋转功能
-  mapRotate(e) {
-    e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
-  }
-  // 环绕漫游
-  mapRoam(e) {
-    e.stopPropagation();
-    sceneviewUtils.surroundRoam(window.agsGlobal.view);
-  }
-  // 控制是否显示鹰眼
-  overviewmap(e) {
-    e.stopPropagation();
-    this.setState({
-      visibleovermap: !this.state.visibleovermap,
+
+
+
+  /**
+   * 【导出底图】回调
+   * author:pensiveant
+   */
+  const windowPrint = () => {
+    dispatch({
+      type: 'toolbar/updateCurrentView',
+      payload: 'map-print-3d',
     });
-    this.props.dispatch({
-      type: ACTION_MAP_OVERVIEW,
-      payload: this.state.visibleovermap,
+
+    dispatch({
+      type: ACTION_MAP_PRINT_3D,
     });
   }
 
+
   /**
-   * 日照分析回调
+   * 【光照阴影】回调
    * author:pensiveant
    */
-  sunShine() {
-    this.props.dispatch({
+  const sunShine = () => {
+    dispatch({
       type: 'toolbar/updateCurrentView',
       payload: 'light-shadow-3d',
     });
 
-    if (!this.props.Lightshadow.lightshadowlistflags) {
-      this.props.dispatch({
+    if (!Lightshadow.lightshadowlistflags) {
+      dispatch({
         type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
@@ -107,7 +139,7 @@ class Toolbar3D extends React.Component {
         },
       });
     } else {
-      this.props.dispatch({
+      dispatch({
         type: 'Lightshadow/listChangeState',
         payload: {
           prolistflags: false,
@@ -119,79 +151,63 @@ class Toolbar3D extends React.Component {
     }
   }
 
-  /**
-   * 导出底图
-   * author:pensiveant
-   */
-  windowPrint() {
-    this.props.dispatch({
-      type: 'toolbar/updateCurrentView',
-      payload: 'map-print-3d',
-    });
+  return (
+    <div
+      className={styles.toolbar}
+      style={{
+        display: agsmap.mode === VIEW_MODE_2D ? 'none' : 'block',
+      }}
+    >
+      <ButtonGroup className={styles.buttonGroup}>
+        <Button onClick={mapPan} className={styles.btnStyle}>
+          <a className={styles.btnA} title="地图移动">
+            <img src={panMapIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={mapRotate} className={styles.btnStyle}>
+          <a className={styles.btnA} title="环绕旋转">
+            <img src={surroundRoamIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button className={styles.btnStyle}>
+          <a className={styles.btnA} title="搜索">
+            <img src={searchIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={mapRoam} className={styles.btnStyle}>
+          <a className={styles.btnA} title="环绕漫游">
+            <img src={surroundRoamIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={overviewmap} className={styles.btnStyle}>
+          <a className={styles.btnA} title="鹰眼">
+            <img src={yuYanIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={measure3DLine} className={styles.btnStyle}>
+          <a className={styles.btnA} title="三维测量">
+            <img src={measurement3DIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={measure3DArea} className={styles.btnStyle}>
+          <a className={styles.btnA} title="面积测量">
+            <img src={measurement2DIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={windowPrint} className={styles.btnStyle}>
+          <a className={styles.btnA} title="导出地图">
+            <img src={exportImageIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+        <Button onClick={sunShine} className={styles.btnStyle}>
+          <a className={styles.btnA} title="光照阴影">
+            <img src={sunImageIcon} alt="" className={styles.btnImg} />
+          </a>
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
 
-    this.props.dispatch({
-      type: ACTION_MAP_PRINT_3D,
-    });
-  }
-
-  render() {
-    return (
-      <div
-        className={styles.toolbar}
-        style={{
-          display: this.props.agsmap.mode === VIEW_MODE_2D ? 'none' : 'block',
-        }}
-      >
-        <ButtonGroup className={styles.buttonGroup}>
-          <Button onClick={this.mapPan} className={styles.btnStyle}>
-            <a className={styles.btnA} title="地图移动">
-              <img src={panMapIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.mapRotate} className={styles.btnStyle}>
-            <a className={styles.btnA} title="环绕旋转">
-              <img src={surroundRoamIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button className={styles.btnStyle}>
-            <a className={styles.btnA} title="搜索">
-              <img src={searchIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.mapRoam} className={styles.btnStyle}>
-            <a className={styles.btnA} title="环绕漫游">
-              <img src={surroundRoamIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.overviewmap} className={styles.btnStyle}>
-            <a className={styles.btnA} title="鹰眼">
-              <img src={yuYanIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.measure3DLine} className={styles.btnStyle}>
-            <a className={styles.btnA} title="三维测量">
-              <img src={measurement3DIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.measure3DArea} className={styles.btnStyle}>
-            <a className={styles.btnA} title="面积测量">
-              <img src={measurement2DIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.windowPrint} className={styles.btnStyle}>
-            <a className={styles.btnA} title="导出地图">
-              <img src={exportImageIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-          <Button onClick={this.sunShine} className={styles.btnStyle}>
-            <a className={styles.btnA} title="光照阴影">
-              <img src={sunImageIcon} alt="" className={styles.btnImg} />
-            </a>
-          </Button>
-        </ButtonGroup>
-      </div>
-    );
-  }
 }
 
 export default connect(({ agsmap, Lightshadow, toolbar }) => {
