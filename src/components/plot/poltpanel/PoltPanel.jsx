@@ -15,7 +15,7 @@ import {
   POLT_EDITOR_REMOVE,
   POLT_EDIT_COMPLETE,
 } from '../../../constants/action-types';
-import poltUtils from '../../../utils/poltUtils';
+import poltUtils from '../../../utils/arcgis/plot/poltUtils';
 
 const { TabPane } = Tabs;
 const ButtonGroup = Button.Group;

@@ -1,25 +1,24 @@
-import { message, Modal, Input, Button } from 'antd';
+import { message} from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { jsapi } from '../constants/geomap-utils';
-import env from '../utils/env';
-import GeometryAttribute from '../components/plot/geometryAttributeEditor/GeometryAttribute';
+import { jsapi } from '../../../constants/geomap-utils';
+import env from '../../../utils/env';
+import GeometryAttribute from '../../../components/plot/geometryAttributeEditor/GeometryAttribute';
 import {
-  addPoltlayerItem,
   getItemInfoByItemId,
   updateItemByItemId,
-  shareItem,
   getPoltItemData,
-} from '../services/portal';
-import { requestArrayBuffer } from '../utils/request';
-import request from '../utils/request';
-import layerUtils from '../utils/layerUtils';
-import GeometrySymbolEditor from '../components/plot/geometrySymbolEditor';
+} from '../../../services/portal';
+import { requestArrayBuffer,request } from '../../../utils/request';
+import GeometrySymbolEditor from '../../../components/plot/geometrySymbolEditor';
 
+/**
+ * 针对标绘功能的方法封装
+ */
 class poltUtils {
 
   /**
-  * 
+  * 根据标绘类型标绘
   * @param {} [] (!)
   * @return {} 
   */
@@ -152,16 +151,7 @@ class poltUtils {
       if (event.state === 'complete') {
         this.sketchCreatehandle.remove();
 
-        if (callback) {
-          // const graphics = [];
-          // graphics.push(event.graphic);
-          // addGraphicsToMap(graphics, env.getParamAgstwo().view);
-          // const drawLayer = mapUtils.getLayerByTitle(ags.view,'临时标绘图层');
-          // if(drawLayer){
-          //   drawLayer.on('change',function(s){
-          //     console.log(s);
-          //   });
-          // }
+        if (callback) {          
           callback(event.graphic);
         }
 
@@ -242,23 +232,17 @@ class poltUtils {
       return;
     }
   }
-
-  static async getSketchModal() {
-    const view = env.getParamAgs().view;
-    const [GraphicsLayer, SketchViewModel] = await jsapi.load([
-      'esri/layers/GraphicsLayer',
-      'esri/widgets/Sketch/SketchViewModel',
-    ]);
-    this.sketchViewModel = new SketchViewModel({
-      view: view,
-      layer: new GraphicsLayer(),
-    });
-  }
+  /**
+   * 取消标绘
+   */
   static deactivePolt() {
     if (this.sketchViewModel) this.sketchViewModel.reset();
     if (this.poltFreeBar) this.poltFreeBar.reSet();
     ReactDOM.unmountComponentAtNode(document.getElementById('geosymbol'));
   }
+  /**
+   * 清除标绘图层
+   */
   static clearPoltLayer() {
     const view = env.getParamAgs().view;
     const poltlayer = this.sketchViewModel && this.sketchViewModel.layer;
@@ -268,6 +252,9 @@ class poltUtils {
     }
 
   }
+  /**
+   * 取消最后一个标绘对象
+   */
   static cancelPoltLastOne() {
     const view = env.getParamAgs().view;
     const poltlayer = view.map.findLayerById(poltlayerid);
@@ -301,7 +288,6 @@ class poltUtils {
       if (!gs)
         message.info('暂无要素');
       const layer = this.sketchViewModel && this.sketchViewModel.layer;
-      debugger
       layer && layer.remove(gs && gs.items[0]);
     } else {
       const gs = this.editSketch && this.editSketch.updateGraphics;
@@ -325,7 +311,7 @@ class poltUtils {
       this.editSketch && this.editSketch.redo();
     }
   }
-  //完成
+  //完成单个要素标绘状态
   static editComplete() {
     const gs = this.sketchViewModel && this.sketchViewModel.updateGraphics;
     if(!gs){
@@ -340,29 +326,11 @@ class poltUtils {
       this.editSketch && this.editSketch.complete();
     }
   }
-  //完成标绘
-  static async savePoltLayer(layerinfo, callback) {
-    window.poltlayerid = null;
-    const map = env.getParamAgs().view.map;
-    const poltlayer = map.findLayerById('poltlayer');
-    if (poltlayer) {
-      const graphics = poltlayer.graphics.items;
-      if (graphics.length === 0) {
-        message.warn('暂无标绘内容');
-        return;
-      }
-      const layertitle = layerinfo.layertitle;
-      const layerText = await layerUtils.getPortalLayerText(poltlayer, layertitle);
-      const [webMercatorUtils] = await jsapi.load(['esri/geometry/support/webMercatorUtils']);
-      const extent = webMercatorUtils.webMercatorToGeographic(agsGlobal.view.extent);
-      const r = await addPoltlayerItem(layertitle, layerText, extent, 'poltfile');
-      if (r.data.success) {
-        await shareItem(r.data.id);
-        if (callback) callback();
-      }
-      this.clearPoltLayer();
-    }
-  }
+
+  /**
+   * 加载标绘图层通过 itemid
+   * @param {*} param0 
+   */
   static async showPoltlayerByItemid({ checked, item }) {
     const map = env.getParamAgs().view.map;
     const view = env.getParamAgs().view;
@@ -398,6 +366,7 @@ class poltUtils {
       'esri/layers/Layer',
     ]);
     if (checked) {
+      // 根据不同文件类型进行加载
       switch (type) {
         case 'CSV': {
           try {
@@ -409,20 +378,7 @@ class poltUtils {
                 title: item.title,
                 content: '{*}',
               },
-            });
-            // layer.renderer = {
-            //   type: 'simple',
-            //   symbol: {
-            //     type: 'simple-marker',
-            //     style: 'circle',
-            //     color: '#8A2BE2',
-            //     size: '8px',
-            //     outline: {
-            //       color: [255, 255, 255],
-            //       width: 1,
-            //     },
-            //   },
-            // };
+            });            
             map.add(layer);
             const query = layer.createQuery();
             query.geometry = layer.fullExtent;
@@ -752,7 +708,10 @@ class poltUtils {
       }
     }
   }
-
+/**
+ * 激活编辑状态通过 指定的itemid
+ * @param {*} itemid 
+ */
   static async poltEditActive(itemid) {
     await this.createEditor();
     const layer = agsGlobal.view.map.findLayerById(itemid);
@@ -774,22 +733,20 @@ class poltUtils {
 
     this.editor.layerInfos = disableEditLayer;
   }
+  /**
+   * 关闭编辑状态通过 指定 itemid
+   * @param {*} itemid 
+   */
   static async poltEditDeActive(itemid) {
     if (itemid) {
       const layer = agsGlobal.view.map.findLayerById(itemid);
       const disableEditLayer = [];
       agsGlobal.view.map.layers.items.map(lay => {
-        // if (lay.id === layer.id) {
-        //   disableEditLayer.push({
-        //     layer,
-        //     enabled: false,
-        //   });
-        // } else {
+       
         disableEditLayer.push({
           layer: lay,
           enabled: false,
         });
-        // }
       });
 
       this.editor.layerInfos = disableEditLayer;
@@ -805,6 +762,11 @@ class poltUtils {
       this.editor.layerInfos = disableEditLayers;
     }
   }
+  /**
+   * 保存标绘编辑 
+   * @param {*} itemid  itemid项
+   * @param {*} callback  保存成功后调用的回调函数
+   */
   static async poltEditSave(itemid, callback) {
     const view = env.getParamAgs().view;
     const [Graphic, GraphicsLayer] = await jsapi.load([
@@ -842,6 +804,10 @@ class poltUtils {
       }
     }
   }
+  /**
+   * 取消标绘编辑
+   * @param {*} itemid  item项
+   */
   static async poltEditCancel(itemid) {
     const view = env.getParamAgs().view;
     const [Graphic, GraphicsLayer] = await jsapi.load([
@@ -861,6 +827,9 @@ class poltUtils {
     view.map.add(editLayer);
     this.editSketch = null;
   }
+  /**
+   * 创建编辑器
+   */
   static async createEditor() {
     const [Editor] = await jsapi.load(['esri/widgets/Editor']);
     const disableEditLayer = [];
@@ -884,13 +853,19 @@ class poltUtils {
       agsGlobal.view.ui.add(this.editor, 'top-right');
     }
   }
+  /**
+   * 移除编辑器
+   */
   static removeEditor() {
     agsGlobal.view.ui.remove(this.editor);
     this.editor = null;
   }
+  /**
+   * 保存标绘编辑至webmap
+   * @param {*} itemid  itemid项
+   */
   static async poltEditActiveCollection(itemid) {
     window.poltlayerid = itemid;
-    debugger;
     const [GraphicsLayer, Graphic, Point, Polyline, Polygon, SketchViewModel] = await jsapi.load([
       'esri/layers/GraphicsLayer',
       'esri/Graphic',
@@ -1008,7 +983,6 @@ class poltUtils {
       });
     this.editlayer.addMany(features);
     if (!this.sketchViewModel) {
-      // await this.getSketchModal();
       const symbolparam = {
         pointparam: {
           fillcolor: { hex: '#1890ff', rgb: { r: 32, g: 142, b: 245 } },
@@ -1048,22 +1022,7 @@ class poltUtils {
     map.add(this.editlayer);
   }
 
-  static async poltEditSaveCollection(item) {
-    window.poltlayerid = null;
-    const view = env.getParamAgs().view;
-    if (!this.editlayer) return;
-    const layerText = await layerUtils.getPortalLayerText(this.editlayer, this.editlayer.title);
-    const res = await updateItemByItemId(item.id, null, null, null, layerText);
-    if (res.data.success) {
-      view.map.remove(this.editlayer);
-      this.editlayer.removeAll();
-      await this.showPoltlayerByItemid({ checked: true, item: item });
-      message.success('保存成功');
-    } else {
-      message.error('保存失败');
-      console.log(res);
-    }
-  }
+
 }
 
 export default poltUtils;

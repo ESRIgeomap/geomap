@@ -30,18 +30,20 @@ export default {
     rollerflags: false,
     // bookmarks: [],
     // bookname: null,
+    
     // 日照分析参数 wangp 20180823
-    showShadow: false,
-    sliderPlay: false,
-    datepickerPlayState: false,
-    valuetime: null,
-    sliderValue: 0,
-    timerOfSlider: setInterval(null, null),
-    timerOfDatepicker: setInterval(null, null),
-    iconOfDatePicker: 'caret-right',
-    iconOfSlider: 'caret-right',
+    // showShadow: false,
+    // sliderPlay: false,
+    // datepickerPlayState: false,
+    // valuetime: null,
+    // sliderValue: 0,
+    // timerOfSlider: setInterval(null, null),
+    // timerOfDatepicker: setInterval(null, null),
+    // iconOfDatePicker: 'caret-right',
+    // iconOfSlider: 'caret-right',
+    // lightshadowlistflags: false,
+
     activeHeadCode: '1',
-    lightshadowlistflags: false,
     menusflags: false,
     timerLayersSelectvisible:false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
@@ -139,17 +141,17 @@ export default {
       return { ...state, menusflags: action.payload };
     },
     // 光照分析
-    listChangeState(state, action) {
-      return {
-        ...state,
-        prolistflags: action.payload.prolistflags,
-        progralistflags: action.payload.progralistflags,
-        controllistflags: action.payload.controllistflags,
-        lightshadowlistflags: action.payload.lightshadowlistflags,
-        layerlistcontrol: action.payload.layerlistcontrol,
-        viewpointflags: action.payload.viewpointflags,
-      };
-    },
+    // listChangeState(state, action) {
+    //   return {
+    //     ...state,
+    //     prolistflags: action.payload.prolistflags,
+    //     progralistflags: action.payload.progralistflags,
+    //     controllistflags: action.payload.controllistflags,
+    //     lightshadowlistflags: action.payload.lightshadowlistflags,
+    //     layerlistcontrol: action.payload.layerlistcontrol,
+    //     viewpointflags: action.payload.viewpointflags,
+    //   };
+    // },
     changeCurrentData(state, action) {
       return {
         ...state,
@@ -194,74 +196,74 @@ export default {
         skylineanalysisModalvisible: action.payload.skylineanalysisModalvisible,
       };
     },
-    shadowInitDataState(state, action) {
-      return {
-        ...state,
-        showShadow: action.payload,
-      };
-    },
-    sliderPlayState(state, action) {
-      return {
-        ...state,
-        sliderPlay: action.payload,
-      };
-    },
-    datepickerPlayState(state, action) {
-      return {
-        ...state,
-        datepickerPlay: action.payload,
-      };
-    },
-    valuetimeState(state, action) {
-      return {
-        ...state,
-        valuetime: action.payload,
-      };
-    },
-    sliderValueState(state, action) {
-      return {
-        ...state,
-        sliderValue: action.payload,
-      };
-    },
-    timerOfDatepickerState(state, action) {
-      return {
-        ...state,
-        timerOfDatepicker: action.payload,
-      };
-    },
-    timerOfSliderState(state, action) {
-      return {
-        ...state,
-        timerOfSlider: action.payload,
-      };
-    },
-    iconOfDatePickerState(state, action) {
-      return {
-        ...state,
-        iconOfDatePicker: action.payload,
-      };
-    },
-    iconOfSliderState(state, action) {
-      return {
-        ...state,
-        iconOfSlider: action.payload,
-      };
-    },
-    rebackInitlightState(state, action) {
-      return {
-        ...state,
-        showShadow: action.payload.showShadow,
-        sliderPlay: action.payload.sliderPlay,
-        datepickerPlay: action.payload.datepickerPlay,
-        valuetime: action.payload.valuetime,
-        sliderValue: action.payload.sliderValue,
-        timerOfDatepicker: action.payload.timerOfDatepicker,
-        timerOfSlider: action.payload.timerOfSlider,
-        iconOfDatePicker: action.payload.iconOfDatePicker,
-        iconOfSlider: action.payload.iconOfSlider,
-      };
-    },
+    // shadowInitDataState(state, action) {
+    //   return {
+    //     ...state,
+    //     showShadow: action.payload,
+    //   };
+    // },
+    // sliderPlayState(state, action) {
+    //   return {
+    //     ...state,
+    //     sliderPlay: action.payload,
+    //   };
+    // },
+    // datepickerPlayState(state, action) {
+    //   return {
+    //     ...state,
+    //     datepickerPlay: action.payload,
+    //   };
+    // },
+    // valuetimeState(state, action) {
+    //   return {
+    //     ...state,
+    //     valuetime: action.payload,
+    //   };
+    // },
+    // sliderValueState(state, action) {
+    //   return {
+    //     ...state,
+    //     sliderValue: action.payload,
+    //   };
+    // },
+    // timerOfDatepickerState(state, action) {
+    //   return {
+    //     ...state,
+    //     timerOfDatepicker: action.payload,
+    //   };
+    // },
+    // timerOfSliderState(state, action) {
+    //   return {
+    //     ...state,
+    //     timerOfSlider: action.payload,
+    //   };
+    // },
+    // iconOfDatePickerState(state, action) {
+    //   return {
+    //     ...state,
+    //     iconOfDatePicker: action.payload,
+    //   };
+    // },
+    // iconOfSliderState(state, action) {
+    //   return {
+    //     ...state,
+    //     iconOfSlider: action.payload,
+    //   };
+    // },
+    // rebackInitlightState(state, action) {
+    //   return {
+    //     ...state,
+    //     showShadow: action.payload.showShadow,
+    //     sliderPlay: action.payload.sliderPlay,
+    //     datepickerPlay: action.payload.datepickerPlay,
+    //     valuetime: action.payload.valuetime,
+    //     sliderValue: action.payload.sliderValue,
+    //     timerOfDatepicker: action.payload.timerOfDatepicker,
+    //     timerOfSlider: action.payload.timerOfSlider,
+    //     iconOfDatePicker: action.payload.iconOfDatePicker,
+    //     iconOfSlider: action.payload.iconOfSlider,
+    //   };
+    // },
     activeHeadChangeState(state, action) {
       return {
         ...state,

@@ -30,7 +30,7 @@ import {
  SPLITLAYERLIST_RELOAD_WEATHER_LAYERS,
 } from '../../constants/action-types';
 import common from '../../utils/common';
-import treeUtil from '../../utils/layertreeutils';
+import treeUtil from '../../utils/arcgis/layerTree/layertreeutils';
 
 const { TreeNode } = Tree;
 const Search = Input.Search;

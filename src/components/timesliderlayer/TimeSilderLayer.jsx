@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Slider, Icon, Select, message, Tooltip } from 'antd';
 import styles from './TimeSliderLayer.less';
 
-import layerUtils from '../../utils/layerUtils';
+import TimerSliderUtils from '../../utils/arcgis/timesliderlayer/timeslider';
 
 const { Option } = Select;
 
@@ -37,8 +37,8 @@ const TimeSliderLayer = props => {
         });
         if (layer) layer.definitionExpression = ``;
         if (layerType.toUpperCase() === 'IMAGERLAYER') {
-          layerUtils.removeLayerByTitle(compareLayerTitle);
-          layerUtils.addTimeCompareLayerByTitle(compareLayerTitle);
+          TimerSliderUtils.removeLayerByTitle(agsGlobal.view,compareLayerTitle);
+          TimerSliderUtils.addTimeCompareLayerByTitle(agsGlobal.view,compareLayerTitle);
         }
       }
     }, 5000);
@@ -55,7 +55,7 @@ const TimeSliderLayer = props => {
         layer.definitionExpression = `${window.timerCompareConfig.timeField}='${year}'`;
       }
       if (layerType.toUpperCase() === 'IMAGERLAYER') {
-        layerUtils.refreshImageLayer(compareLayerTitle, year);
+        TimerSliderUtils.refreshImageLayer(agsGlobal.view,compareLayerTitle, year);
       }
     }
   };
@@ -72,7 +72,7 @@ const TimeSliderLayer = props => {
       payload: false,
     });
     pausePlay();
-    layerUtils.removeLayerByTitle(compareLayerTitle);
+    TimerSliderUtils.removeLayerByTitle(agsGlobal.view,compareLayerTitle);
   };
   //加载图层并显示滑块条
   const showTimerSliderBar = value => {
@@ -82,7 +82,7 @@ const TimeSliderLayer = props => {
 
     if (compareLayerTitle) {
       if (layerType.toUpperCase() === 'FEATURELAYER') {
-        const years = layerUtils.getRangYearByLayer(compareLayerTitle, layerType);
+        const years = TimerSliderUtils.getRangYearByLayer(agsGlobal.view,compareLayerTitle, layerType);
         years.then(ys => {
           setRangYear(ys);
         });
@@ -91,13 +91,13 @@ const TimeSliderLayer = props => {
         setRangYear([2014, 2015, 2016, 2017, 2018, 2019]);
       }
 
-      layerUtils.addTimeCompareLayerByTitle(compareLayerTitle, layerType);
+      TimerSliderUtils.addTimeCompareLayerByTitle(agsGlobal.view,compareLayerTitle, layerType);
     } else {
       message.info('请选择图层');
     }
   };
   const handleChange = async value => {
-    await layerUtils.removeLayerByTitle(compareLayerTitle);
+    await TimerSliderUtils.removeLayerByTitle(agsGlobal.view,compareLayerTitle);
     const t = window.timerCompareConfig.vectorLayers.find(l => l.title === value).type;
     setLayerType(t);
     setCompareLayerTitle(value);

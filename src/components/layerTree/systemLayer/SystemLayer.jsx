@@ -11,7 +11,7 @@ import {
   LAYERLIST_CHANGE_INDEX,
 } from '../../../constants/action-types';
 import common from '../../../utils/common';
-import treeUtil from '../../../utils/layertreeutils';
+import treeUtil from '../../../utils/arcgis/layerTree/layertreeutils';
 
 const { TreeNode } = Tree;
 const Search = Input.Search;

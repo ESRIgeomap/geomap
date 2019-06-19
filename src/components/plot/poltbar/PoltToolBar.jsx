@@ -11,7 +11,7 @@ import {
   POLT_EDITOR_REMOVE,
   POLT_EDIT_CLEAR,
 } from '../../../constants/action-types';
-import poltUtils from '../../../utils/poltUtils';
+import poltUtils from '../../../utils/arcgis/plot/poltUtils';
 
 const { Option } = Select;
 const PoltToolBar = props => {
