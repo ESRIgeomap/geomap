@@ -2,6 +2,11 @@ function pluck(array, key) {
   if (!array) return [];
   return array.map(o => o[key]);
 }
+/**
+ * 根据portal里存储的 webmap结构组织 webmap json对象
+ * 构建时 需传入view对象
+ * 通过调用 getWebMapJSON() 方法获得 webmap json对象
+ */
 class WebMap {
   constructor(view) {
     this._map = view.map;
@@ -9,11 +14,13 @@ class WebMap {
     this._basemap = null;
     this._init();
   }
+  // 初始化
   _init() {
     this._createBaseMap(); //底图
     this._createOperationalLayers(); //业务图层
     this._createPoltLayers(); //标绘图层
   }
+  // 组织底图参数
   _createBaseMap() {
     const bm = this._map.basemap;
     const title = bm.title;
@@ -38,6 +45,7 @@ class WebMap {
       baseMapLayers,
     };
   }
+  // 组织业务图层参数
   _createOperationalLayers() {
     const layers = this._map.layers.items.filter(function(lyr) {
       return (
@@ -62,8 +70,9 @@ class WebMap {
       });
     });
   }
+  // 组织标绘图层参数
   _createPoltLayers() {}
-
+  // 组织 webmap json对象
   getWebMapJSON() {
     return {
       operationalLayers: this._allLayers,

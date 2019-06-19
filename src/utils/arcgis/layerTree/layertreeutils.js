@@ -47,16 +47,16 @@ export default {
     });
     return treesArr;
   },
-/**
- * 获取所有子节点
- * @param {*} node 
- * @param {*} arr 
- */
-  getAllChildrenNode(node,arr) {
-    const nodes = arr||[];
+  /**
+   * 获取所有子节点
+   * @param {*} node
+   * @param {*} arr
+   */
+  getAllChildrenNode(node, arr) {
+    const nodes = arr || [];
     if (node.children) {
       node.children.map(son => {
-        this.getAllChildrenNode(son,nodes);
+        this.getAllChildrenNode(son, nodes);
       });
     } else {
       nodes.push(node);
@@ -68,27 +68,27 @@ export default {
    * 根据树节点title获取key
    * @param {*} titles [title1,title2...]
    */
-  getKeyByTitle(titles){
-    let ts = Array.isArray(titles)?titles:[].concat(titles);
+  getKeyByTitle(titles) {
+    let ts = Array.isArray(titles) ? titles : [].concat(titles);
     const alltrees = this.getAllTreeNodes();
     const keys = [];
-    ts.map((title)=>{
-      const treeNode =  alltrees.find((node)=>{
-          return node.title ===title;
+    ts.map(title => {
+      const treeNode = alltrees.find(node => {
+        return node.title === title;
       });
       keys.push(treeNode.key);
     });
     return keys.filter(Boolean);
   },
   /**根据标题获取树节点
-   * 
-   * @param {*} title 
+   *
+   * @param {*} title
    */
-  getTreeNodeByTitle(title){
+  getTreeNodeByTitle(title) {
     const trees = this.getAllTreeNodes();
-    const node = trees.find((tree)=>{
+    const node = trees.find(tree => {
       return tree.title === title;
     });
     return node;
-  }
+  },
 };

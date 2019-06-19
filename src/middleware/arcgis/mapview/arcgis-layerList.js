@@ -1,17 +1,18 @@
 import { message } from 'antd';
 import ReactDOM from 'react-dom';
 import * as layerlistTypes from '../../../constants/action-types';
-import layerUtils from '../../../utils/layerUtils';
 import { jsapi } from '../../../constants/geomap-utils';
 import env from '../../../utils/env';
 import wmap from '../../../utils/arcgis/webMap';
-import { addWebMap, shareItem, searchItems } from '../../../services/portal';
 import request from './../../../utils/request';
-import poltUtils from '../../../utils/poltUtils';
+import poltUtils from '../../../utils/arcgis/plot/poltUtils';
 import GeometryAttribute from '../../../components/plot/geometryAttributeEditor/GeometryAttribute';
-import treeUtil from '../../../utils/layertreeutils';
+import treeUtil from '../../../utils/arcgis/layerTree/layertreeutils';
 import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
 import {
+  addWebMap,
+  shareItem,
+  searchItems,
   deleteItems,
   updateItemByItemId,
   addPoltFileItem,
@@ -94,7 +95,7 @@ function layerList(opts = {}) {
               });
               map.load().then(() => {
                 const rmlayers = map.layers.items.map(orl => {
-                  return agsmap.allLayers.find(function (layer) {
+                  return agsmap.allLayers.find(function(layer) {
                     return layer.title === orl.title;
                   });
                 });
@@ -114,7 +115,7 @@ function layerList(opts = {}) {
       case layerlistTypes.SUBJECTLAYERLIST_SAVE: {
         const q = `owner:${
           sessionStorage.username
-          } orgid:0123456789ABCDEF AND type: 'Web Map' AND tags: pgis NOT owner:{esri TO esri_zzzzz}`;
+        } orgid:0123456789ABCDEF AND type: 'Web Map' AND tags: pgis NOT owner:{esri TO esri_zzzzz}`;
         const collections = await searchItems(q, 0, 100, 'numviews', 'desc');
         if (collections.data.results.length > 5) {
           message.warn('您已收藏至上限6个，将不予收藏');
@@ -162,15 +163,13 @@ function layerList(opts = {}) {
         break;
       }
       case layerlistTypes.LAYERLIST_ADD_LAYERS: {
-        const {  addedlayers,view } = action.payload;
-        
+        const { addedlayers, view } = action.payload;
+
         store.dispatch({
           type: 'agsmap/changegloballoadingstate',
           payload: true,
         });
-        const [FeatureLayer] = await jsapi.load([
-          'esri/layers/FeatureLayer',
-        ]);
+        const [FeatureLayer] = await jsapi.load(['esri/layers/FeatureLayer']);
         addedlayers.map(({ type, url, goto, year, title, opcity, expression, render }) => {
           if (!url) {
             message.warn(`服务缺失：${title}`);
@@ -258,7 +257,7 @@ function layerList(opts = {}) {
       case layerlistTypes.LAYERLIST_GET_TREE: {
         const q = `owner:${
           sessionStorage.username
-          } orgid:0123456789ABCDEF AND type: 'Feature Service' AND tags: pgis NOT owner:{esri TO esri_zzzzz}`;
+        } orgid:0123456789ABCDEF AND type: 'Feature Service' AND tags: pgis NOT owner:{esri TO esri_zzzzz}`;
         const items = await searchItems(q, 0, 100, 'modified', 'desc');
 
         let treesNode = [];
@@ -294,7 +293,7 @@ function layerList(opts = {}) {
           return l.title === dragNode.title;
         });
         if (layer) {
-          const index = layerUtils.getLayerIndexByTitle(dropNode.title);
+          const index = mapviewUtil.getLayerIndexByTitle(agsGlobal.view, dropNode.title);
           map.reorder(layer, index || 0);
         }
         break;
@@ -428,7 +427,7 @@ function layerList(opts = {}) {
             const a = document.createElement('a');
             a.href = `${window.appcfg.portal}sharing/rest/content/items/${
               exportres.data.exportItemId
-              }/data?token=${sessionStorage.token}`;
+            }/data?token=${sessionStorage.token}`;
             a.click();
             deleteItems([exportres.data.exportItemId]);
             store.dispatch({ type: 'layerList/changePoltlayerOptionsLoad', payload: false });
@@ -469,7 +468,7 @@ function layerList(opts = {}) {
                 const a = document.createElement('a');
                 a.href = `${window.appcfg.portal}sharing/rest/content/items/${
                   exportres.data.exportItemId
-                  }/data?token=${sessionStorage.token}`;
+                }/data?token=${sessionStorage.token}`;
                 a.click();
                 deleteItems([exportres.data.exportItemId, pubres.data.services[0].serviceItemId]);
               }
@@ -500,7 +499,7 @@ function layerList(opts = {}) {
         ];
         weatherLayerTitles.map(title => {
           const node = treeUtil.getTreeNodeByTitle(title);
-          const oldLayer = layerUtils.getLayerByTitle(title);
+          const oldLayer = mapUtils.getLayerByTitle(agsGlobal.view, title);
           if (oldLayer && oldLayer.visible) {
             view.map.remove(oldLayer);
 
@@ -553,7 +552,7 @@ function layerList(opts = {}) {
       case layerlistTypes.LAYERLIST_TOP_COLLECTION: {
         const q = `owner:${
           sessionStorage.username
-          } orgid:0123456789ABCDEF AND type: 'Web Map' AND tags: topone NOT owner:{esri TO esri_zzzzz}`;
+        } orgid:0123456789ABCDEF AND type: 'Web Map' AND tags: topone NOT owner:{esri TO esri_zzzzz}`;
         const items = await searchItems(q, 0, 100, 'modified', 'desc');
         const itemid = items.data.results[0] && items.data.results[0].id;
         await updateItemByItemId(itemid, ['']);
