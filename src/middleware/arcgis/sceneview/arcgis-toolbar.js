@@ -1,14 +1,5 @@
-import Measure3DUtil from '../../../utils/measure3D';
-import NavigationToggle from '../../../utils/NavigationToggle';
-import SurroundRoam from '../../../utils/SurroundRoam';
 import Print3DMap from '../../../utils/Print3DMap';
 import {
-  ACTION_MEASURE_LINE_3D,
-  ACTION_MEASURE_AREA_3D,
-  ACTION_MAP_PAN,
-  ACTION_MAP_ROTATE,
-  ACTION_MAP_OVERVIEW,
-  ACTION_MAP_ROAM,
   ACTION_MAP_PRINT_3D,
 } from '../../../constants/action-types';
 // 获取全局ags对象，用于其他组件获取其中的view对象
@@ -21,42 +12,7 @@ function toolbar(opts = {}) {
   return () => next => action => {
     const ags = window.agsGlobal;
     switch (action.type) {
-      // lih 20180718  工具条-三维长度测量
-      case ACTION_MEASURE_LINE_3D: {
-        Measure3DUtil.sceneView = ags.view;
-        Measure3DUtil.active('line');
-        break;
-      }
-      // lih 20180718  工具条-三维面积测量
-      case ACTION_MEASURE_AREA_3D: {
-        Measure3DUtil.sceneView = ags.view;
-        Measure3DUtil.active('area');
-        break;
-      }
-      // lih 20180718  工具条-地图平移
-      case ACTION_MAP_PAN: {
-        NavigationToggle.active(ags.view, 'pan');
-        break;
-      }
-      // lih 20180718  工具条-地图旋转
-      case ACTION_MAP_ROTATE: {
-        NavigationToggle.active(ags.view, 'rotate');
-        break;
-      }
-      // lih 20180718  工具条-地图鹰眼
-      case ACTION_MAP_OVERVIEW: {
-        NavigationToggle.active(ags.view, 'rotate');
-        break;
-      }
       // lih 20180725 工具条-环绕漫游
-      case ACTION_MAP_ROAM: {
-        if (ags.view) {
-          SurroundRoam.sceneView = ags.view;
-          SurroundRoam.active('roam');
-          break;
-        }
-        break;
-      }
       // liugh 20180928 工具条-地图截图
       case ACTION_MAP_PRINT_3D: {
         Print3DMap.sceneView = ags.view;

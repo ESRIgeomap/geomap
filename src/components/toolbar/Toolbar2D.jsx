@@ -126,8 +126,9 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
   const outputSubmenuOnClick = ({ key }) => {
     switch (key) {
       case 'print2DMap':
-        dispatch({
-          type: ACTION_PRINT_2D_MAP,
+      dispatch({
+          type: 'toolbar/updateCurrentView',
+          payload: 'print-map-2d',
         });
         break;
       case 'clipMap':
@@ -192,6 +193,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
         }
         break;
       }
+     
       default:
         break;
     }

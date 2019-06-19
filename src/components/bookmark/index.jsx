@@ -1,7 +1,7 @@
-import React, { Component, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'dva';
 import { Modal, Button, Icon, Input, notification, Tooltip } from 'antd';
-import styles from './Bookmark.css';
+import styles from './index.css';
 import { ConfigProvider } from 'antd';
 
 const Bookmark = ({ bookmark,dispatch }) => {

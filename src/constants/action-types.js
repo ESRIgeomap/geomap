@@ -66,12 +66,8 @@ export const ACTION_ADDMAPCORRECT_2D = 'action-addmapcorrect-2d';
  * toolbar
  */
 export const ACTION_MEASURE_LINE_3D = 'action-measure-line-3d';
-export const ACTION_MEASURE_AREA_3D = 'action-measure-area-3d';
-export const ACTION_MAP_PAN = 'action-map-pan';
-export const ACTION_MAP_ROTATE = 'action-map-rotate';
 export const ACTION_MAP_OVERVIEW = 'action-map-overview';
 export const ACTION_MAP_EYEVIEW = 'action-map-eyeview';
-export const ACTION_MAP_ROAM = 'action-map-roam';
 export const ACTION_MAP_PRINT_3D = 'action-map-print-3d';
 
 
