@@ -32,15 +32,15 @@ export default {
   },
 
   effects: {
-  
+
   },
 
   reducers: {
     /**
      * 回到初始状态
      * author:pesiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     rebackInitlightState(state, action) {
       return {
@@ -60,8 +60,8 @@ export default {
     /**
      * 更改时间轴的播放状态
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     sliderPlayState(state, action) {
       return {
@@ -70,12 +70,11 @@ export default {
       };
     },
 
-    
     /**
      * 设置按时间轴播放的循环函数
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     timerOfSliderState(state, action) {
       return {
@@ -87,8 +86,8 @@ export default {
     /**
      * 设置时间轴播放按钮的图标
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     iconOfSliderState(state, action) {
       return {
@@ -96,12 +95,12 @@ export default {
         iconOfSlider: action.payload,
       };
     },
-    
+
     /**
      * 设置日照分析组件的显隐
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     listChangeState(state, action) {
       return {
@@ -116,10 +115,10 @@ export default {
     },
 
     /**
-     * 设置是否勾选显示阴影 
+     * 设置是否勾选显示阴影
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     shadowInitDataState(state, action) {
       return {
@@ -131,8 +130,8 @@ export default {
     /**
      * 设置日期播放状态
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     datepickerPlayState(state, action) {
       return {
@@ -144,8 +143,8 @@ export default {
     /**
      * 设置当前日期值
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     valuetimeState(state, action) {
       return {
@@ -157,8 +156,8 @@ export default {
     /**
      * 更改时间轴的值
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     sliderValueState(state, action) {
       return {
@@ -170,8 +169,8 @@ export default {
     /**
      * 设置日期播放定时器
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     timerOfDatepickerState(state, action) {
       return {
@@ -183,8 +182,8 @@ export default {
     /**
      * 设置日期播放按钮图标
      * author:pensiveant
-     * @param {*} state 
-     * @param {*} action 
+     * @param {*} state
+     * @param {*} action
      */
     iconOfDatePickerState(state, action) {
       return {
