@@ -3,7 +3,7 @@
  * author:pensiveant
  */
 
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Slider, DatePicker, Row, Col, Checkbox, Button, Icon } from 'antd';
 import moment from 'moment';
@@ -14,7 +14,6 @@ import styles from './Lightshadow.css';
 const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
 
   useEffect(() => {
-    
     //设置日照分析的初始状态
     dispatch({
       type: 'Lightshadow/rebackInitlightState',
@@ -33,6 +32,23 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
 
   }, [dispatch]);
 
+  // 当日照分析到达24点时自动停止
+  useEffect(() => {
+    if (Lightshadow.sliderValue > 1440) {
+      clearInterval(Lightshadow.timerOfSlider);
+      dispatch({
+        type: 'Lightshadow/iconOfSliderState',
+        payload: 'caret-right',
+      });
+      // this.setState({
+      //   iconOfSlider: 'caret-right',
+      // });
+      dispatch({
+        type: 'Lightshadow/sliderPlayState',
+        payload: !Lightshadow.sliderPlay,
+      });
+    }
+  }, [Lightshadow.sliderValue]);
 
   /**
    * 日期控件选择change事件
@@ -56,7 +72,7 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
         type: 'Lightshadow/sliderPlayState',
         payload: !Lightshadow.sliderPlay,
       });
-      
+
       if (Lightshadow.sliderPlay) { //暂停
         clearInterval(Lightshadow.timerOfSlider);
         dispatch({
@@ -67,19 +83,17 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
         //   iconOfSlider: 'caret-right',
         // });
       } else { //播放
-
         dispatch({
           type: 'Lightshadow/timerOfSliderState',
           payload: setInterval(() => {
-            let temp =Lightshadow.sliderValue;
-            const tempTime1 =Lightshadow.valuetime
-              .hour(parseInt(temp / 60, 10))
-              .minute(temp % 60);
+            const tempTime1 = Lightshadow.valuetime
+              .hour(parseInt(Lightshadow.sliderValue / 60, 10))
+              .minute(Lightshadow.sliderValue % 60);
             window.agsGlobal.view.environment.lighting.date = Number(tempTime1.format('x'));
             // slidervalue数据同步
             dispatch({
               type: 'Lightshadow/sliderValueState',
-              payload: (temp += 5),
+              payload: (Lightshadow.sliderValue += 5),
             });
             dispatch({
               type: 'Lightshadow/iconOfSliderState',
@@ -88,20 +102,6 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
             // this.setState({
             //   iconOfSlider: 'pause',
             // });
-            if (temp > 1440) {
-              clearInterval(this.state.timerOfSlider);
-              dispatch({
-                type: 'Lightshadow/iconOfSliderState',
-                payload: 'caret-right',
-              });
-              // this.setState({
-              //   iconOfSlider: 'caret-right',
-              // });
-              dispatch({
-                type: 'Lightshadow/sliderPlayState',
-                payload: !Lightshadow.sliderPlay,
-              });
-            }
           }, 10),
         });
       }
@@ -203,7 +203,7 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
         lightshadowlistflags: false,
         prolistflags: false,
         progralistflags: false,
-        controllistflags: false,   
+        controllistflags: false,
       },
     });
     dispatch({
@@ -316,7 +316,7 @@ const LightshadowListTwo = ({ Lightshadow, dispatch, }) => {
 
 }
 
-export default connect(({ Lightshadow,toolbar }) => {
+export default connect(({ Lightshadow, toolbar }) => {
   return {
     Lightshadow,
     toolbar,

@@ -191,7 +191,12 @@ class GeoSearch extends React.Component {
   }
 
   clearSearchResult() {
-    this.props.dispatch({ type: 'search/clearSearch' });
+    this.props.dispatch({
+      type: 'search/clearSearch',
+      payload: {
+        mode: SearchConsts.MODE_LOCATION,
+      },
+    });
   }
 
   closeNearbySearch() {
@@ -240,7 +245,10 @@ class GeoSearch extends React.Component {
   }
 
   handleDetailReturn() {
-    this.props.dispatch({ type: 'search/clearPoi' });
+    this.props.dispatch({
+      type: 'search/clearPoi',
+      payload: { subMode: '' },
+    });
   }
 
   handleNearbyDetailReturn() {
@@ -254,7 +262,7 @@ class GeoSearch extends React.Component {
 
   renderContent() {
     if (this.props.search.mode === SearchConsts.MODE_LOCATION) {
-      console.log(this.props.search.submode)
+      console.log(this.props.search.submode);
       switch (this.props.search.submode) {
         case SearchConsts.SUBMODE_LOCATION_NEARBY:
         case SearchConsts.SUBMODE_LOCATION_NEARBY_DETAIL:
@@ -382,7 +390,10 @@ class GeoSearch extends React.Component {
   renderRouteBox() {
     if (this.props.search.mode === SearchConsts.MODE_DIRECTION) {
       return (
-        <RouteComponents.StartEndSelector onStartInput={this.handleStartInput} onEndInput={this.handleEndInput} />
+        <RouteComponents.StartEndSelector
+          onStartInput={this.handleStartInput}
+          onEndInput={this.handleEndInput}
+        />
       );
     }
 

@@ -1,4 +1,4 @@
-import {message} from 'antd';
+import { message } from 'antd';
 import * as SearchConst from '../constants/search';
 // import { queryBusStation } from '../services/tianditu/searchpoi';
 // import { planBusLine } from '../services/tianditu/busline';
@@ -9,7 +9,7 @@ import { planBusLine } from '../services/baiduAPI/busline';
 import { planDriveLine } from '../services/baiduAPI/driveline';
 import { planWalkLine } from '../services/baiduAPI/walkline';
 import { planRideLine } from '../services/baiduAPI/rideline';
-import {ACTION_SPACE_QUERY_CLEAR } from '../constants/action-types';
+import { ACTION_SPACE_QUERY_CLEAR } from '../constants/action-types';
 
 import {
   // searchPoi,
@@ -60,9 +60,7 @@ export default {
     rideresult: null,
 
     // 查询结果的列表
-    list: {
-      order: []
-    },
+    list: [],
     poi: null,
     searching: false,
     poipager: {
@@ -85,15 +83,15 @@ export default {
     navigationVisible: false,
 
     // 智能提示查询结果
-    smartTipList:null,
+    smartTipList: null,
     // 标识各查询结果面板折叠状态
-    foldFlag:{},
+    foldFlag: {},
 
     // 标识各查询结果面板更多类型是否显示
-    moreTypesVisible:{},
+    moreTypesVisible: {},
 
     // 标识各查询结果面板当前展示的数据类型
-    queryDataType:{},
+    queryDataType: {},
 
     // 是否通过选择分类进行查询
     bFromClassQuery: false,
@@ -114,16 +112,16 @@ export default {
       // 百度地图结果处理 开始
       let queryResults = searchResp.data;
       let resultList = [];
-      if (queryResults.result){
-        queryResults.result.map(item=>{
-          if (item.location){
-            item['lonlat'] = item.location.lng +' '+item.location.lat;
+      if (queryResults.result) {
+        queryResults.result.map(item => {
+          if (item.location) {
+            item['lonlat'] = item.location.lng + ' ' + item.location.lat;
             resultList.push(item);
           }
         });
       }
       // 百度地图结果处理 结束
-      const response = {result:resultList};
+      const response = { result: resultList };
 
       if (response && Array.isArray(response.result)) {
         yield put({
@@ -154,7 +152,7 @@ export default {
             yield put({ type: 'updateStartAndPlan', payload });
             let start = yield select(store => store.search.start);
             let end = yield select(store => store.search.end);
-            yield put({ type: SearchConst.PIN_START_END, payload:{start:start, end:end} });
+            yield put({ type: SearchConst.PIN_START_END, payload: { start: start, end: end } });
             switch (dirmode) {
               case SearchConst.MODE_DIR_BUS: {
                 yield put({
@@ -209,7 +207,7 @@ export default {
             yield put({ type: 'updateEndAndPlan', payload });
             let start = yield select(store => store.search.start);
             let end = yield select(store => store.search.end);
-            yield put({ type: SearchConst.PIN_START_END, payload:{start:start, end:end} });
+            yield put({ type: SearchConst.PIN_START_END, payload: { start: start, end: end } });
             switch (dirmode) {
               case SearchConst.MODE_DIR_BUS: {
                 yield put({
@@ -270,57 +268,69 @@ export default {
 
       const { data } = planResp;
       // 百度地图结果处理 开始
-      data.resultCode = data.status;// 0：成功;1：服务器内部错误;2：参数无效;1001：没有公交方案;1002：没有匹配的POI
+      data.resultCode = data.status; // 0：成功;1：服务器内部错误;2：参数无效;1001：没有公交方案;1002：没有匹配的POI
       if (data && data.result && data.result.routes && data.result.routes.length > 0) {
-        data.results={
-          lineType:1
+        data.results = {
+          lineType: 1,
         };
         let lines = [];
-        data.result.routes.map((item,index) => {
+        data.result.routes.map((item, index) => {
           let lineName = '';
           let segments = [];
-          item.steps.map((step,index)=>{
-            let segment={};
-            if (step[0].vehicle.name !== ''){
-              if (lineName!==''){
-                lineName+=' ';
+          item.steps.map((step, index) => {
+            let segment = {};
+            if (step[0].vehicle.name !== '') {
+              if (lineName !== '') {
+                lineName += ' ';
               }
 
-              lineName+=step[0].vehicle.name +' |';
+              lineName += step[0].vehicle.name + ' |';
             }
 
-            segment.stationEnd={}
+            segment.stationEnd = {};
             segment.stationEnd.name = step[0].vehicle.end_name;
-            if (!segment.stationEnd.name){
+            if (!segment.stationEnd.name) {
               segment.stationEnd.name = step[0].instruction;
             }
-            segment.stationEnd.uuid = "";
-            segment.stationEnd.lonlat = step[0].end_location.lng+','+step[0].end_location.lat;
+            segment.stationEnd.uuid = '';
+            segment.stationEnd.lonlat = step[0].end_location.lng + ',' + step[0].end_location.lat;
 
-            segment.segmentType= step[0].type
+            segment.segmentType = step[0].type;
 
-            segment.segmentLine = [{
-              "linePoint": step[0].start_location.lng+','+step[0].start_location.lat+';'+ step[0].path+';'+step[0].end_location.lng+','+step[0].end_location.lat+';',
-              "segmentTime": 8,
-              "byuuid": "",
-              "lineName": "",
-              "segmentDistance": step[0].distance,
-              "segmentStationCount": step[0].vehicle.stop_num,
-              "direction": "",
-            }];
+            segment.segmentLine = [
+              {
+                linePoint:
+                  step[0].start_location.lng +
+                  ',' +
+                  step[0].start_location.lat +
+                  ';' +
+                  step[0].path +
+                  ';' +
+                  step[0].end_location.lng +
+                  ',' +
+                  step[0].end_location.lat +
+                  ';',
+                segmentTime: 8,
+                byuuid: '',
+                lineName: '',
+                segmentDistance: step[0].distance,
+                segmentStationCount: step[0].vehicle.stop_num,
+                direction: '',
+              },
+            ];
 
-            segment.stationStart={}
+            segment.stationStart = {};
             segment.stationStart.name = step[0].vehicle.start_name;
-            segment.stationStart.uuid = "";
-            segment.stationStart.lonlat = step[0].start_location.lng+','+step[0].start_location.lat;
+            segment.stationStart.uuid = '';
+            segment.stationStart.lonlat =
+              step[0].start_location.lng + ',' + step[0].start_location.lat;
 
             segments.push(segment);
-
-          })
+          });
 
           let line = {
-            lineName:lineName,
-            segments:segments
+            lineName: lineName,
+            segments: segments,
           };
 
           lines.push(line);
@@ -335,7 +345,7 @@ export default {
           case 0: {
             // 天地图
             // const lines = data.results.filter(line => (line.lineType & 1) === 1);
-            const lines = data.results.lines
+            const lines = data.results.lines;
             if (lines.length > 0) {
               yield put({
                 type: 'updateResults',
@@ -347,38 +357,38 @@ export default {
           }
           case 1:
             // yield put({ type: 'showError', payload: '找不到起点' });//天地图
-            yield put({ type: 'showError', payload: '服务器内部错误' });//百度
+            yield put({ type: 'showError', payload: '服务器内部错误' }); //百度
             break;
           case 2:
             // yield put({ type: 'showError', payload: '找不到终点' });//天地图
-            yield put({ type: 'showError', payload: '参数无效' });//百度
+            yield put({ type: 'showError', payload: '参数无效' }); //百度
             break;
           case 3:
-            yield put({ type: 'showError', payload: '规划线路失败' });//天地图
+            yield put({ type: 'showError', payload: '规划线路失败' }); //天地图
             break;
           case 1001:
-            yield put({ type: 'showError', payload: '没有公交方案' });//百度
+            yield put({ type: 'showError', payload: '没有公交方案' }); //百度
             break;
           case 1002:
-            yield put({ type: 'showError', payload: '没有匹配的POI' });//百度
+            yield put({ type: 'showError', payload: '没有匹配的POI' }); //百度
             break;
           case 4:
             yield put({
               type: 'showError',
               payload: '起终点距离200米以内，不规划线路，建议步行',
-            });//天地图
+            }); //天地图
             break;
           case 5:
             yield put({
               type: 'showError',
               payload: '起终点距离500米内，返回线路',
-            });//天地图
+            }); //天地图
             break;
           case 6:
             yield put({
               type: 'showError',
               payload: '输入参数错误',
-            });//天地图
+            }); //天地图
             break;
           default:
             break;
@@ -417,38 +427,38 @@ export default {
           }
           case 1:
             // yield put({ type: 'showError', payload: '找不到起点' });//天地图
-            yield put({ type: 'showError', payload: '服务器内部错误' });//百度
+            yield put({ type: 'showError', payload: '服务器内部错误' }); //百度
             break;
           case 2:
             // yield put({ type: 'showError', payload: '找不到终点' });//天地图
-            yield put({ type: 'showError', payload: '参数无效' });//百度
+            yield put({ type: 'showError', payload: '参数无效' }); //百度
             break;
           case 3:
-            yield put({ type: 'showError', payload: '规划线路失败' });//天地图
+            yield put({ type: 'showError', payload: '规划线路失败' }); //天地图
             break;
           case 1001:
-            yield put({ type: 'showError', payload: '没有公交方案' });//百度
+            yield put({ type: 'showError', payload: '没有公交方案' }); //百度
             break;
           case 1002:
-            yield put({ type: 'showError', payload: '没有匹配的POI' });//百度
+            yield put({ type: 'showError', payload: '没有匹配的POI' }); //百度
             break;
           case 4:
             yield put({
               type: 'showError',
               payload: '起终点距离200米以内，不规划线路，建议步行',
-            });//天地图
+            }); //天地图
             break;
           case 5:
             yield put({
               type: 'showError',
               payload: '起终点距离500米内，返回线路',
-            });//天地图
+            }); //天地图
             break;
           case 6:
             yield put({
               type: 'showError',
               payload: '输入参数错误',
-            });//天地图
+            }); //天地图
             break;
           default:
             break;
@@ -487,45 +497,44 @@ export default {
           }
           case 1:
             // yield put({ type: 'showError', payload: '找不到起点' });//天地图
-            yield put({ type: 'showError', payload: '服务器内部错误' });//百度
+            yield put({ type: 'showError', payload: '服务器内部错误' }); //百度
             break;
           case 2:
             // yield put({ type: 'showError', payload: '找不到终点' });//天地图
-            yield put({ type: 'showError', payload: '参数无效' });//百度
+            yield put({ type: 'showError', payload: '参数无效' }); //百度
             break;
           case 3:
-            yield put({ type: 'showError', payload: '规划线路失败' });//天地图
+            yield put({ type: 'showError', payload: '规划线路失败' }); //天地图
             break;
           case 1001:
-            yield put({ type: 'showError', payload: '没有公交方案' });//百度
+            yield put({ type: 'showError', payload: '没有公交方案' }); //百度
             break;
           case 1002:
-            yield put({ type: 'showError', payload: '没有匹配的POI' });//百度
+            yield put({ type: 'showError', payload: '没有匹配的POI' }); //百度
             break;
           case 4:
             yield put({
               type: 'showError',
               payload: '起终点距离200米以内，不规划线路，建议步行',
-            });//天地图
+            }); //天地图
             break;
           case 5:
             yield put({
               type: 'showError',
               payload: '起终点距离500米内，返回线路',
-            });//天地图
+            }); //天地图
             break;
           case 6:
             yield put({
               type: 'showError',
               payload: '输入参数错误',
-            });//天地图
+            }); //天地图
             break;
           default:
             break;
         }
       }
     },
-
 
     *drawBusLine({ payload }, { put, select }) {
       const lines = yield select(store => store.search.lines);
@@ -545,7 +554,7 @@ export default {
         end.lonlat.replace(' ', ',')
       );
       const { data } = planResp;
-      const pushdiverData = data.result.routes[0].steps
+      const pushdiverData = data.result.routes[0].steps;
       if (pushdiverData) {
         yield put({ type: 'updateDriveResult', payload: data });
         yield put({
@@ -560,13 +569,13 @@ export default {
     },
 
     *clearSearch({ payload }, { put }) {
-      yield put({ type: 'clearSearchState', payload});
+      yield put({ type: 'clearSearchState', payload });
       yield put({ type: SearchConst.MAP_ACTION_CLEAR });
     },
 
     *searchPoi({ payload }, { put, call }) {
-      const { mode, keyword, bound, types, param, pageInfo, bSmartTips} = payload;
-      if (mode === SearchConst.MODE_LOCATION){
+      const { mode, keyword, bound, types, param, pageInfo, bSmartTips } = payload;
+      if (mode === SearchConst.MODE_LOCATION) {
         yield put({
           type: 'switchToolbarSubmode',
           payload: SearchConst.SUBMODE_LOCATION_LIST,
@@ -576,26 +585,34 @@ export default {
           payload: SearchConst.SUBMODE_LOCATION_LIST,
         });
         yield put({ type: 'locationStartSearching' });
-      }else if (mode === SearchConst.MODE_IDENTIFY){
-          yield put({
-            type: 'switchSubmode',
-            payload: SearchConst.SUBMODE_IDENTIFY_LIST,
-          });
+      } else if (mode === SearchConst.MODE_IDENTIFY) {
+        yield put({
+          type: 'switchSubmode',
+          payload: SearchConst.SUBMODE_IDENTIFY_LIST,
+        });
       }
 
       yield put({ type: 'clearSelectedPoi', payload });
       yield put({ type: SearchConst.MAP_ACTION_CLEAR_HIGHLIGHT_POI });
 
-      if(mode !== SearchConst.MODE_LOCATION){
+      if (mode !== SearchConst.MODE_LOCATION) {
         // yield put({ type: 'changMoreTypesVisible',payload:{ mode:mode, bShowMoreTypes: false} });
       }
       yield put({ type: 'startSearching' });
       yield put({ type: 'updateSearchOrder', mode: mode });
 
-      let tempResult = yield call(searchCategory, keyword, bound, types, param, pageInfo, bSmartTips);
+      let tempResult = yield call(
+        searchCategory,
+        keyword,
+        bound,
+        types,
+        param,
+        pageInfo,
+        bSmartTips
+      );
 
-      if(mode === SearchConst.MODE_SPACE&&tempResult.results.length ===0){
-        yield put({type:ACTION_SPACE_QUERY_CLEAR});
+      if (mode === SearchConst.MODE_SPACE && tempResult.results.length === 0) {
+        yield put({ type: ACTION_SPACE_QUERY_CLEAR });
         message.info('No Data');
       }
       let result = {};
@@ -605,11 +622,14 @@ export default {
       // pageInfo = result.pageInfo;
       result = result[mode].results;
       let bFromIdentify = param ? param.bFromIdentify : null;
-      yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result, page: 1, pageInfo, bFromIdentify } });
+      yield put({
+        type: SearchConst.MAP_ACTION_DRAW_POI,
+        payload: { result, page: 1, pageInfo, bFromIdentify },
+      });
     },
 
     *smartTip({ payload }, { put, call }) {
-      const { keyword, bound, types, param, pageInfo, bSmartTips} = payload;
+      const { keyword, bound, types, param, pageInfo, bSmartTips } = payload;
       let result = yield call(searchCategory, keyword, bound, types, param, pageInfo, bSmartTips);
       yield put({ type: 'updateSmartTipList', payload: result });
     },
@@ -627,11 +647,20 @@ export default {
         type: 'switchToolbarSubmode',
         payload: SearchConst.SUBMODE_LOCATION_LIST,
       });
-      let result = yield call(searchCategory, keyword, bound, types, param, pageInfo, bSmartTips);
-      yield put({ type: 'updateSearchList', payload: result, mode: mode });
+      let result = yield call(
+        searchCategory,
+        keyword,
+        bound,
+        types,
+        param,
+        pageInfo,
+        bSmartTips
+      );
+      // let result = {};
+      // result[SearchConst.MODE_LOCATION] = tempResult;
+      yield put({ type: 'updateSearchList', payload: result, mode: SearchConst.MODE_LOCATION });
       // 这里因为Antd的pager组件分页是从1开始计数，
       // 所以第一页传1保持与modal的值一致
-      result = result;
       yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result, page: 1 } });
     },
     *selectPoiByLabel({ payload }, { put }) {
@@ -648,7 +677,7 @@ export default {
     },
     *selectPoi({ payload }, { put }) {
       const { item, index, subMode } = payload;
-      if (subMode){
+      if (subMode) {
         yield put({
           type: 'switchSubmode',
           payload: subMode,
@@ -659,7 +688,7 @@ export default {
       //   payload: SearchConst.SUBMODE_LOCATION_DETAIL,
       // });
       yield put({ type: 'updateSelectedPoi', payload: item });
-      yield put({ type: SearchConst.MAP_ACTION_HIGHLIGHT_POI, payload: payload });
+      yield put({ type: SearchConst.MAP_ACTION_HIGHLIGHT_POI, payload: index });
     },
     // *showPoiInfos({ payload }, { put }) {
     //   const { graphics, pageInfo } = payload;
@@ -674,7 +703,6 @@ export default {
     //   yield put({ type: 'updateSearchList', payload: result });
 
     //   yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result, page: 1, pageInfo } });
-
 
     //   // yield put({
     //   //   type: 'switchSubmode',
@@ -817,25 +845,32 @@ export default {
     },
 
     *drawSearchResultGraphics({ payload }, { put, select }) {
-      const {mode, list} = payload;
-      yield put({ type: SearchConst.MAP_ACTION_DRAW_POI, payload: { result: list.results, page: list.pageInfo.pageIndex, pageInfo: list.pageInfo, bFromIdentify: false } });
+      const { mode, list } = payload;
+      yield put({
+        type: SearchConst.MAP_ACTION_DRAW_POI,
+        payload: {
+          result: list.results,
+          page: list.pageInfo.pageIndex,
+          pageInfo: list.pageInfo,
+          bFromIdentify: false,
+        },
+      });
     },
 
     // *changMoreTypesVisible({ payload }, { put, select }) {
     //   yield put({ type: 'changMoreTypesVisible', payload });
     // },
-
   },
 
   reducers: {
     changMoreTypesVisible(state, action) {
       let { mode, bShowMoreTypes } = action.payload;
-      bShowMoreTypes = (bShowMoreTypes === null ? false :bShowMoreTypes);
+      bShowMoreTypes = bShowMoreTypes === null ? false : bShowMoreTypes;
       state.moreTypesVisible[mode] = bShowMoreTypes;
       return {
         ...state,
-        moreTypesVisible: state.moreTypesVisible
-      }
+        moreTypesVisible: state.moreTypesVisible,
+      };
     },
 
     setQueryDataType(state, action) {
@@ -843,8 +878,8 @@ export default {
       state.queryDataType[mode] = featureType;
       return {
         ...state,
-        queryDataType: state.queryDataType
-      }
+        queryDataType: state.queryDataType,
+      };
     },
 
     updateClassQueryState(state, action) {
@@ -852,8 +887,8 @@ export default {
       state.bFromClassQuery = bFromClassQuery;
       return {
         ...state,
-        bFromClassQuery: state.bFromClassQuery
-      }
+        bFromClassQuery: state.bFromClassQuery,
+      };
     },
 
     updateCheckedTypeList(state, action) {
@@ -861,8 +896,8 @@ export default {
       state.checkedTypeList = checkedTypeList;
       return {
         ...state,
-        checkedTypeList: state.checkedTypeList
-      }
+        checkedTypeList: state.checkedTypeList,
+      };
     },
 
     updateDirMode(state, action) {
@@ -877,7 +912,7 @@ export default {
 
         submode: '',
         list: {
-          order:[]
+          order: [],
         },
       };
     },
@@ -917,21 +952,22 @@ export default {
       };
     },
     updateStart(state, action) {
-      let data = action.payload.data, dirlttext = action.payload.dirlttext;
-      data =data?data:action.payload;
+      let data = action.payload.data,
+        dirlttext = action.payload.dirlttext;
+      data = data ? data : action.payload;
       return {
         ...state,
-        start:data ,
-        starttext: data?data.name:null,
+        start: data,
+        starttext: data ? data.name : null,
         diropts: null,
-        dirlttext:dirlttext?dirlttext:state.dirlttext,
+        dirlttext: dirlttext ? dirlttext : state.dirlttext,
       };
     },
     updateStartAndPlan(state, action) {
       return {
         ...state,
         start: action.payload,
-        starttext: action.payload?action.payload.name:null,
+        starttext: action.payload ? action.payload.name : null,
         diropts: null,
         loading: true,
       };
@@ -943,21 +979,22 @@ export default {
       return { ...state, startsearching: action.payload };
     },
     updateEnd(state, action) {
-      let data = action.payload.data, dirlttext = action.payload.dirlttext;
-      data =data?data:action.payload;
+      let data = action.payload.data,
+        dirlttext = action.payload.dirlttext;
+      data = data ? data : action.payload;
       return {
         ...state,
-        end:data ,
-        endtext: data?data.name:null,
+        end: data,
+        endtext: data ? data.name : null,
         diropts: null,
-        dirlttext:dirlttext?dirlttext:state.dirlttext,
+        dirlttext: dirlttext ? dirlttext : state.dirlttext,
       };
     },
     updateEndAndPlan(state, action) {
       return {
         ...state,
         end: action.payload,
-        endtext: action.payload?action.payload.name:null,
+        endtext: action.payload ? action.payload.name : null,
         diropts: null,
         loading: true,
       };
@@ -981,62 +1018,66 @@ export default {
       return { ...state, rideresult: action.payload, loading: false };
     },
     updateSearchList(state, action) {
-      let list = state.list;
-      let mode = action.mode;
-      list[mode] = action.payload[mode];
-      if(list['order'].indexOf(mode) > -1){
-        list['order'].splice(list['order'].indexOf(mode), 1);
-      }
-      list['order'].push(mode);
+      // let list = state.list;
+      // let mode = action.mode;
+      // list[mode] = action.payload[mode];
+      // if (list['order'].indexOf(mode) > -1) {
+      //   list['order'].splice(list['order'].indexOf(mode), 1);
+      // }
+      // list['order'].push(mode);
 
       // if(list['order'].indexOf(mode) < 0){
       //   list['order'].push(mode);
       // }
-      let foldFlag = state.foldFlag;
-      Object.keys(foldFlag).map(key => {
-        if (key === mode){
-          foldFlag[key] = false;
-        }else{
-          foldFlag[key] = true;
-        }
-      });
+      // let foldFlag = state.foldFlag;
+      // Object.keys(foldFlag).map(key => {
+      //   if (key === mode) {
+      //     foldFlag[key] = false;
+      //   } else {
+      //     foldFlag[key] = true;
+      //   }
+      // });
 
-      return { ...state, list: list, foldFlag: foldFlag, searching: false, locationStartSearching: false };
+      return {
+        ...state,
+        list: action.payload,
+        // foldFlag: foldFlag,
+        searching: false,
+        locationStartSearching: false,
+      };
     },
     updateSearchOrder(state, action) {
       let list = state.list;
       let mode = action.mode;
 
-      if(list['order'].indexOf(mode) > -1){
+      if (list['order'].indexOf(mode) > -1) {
         list['order'].splice(list['order'].indexOf(mode), 1);
       }
       list['order'].push(mode);
 
-      return { ...state, list: list};
+      return { ...state, list: list };
     },
     updateSmartTipList(state, action) {
       return { ...state, smartTipList: action.payload, searching: false };
     },
     updateFoldFlag(state, action) {
-      const {mode, bFoldReuslt} = action.payload;
+      const { mode, bFoldReuslt } = action.payload;
 
-      if (!bFoldReuslt){
+      if (!bFoldReuslt) {
         Object.keys(state.foldFlag).map(key => {
-          if (key !== mode)
-            state.foldFlag[key] = true;
+          if (key !== mode) state.foldFlag[key] = true;
         });
       }
 
       state.foldFlag[mode] = bFoldReuslt;
-      if (!bFoldReuslt){
+      if (!bFoldReuslt) {
         return { ...state, foldFlag: state.foldFlag, mode: mode };
-      }else
-        return { ...state, foldFlag: state.foldFlag };
+      } else return { ...state, foldFlag: state.foldFlag };
     },
 
     foldAllPanel(state) {
       Object.keys(state.foldFlag).map(key => {
-          state.foldFlag[key] = true;
+        state.foldFlag[key] = true;
       });
 
       return { ...state, foldFlag: state.foldFlag };
@@ -1049,7 +1090,7 @@ export default {
       return {
         ...state,
         poi: null,
-        submode: action.payload.subMode,
+        submode: SearchConst.SUBMODE_LOCATION_LIST
       };
     },
     clearSelectedNearbyPoi(state) {
@@ -1063,14 +1104,14 @@ export default {
       return { ...state, nearbypoi: action.payload };
     },
     clearSearchState(state, action) {
-      const {mode} = action.payload;
-      let list = state.list;
-      list[mode] = null;
-      if(list['order'].indexOf(mode) > -1){
-        list['order'].splice(list['order'].indexOf(mode), 1);
-      }
+      const { mode } = action.payload;
+      // let list = state.list;
+      // list[mode] = null;
+      // if (list['order'].indexOf(mode) > -1) {
+      //   list['order'].splice(list['order'].indexOf(mode), 1);
+      // }
 
-      if (mode === SearchConst.MODE_LOCATION){
+      if (mode === SearchConst.MODE_LOCATION) {
         return {
           ...state,
           hasError: false,
@@ -1082,13 +1123,13 @@ export default {
           starttext: '',
           end: null,
           endtext: '',
-          checkedTypeList:[],
+          checkedTypeList: [],
           submode: '',
           toolbarSubmode: '',
-          list: list,
+          list: [],
           poi: null,
         };
-      }else if (mode === SearchConst.MODE_DIRECTION){
+      } else if (mode === SearchConst.MODE_DIRECTION) {
         return {
           ...state,
           hasError: false,
@@ -1106,10 +1147,10 @@ export default {
 
           submode: '',
           toolbarSubmode: '',
-          list: list,
+          list: [],
           poi: null,
         };
-      }else if (mode === SearchConst.MODE_IDENTIFY || mode === SearchConst.MODE_SPACE){
+      } else if (mode === SearchConst.MODE_IDENTIFY || mode === SearchConst.MODE_SPACE) {
         return {
           ...state,
           hasError: false,
@@ -1123,7 +1164,7 @@ export default {
           endtext: '',
 
           submode: '',
-          list: list,
+          list: [],
           poi: null,
         };
       }
