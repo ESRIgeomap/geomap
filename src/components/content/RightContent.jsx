@@ -56,6 +56,13 @@ const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
           </ClosePanel>
         );
       }
+      case 'view-clip-map': {
+        return (
+          <ClosePanel title="截屏" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.ViewClipMap view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
       default:break;
     }
 

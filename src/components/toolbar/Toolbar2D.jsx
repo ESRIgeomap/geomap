@@ -132,8 +132,12 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
         });
         break;
       case 'clipMap':
+        // dispatch({
+        //   type: MAP_ACTION_CLIP_MAP,
+        // });
         dispatch({
-          type: MAP_ACTION_CLIP_MAP,
+          type: 'toolbar/updateCurrentView',
+          payload: 'view-clip-map',
         });
         break;
       default:

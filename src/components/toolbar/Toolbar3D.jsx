@@ -109,12 +109,8 @@ const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
   const windowPrint = () => {
     dispatch({
       type: 'toolbar/updateCurrentView',
-      payload: 'map-print-3d',
-    });
-
-    dispatch({
-      type: ACTION_MAP_PRINT_3D,
-    });
+      payload: 'view-clip-map',
+    });   
   }
 
 

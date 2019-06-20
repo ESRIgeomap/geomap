@@ -1,4 +1,4 @@
-import Print3DMap from '../../../utils/Print3DMap';
+
 import {
   ACTION_MAP_PRINT_3D,
 } from '../../../constants/action-types';
@@ -13,12 +13,7 @@ function toolbar(opts = {}) {
     const ags = window.agsGlobal;
     switch (action.type) {
       // lih 20180725 工具条-环绕漫游
-      // liugh 20180928 工具条-地图截图
-      case ACTION_MAP_PRINT_3D: {
-        Print3DMap.sceneView = ags.view;
-        Print3DMap.print();
-        break;
-      }
+      
       default: {
         next(action);
         break;
