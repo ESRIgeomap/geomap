@@ -21,32 +21,19 @@ export default {
 
   state: {
     viewCreated: false,
-    sceneviewCreated:false,
+    sceneviewCreated: false,
     mode: VIEW_MODE_2D,
     callflags: false,
     // bookflags: false,
     splitflags: false,
     correctflags: false,
     rollerflags: false,
-    // bookmarks: [],
-    // bookname: null,
-    
-    // 日照分析参数 wangp 20180823
-    // showShadow: false,
-    // sliderPlay: false,
-    // datepickerPlayState: false,
-    // valuetime: null,
-    // sliderValue: 0,
-    // timerOfSlider: setInterval(null, null),
-    // timerOfDatepicker: setInterval(null, null),
-    // iconOfDatePicker: 'caret-right',
-    // iconOfSlider: 'caret-right',
-    // lightshadowlistflags: false,
-
     activeHeadCode: '1',
     menusflags: false,
-    timerLayersSelectvisible:false,
+    timerLayersSelectvisible: false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
+    // 天气特效 面板 状态
+    weatherEffectsPanelState: false,
   },
 
   subscriptions: {
@@ -91,21 +78,6 @@ export default {
         }
       }
     },
-    // *addBookmark({ payload }, { put }) {
-    //   yield put({ type: ACTION_ADDBOOKMARK_2D, payload });
-    // },
-    // *gotoBookmark({ payload }, { put }) {
-    //   yield put({ type: ACTION_GOTOBOOKMARK_2D, payload });
-    // },
-    // *deletBookmark({ payload }, { put }) {
-    //   yield put({ type: ACTION_DELETBOOKMARK_2D, payload });
-    // },
-    // *deletthisBookmark({ payload }, { put }) {
-    //   yield put({ type: ACTION_DELETTHISBOOKMARK_2D, payload });
-    // },
-    // *editBookmark({ payload }, { put }) {
-    //   yield put({ type: ACTION_EDITBOOKMARK_2D, payload });
-    // },
   },
 
   reducers: {
@@ -140,18 +112,11 @@ export default {
     menusChangeState(state, action) {
       return { ...state, menusflags: action.payload };
     },
-    // 光照分析
-    // listChangeState(state, action) {
-    //   return {
-    //     ...state,
-    //     prolistflags: action.payload.prolistflags,
-    //     progralistflags: action.payload.progralistflags,
-    //     controllistflags: action.payload.controllistflags,
-    //     lightshadowlistflags: action.payload.lightshadowlistflags,
-    //     layerlistcontrol: action.payload.layerlistcontrol,
-    //     viewpointflags: action.payload.viewpointflags,
-    //   };
-    // },
+    // 电表展示 end
+    // 天气特效 面板状态修改
+    weatherEffectsPanelChangeState(state, action) {
+      return { ...state, weatherEffectsPanelState: action.payload };
+    },
     changeCurrentData(state, action) {
       return {
         ...state,

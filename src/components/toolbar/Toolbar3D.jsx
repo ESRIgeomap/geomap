@@ -9,6 +9,7 @@ import measurement3DIcon from './images/量高.png';
 import measurement2DIcon from './images/量面.png';
 import exportImageIcon from './images/导图.png';
 import sunImageIcon from './images/光照.jpg';
+import weatherEffectIcon from './images/天气特效.png';
 import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil';
 
 import {
@@ -99,6 +100,18 @@ const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
       payload: 'measure-area-3d',
     });
   }
+
+  /**
+   * 天气场景模拟
+   * author:lee
+   */
+    const changeWeatherEffect = () => {
+      dispatch({
+        type: 'agsmap/weatherEffectsPanelChangeState',
+        payload: !agsmap.weatherEffectsPanelState,
+  
+      });
+    }
 
 
 
@@ -204,6 +217,11 @@ const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
             <img src={sunImageIcon} alt="" className={styles.btnImg} />
           </a>
         </Button>
+        <Button onClick={changeWeatherEffect} className={styles.btnStyle}>
+            <a className={styles.btnA} title="天气特效">
+              <img src={weatherEffectIcon} alt="" className={styles.btnImg} />
+            </a>
+          </Button>
       </ButtonGroup>
     </div>
   );

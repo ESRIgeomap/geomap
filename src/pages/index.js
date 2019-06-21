@@ -34,6 +34,8 @@ import RightContent from '../components/content/RightContent';
 import RollerBlind from '../components/RollerBlind/';
 //分屏对比模块加载
 import SplitScreen from '../components/SplitScreen/';
+// 天气特效
+import WeatherEffectsPanel from '../components/WeatherEffects/WeatherEffectsPanel';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -88,6 +90,7 @@ class IndexPage extends React.Component {
         view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
         className={styles.componentCompass}
       />,
+      <WeatherEffectsPanel />
     ];
   }
 

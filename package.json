@@ -23,7 +23,8 @@
     "react-document-title": "^2.0.3",
     "react-github-button": "^0.1.11",
     "react-resize-detector": "^4.2.0",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
