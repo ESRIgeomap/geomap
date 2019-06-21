@@ -15,14 +15,13 @@ import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil';
 import {
   ACTION_MAP_OVERVIEW,
   VIEW_MODE_2D,
-  ACTION_MAP_PRINT_3D,
 } from '../../constants/action-types';
 
 import styles from './Toolbar3D.less';
 
 const ButtonGroup = Button.Group;
 
-const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
+const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
 
   const [state, setState] = useState(true);
 
@@ -164,7 +163,7 @@ const Toolbar3D = ({ agsmap, Lightshadow, toolbar, dispatch }) => {
     <div
       className={styles.toolbar}
       style={{
-        display: agsmap.mode === VIEW_MODE_2D ? 'none' : 'block',
+        display: viewmode === VIEW_MODE_2D ? 'none' : 'block',
       }}
     >
       <ButtonGroup className={styles.buttonGroup}>

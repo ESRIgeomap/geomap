@@ -3,11 +3,6 @@ import {
   INIT_SPLITMAP,
   VIEW_MODE_2D,
   SWITCH_MAP,
-  ACTION_ADDBOOKMARK_2D,
-  ACTION_GOTOBOOKMARK_2D,
-  ACTION_DELETBOOKMARK_2D,
-  ACTION_DELETTHISBOOKMARK_2D,
-  ACTION_EDITBOOKMARK_2D,
 } from '../constants/action-types';
 
 const delay = timeout => {
@@ -161,74 +156,6 @@ export default {
         skylineanalysisModalvisible: action.payload.skylineanalysisModalvisible,
       };
     },
-    // shadowInitDataState(state, action) {
-    //   return {
-    //     ...state,
-    //     showShadow: action.payload,
-    //   };
-    // },
-    // sliderPlayState(state, action) {
-    //   return {
-    //     ...state,
-    //     sliderPlay: action.payload,
-    //   };
-    // },
-    // datepickerPlayState(state, action) {
-    //   return {
-    //     ...state,
-    //     datepickerPlay: action.payload,
-    //   };
-    // },
-    // valuetimeState(state, action) {
-    //   return {
-    //     ...state,
-    //     valuetime: action.payload,
-    //   };
-    // },
-    // sliderValueState(state, action) {
-    //   return {
-    //     ...state,
-    //     sliderValue: action.payload,
-    //   };
-    // },
-    // timerOfDatepickerState(state, action) {
-    //   return {
-    //     ...state,
-    //     timerOfDatepicker: action.payload,
-    //   };
-    // },
-    // timerOfSliderState(state, action) {
-    //   return {
-    //     ...state,
-    //     timerOfSlider: action.payload,
-    //   };
-    // },
-    // iconOfDatePickerState(state, action) {
-    //   return {
-    //     ...state,
-    //     iconOfDatePicker: action.payload,
-    //   };
-    // },
-    // iconOfSliderState(state, action) {
-    //   return {
-    //     ...state,
-    //     iconOfSlider: action.payload,
-    //   };
-    // },
-    // rebackInitlightState(state, action) {
-    //   return {
-    //     ...state,
-    //     showShadow: action.payload.showShadow,
-    //     sliderPlay: action.payload.sliderPlay,
-    //     datepickerPlay: action.payload.datepickerPlay,
-    //     valuetime: action.payload.valuetime,
-    //     sliderValue: action.payload.sliderValue,
-    //     timerOfDatepicker: action.payload.timerOfDatepicker,
-    //     timerOfSlider: action.payload.timerOfSlider,
-    //     iconOfDatePicker: action.payload.iconOfDatePicker,
-    //     iconOfSlider: action.payload.iconOfSlider,
-    //   };
-    // },
     activeHeadChangeState(state, action) {
       return {
         ...state,

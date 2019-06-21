@@ -12,6 +12,7 @@ export const SET_USER_WEBSCENES = 'SET_USER_WEBSCENES';
  * Map & View
  */
 export const INIT_MAP = 'INIT_MAP';
+export const INIT_WEBSCENE = 'INIT_WEBSCENE';
 export const SWITCH_MAP = 'SWITCH_MAP';
 export const INIT_SPLITMAP = 'INIT_SPLITMAP';
 

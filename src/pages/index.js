@@ -115,7 +115,7 @@ class IndexPage extends React.Component {
               targetDomEl={this.rightRef}
             />
           </div>
-          <Toolbar3D />
+          <Toolbar3D viewmode={this.props.agsmap.mode}/>
           <Trans3D />
           <Bookmark />
           <MapcorrectList />
