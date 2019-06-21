@@ -1,9 +1,8 @@
 /**
  * 二维地图初始化工作
- * @author  lee  
+ * @author  lee
  */
 
-import Print2DMap from '../../../utils/Print2DMap';
 import AgsSearchUtil from '../../../utils/arcgis/search';
 import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
 import * as actions from '../../../constants/action-types';
@@ -19,7 +18,7 @@ window.agstwoGlobal = {};
 
 const agstwo = window.agstwoGlobal;
 
-// 设置esriconfig 
+// 设置esriconfig
 async function prepare() {
   const [esriConfig] = await jsapi.load(['esri/config']);
   // 设置跨域处理地址
@@ -33,7 +32,7 @@ function initMapUtils(store) {
   AgsSearchUtil.instance().store = store;
 }
 // 初始化地图
-async function initMap(viewMode,store) {
+async function initMap(viewMode, store) {
   if (viewMode === actions.VIEW_MODE_2D) {
     // 初始化二维地图
     ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
@@ -70,7 +69,7 @@ function createMapView(opts = {}) {
           container.appendChild(ags.container);
           break;
         }
-        
+
         // Otherwise, create a new container element and a new scene view.
         ags.container = document.createElement('div');
         container.appendChild(ags.container);
@@ -78,18 +77,16 @@ function createMapView(opts = {}) {
         await prepare();
 
         // 初始化地图
-        await initMap(viewMode,store);
+        await initMap(viewMode, store);
 
         // after view created
         window.agsGlobal = ags;
-
 
         // TODO: to be continued
         initMapUtils(store);
 
         // When initialized...
-        return ags.view.when(() => {
-        });
+        return ags.view.when(() => {});
       }
       case actions.INIT_SPLITMAP: {
         const { payload } = action;
@@ -116,17 +113,7 @@ function createMapView(opts = {}) {
       }
       case actions.SWITCH_MAP: {
         const { payload } = action;
-        await initMap(payload,store);
-        break;
-      }
-      case actions.ACTION_PRINT_2D_MAP: {
-        Print2DMap.mapView = ags.view;
-        Print2DMap.show();
-        break;
-      }
-      case actions.MAP_ACTION_CLIP_MAP: {
-        Print2DMap.mapView = ags.view;
-        Print2DMap.clipMap();
+        await initMap(payload, store);
         break;
       }
       default: {
