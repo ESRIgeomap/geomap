@@ -18,6 +18,7 @@ import LightshadowList from '../components/Lightshadow';
 import Zoom from '../components/mapviewer/zoom';
 import Compass from '../components/mapviewer/compass';
 import ViewInfo from '../components/mapviewer/viewInfo';
+import Basemap from '../components/mapviewer/basemap';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
 import styles from './index.css';
@@ -69,6 +70,9 @@ class IndexPage extends React.Component {
         key="ui-component-viewinfo"
         view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
       />,
+      <Basemap
+        className={styles.componentBasemap}
+      />
     ];
   }
   exitRoller() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overviewmap from '../components/overviewmap/Overviewmap';
-import Basemap from '../components/basemap/';
+import Basemap from '../components/mapviewer/basemap/';
 
 export default {
   // 鹰眼

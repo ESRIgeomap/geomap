@@ -1,12 +1,12 @@
 /**
  * 底图选择框组件
- * @author  lee  
+ * @author  lee
  */
 
 import React from 'react';
 import { Row, Col } from 'antd';
 import styles from './index.less';
-import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
+import * as mapUtils from '../../../../utils/arcgis/map/mapviewUtil';
 
 const BaseMapPanel = props => {
   function switchBmap(e) {
