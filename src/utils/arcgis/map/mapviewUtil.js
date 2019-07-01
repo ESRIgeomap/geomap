@@ -3,35 +3,6 @@
  * @author  lee  
  */
 import * as jsapi from '../../jsapi';
-//---------------------------------场景初始化 start----------------------------------------
-/**
- * 初始化二维场景
- * @author  lee  
- * @param {object} portal  portal地址
- * @param {string} itemid  webmapId
- * @param {string} container  地图的div
- * @returns {object}  view 场景
- */
-async function initMapView(portal, itemid, container) {
-  const [WebMap, MapView] = await jsapi.load(['esri/WebMap', 'esri/views/MapView']);
-  const webmap = new WebMap({
-    portalItem: {
-      id: itemid,
-      portal: portal,
-    },
-  });
-  const view = new MapView({
-    container: container,
-    map: webmap,
-    ui: {
-      components: [],
-    },
-  });
-  return view;
-}
-export { initMapView }
-
-//---------------------------------场景初始化 end--------------------------------
 
 //---------------------------------底图切换 start------------------------------
 /**
@@ -153,27 +124,6 @@ async function addImageryLayerByCondition(view, url, type, value, title) {
 }
 export { addImageryLayerByCondition };
 
-
-
-/**
- * 根据幻灯片的名称，切换到对应的视角
- * @param {*} scenceView
- * @param {*} title
- */
-function gotoBySliderName(scenceView, title) {
-  const view = scenceView;
-  const slides = view.map.presentation.slides.items;
-  const options = {
-    duration: 3000,
-    maxDuration: 3000,
-  };
-  // 飞行到视线分析 幻灯片
-  slides.forEach(slide => {
-    if (slide.title.text === title) {
-      view.goTo(slide.viewpoint, options);
-    }
-  });
-}
 
 
 
@@ -641,6 +591,5 @@ export {
   highlightByLayerGraphic,
   clearhightlight,
   addfeatureLayer,
-  gotoBySliderName,
   addBufferTextLayer,
 };

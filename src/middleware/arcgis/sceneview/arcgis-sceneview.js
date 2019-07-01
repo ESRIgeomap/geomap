@@ -43,7 +43,7 @@ function createSceneView(opts = {}) {
 
         await prepare();
 
-        ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
+        ags.view = await window.agsUtils.view.map3d.initSceneView(Portal, WebsceneID, ags.container);
         // 创建鹰眼微件
         await widgets.createOverView(ags.view);
 

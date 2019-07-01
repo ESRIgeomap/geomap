@@ -62,7 +62,7 @@ function createMapView(opts = {}) {
         await prepare();
 
         // 初始化地图
-        ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
+        ags.view = await window.agsUtils.view.map2d.initMapView(Portal, WebmapID, ags.container);
 
         // after view created
         window.agsGlobal = ags;
@@ -89,7 +89,7 @@ function createMapView(opts = {}) {
         containers.appendChild(agstwo.containers);
         await prepare();
         // 初始化分屏对比地图
-        agstwo.view = await mapUitls.initMapView(Portal, SplitWebmap, agstwo.containers);
+        agstwo.view = await window.agsUtils.view.map2d.initMapView(Portal, SplitWebmap, agstwo.containers);
         // 保持左右侧地图保持同步
         synchronizeViews([ags.view, agstwo.view]);
         return agstwo.view.when(() => {
