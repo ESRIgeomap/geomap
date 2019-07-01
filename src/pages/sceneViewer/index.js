@@ -3,10 +3,7 @@ import { connect } from 'dva';
 import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
-import Toolbar3D from '../../components/toolbar/Toolbar3D';
 import ToolbarLeft from '../../components/sceneviewer/toolbar/ToolbarLeft';
-//加载日照分析组件
-import LightshadowList from '../../components/Lightshadow';
 
 import { INIT_WEBSCENE } from '../../constants/action-types';
 import styles from './index.css';
@@ -43,9 +40,7 @@ class IndexPage extends React.Component {
               targetDomEl={this.rightRef}
             />
           </div>
-          <Toolbar3D />
           <ToolbarLeft />
-          <LightshadowList />
         </div>
       </div>
     );
