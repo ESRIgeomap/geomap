@@ -1,5 +1,5 @@
 import { jsapi } from '../../../constants/geomap-utils';
-import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
+import * as mapUitls from '../../../utils/arcgis/map/sceneviewUtil';
 import * as actions from '../../../constants/action-types';
 import widgets from '../../../utils/widgets';
 import { AppProxy, Portal, WebsceneID } from '../../../utils/env';

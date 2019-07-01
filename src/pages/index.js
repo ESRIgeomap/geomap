@@ -34,8 +34,6 @@ import RightContent from '../components/content/RightContent';
 import RollerBlind from '../components/RollerBlind/';
 //分屏对比模块加载
 import SplitScreen from '../components/SplitScreen/';
-// 天气特效
-import WeatherEffectsPanel from '../components/WeatherEffects/WeatherEffectsPanel';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -59,26 +57,6 @@ class IndexPage extends React.Component {
   renderMapUIWidgets() {
     // 这里可以考虑通过config.js来配置
     // 类似MapViewer初始化ui.components数组
-    if (this.props.agsmap.mode === VIEW_MODE_2D) {
-      return [
-        <Zoom
-          key="ui-component-zoom"
-          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-          className={styles.componentZoom}
-        />,
-        <Compass
-          key="ui-component-compass"
-          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-          className={styles.componentCompass}
-        />,
-        <ViewInfo
-          key="ui-component-viewinfo"
-          view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-        />,
-      ];
-    }
-
-    // 3D
     return [
       <Zoom
         key="ui-component-zoom"
@@ -90,10 +68,12 @@ class IndexPage extends React.Component {
         view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
         className={styles.componentCompass}
       />,
-      <WeatherEffectsPanel />
+      <ViewInfo
+        key="ui-component-viewinfo"
+        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
+      />,
     ];
   }
-
   exitRoller() {
     this.props.dispatch({
       type: 'agsmap/rollscreenChangeState',
@@ -115,7 +95,7 @@ class IndexPage extends React.Component {
               targetDomEl={this.rightRef}
             />
           </div>
-          <Toolbar3D viewmode={this.props.agsmap.mode}/>
+          <Toolbar3D viewmode={this.props.agsmap.mode} />
           <Trans3D />
           <Bookmark />
           <MapcorrectList />

@@ -38,7 +38,7 @@ async function initMap(viewMode, store) {
     ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
     store.dispatch({ type: 'agsmap/afterViewCreated' });
     // 创建底图切换微件
-    await widgets.createBasemapGallery(ags.view);
+    // await widgets.createBasemapGallery(ags.view);
   } else if (viewMode === actions.VIEW_MODE_3D) {
     // 初始化三维地图
     ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
