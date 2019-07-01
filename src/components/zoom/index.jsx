@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
 import * as jsapi from '../../utils/jsapi';
+import arcgis from '../../utils/arcgis';
 
 import styles from './index.css';
 /**
@@ -18,15 +19,26 @@ const Zoom = props => {
   const [zoomVal, setZoomVal] = useState(null);
 
   useEffect(() => {
-    let handle;
-    // view 有三种取值，undefine，2d，3d
-    if (view) {
-      if (handle) {
-        handle.remove();
-      }
-      handle = createWidget(window.agsGlobal.view);
-    }
-  }, [view]);
+    jsapi.load(['esri/widgets/Zoom/ZoomViewModel']).then(([ZoomViewModel]) => {
+      const timer = setInterval(() => {
+        if (arcgis.isViewReady()) {
+          clearInterval(timer);
+          createWidget(window.agsGlobal.view)
+        }
+      }, 300);
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   let handle;
+  //   // view 有三种取值，undefine，2d，3d
+  //   if (view) {
+  //     if (handle) {
+  //       handle.remove();
+  //     }
+  //     handle = createWidget(window.agsGlobal.view);
+  //   }
+  // }, [view]);
   // 创建微件
 
   function createWidget(view) {

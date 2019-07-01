@@ -13,24 +13,16 @@ export default () => {
 
   useEffect(() => {
     jsapi.load(['esri/widgets/Zoom/ZoomViewModel']).then(([ZoomViewModel]) => {
-      if (arcgis.isViewReady()) {
-        const vm = new ZoomViewModel({
-          view: window.agsGlobal.view,
-        });
-        setLoading(false);
-        setVm(vm);
-      } else {
-        const timer = setInterval(() => {
-          if (arcgis.isViewReady()) {
-            clearInterval(timer);
-            const vm = new ZoomViewModel({
-              view: window.agsGlobal.view,
-            });
-            setLoading(false);
-            setVm(vm);
-          }
-        }, 300);
-      }
+      const timer = setInterval(() => {
+        if (arcgis.isViewReady()) {
+          clearInterval(timer);
+          const vm = new ZoomViewModel({
+            view: window.agsGlobal.view,
+          });
+          setLoading(false);
+          setVm(vm);
+        }
+      }, 300);
     });
   }, []);
 

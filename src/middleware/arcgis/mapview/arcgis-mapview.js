@@ -7,7 +7,7 @@ import AgsSearchUtil from '../../../utils/arcgis/search';
 import * as mapUitls from '../../../utils/arcgis/map/mapviewUtil';
 import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
-import { AppProxy, Portal, WebsceneID, WebmapID, SplitWebmap } from '../../../utils/env';
+import { AppProxy, Portal, WebmapID, SplitWebmap } from '../../../utils/env';
 import widgets from '../../../utils/widgets';
 import { synchronizeViews } from '../../../utils/arcgis/map/synchronizeView';
 
@@ -31,22 +31,6 @@ function initMapUtils(store) {
   AgsSearchUtil.instance().view = ags.view;
   AgsSearchUtil.instance().store = store;
 }
-// 初始化地图
-async function initMap(viewMode, store) {
-  if (viewMode === actions.VIEW_MODE_2D) {
-    // 初始化二维地图
-    ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
-    store.dispatch({ type: 'agsmap/afterViewCreated' });
-    // 创建底图切换微件
-    // await widgets.createBasemapGallery(ags.view);
-  } else if (viewMode === actions.VIEW_MODE_3D) {
-    // 初始化三维地图
-    ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
-    store.dispatch({ type: 'agsmap/afterSceneviewCreated' });
-    // 创建鹰眼微件
-    await widgets.createOverView(ags.view);
-  }
-}
 
 function createMapView(opts = {}) {
   // Detect if 'createLogger' was passed directly to 'applyMiddleware'.
@@ -59,7 +43,7 @@ function createMapView(opts = {}) {
       // 初始化地图
       case actions.INIT_MAP: {
         const { payload } = action;
-        const { container, viewMode } = payload;
+        const { container } = payload;
 
         // DOM container not defined
         if (!container) break;
@@ -77,7 +61,7 @@ function createMapView(opts = {}) {
         await prepare();
 
         // 初始化地图
-        await initMap(viewMode, store);
+        ags.view = await mapUitls.initMapView(Portal, WebmapID, ags.container);
 
         // after view created
         window.agsGlobal = ags;
@@ -86,7 +70,7 @@ function createMapView(opts = {}) {
         initMapUtils(store);
 
         // When initialized...
-        return ags.view.when(() => {});
+        return ags.view.when(() => { });
       }
       case actions.INIT_SPLITMAP: {
         const { payload } = action;
@@ -113,7 +97,6 @@ function createMapView(opts = {}) {
       }
       case actions.SWITCH_MAP: {
         const { payload } = action;
-        await initMap(payload, store);
         break;
       }
       default: {

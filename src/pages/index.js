@@ -19,7 +19,6 @@ import Compass from '../components/compass';
 import ViewInfo from '../components/viewInfo/';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
-import { VIEW_MODE_2D } from '../constants/action-types';
 import styles from './index.css';
 
 //pensiveant:加载LayerList组件
