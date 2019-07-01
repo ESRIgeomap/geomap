@@ -59,7 +59,6 @@ class IndexPage extends React.Component {
     return [
       <Zoom
         key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
         className={styles.componentZoom}
       />,
       <Compass
