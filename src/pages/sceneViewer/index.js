@@ -4,19 +4,14 @@ import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
 import Toolbar3D from '../../components/toolbar/Toolbar3D';
+import ToolbarLeft from '../../components/toolbar/ToolbarLeft';
 //加载日照分析组件
 import LightshadowList from '../../components/Lightshadow';
-
-import Zoom from '../../components/zoom';
-import Compass from '../../components/compass';
 
 import { INIT_WEBSCENE } from '../../constants/action-types';
 import styles from './index.css';
 
-
 import RightContent from '../../components/content/RightContent';
-// 天气特效
-import WeatherEffectsPanel from '../../components/WeatherEffects/WeatherEffectsPanel';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -35,24 +30,6 @@ class IndexPage extends React.Component {
     });
   }
 
-  renderMapUIWidgets() {
-    // 3D
-    return [
-      <Zoom
-        key="ui-component-zoom"
-        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-        className={styles.componentZoom}
-      />,
-      <Compass
-        key="ui-component-compass"
-        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
-        className={styles.componentCompass}
-      />,
-      <WeatherEffectsPanel />
-    ];
-  }
-
-
   render() {
     return (
       <div className={styles.wrapper}>
@@ -67,8 +44,8 @@ class IndexPage extends React.Component {
             />
           </div>
           <Toolbar3D />
+          <ToolbarLeft />
           <LightshadowList />
-          {this.renderMapUIWidgets()}
         </div>
       </div>
     );

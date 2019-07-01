@@ -1,0 +1,46 @@
+.toolbar {
+  flex-direction: column;
+  position: absolute;
+  left: 30px;
+  top: 100px;
+  width: 40px;
+  height: 240px;
+  z-index: 2;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  width: 38px;
+  border: 1px solid #c4c8cc;
+  background: rgba(255, 255, 255, 1);
+  color: #384750;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.btn.active {
+  background: #3285ff;
+}
+
+.roundBtn {
+  composes: btn;
+  border-radius: 50%;
+}
+
+.btn:global(.disabled) {
+  cursor: no-drop;
+}
+
+.btn:hover {
+  background: #47b479;
+  color: white;
+}
