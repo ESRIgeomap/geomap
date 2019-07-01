@@ -9,6 +9,7 @@ import * as actions from '../../../constants/action-types';
 import { jsapi } from '../../../constants/geomap-utils';
 import { AppProxy, Portal, WebmapID, SplitWebmap } from '../../../utils/env';
 import widgets from '../../../utils/widgets';
+
 import { synchronizeViews } from '../../../utils/arcgis/map/synchronizeView';
 
 // debug obj

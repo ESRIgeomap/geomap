@@ -11,11 +11,12 @@ import Toolbar2D from '../components/toolbar/Toolbar2D';
 import Toolbar3D from '../components/toolbar/Toolbar3D';
 import Bookmark from '../components/bookmark';
 import MapcorrectList from '../components/mapcorrect/MapcorrectList';
-//加载日照分析组件
+import { INIT_MAP } from '../constants/action-types';
+// 加载日照分析组件
 import LightshadowList from '../components/Lightshadow';
-
+// 罗盘微件
 import Zoom from '../components/mapviewer/zoom';
-import Compass from '../components/compass';
+import Compass from '../components/mapviewer/compass';
 import ViewInfo from '../components/mapviewer/viewInfo';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
@@ -45,10 +46,9 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'agsmap/init',
+      type: INIT_MAP,
       payload: {
         container: this.viewDiv,
-        viewMode: this.props.agsmap.mode,
       },
     });
   }

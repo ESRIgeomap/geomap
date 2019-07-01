@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as jsapi from '../../utils/jsapi';
+import * as jsapi from '../../../utils/jsapi';
 import styles from './index.css';
 
 function toRotationTransform(orientation) {
