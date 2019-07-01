@@ -4,7 +4,6 @@ import _ from 'lodash';
 import styles from './index.css';
 
 const ViewInfo = props => {
-  const {view }  = props;
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [scale, setScale] = useState('');
@@ -12,15 +11,13 @@ const ViewInfo = props => {
 
 
   useEffect(() => {
-    let handle;
-    // view 有三种取值，undefine，2d，3d
-    if (view === '2d') {
-      if (handle) {
-        handle.remove();
+    const timer = setInterval(() => {
+      if (window.agsGlobal.view) {
+        clearInterval(timer);
+        loadViewInfo(window.agsGlobal.view);
       }
-      handle = loadViewInfo(window.agsGlobal.view);
-    }
-  }, [view]);
+    }, 300);
+  }, []);
 
   function loadViewInfo(view) {
     view.when(view => {

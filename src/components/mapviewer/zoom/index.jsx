@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
-import * as jsapi from '../../utils/jsapi';
-import arcgis from '../../utils/arcgis';
+import * as jsapi from '../../../utils/jsapi';
 
 import styles from './index.css';
 /**
@@ -10,7 +9,6 @@ import styles from './index.css';
  */
 
 const Zoom = props => {
-  const { view } = props;
   const [vm, setVm] = useState(null);
   // 监听是否是最大zoom
   const [maxZoomed, setMaxZoomed] = useState(false);
@@ -19,28 +17,15 @@ const Zoom = props => {
   const [zoomVal, setZoomVal] = useState(null);
 
   useEffect(() => {
-    jsapi.load(['esri/widgets/Zoom/ZoomViewModel']).then(([ZoomViewModel]) => {
-      const timer = setInterval(() => {
-        if (arcgis.isViewReady()) {
-          clearInterval(timer);
-          createWidget(window.agsGlobal.view)
-        }
-      }, 300);
-    });
+    const timer = setInterval(() => {
+      if (window.agsGlobal.view) {
+        clearInterval(timer);
+        createWidget(window.agsGlobal.view);
+      }
+    }, 300);
   }, []);
 
-  // useEffect(() => {
-  //   let handle;
-  //   // view 有三种取值，undefine，2d，3d
-  //   if (view) {
-  //     if (handle) {
-  //       handle.remove();
-  //     }
-  //     handle = createWidget(window.agsGlobal.view);
-  //   }
-  // }, [view]);
   // 创建微件
-
   function createWidget(view) {
     jsapi
       .load(['esri/widgets/Zoom/ZoomViewModel', 'esri/core/watchUtils'])

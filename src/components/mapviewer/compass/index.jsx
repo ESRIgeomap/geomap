@@ -15,22 +15,19 @@ function toRotationTransform(orientation) {
  * @author  lee  
  */
 const Compass = props => {
-  const { view } = props;
   const [vm,setVm] = useState(null);
   const [orientation, setOrientation] = useState({
     z: 0,
   });
 
   useEffect(() => {
-    let handle;
-    // view 有三种取值，undefine，2d，3d
-    if (view) {
-      if (handle) {
-        handle.remove();
+    const timer = setInterval(() => {
+      if (window.agsGlobal.view) {
+        clearInterval(timer);
+        createWidget(window.agsGlobal.view);
       }
-      handle = createWidget(window.agsGlobal.view);
-    }
-  }, [view]);
+    }, 300);
+  }, []);
 
   const createWidget = view => {
     jsapi.load(['esri/widgets/Compass/CompassViewModel']).then(([CompassViewModel]) => {

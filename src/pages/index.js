@@ -14,9 +14,9 @@ import MapcorrectList from '../components/mapcorrect/MapcorrectList';
 //加载日照分析组件
 import LightshadowList from '../components/Lightshadow';
 
-import Zoom from '../components/zoom/';
+import Zoom from '../components/mapviewer/zoom';
 import Compass from '../components/compass';
-import ViewInfo from '../components/viewInfo/';
+import ViewInfo from '../components/mapviewer/viewInfo';
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
 
 import styles from './index.css';
@@ -63,7 +63,6 @@ class IndexPage extends React.Component {
       />,
       <Compass
         key="ui-component-compass"
-        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
         className={styles.componentCompass}
       />,
       <ViewInfo
