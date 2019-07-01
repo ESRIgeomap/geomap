@@ -23,45 +23,45 @@ function createSceneView(opts = {}) {
 
   return store => next => async action => {
     switch (action.type) {
-      // 初始化地图
-      // case actions.INIT_WEBSCENE: {
-      //   const { payload } = action;
-      //   const { container } = payload;
+      //初始化地图
+      case actions.INIT_WEBSCENE: {
+        const { payload } = action;
+        const { container } = payload;
 
-      //   // DOM container not defined
-      //   if (!container) break;
+        // DOM container not defined
+        if (!container) break;
 
-      //   // if sceneview container is already initialized, just add it back to the DOM.
-      //   if (ags.container) {
-      //     container.appendChild(ags.container);
-      //     break;
-      //   }
+        // if sceneview container is already initialized, just add it back to the DOM.
+        if (ags.container) {
+          container.appendChild(ags.container);
+          break;
+        }
 
-      //   // Otherwise, create a new container element and a new scene view.
-      //   ags.container = document.createElement('div');
-      //   container.appendChild(ags.container);
+        // Otherwise, create a new container element and a new scene view.
+        ags.container = document.createElement('div');
+        container.appendChild(ags.container);
 
-      //   await prepare();
+        await prepare();
 
-      //   ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
-      //   // 创建鹰眼微件
-      //   await widgets.createOverView(ags.view);
+        ags.view = await mapUitls.initSceneView(Portal, WebsceneID, ags.container);
+        // 创建鹰眼微件
+        await widgets.createOverView(ags.view);
 
-      //   // after view created
-      //   window.agsGlobal = ags;
+        // after view created
+        window.agsGlobal = ags;
 
-      //   // When initialized...
-      //   return ags.view.when(() => { });
-      // }
+        // When initialized...
+        return ags.view.when(() => { });
+      }
       case actions.ACTION_MAP_OVERVIEW: {
-        // const visibleOverviewmap = action.payload;
-        // const overmap = document.getElementById('overmapDiv');
-        // if (visibleOverviewmap) {
-        //   overmap.style.display = 'block';
-        // } else {
-        //   overmap.style.display = 'none';
-        // }
-        // break;
+        const visibleOverviewmap = action.payload;
+        const overmap = document.getElementById('overmapDiv');
+        if (visibleOverviewmap) {
+          overmap.style.display = 'block';
+        } else {
+          overmap.style.display = 'none';
+        }
+        break;
       }
       default: {
         next(action);
