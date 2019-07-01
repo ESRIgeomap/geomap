@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
 import classnames from 'classnames';
 
-import arcgis from '../../utils/arcgis';
-import * as jsapi from '../../utils/jsapi';
+import arcgis from '../../../utils/arcgis';
+import * as jsapi from '../../../utils/jsapi';
 
 import styles from './index.css';
 

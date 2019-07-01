@@ -5,8 +5,8 @@ import classnames from 'classnames';
 import arcgis from '../../../utils/arcgis';
 import * as sceneviewUtils from '../../../utils/arcgis/map/sceneviewUtil';
 import Zoom from '../zoom/';
-import Compass from '../../compass3D';
-import Home from '../../home';
+import Compass from '../compass/index';
+import Home from '../home';
 
 import styles from './Toolbarleft.css';
 
