@@ -3,38 +3,40 @@ import { connect } from 'dva';
 import { Button } from 'antd';
 import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
-
+// 二维查询组件
 import GeoSearch from '../components/search/GeoSearch';
+// 二三维切换组件
 import Trans3D from '../components/trans3d/';
-
+// 二维工具条组件
 import Toolbar2D from '../components/toolbar/Toolbar2D';
-import Toolbar3D from '../components/toolbar/Toolbar3D';
-import Bookmark from '../components/bookmark';
-import MapcorrectList from '../components/mapcorrect/MapcorrectList';
+// 初始化二维地图功能 
 import { INIT_MAP } from '../constants/action-types';
-// 加载日照分析组件
-import LightshadowList from '../components/Lightshadow';
-// 罗盘微件
+// 二维放大缩小微件
 import Zoom from '../components/mapviewer/zoom';
+// 二维罗盘微件
 import Compass from '../components/mapviewer/compass';
+// 二维场景组件（经纬度、比例如等）
 import ViewInfo from '../components/mapviewer/viewInfo';
+// 二维底图组件
 import Basemap from '../components/mapviewer/basemap';
+// 二维时间滑块组件
 import TimerSlider from '../components/timesliderlayer/TimeSilderLayer';
+// 二维书签组件
+import Bookmark from '../components/mapviewer/bookmark';
+// 二维图层列表组件
+import LayerList from '../components/layerTree';
+// 二维疑点标绘组件
+import PoltPanel from '../components/plot';
+// 二维分屏对比图层列表组件
+import SplitLayerList from '../components/layerList/SplitLayerList';
+// 二维内容组件（打印、截屏等组件的包容器）
+import RightContent from '../components/content/RightContent';
+// 二维卷帘对比组件
+import RollerBlind from '../components/RollerBlind/';
+// 二维分屏对比组件
+import SplitScreen from '../components/SplitScreen/';
 
 import styles from './index.css';
-
-//pensiveant:加载LayerList组件
-import LayerList from '../components/layerTree';
-//pensiveant:加载疑点标绘PoltPanel组件
-import PoltPanel from '../components/plot';
-
-import SplitLayerList from '../components/layerList/SplitLayerList';
-
-import RightContent from '../components/content/RightContent';
-//卷帘对比模块加载
-import RollerBlind from '../components/RollerBlind/';
-//分屏对比模块加载
-import SplitScreen from '../components/SplitScreen/';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -96,11 +98,8 @@ class IndexPage extends React.Component {
               targetDomEl={this.rightRef}
             />
           </div>
-          <Toolbar3D viewmode={this.props.agsmap.mode} />
           <Trans3D />
           <Bookmark />
-          <MapcorrectList />
-          <LightshadowList />
           <TimerSlider />
           {this.renderMapUIWidgets()}
         </div>
