@@ -10,6 +10,9 @@ import styles from './index.css';
 
 import RightContent from '../../components/content/RightContent';
 
+// wangxd:修改数据源模块
+import ChangeDataSource from '../../components/ChangeDataSource/ChangeDataSource';
+
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +44,7 @@ class IndexPage extends React.Component {
             />
           </div>
           <ToolbarLeft />
+          <ChangeDataSource />
         </div>
       </div>
     );
