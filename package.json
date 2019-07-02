@@ -9,22 +9,23 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "echarts": "^4.2.1",
     "esri-loader": "^2.9.1",
+    "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "nprogress": "^0.2.0",
     "qs": "^6.7.0",
-    "react": "^16.8.6",
     "rc-queue-anim": "^1.6.10",
     "rc-scroll-anim": "^2.5.6",
     "rc-tween-one": "^2.2.19",
+    "react": "^16.8.6",
     "react-color": "^2.17.0",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.8.6",
     "react-document-title": "^2.0.3",
+    "react-dom": "^16.8.6",
     "react-github-button": "^0.1.11",
     "react-resize-detector": "^4.2.0",
-    "xmldom": "^0.1.27",
-    "jquery": "^3.3.1"
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
