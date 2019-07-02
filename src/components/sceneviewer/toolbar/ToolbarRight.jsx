@@ -3,6 +3,7 @@ import ModifyDataSource from '../ModifyDataSource/index';
 import SearchBtn from '../SearchBtn/index';
 import SelectionTool from '../SelectionTool/index';
 import BaseMap from '../BaseMap/index';
+import LightShadow from '../LightShadow/index';
 import styles from './ToolbarRight.css';
 
 const ToolbarRight = () => {
@@ -16,6 +17,8 @@ const ToolbarRight = () => {
       <SelectionTool />
       {/* 底图切换 */}
       <BaseMap />
+      {/* 光照阴影 */}
+      <LightShadow />
     </div>
   );
 };
