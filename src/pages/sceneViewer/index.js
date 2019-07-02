@@ -4,6 +4,7 @@ import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
 import ToolbarLeft from '../../components/sceneviewer/toolbar/ToolbarLeft';
+import ToolbarRight from '../../components/sceneviewer/toolbar/ToolbarRight';
 
 import { INIT_WEBSCENE } from '../../constants/action-types';
 import styles from './index.css';
@@ -45,6 +46,7 @@ class IndexPage extends React.Component {
           </div>
           <ToolbarLeft />
           <ChangeDataSource />
+          <ToolbarRight />
         </div>
       </div>
     );
