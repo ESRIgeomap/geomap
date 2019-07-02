@@ -26,6 +26,9 @@ export default {
     activeHeadCode: '1',
     menusflags: false,
     activeMapItemid: null,
+    deactivate: true,
+    deactivate2: true,
+    deactivate3: true,
     timerLayersSelectvisible: false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
     // 天气特效 面板 状态
@@ -191,6 +194,15 @@ export default {
     // bim工具条
     changeToolbar4bimPanelState(state, action) {
       return { ...state, toolbar4bimPanelState: action.payload };
+    },
+    shanchuweijian(state, action) {
+      return { ...state, deactivate: action.payload };
+    },
+    shanchuweijian2(state, action) {
+      return { ...state, deactivate2: action.payload };
+    },
+    shanchuweijian3(state, action) {
+      return { ...state, deactivate3: action.payload };
     },
     setOpacity(state, action){
       return { ...state, opacityVlue: action.payload };

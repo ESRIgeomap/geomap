@@ -4,6 +4,7 @@ import SearchBtn from '../SearchBtn/index';
 import SelectionTool from '../SelectionTool/index';
 import BaseMap from '../BaseMap/index';
 import LightShadow from '../LightShadow/index';
+import Measure3Dbutton from '../Measure3Dbutton/index';
 import styles from './ToolbarRight.css';
 
 const ToolbarRight = () => {
@@ -19,6 +20,8 @@ const ToolbarRight = () => {
       <BaseMap />
       {/* 光照阴影 */}
       <LightShadow />
+
+      <Measure3Dbutton />
     </div>
   );
 };
