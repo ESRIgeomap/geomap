@@ -25,14 +25,16 @@ export default {
     rollerflags: false,
     activeHeadCode: '1',
     menusflags: false,
+    activeMapItemid: null,
     timerLayersSelectvisible: false,
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
     // 天气特效 面板 状态
     weatherEffectsPanelState: false,
-     // 切换数据源 面板 状态 wfh 20190618
-     changeDataSourcePanelState: false,
-     // bim工具条 面板 状态 wfh 20190620
-     toolbar4bimPanelState: false,
+    // 切换数据源 面板 状态 wfh 20190618
+    changeDataSourcePanelState: false,
+    // bim工具条 面板 状态 wfh 20190620
+    toolbar4bimPanelState: false,
+    opacityVlue: 1,
   },
 
   subscriptions: {
@@ -111,6 +113,12 @@ export default {
     menusChangeState(state, action) {
       return { ...state, menusflags: action.payload };
     },
+    switchBaseMap(state, action) {
+      return {
+        ...state,
+        activeMapItemid: action.payload,
+      };
+    },
     // 电表展示 end
     // 天气特效 面板状态修改
     weatherEffectsPanelChangeState(state, action) {
@@ -176,13 +184,16 @@ export default {
         identifyflags: action.payload,
       };
     },
-     // 修改数据源
-     changeDataSourcePanelChangeState(state, action) {
+    // 修改数据源
+    changeDataSourcePanelChangeState(state, action) {
       return { ...state, changeDataSourcePanelState: action.payload };
     },
-     // bim工具条
-     changeToolbar4bimPanelState(state, action) {
+    // bim工具条
+    changeToolbar4bimPanelState(state, action) {
       return { ...state, toolbar4bimPanelState: action.payload };
+    },
+    setOpacity(state, action){
+      return { ...state, opacityVlue: action.payload };
     },
   },
 };
