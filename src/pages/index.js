@@ -68,9 +68,9 @@ class IndexPage extends React.Component {
       />,
       <ViewInfo
         key="ui-component-viewinfo"
-        view={_.get(window.agsGlobal, 'view') && _.get(window.agsGlobal, 'view').type}
       />,
       <Basemap
+        key="ui-component-basemap"
         className={styles.componentBasemap}
       />
     ];

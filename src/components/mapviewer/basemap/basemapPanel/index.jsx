@@ -6,14 +6,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import styles from './index.less';
-import * as mapUtils from '../../../../utils/arcgis/map/mapviewUtil';
 
 const BaseMapPanel = props => {
   function switchBmap(e) {
     const view = window.agsGlobal.view;
     const itemId = e.target.dataset.itemid;
     // 通过webmap的id切换底图
-    mapUtils.switchBaseMapByWebmapId(view, itemId);
+    window.agsUtils.view.map2d.switchBaseMapByWebmapId(view, itemId);
     // 调用父组件的设置图片地址功能
     props.setBmapIcon(e.target.src);
     // 调用父组件的隐藏功能
