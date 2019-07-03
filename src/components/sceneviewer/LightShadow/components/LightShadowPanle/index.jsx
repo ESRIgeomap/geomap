@@ -227,12 +227,10 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
       }}
     >
       <div className={styles.listdiv}>
-        <p className={styles.ptitle}>
-          日光
-          <span className={styles.spantitle} onClick={listvisible}>
-            ×
-          </span>
-        </p>
+        <div className={styles['panle-header']}>
+          <p className={styles['panle-title']}>光照阴影</p>
+          <Icon type="close" className={styles['close-btn']} onClick={listvisible} />
+        </div>
         <div className={styles.settingInfo}>
           <Row
             style={{
