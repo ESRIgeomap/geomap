@@ -1,183 +1,103 @@
 /*
  * 日照分析组件
- * author:pensiveant
+ * author:dengd
  */
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { Slider, DatePicker, Row, Col, Checkbox, Button, Icon } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import styles from './index.less';
 
-const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
-  useEffect(() => {
-    //设置日照分析的初始状态
-    dispatch({
-      type: 'Lightshadow/rebackInitlightState',
-      payload: {
-        showShadow: false,
-        sliderPlay: false,
-        datepickerPlay: false,
-        valuetime: moment(new Date(), 'YYYY/MM/DD'),
-        sliderValue: moment().hour() * 60 + moment().minute(),
-        timerOfSlider: setInterval(null, null),
-        timerOfDatepicker: setInterval(null, null),
-        iconOfDatePicker: 'caret-right',
-        iconOfSlider: 'caret-right',
-      },
-    });
-  }, [dispatch]);
+const LightshadowPanle = ({ visible, closePanle }) => {
+  const [sliderValue, setSliderValue] = useState(moment().hour() * 60 + moment().minute()); // 24小时滑块值
+  const [dateValue, setDateValue] = useState(moment(new Date(), 'YYYY/MM/DD')); // 日期
+  const [sliderTimer, setSliderTimer] = useState(); // 时间滑块的timer
+  const [datePickerTimer, setDatePickerTimer] = useState(null); // 日期timer
+  const [showShadow, setShowShadow] = useState(false); // 是否显示阴影
 
   // 当日照分析到达24点时自动停止
   useEffect(() => {
-    if (Lightshadow.sliderValue > 1440) {
-      clearInterval(Lightshadow.timerOfSlider);
-      dispatch({
-        type: 'Lightshadow/iconOfSliderState',
-        payload: 'caret-right',
-      });
-      // this.setState({
-      //   iconOfSlider: 'caret-right',
-      // });
-      dispatch({
-        type: 'Lightshadow/sliderPlayState',
-        payload: !Lightshadow.sliderPlay,
-      });
+    if (sliderValue > 1440) {
+      clearInterval(sliderTimer);
+      setSliderTimer(null);
     }
-  }, [Lightshadow.sliderValue]);
+    if (window.agsGlobal.view) {
+      const date = moment(dateValue)
+        .hour(parseInt(sliderValue / 60, 10))
+        .minute(sliderValue % 60);
+      window.agsGlobal.view.environment.lighting.date = Number(date.format('x'));
+    }
+  }, [sliderValue, dateValue]);
 
   /**
    * 日期控件选择change事件
-   * author:pensiveant
+   * author:dengd
    */
   const onDatepickerChange = value => {
-    dispatch({
-      type: 'Lightshadow/valuetimeState',
-      payload: value,
-    });
-    window.agsGlobal.view.environment.lighting.date = Number(value.format('x'));
+    setDateValue(value);
   };
 
   /**
    * 时间播放按钮回调
-   * author:pensiveant
+   * author:dengd
    */
   const onSliderValueAdd = () => {
-    if (Lightshadow.sliderValue < 1440) {
-      dispatch({
-        type: 'Lightshadow/sliderPlayState',
-        payload: !Lightshadow.sliderPlay,
-      });
-
-      if (Lightshadow.sliderPlay) {
+    if (sliderValue < 1440) {
+      if (sliderTimer) {
         //暂停
-        clearInterval(Lightshadow.timerOfSlider);
-        dispatch({
-          type: 'Lightshadow/iconOfSliderState',
-          payload: 'caret-right',
-        });
-        // this.setState({
-        //   iconOfSlider: 'caret-right',
-        // });
+        clearInterval(sliderTimer);
+        setSliderTimer(null);
       } else {
         //播放
-        dispatch({
-          type: 'Lightshadow/timerOfSliderState',
-          payload: setInterval(() => {
-            const tempTime1 = Lightshadow.valuetime
-              .hour(parseInt(Lightshadow.sliderValue / 60, 10))
-              .minute(Lightshadow.sliderValue % 60);
-            window.agsGlobal.view.environment.lighting.date = Number(tempTime1.format('x'));
-            // slidervalue数据同步
-            dispatch({
-              type: 'Lightshadow/sliderValueState',
-              payload: (Lightshadow.sliderValue += 5),
-            });
-            dispatch({
-              type: 'Lightshadow/iconOfSliderState',
-              payload: 'pause',
-            });
-            // this.setState({
-            //   iconOfSlider: 'pause',
-            // });
-          }, 10),
-        });
+        setSliderTimer(setInterval(() => {
+          // slidervalue数据同步
+          setSliderValue(prevSilderValue => Number(prevSilderValue) + 5);
+        }, 50));
       }
     }
   };
 
   /**
    * 日期播放按钮回调
-   * author:pensiveant
+   * author:dengd
    */
   const onDatepickerValueAdd = () => {
-    dispatch({
-      type: 'Lightshadow/datepickerPlayState',
-      payload: !Lightshadow.datepickerPlay,
-    });
-    if (!Lightshadow.datepickerPlay) {
-      dispatch({
-        type: 'Lightshadow/timerOfDatepickerState',
-        payload: setInterval(() => {
-          const tempNowTime = Lightshadow.valuetime.add(1, 'days');
-          window.agsGlobal.view.environment.lighting.date = Number(tempNowTime.format('x'));
-          dispatch({
-            type: 'Lightshadow/valuetimeState',
-            payload: tempNowTime,
-          });
-          dispatch({
-            type: 'Lightshadow/iconOfDatePickerState',
-            payload: 'pause',
-          });
-          // this.setState({
-          //   iconOfDatePicker: 'pause',
-          // });
-        }, 100),
-      });
+    if (!datePickerTimer) {
+      // 播放
+      setDatePickerTimer(setInterval(() => {
+        setDateValue(prevDateValue => {
+          const year = prevDateValue.year();
+          const month = prevDateValue.month();
+          const date = prevDateValue.date();
+          return moment().year(year).month(month).date(date + 1);
+        });
+      }, 100));
     } else {
-      clearInterval(Lightshadow.timerOfDatepicker);
-      //dispatch({
-      //   type: 'planningreview/timerOfDatepickerState',
-      //   payload: setInterval(null, null),
-      // });
-      dispatch({
-        type: 'Lightshadow/iconOfDatePickerState',
-        payload: 'caret-right',
-      });
-      // this.setState({
-      //   iconOfDatePicker: 'caret-right',
-      // });
+      // 停止
+      clearInterval(datePickerTimer);
+      setDatePickerTimer(null);
     }
   };
 
   /**
    * 时间轴点击回调
-   * author:pensiveant
+   * author:dengd
    */
   const onSliderChange = value => {
     // 将传入的value转换为小时，分钟
-    const tempTime2 = Lightshadow.valuetime.hour(parseInt(value / 60, 10)).minute(value % 60);
-    dispatch({
-      type: 'Lightshadow/valuetimeState',
-      payload: tempTime2,
-    });
-    dispatch({
-      type: 'Lightshadow/sliderValueState',
-      payload: value,
-    });
-    window.agsGlobal.view.environment.lighting.date = Number(tempTime2.format('x'));
+    const tempTime2 = dateValue.hour(parseInt(value / 60, 10)).minute(value % 60);
+    setDateValue(tempTime2);
+    setSliderValue(value);
   };
 
   /**
    * 显示阴影checkbox check事件回调
-   * author:pensiveant
+   * author:dengd
    */
   const onCheckBoxChange = e => {
-    dispatch({
-      type: 'Lightshadow/shadowInitDataState',
-      payload: e.target.checked,
-    });
+    setShowShadow(e.target.checked);
 
     if (e.target.checked) {
       window.agsGlobal.view.environment.lighting.directShadowsEnabled = true;
@@ -188,27 +108,10 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
 
   /**
    * 关闭按钮点击回调
-   * author:pensiveant
+   * author:dengd
    */
-  const listvisible = () => {
-    dispatch({
-      type: 'Lightshadow/listChangeState',
-      payload: {
-        lightshadowlistflags: false,
-        prolistflags: false,
-        progralistflags: false,
-        controllistflags: false,
-      },
-    });
-    dispatch({
-      type: 'init_lightshadow',
-    });
-
-    //设置toolbar的状态
-    dispatch({
-      type: 'toolbar/updateCurrentView',
-      payload: null,
-    });
+  const closeBtnOnClick = () => {
+    closePanle();
   };
 
   const marks = {
@@ -219,17 +122,33 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
     1440: '24点',
   };
 
+  // slider 按钮图标
+  let iconOfSlider = null;
+  if (sliderTimer) {
+    iconOfSlider = <Icon type="pause" />;
+  } else {
+    iconOfSlider = <Icon type="caret-right" />;
+  }
+
+  // datepicker 按钮图标
+  let iconOfDatePicker = null;
+  if (datePickerTimer) {
+    iconOfDatePicker = <Icon type="pause" />;
+  } else {
+    iconOfDatePicker = <Icon type="caret-right" />;
+  }
+
   return (
     <div
       className={styles.modlediv}
       style={{
-        display: Lightshadow.lightshadowlistflags ? 'block' : 'none',
+        display: visible ? 'block' : 'none',
       }}
     >
       <div className={styles.listdiv}>
         <div className={styles['panle-header']}>
           <p className={styles['panle-title']}>光照阴影</p>
-          <Icon type="close" className={styles['close-btn']} onClick={listvisible} />
+          <Icon type="close" className={styles['close-btn']} onClick={closeBtnOnClick} />
         </div>
         <div className={styles.settingInfo}>
           <Row
@@ -241,9 +160,9 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
               <Slider
                 marks={marks}
                 max={1440}
-                defaultValue={Lightshadow.sliderValue}
+                defaultValue={sliderValue}
                 tipFormatter={null}
-                value={Lightshadow.sliderValue}
+                value={sliderValue}
                 onChange={onSliderChange}
               />
             </Col>
@@ -256,7 +175,7 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
                 shape="circle"
                 onClick={onSliderValueAdd}
               >
-                <Icon type={Lightshadow.iconOfSlider} />
+                { iconOfSlider }
               </Button>
             </Col>
           </Row>
@@ -269,8 +188,8 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
               <DatePicker
                 showToday={false}
                 allowClear={false}
-                defaultValue={Lightshadow.valuetime}
-                value={Lightshadow.valuetime}
+                defaultValue={dateValue}
+                value={dateValue}
                 format="YYYY-MM-DD"
                 onChange={onDatepickerChange}
               />
@@ -284,16 +203,15 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
                 shape="circle"
                 onClick={onDatepickerValueAdd}
               >
-                <Icon type={Lightshadow.iconOfDatePicker} />
+                { iconOfDatePicker }
               </Button>
             </Col>
           </Row>
           <Row>
             <Col span={8} offset={1}>
               <Checkbox
-                // defaultChecked={this.state.showShadow}
-                // checked={this.state.showShadow}
-                checked={Lightshadow.showShadow}
+                defaultChecked={showShadow}
+                checked={showShadow}
                 onChange={onCheckBoxChange}
               >
                 显示阴影
@@ -306,9 +224,8 @@ const LightshadowListTwo = ({ Lightshadow, dispatch }) => {
   );
 };
 
-export default connect(({ Lightshadow, toolbar }) => {
+export default connect(() => {
   return {
-    Lightshadow,
-    toolbar,
+
   };
-})(LightshadowListTwo);
+})(LightshadowPanle);
