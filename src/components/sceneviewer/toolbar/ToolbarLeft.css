@@ -1,8 +1,8 @@
 .toolbar {
   flex-direction: column;
   position: absolute;
-  left: 30px;
-  top: 100px;
+  left: 15px;
+  top: 15px;
   width: 40px;
   height: 240px;
   z-index: 2;
@@ -41,6 +41,6 @@
 }
 
 .btn:hover {
-  background: #47b479;
-  color: white;
+  color: #0079c1;
+  background-color: #edf7fd;
 }
