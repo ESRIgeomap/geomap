@@ -43,12 +43,7 @@ class ChangeDataSource extends Component {
       featureLayerItemArray: [],
       sceneLayerItemArray: []
     };
-    // let websceneArrayInit = [];
-    // const itemThumbnaillUrl = 'http://esrichina3d.arcgisonline.cn/portal/sharing/rest/content/items/860aa43a69c94cbfa74ac4d76ec9aceb/info/thumbnail/ago_downloaded.jpg';
-    // for (let i = 0; i < 10; i++) {
-    //   websceneArrayInit.push({ id: '860aa43a69c94cbfa74ac4d76ec9aceb',title:'长江大保护_数据展示场景', thumbnailUrl: itemThumbnaillUrl });
-    // }
-    // this.state.websceneArray = websceneArrayInit;
+  
     this.initQueryWebScene = this.initQueryWebScene.bind(this);
     this.initQueryLayerItem = this.initQueryLayerItem.bind(this);
     this.dateToString4all = this.dateToString4all.bind(this);
@@ -284,22 +279,6 @@ class ChangeDataSource extends Component {
         ags.view.extent = layer.fullExtent;
       });
     }
-    // ags.view = new Sceneview({
-    //   container: 'viewDiv',
-    //   map: scene,
-    //   ui: {
-    //     components: [],
-    //   },
-    // });
-    // ags.view.when(() => {
-    //   mySelf.initSceneView();
-    //   // Once the layer loads, set the view's extent to the layer's fullextent
-    //   if(layer){
-    //     layer.when(function () {
-    //       ags.view.extent = layer.fullExtent;
-    //     });
-    //   }
-    // });
   }
   async addSceneLayerToWebScene (sceneLayerId) {
     //清空viewDiv

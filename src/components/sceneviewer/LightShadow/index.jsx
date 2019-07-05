@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
-import sunImageIcon from './rzfx.png';
-import sunImageIcon1 from './rzfx1.png';
+import sunImageIcon from './images/rzfx.png';
+import sunImageIcon1 from './images/rzfx1.png';
 import LightShadowPanle from './components/lightShadowPanle/index';
 import styles from './index.less';
 

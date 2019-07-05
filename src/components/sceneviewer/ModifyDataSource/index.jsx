@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import modifyDataSourceIcon from './images/tjss1.png';
-import modifyDataSourceIcon1 from './images/tjss.png';
+import modifyDataSourceIcon from './images/icon_search2-01.png';
+import modifyDataSourceIcon1 from './images/icon_search1-01.png';
 import ChangeDataSource from './ChangeDataSource/ChangeDataSource';
 import styles from './index.css';
 

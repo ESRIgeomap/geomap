@@ -8,8 +8,8 @@ import styles from './index.less';
 import MeasureArea3D from './components/MeasureArea3D';
 import MeasureLine3D from './components/MeasureLine3D';
 import Slice3D from './components/Slice3D';
-import changebasemap from './dwcj.png';
-import changebasemap1 from './dwcj1.png';
+import changebasemap from './images/icon_measure1.png';
+import changebasemap1 from './images/icon_measure2.png';
 
 const { TabPane } = Tabs;
 
