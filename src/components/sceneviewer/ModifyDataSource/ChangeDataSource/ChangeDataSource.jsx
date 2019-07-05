@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'dva';
 import { Modal, Menu, Icon, Card, Input } from 'antd';
-import * as jsapi from '../../utils/jsapi';
+import * as jsapi from '../../../../utils/jsapi';
 import $ from 'jquery';
-import env from '../../utils/env';
-import totalWebScene from '../../services/portal4ags/item/totalWebScene';
-import totalSceneLayerItem from '../../services/portal4ags/item/totalSceneLayerItem';
-import totalFeatureLayerItem from '../../services/portal4ags/item/totalFeatureLayerItem';
-import Overviewmap from '../../components/overviewmap/Overviewmap';
+import env from '../../../../utils/env';
+import totalWebScene from '../../../../services/portal4ags/item/totalWebScene';
+import totalSceneLayerItem from '../../../../services/portal4ags/item/totalSceneLayerItem';
+import totalFeatureLayerItem from '../../../../services/portal4ags/item/totalFeatureLayerItem';
+import Overviewmap from '../../../overviewmap/Overviewmap';
 
 
 
