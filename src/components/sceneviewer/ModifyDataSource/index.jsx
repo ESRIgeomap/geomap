@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
-import modifyDataSourceIcon from './modifyDataSource.png';
-import modifyDataSourceIcon1 from './modifyDataSource1.png';
+import modifyDataSourceIcon from './tjss1.png';
+import modifyDataSourceIcon1 from './tjss.png';
 import ChangeDataSource from './ChangeDataSource/ChangeDataSource';
 import styles from './index.css';
 
