@@ -33,8 +33,6 @@ export default {
     identifyflags: true, // pensiveant：标绘，是否进行属性查询
     // 天气特效 面板 状态
     weatherEffectsPanelState: false,
-    // 切换数据源 面板 状态 wfh 20190618
-    changeDataSourcePanelState: false,
     // bim工具条 面板 状态 wfh 20190620
     toolbar4bimPanelState: false,
     opacityVlue: 1,
@@ -186,10 +184,6 @@ export default {
         ...state,
         identifyflags: action.payload,
       };
-    },
-    // 修改数据源
-    changeDataSourcePanelChangeState(state, action) {
-      return { ...state, changeDataSourcePanelState: action.payload };
     },
     // bim工具条
     changeToolbar4bimPanelState(state, action) {

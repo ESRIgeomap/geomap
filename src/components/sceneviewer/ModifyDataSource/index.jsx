@@ -1,43 +1,36 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import { connect } from 'dva';
-import modifyDataSourceIcon from './tjss1.png';
-import modifyDataSourceIcon1 from './tjss.png';
+import modifyDataSourceIcon from './images/tjss1.png';
+import modifyDataSourceIcon1 from './images/tjss.png';
 import ChangeDataSource from './ChangeDataSource/ChangeDataSource';
 import styles from './index.css';
 
-const ModifyDataSource = ({dispatch, agsmap}) => {
-  // const [visible, setVisible] = useState(false);
+const ModifyDataSource = () => {
+  const [panalState, setPanalState] = useState(false);
 
   function btnOnClick() {
-    // setVisible(!visible);
-    if (agsmap.changeDataSourcePanelState) {
-      dispatch({
-        type: 'agsmap/changeDataSourcePanelChangeState',
-        payload: false,
-      });
-    } else {
-      dispatch({
-        type: 'agsmap/changeDataSourcePanelChangeState',
-        payload: true,
-      });
-    }
+    setPanalState(!panalState)
   }
 
   return (
     <React.Fragment>
-      <Button onClick={btnOnClick} className={styles.btnStyle} style={{ backgroundColor: agsmap.changeDataSourcePanelState ? "#47b479" : "white" }}>
+      <Button
+        onClick={btnOnClick}
+        className={styles.btnStyle}
+        style={{ backgroundColor: panalState? '#47b479' : 'white' }}
+      >
         <a className={styles.btnA} title="修改数据源">
-          <img src={agsmap.changeDataSourcePanelState ? modifyDataSourceIcon : modifyDataSourceIcon1} alt="" className={styles.btnImg} />
+          <img
+            src={panalState ? modifyDataSourceIcon : modifyDataSourceIcon1}
+            alt=""
+            className={styles.btnImg}
+          />
         </a>
       </Button>
-      <ChangeDataSource/>
+      <ChangeDataSource visible={panalState} setVisible={btnOnClick} />
     </React.Fragment>
   );
 };
 
-export default connect(({ agsmap }) => {
-  return {
-    agsmap,
-  };
-})(ModifyDataSource);
+export default ModifyDataSource;

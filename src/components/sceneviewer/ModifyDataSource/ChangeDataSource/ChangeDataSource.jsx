@@ -482,10 +482,7 @@ class ChangeDataSource extends Component {
   }
 
   handleCancel() {
-    this.props.dispatch({
-      type: 'agsmap/changeDataSourcePanelChangeState',
-      payload: false,
-    });
+    this.props.setVisible(false);
   }
 
   handleClick4menu(evt) {
@@ -556,7 +553,7 @@ class ChangeDataSource extends Component {
           width={1600}
           height={800}
           title="修改数据源"
-          visible={this.props.agsmap.changeDataSourcePanelState}
+          visible={this.props.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           maskClosable={false}
