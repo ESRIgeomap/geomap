@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
 import styles from './index.less';
 
-const BaseMapItem = ({ dispatch, agsmap, data, key }) => {
+const BaseMapItem = ({ dispatch, data, key, basemapOnChange, activeMapItemid }) => {
   const [itemid, stateitemid] = useState(null);
   const view = window.agsGlobal.view;
 
@@ -11,24 +11,15 @@ const BaseMapItem = ({ dispatch, agsmap, data, key }) => {
     stateitemid(data.itemId);
   }, []);
 
-  function switchBaseMap(e) {
-    const activeMap = e.target.getAttribute('activemap');
-    dispatch({
-      type: 'agsmap/switchBaseMap',
-      payload: activeMap,
-    });
-    console.log(itemid)
+  function switchBaseMap() {
     mapUtils.switchBaseMapByWebmapId(view, itemid);
-    dispatch({
-      type: 'agsmap/menusChangeState',
-      payload: false,
-    });
+    basemapOnChange(itemid);
   }
 
   return (
     <div
       className={`${styles.mapitem} ${
-        data.itemId === agsmap.activeMapItemid ? styles.active : ''
+        itemid === activeMapItemid ? styles.active : ''
       }`}
       title={data.title}
       onClick={switchBaseMap}
@@ -37,13 +28,14 @@ const BaseMapItem = ({ dispatch, agsmap, data, key }) => {
         activemap={data.itemId}
         className={styles.mapIcon}
         src={data.icon}
+        alt=""
       />
     </div>
   );
 };
 
-export default connect(({ agsmap }) => {
+export default connect(() => {
   return {
-    agsmap,
+
   };
 })(BaseMapItem);
