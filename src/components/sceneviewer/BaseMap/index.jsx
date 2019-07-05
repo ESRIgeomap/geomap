@@ -52,7 +52,7 @@ const BaseMap = ({ dispatch, agsmap }) => {
   }
 
   return (
-    <div title="底图" className={styles.changebase}>
+    <div className={styles.changebase}>
       {/*<Popover
         placement="leftTop"
         content={content}
@@ -77,14 +77,17 @@ const BaseMap = ({ dispatch, agsmap }) => {
               {content}
             </CustomScroll>
           </div>
-          <h2>地图面透明度</h2>
-          <Slider marks={marks} defaultValue={100} onChange={onSliderChange} />
+          <h3 style={{padding: '0 10px', marginBottom: '0'}}>地图面透明度</h3>
+          <div style={{padding: '0 10px', marginBottom: '10px'}}>
+            <Slider marks={marks} defaultValue={100} onChange={onSliderChange} />
+          </div>
         </div>
       </div>
       <Button
         className={styles.basemapbutton}
         style={{ backgroundColor: visible ? '#47b479' : 'white' }}
         onClick={neasureVisible}
+        title="底图"
       >
         <img className={styles.baseIcon} src={visible ? changebasemap1 : changebasemap} />
       </Button>
