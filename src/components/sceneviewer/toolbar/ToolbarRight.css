@@ -1,6 +1,6 @@
 .toolbar-right {
   position: absolute;
-  top: 100px;
-  right: 30px;
+  top: 15px;
+  right: 15px;
   z-index: 10;
 }
