@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { Layout, Icon, Button, Popover, Slider } from 'antd';
+import { Icon, Button } from 'antd';
+import Slider from './Slider';
 import styles from './index.less';
-import CustomScroll from 'react-custom-scrollbars';
 import BaseMapItem from './basemapitem';
-import changebasemap from './img/dtqh.png';
-import changebasemap1 from './img/dtqh1.png';
+import btnImg from './img/btn.png';
+import btnImgSelected from './img/btn_selected.png';
 
 const marks = {
   100: '100',
@@ -73,43 +73,30 @@ const BaseMap = ({ dispatch }) => {
 
   return (
     <div className={styles.changebase}>
-      {/*<Popover
-        placement="leftTop"
-        content={content}
-        title="底图切换"
-        overlayClassName={styles.popover}
-        trigger="click"
-        visible={visible}
-        onVisibleChange={visible => {
-          setVisible(visible);
-        }}
-      >*/}
       <div className={styles.measurebox} style={{ display: visible ? 'block' : 'none' }}>
         <div className={styles.panelWrap}>
           <div className={styles.panelHead}>
             <span>底图</span>
-            <span onMouseDown={neasureVisible}>
+            <span onMouseDown={neasureVisible} title="关闭">
               <Icon type="close" />
             </span>
           </div>
           <div className={styles.panelContent}>
-            <CustomScroll autoHeight autoHeightMin={0} autoHeightMax={290}>
-              {renderBasemapList()}
-            </CustomScroll>
+            {renderBasemapList()}
           </div>
-          <h3 style={{padding: '0 10px', marginBottom: '0'}}>地图面透明度</h3>
-          <div style={{padding: '0 10px', marginBottom: '10px'}}>
-            <Slider marks={marks} defaultValue={100} value={opacityVlue * 100} onChange={onSliderChange} />
+          <h3 className={styles.title}>地图面透明度</h3>
+          <div className={styles['slider-wrap']}>
+            <Slider onChange={onSliderChange} value={opacityVlue * 100}/>
           </div>
         </div>
       </div>
       <Button
         className={styles.basemapbutton}
-        style={{ backgroundColor: visible ? '#47b479' : 'white' }}
+        style={{ backgroundColor: visible ? '#dfeef7' : 'white' }}
         onClick={neasureVisible}
         title="底图"
       >
-        <img className={styles.baseIcon} src={visible ? changebasemap1 : changebasemap} alt="" />
+        <img className={styles.baseIcon} src={visible ? btnImgSelected : btnImg} alt="" />
       </Button>
       {/*<Popover>*/}
     </div>
