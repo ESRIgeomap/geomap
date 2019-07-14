@@ -4,29 +4,6 @@
  */
 import * as jsapi from '../../jsapi';
 
-//---------------------------------底图切换 start------------------------------
-/**
- * 通过webmapid 切换底图
- * @author  lee  
- * @param {object} view 场景
- * @param {string} webmapId webmap的itmid
- */
-async function switchBaseMapByWebmapId(view, webmapId) {
-  const [WebMap] = await jsapi.load(['esri/WebMap']);
-  const map = new WebMap({
-    portalItem: {
-      id: webmapId,
-    },
-  });
-  map.load().then(function () {
-    map.basemap.load().then(function () {
-      view.map.basemap = map.basemap;
-    });
-  });
-}
-export { switchBaseMapByWebmapId }
-//---------------------------------底图切换 start------------------------------
-
 //---------------------------------图层获取start----------------------------------------
 /**
  * 根据图层的title获取图层
@@ -127,29 +104,6 @@ export { addImageryLayerByCondition };
 
 
 
-/**
- * 根据图层名称，控制图层显隐藏
- * @author  lee  20181208
- * @param {*} view  场景
- * @param {*} title  名称
- * @param {*} visible 显示/隐藏  true or false
- */
-function setLayerVisible(view, title, visible) {
-  var foundLayer = getLayerByTitle(view, title);
-  foundLayer.visible = visible;
-}
-
-/**
- * 批量设置指定图层的可见性
- * @param {*} scenceView
- * @param {*} titles
- * @param {*} visible
- */
-function setLayerVisibleByTitleBatch(view, titles, visible) {
-  titles.map(title => {
-    return setLayerVisible(view, title, visible);
-  });
-}
 
 /**
  * 给面图层添加outline并高亮
@@ -578,14 +532,12 @@ async function addGraphicsToMap(graphics, view) {
 
 export {
   addGraphicsToMap,//给map添加Graphics
-  setLayerVisible,
   setLayerVisibleByItem,
   getLayerByItem,
   addLayerByItem,
   removeLayerByItem,
   getLayerVisibleByLayerName,
   getUniqueValueRenderer,
-  setLayerVisibleByTitleBatch,
   drawbuffer,
   highLightPolygonOutline,
   highlightByLayerGraphic,

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /**
  * 底图选择框组件
  * @author  lee
@@ -12,7 +13,7 @@ const BaseMapPanel = props => {
     const view = window.agsGlobal.view;
     const itemId = e.target.dataset.itemid;
     // 通过webmap的id切换底图
-    window.agsUtils.view.map2d.switchBaseMapByWebmapId(view, itemId);
+    window.GeomapUtils.view.map2d.switchBaseMapByWebmapId(view, itemId);
     // 调用父组件的设置图片地址功能
     props.setBmapIcon(e.target.src);
     // 调用父组件的隐藏功能

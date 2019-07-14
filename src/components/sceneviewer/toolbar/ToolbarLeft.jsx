@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Icon } from 'antd';
 import classnames from 'classnames';
 import arcgis from '../../../utils/arcgis';
-import * as sceneviewUtils from '../../../utils/arcgis/map/sceneviewUtil';
 import Zoom from '../zoom/';
 import Compass from '../compass/index';
 import Home from '../home';
@@ -33,7 +32,7 @@ const ToolbarLeft = () => {
    */
   const mapPan = e => {
     e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
+    window.GeomapUtils.view.map3d.changeToggle(window.agsGlobal.view, 'pan');
   };
 
   /**
@@ -43,7 +42,7 @@ const ToolbarLeft = () => {
    */
   const mapRotate = e => {
     e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
+    window.GeomapUtils.view.map3d.changeToggle(window.agsGlobal.view, 'rotate');
   };
 
   return (

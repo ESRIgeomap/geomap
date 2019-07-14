@@ -28,6 +28,7 @@
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
+    "@geomap/utils": "^0.2.0",
     "babel-eslint": "^9.0.0",
     "cross-env": "^5.1.4",
     "dojo-typings": "^1.11.9",

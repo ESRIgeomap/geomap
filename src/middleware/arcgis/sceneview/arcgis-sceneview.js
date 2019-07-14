@@ -1,5 +1,4 @@
 import { jsapi } from '../../../constants/geomap-utils';
-import * as mapUitls from '../../../utils/arcgis/map/sceneviewUtil';
 import * as actions from '../../../constants/action-types';
 import widgets from '../../../utils/widgets';
 import { AppProxy, Portal, WebsceneID } from '../../../utils/env';
@@ -43,7 +42,7 @@ function createSceneView(opts = {}) {
 
         await prepare();
 
-        ags.view = await window.agsUtils.view.map3d.initSceneView(Portal, WebsceneID, ags.container);
+        ags.view = await window.GeomapUtils.view.map3d.initSceneView(Portal, WebsceneID, ags.container);
         // 创建鹰眼微件
         await widgets.createOverView(ags.view);
 

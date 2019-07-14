@@ -10,7 +10,6 @@ import measurement2DIcon from './images/量面.png';
 import exportImageIcon from './images/导图.png';
 import sunImageIcon from './images/光照.jpg';
 import weatherEffectIcon from './images/天气特效.png';
-import * as sceneviewUtils from '../../utils/arcgis/map/sceneviewUtil';
 
 import {
   ACTION_MAP_OVERVIEW,
@@ -33,7 +32,7 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
    */
   const mapPan = (e) => {
     e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'pan');
+    window.GeomapUtils.view.map3d.changeToggle(window.agsGlobal.view, 'pan');
   }
 
    /**
@@ -43,7 +42,7 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
    */
   const mapRotate = (e) => {
     e.stopPropagation();
-    sceneviewUtils.changeToggle(window.agsGlobal.view, 'rotate');
+    window.GeomapUtils.view.map3d.changeToggle(window.agsGlobal.view, 'rotate');
   }
 
    /**
@@ -53,7 +52,7 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
    */
   const mapRoam = (e) => {
     e.stopPropagation();
-    sceneviewUtils.surroundRoam(window.agsGlobal.view);
+    window.GeomapUtils.view.map3d.surroundRoam(window.agsGlobal.view);
   }
 
 

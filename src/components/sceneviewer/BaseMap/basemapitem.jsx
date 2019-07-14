@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
-import * as mapUtils from '../../../utils/arcgis/map/mapviewUtil';
 import styles from './index.less';
 
 const BaseMapItem = ({ dispatch, data, key, basemapOnChange, activeMapItemid }) => {
@@ -12,7 +11,7 @@ const BaseMapItem = ({ dispatch, data, key, basemapOnChange, activeMapItemid }) 
   }, []);
 
   function switchBaseMap() {
-    mapUtils.switchBaseMapByWebmapId(view, itemid);
+    window.GeomapUtils.view.map2d.switchBaseMapByWebmapId(view, itemid);
     basemapOnChange(itemid);
   }
 
