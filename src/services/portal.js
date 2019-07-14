@@ -5,10 +5,7 @@
  */
 import request from '../utils/request';
 
-const portalUrl =
-  window.appcfg.portal.indexOf('https') < 0
-    ? window.appcfg.portal.replace('http', 'https')
-    : window.appcfg.portal;
+const portalUrl =  window.appcfg.portal;
 // const portalUrl = window.appcfg.portal;
 /**
  * 获取token令牌,默认一个小时有效期
@@ -58,7 +55,7 @@ export function getPortalSelf() {
  */
 export function searchItems(q, start, num, sortField, sort) {
   const formData = new URLSearchParams();
-  formData.append('token', sessionStorage.token);
+  // formData.append('token', sessionStorage.token);
   formData.append('q', q);
   formData.append('start', start);
   formData.append('num', num);

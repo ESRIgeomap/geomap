@@ -5,7 +5,7 @@ export default function getTotalWebScene(dataObj) {
 
   const requestUrl = "http://esrichina3d.arcgisonline.cn/portal/sharing/search?f=json&" +
     "num=100&start=1&sortField=modified&sortOrder=desc&" +
-    "q=type:'Web Scene' AND owner:" + dataObj.owner;
+    "q=type:'Web Scene' ";
   return jQuery.ajax({
     type: 'GET',
     url: requestUrl,

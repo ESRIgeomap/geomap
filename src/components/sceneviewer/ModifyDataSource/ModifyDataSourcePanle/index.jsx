@@ -1,24 +1,34 @@
 /**
  * 修改数据源面板
- * @author  pensiveant
+ * @author  Lee
  */
 import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
+import moment from 'moment';
 import styles from './index.less';
 import { Button, Radio, Icon } from 'antd';
+
+import { searchItems } from '../../../../services/portal';
 
 import DataItem from './component/dataItem';
 
 const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
   const [dataType, setDataType] = useState(''); //数据类型标识
-  const [dataSource, setDataSource] = useState([
-    {
-      title: '南京BIMGIS制作的shapefile文件',
-      type: 'WebScene',
-      modifyTime: '2019-6-20 08:27:36',
-    },
-  ]); //数据源
+  const [dataSource, setDataSource] = useState([]); //数据源
 
+  useEffect(() => {
+    initQueryWebScene();
+  }, []);
+
+  async function initQueryWebScene() {
+    const q = `type: 'Web Scene'  NOT owner:{esri TO esri_zzzzz}`;
+    const  response = await searchItems(q, 0, 100, 'numviews', 'desc');
+    const items = response.data.results;
+    items.forEach(item => {
+      item.thumbnailUrl = window.appcfg.portal +'sharing/rest/content/items/' + item.id + '/info/' + item.thumbnail;
+      item.modified = moment(new Date(item.modified)).format('YYYY-MM-DD HH:mm:ss');
+    });
+    setDataSource(items);
+  }
   /**
    * 关闭面板
    * @author pensiveant
@@ -35,11 +45,18 @@ const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
     setDataType(e.target.value);
   };
 
+   /**
+   * 构造item卡图
+   * @author Lee
+   */
+  const renderItemlist = e => {
+    return dataSource.map(item => {
+      return <DataItem item={item} />;
+    });
+  };
+
   return (
-    <div
-      className={styles.chooseDataSource}
-      style={{ display: visible ? 'flex' : 'none' }}
-    >
+    <div className={styles.chooseDataSource} style={{ display: visible ? 'flex' : 'none' }}>
       <div className={styles.close} onClick={closePannel}>
         <Icon type="close" />
       </div>
@@ -73,78 +90,7 @@ const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
         </Radio.Group>
       </div>
       <p className={styles.totalNum}>总共搜出60个WebScene资源</p>
-      <div className={styles.map}>
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-        <DataItem
-          title={dataSource[0].title}
-          type={dataSource[0].type}
-          modifyTime={dataSource[0].modifyTime}
-        />
-      </div>
+      <div className={styles.map}>{renderItemlist()}</div>
       <div className={styles.cancelOkBtn}>
         <Button>确定</Button>
         <Button>取消</Button>
