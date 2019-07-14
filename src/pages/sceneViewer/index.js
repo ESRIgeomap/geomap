@@ -2,9 +2,13 @@ import React from 'react';
 import { connect } from 'dva';
 import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
-
+// 三维左侧工具条（home、放大、缩小、平移、旋转、指北针）
 import ToolbarLeft from '../../components/sceneviewer/toolbar/ToolbarLeft';
+// 三维右侧工具条
 import ToolbarRight from '../../components/sceneviewer/toolbar/ToolbarRight';
+// 三维工具条
+import Toolbar3D from '../../components/sceneviewer/toolbar/Toolbar3D';
+
 
 import { INIT_WEBSCENE } from '../../constants/action-types';
 import styles from './index.css';
@@ -46,6 +50,7 @@ class IndexPage extends React.Component {
           </div>
           <ToolbarLeft />
           <ToolbarRight />
+          <Toolbar3D/>
         </div>
       </div>
     );
