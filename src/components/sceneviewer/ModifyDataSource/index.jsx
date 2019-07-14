@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import modifyDataSourceIcon from './images/icon_search2-01.png';
 import modifyDataSourceIcon1 from './images/icon_search1-01.png';
-import ChangeDataSource from './ChangeDataSource/ChangeDataSource';
+import ChangeDataSource from './ModifyDataSourcePanle';
 import styles from './index.css';
 
 const ModifyDataSource = () => {

@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
-import searchIcon from './images/手指.png';
 import surroundRoamIcon from './images/旋转.png';
 import yuYanIcon from './images/鱼眼.png';
-import measurement3DIcon from './images/量高.png';
-import measurement2DIcon from './images/量面.png';
 import exportImageIcon from './images/导图.png';
-import sunImageIcon from './images/光照.jpg';
 import weatherEffectIcon from './images/天气特效.png';
 
 import {
@@ -29,7 +25,7 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
    */
   const mapRoam = (e) => {
     e.stopPropagation();
-    window.GeomapUtils.view.map3d.surroundRoam(window.agsGlobal.view);
+    window.GeomapUtils.view.map3d.roamByHeading(window.agsGlobal.view);
   }
 
 
@@ -46,33 +42,6 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
     dispatch({
       type: ACTION_MAP_OVERVIEW,
       payload: state.visibleovermap,
-    });
-  }
-
-  
-  /**
-   * 3D【三维测量】回调
-   * author:
-   * @param {*} e
-   */
-  const measure3DLine = (e) => {
-    e.stopPropagation();
-    dispatch({
-      type: 'toolbar/updateCurrentView',
-      payload: 'measure-line-3d',
-    });
-  }
-
-  /**
-   * 3D【面积测量】回调
-   * author:pensiveant
-   * @param {*} e
-   */
-  const measure3DArea = (e) => {
-    e.stopPropagation();
-    dispatch({
-      type: 'toolbar/updateCurrentView',
-      payload: 'measure-area-3d',
     });
   }
 
@@ -102,38 +71,7 @@ const Toolbar3D = ({ viewmode,agsmap, Lightshadow,dispatch }) => {
   }
 
 
-  /**
-   * 【光照阴影】回调
-   * author:pensiveant
-   */
-  const sunShine = () => {
-    dispatch({
-      type: 'toolbar/updateCurrentView',
-      payload: 'light-shadow-3d',
-    });
 
-    if (!Lightshadow.lightshadowlistflags) {
-      dispatch({
-        type: 'Lightshadow/listChangeState',
-        payload: {
-          prolistflags: false,
-          progralistflags: false,
-          controllistflags: false,
-          lightshadowlistflags: true,
-        },
-      });
-    } else {
-      dispatch({
-        type: 'Lightshadow/listChangeState',
-        payload: {
-          prolistflags: false,
-          progralistflags: false,
-          controllistflags: false,
-          lightshadowlistflags: false,
-        },
-      });
-    }
-  }
 
   return (
     <div
