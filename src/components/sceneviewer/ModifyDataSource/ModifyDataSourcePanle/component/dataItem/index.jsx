@@ -6,9 +6,9 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import DataImg from './img/data.png';
 
-const DataItem = ({ item }) => {
+const DataItem = ({ item, onlayerClick }) => {
   return (
-    <div className={styles.dataItem}>
+    <div className={styles.dataItem} onClick={onlayerClick}>
       <div className={styles.map}>
         <img src={item.thumbnailUrl} alt="data" style={{ width: '100%', height: '100%' }} />
       </div>

@@ -11,8 +11,8 @@ import { searchItems } from '../../../../services/portal';
 
 import DataItem from './component/dataItem';
 
-const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
-  const [dataType, setDataType] = useState(''); //数据类型标识
+const ModifyDataSourcePanle = ({ visible, setVisible }) => {
+  const [dataType, setDataType] = useState('webscene'); //数据类型标识
   const [dataSource, setDataSource] = useState([]); //数据源
 
   useEffect(() => {
@@ -29,12 +29,35 @@ const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
     });
     setDataSource(items);
   }
+
+  async function initQueryFeatureLayer() {
+    const q = `owner:arcgis (type:('Feature Collection' OR 'Feature Service' OR 'Stream Service' OR 'WFS') -typekeywords:'Table')`;
+    const  response = await searchItems(q, 0, 100, 'numviews', 'desc');
+    const items = response.data.results;
+    items.forEach(item => {
+      item.thumbnailUrl = window.appcfg.portal +'sharing/rest/content/items/' + item.id + '/info/' + item.thumbnail;
+      item.modified = moment(new Date(item.modified)).format('YYYY-MM-DD HH:mm:ss');
+    });
+    setDataSource(items);
+  }
+
+  async function initQuerySceneLayer() {
+    const q = `owner:arcgis (type:"Scene Service") -type:("Code Attachment" OR "Featured Items")`;
+    const  response = await searchItems(q, 0, 100, 'numviews', 'desc');
+    const items = response.data.results;
+    items.forEach(item => {
+      item.thumbnailUrl = window.appcfg.portal +'sharing/rest/content/items/' + item.id + '/info/' + item.thumbnail;
+      item.modified = moment(new Date(item.modified)).format('YYYY-MM-DD HH:mm:ss');
+    });
+    setDataSource(items);
+  }
   /**
    * 关闭面板
    * @author pensiveant
    */
   const closePannel = e => {
-    closeModifyDataSourcePanle();
+    console.log(setVisible)
+    setVisible();
   };
 
   /**
@@ -43,7 +66,18 @@ const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
    */
   const handleDataSourceChange = e => {
     setDataType(e.target.value);
+    if(e.target.value=='webscene'){
+      initQueryWebScene()
+    }else if(e.target.value=='feature'){
+      initQueryFeatureLayer()
+    }else if(e.target.value=='scene'){
+      initQuerySceneLayer()
+    }
   };
+
+  function imglayerOnClick() {
+    console.log("点击图片")
+  }
 
    /**
    * 构造item卡图
@@ -51,7 +85,7 @@ const ModifyDataSourcePanle = ({ visible, closeModifyDataSourcePanle }) => {
    */
   const renderItemlist = e => {
     return dataSource.map(item => {
-      return <DataItem item={item} />;
+      return <DataItem item={item} onlayerClick={imglayerOnClick}/>;
     });
   };
 
