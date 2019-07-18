@@ -75,8 +75,9 @@ const ModifyDataSourcePanle = ({ visible, setVisible }) => {
     }
   };
 
-  function imglayerOnClick() {
+  function imglayerOnClick(e) {
     console.log("点击图片")
+    console.log(e.currentTarget.children[0].children[0].alt);
   }
 
    /**

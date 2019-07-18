@@ -10,7 +10,7 @@ const DataItem = ({ item, onlayerClick }) => {
   return (
     <div className={styles.dataItem} onClick={onlayerClick}>
       <div className={styles.map}>
-        <img src={item.thumbnailUrl} alt="data" style={{ width: '100%', height: '100%' }} />
+        <img src={item.thumbnailUrl} alt={item.id} style={{ width: '100%', height: '100%' }} />
       </div>
       <p className={styles.title}>{item.title}</p>
       <p className={styles.type}>{item.type}</p>
