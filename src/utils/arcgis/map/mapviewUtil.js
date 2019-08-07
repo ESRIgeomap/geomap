@@ -3,96 +3,6 @@
  * @author  lee  
  */
 import * as jsapi from '../../jsapi';
-//---------------------------------场景初始化 start----------------------------------------
-/**
- * 初始化二维场景
- * @author  lee  
- * @param {object} portal  portal地址
- * @param {string} itemid  webmapId
- * @param {string} container  地图的div
- * @returns {object}  view 场景
- */
-async function initMapView(portal, itemid, container) {
-  const [WebMap, MapView] = await jsapi.load(['esri/WebMap', 'esri/views/MapView']);
-  const webmap = new WebMap({
-    portalItem: {
-      id: itemid,
-      portal: portal,
-    },
-  });
-  const view = new MapView({
-    container: container,
-    map: webmap,
-    ui: {
-      components: [],
-    },
-  });
-  return view;
-}
-export { initMapView }
-/**
- * 初始化三维场景
- * @author  lee  
- * @param {object} portal  portal地址
- * @param {string} itemid  webscenenId
- * @param {string} container  地图的div
- * @returns {object}  view 场景
- */
-
-async function initSceneView(portal, itemid, container) {
-  const [WebScene, Sceneview] = await jsapi.load(['esri/WebScene', 'esri/views/SceneView']);
-  const scene = new WebScene({
-    portalItem: {
-      id: itemid,
-      portal: portal,
-    },
-  });
-
-  const view = new Sceneview({
-    container: container,
-    map: scene,
-    environment: {
-      atmosphere: {
-        quality: 'high',
-      },
-      // 修改光照
-      lighting: {
-        date: new Date(),
-        directShadowsEnabled: false,
-        cameraTrackingEnabled: false,
-      },
-    },
-    ui: {
-      components: [], 
-    },
-  });
-  return view;
-}
-export { initSceneView };
-//---------------------------------场景初始化 end--------------------------------
-
-//---------------------------------底图切换 start------------------------------
-/**
- * 通过webmapid 切换底图
- * @author  lee  
- * @param {object} view 场景
- * @param {string} webmapId webmap的itmid
- */
-async function switchBaseMapByWebmapId(view, webmapId) {
-  const [WebMap] = await jsapi.load(['esri/WebMap']);
-  const map = new WebMap({
-    portalItem: {
-      id: webmapId,
-    },
-  });
-  map.load().then(function () {
-    map.basemap.load().then(function () {
-      view.map.basemap = map.basemap;
-    });
-  });
-}
-export { switchBaseMapByWebmapId }
-//---------------------------------底图切换 start------------------------------
 
 //---------------------------------图层获取start----------------------------------------
 /**
@@ -193,51 +103,7 @@ export { addImageryLayerByCondition };
 
 
 
-/**
- * 根据幻灯片的名称，切换到对应的视角
- * @param {*} scenceView
- * @param {*} title
- */
-function gotoBySliderName(scenceView, title) {
-  const view = scenceView;
-  const slides = view.map.presentation.slides.items;
-  const options = {
-    duration: 3000,
-    maxDuration: 3000,
-  };
-  // 飞行到视线分析 幻灯片
-  slides.forEach(slide => {
-    if (slide.title.text === title) {
-      view.goTo(slide.viewpoint, options);
-    }
-  });
-}
 
-
-
-/**
- * 根据图层名称，控制图层显隐藏
- * @author  lee  20181208
- * @param {*} view  场景
- * @param {*} title  名称
- * @param {*} visible 显示/隐藏  true or false
- */
-function setLayerVisible(view, title, visible) {
-  var foundLayer = getLayerByTitle(view, title);
-  foundLayer.visible = visible;
-}
-
-/**
- * 批量设置指定图层的可见性
- * @param {*} scenceView
- * @param {*} titles
- * @param {*} visible
- */
-function setLayerVisibleByTitleBatch(view, titles, visible) {
-  titles.map(title => {
-    return setLayerVisible(view, title, visible);
-  });
-}
 
 /**
  * 给面图层添加outline并高亮
@@ -666,19 +532,16 @@ async function addGraphicsToMap(graphics, view) {
 
 export {
   addGraphicsToMap,//给map添加Graphics
-  setLayerVisible,
   setLayerVisibleByItem,
   getLayerByItem,
   addLayerByItem,
   removeLayerByItem,
   getLayerVisibleByLayerName,
   getUniqueValueRenderer,
-  setLayerVisibleByTitleBatch,
   drawbuffer,
   highLightPolygonOutline,
   highlightByLayerGraphic,
   clearhightlight,
   addfeatureLayer,
-  gotoBySliderName,
   addBufferTextLayer,
 };

@@ -499,7 +499,7 @@ function layerList(opts = {}) {
         ];
         weatherLayerTitles.map(title => {
           const node = treeUtil.getTreeNodeByTitle(title);
-          const oldLayer = mapUtils.getLayerByTitle(agsGlobal.view, title);
+          const oldLayer = window.GeomapUtils.view.map2d.getLayerByTitle(window.agsGlobal.view, title);
           if (oldLayer && oldLayer.visible) {
             view.map.remove(oldLayer);
 

@@ -5,6 +5,11 @@
 
   var config = {
     portal: portalRoot,
+
+    protocolName4datasource: 'http',
+    domainName4datasource: 'esrichina3d.arcgisonline.cn',
+    webAdaptorName4datasource: 'portal',
+    username4searchItems4datasource: 'Product',
     /**
      * App Info
      */

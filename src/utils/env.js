@@ -26,5 +26,19 @@ export const MultiDateItem5 = AppConfig.multidateItemfive;
 export default {
     getParamAgs() {
         return window.agsGlobal;
-    }
+    },
+    getDomainName() {
+        return window.appcfg.domainName4datasource;
+      },
+      getWebAdaptorName() {
+        return window.appcfg.webAdaptorName4datasource;
+      },
+      getUsername4searchItems() {
+        return window.appcfg.username4searchItems4datasource;
+      },
+      getPortal4datasource() {
+        // http://esrichina3d.arcgisonline.cn/portal/
+        const portalUrl = window.appcfg.protocolName4datasource + '://' + window.appcfg.domainName4datasource + '/' + window.appcfg.webAdaptorName4datasource + '/';
+        return portalUrl;
+      },
 }
