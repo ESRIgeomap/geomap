@@ -1,5 +1,7 @@
-const GeomapUtis = window.agsUtils;
-const { jsapi } = GeomapUtis;
+// const GeomapUtis = window.agsUtils;
+// const { jsapi } = GeomapUtis;
+import geomapUtils from '@geomap/utils';
+const { jsapi } = geomapUtils;
 
 export { jsapi };
-export default GeomapUtis;
+export default geomapUtils;
