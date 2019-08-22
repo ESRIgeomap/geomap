@@ -19,8 +19,6 @@ import styles from './Toolbar2D.css';
 const ButtonGroup = Button.Group;
 
 const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
-
-
   /**
    * 【数据选择】点击回调
    * author：
@@ -50,9 +48,9 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
   };
 
   /**
-  *【影像工具】单击回调
-  * author：
-  */
+   *【影像工具】单击回调
+   * author：
+   */
   const imageTool = ({ key }) => {
     switch (key) {
       case 'juanMap': {
@@ -115,8 +113,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
       default:
         break;
     }
-  }
-
+  };
 
   /**
    * 【结果输出】各个子菜单点击事件
@@ -126,7 +123,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
   const outputSubmenuOnClick = ({ key }) => {
     switch (key) {
       case 'print2DMap':
-      dispatch({
+        dispatch({
           type: 'toolbar/updateCurrentView',
           payload: 'print-map-2d',
         });
@@ -143,8 +140,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
       default:
         break;
     }
-  }
-
+  };
 
   /**
    * 【工具箱】点击回调
@@ -154,6 +150,13 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
    */
   const measureLine = ({ key }) => {
     switch (key) {
+      //地图二维测量
+      case 'measure2DBox':
+        dispatch({
+          type: 'toolbar/updateCurrentView',
+          payload: 'measure-2d-box',
+        });
+        break;
       // 地图二维长度测量
       case 'measure2DLine':
         dispatch({
@@ -197,17 +200,20 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
         }
         break;
       }
-     
+
       default:
         break;
     }
-  }
-
+  };
 
   //工具箱下拉菜单UI构建
   const renderMenuItems = () => {
     const items = [];
     items.push([
+      <Menu.Item key="measure2DBox" style={{ textAlign: 'center' }}>
+        <Icon type="edit" />
+        <span>&nbsp;测量</span>
+      </Menu.Item>,
       <Menu.Item key="measure2DLine" style={{ textAlign: 'center' }}>
         <Icon type="edit" />
         <span>&nbsp;测距</span>
@@ -231,7 +237,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
     ]);
 
     return items;
-  }
+  };
 
   //  影像工具下拉菜UI构建
   const renderYXMenuItems = () => {
@@ -253,7 +259,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
     ]);
 
     return items;
-  }
+  };
 
   /**
    * 结果输出下拉菜单UI构建
@@ -275,8 +281,7 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
     ]);
 
     return items;
-  }
-
+  };
 
   //影像工具menu
   const yx_menu = (
@@ -299,7 +304,6 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
     </Menu>
   );
 
-
   return (
     <div
       className={styles.toolbar}
@@ -311,44 +315,39 @@ const Toolbar2D = ({ agsmap, layerList, bookmark, dispatch }) => {
         <Button className={styles.btnStyle} onClick={showLayerList}>
           <Icon type="profile" />
           数据选择
-          </Button>
+        </Button>
         <Button className={styles.btnStyle} onClick={showPoltPanel}>
           <Icon type="highlight" />
           疑点标绘
-          </Button>
+        </Button>
 
         <Dropdown overlay={yx_menu} trigger={['click']}>
           <Button className={styles.btnStyle}>
             <Icon type="picture" theme="filled" />
             影像工具
-              <Icon type="down" />
+            <Icon type="down" />
           </Button>
         </Dropdown>
         <Dropdown overlay={jg_menu} trigger={['click']}>
           <Button className={styles.btnStyle}>
             <Icon type="picture" theme="filled" />
             结果输出
-              <Icon type="down" />
+            <Icon type="down" />
           </Button>
         </Dropdown>
         <Dropdown overlay={menu} trigger={['click']}>
           <Button className={styles.btnStyle}>
             <Icon type="medicine-box" theme="filled" />
             工具箱
-              <Icon type="down" />
+            <Icon type="down" />
           </Button>
         </Dropdown>
       </ButtonGroup>
 
-      <Avatar
-        style={{ marginLeft: '20px', backgroundColor: '#87d068' }}
-        icon="user"
-        size="large"
-      />
+      <Avatar style={{ marginLeft: '20px', backgroundColor: '#87d068' }} icon="user" size="large" />
     </div>
   );
-
-}
+};
 
 export default connect(({ agsmap, layerList, bookmark }) => {
   return {

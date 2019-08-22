@@ -5,9 +5,10 @@ import { ScrollContent } from '../layout';
 import ClosePanel from './ClosePanel';
 
 import * as Widgets from '../widgets';
-import {ACTION_MAP_PRINT_3D} from '../../constants/action-types';
+import { ACTION_MAP_PRINT_3D } from '../../constants/action-types';
+import Measure2DBox from '../measure2dbox';
 
-const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
+const RightContent = ({ dispatch, toolbar, maxHeight, Lightshadow }) => {
   function clear() {
     dispatch({ type: 'toolbar/updateCurrentView', payload: null });
   }
@@ -63,7 +64,19 @@ const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
           </ClosePanel>
         );
       }
-      default:break;
+      case 'measure-2d-box': {        
+        return (
+          <Measure2DBox
+            view={_.get(window.agsGlobal, 'view')}
+            // visible={toolbar.measure2dboxVisible}
+            onClose={() => {
+              dispatch({ type: 'toolbar/updateCurrentView', payload: null });
+            }}
+          />
+        );
+      }
+      default:
+        break;
     }
 
     return null;
@@ -72,9 +85,9 @@ const RightContent = ({ dispatch, toolbar, maxHeight ,Lightshadow}) => {
   return renderContent();
 };
 
-export default connect(({ toolbar,Lightshadow }) => {
-  return { 
+export default connect(({ toolbar, Lightshadow }) => {
+  return {
     toolbar,
     Lightshadow,
-   };
+  };
 })(RightContent);
