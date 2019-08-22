@@ -170,7 +170,7 @@ const Measure2DBox = ({ view, visible = true, onClose }) => {
           className={styles.close}
           onClick={() => {
             clearMeasureRes();
-            sketchModalHandle.remove();
+            sketchModalHandle&&sketchModalHandle.remove();
             if (onClose) onClose();
           }}
         >
