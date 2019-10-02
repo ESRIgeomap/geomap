@@ -21,7 +21,7 @@ class SearchResultList extends React.Component {
     if (restype === SearchConsts.LIST_RESULT_FIND) {
       this.props.dispatch({
         type: 'search/selectPoi',
-        payload: { item, index },
+        payload: { item, index, subMode: SearchConsts.SUBMODE_LOCATION_DETAIL },
       });
     }
 
@@ -120,8 +120,7 @@ class SearchResultList extends React.Component {
     if (restype === SearchConsts.LIST_RESULT_FIND) {
       return (
         <span className={styles.barText}>
-          {`共找到 ${this.props.search.list &&
-            this.props.data.length} 条搜索结果`}
+          {`共找到 ${this.props.data && this.props.data.length} 条搜索结果`}
         </span>
       );
     }
@@ -141,8 +140,7 @@ class SearchResultList extends React.Component {
   render() {
     const { restype, search } = this.props;
     const { poipager, nearbypager } = search;
-    const pager =
-      restype === SearchConsts.LIST_RESULT_FIND ? poipager : nearbypager;
+    const pager = restype === SearchConsts.LIST_RESULT_FIND ? poipager : nearbypager;
 
     return (
       <div className={styles.wrap}>
@@ -156,8 +154,9 @@ class SearchResultList extends React.Component {
               total: this.props.data && this.props.data.length,
             }}
             dataSource={
-              this.props.data &&
-              this.props.data.slice(6 * (pager.current - 1), 6 * pager.current)
+              (this.props.data &&
+                this.props.data.slice(6 * (pager.current - 1), 6 * pager.current)) ||
+              []
             }
             renderItem={this.renderItem}
           />

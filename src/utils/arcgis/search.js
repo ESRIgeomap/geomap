@@ -11,8 +11,7 @@ import {
 } from '../../constants/search';
 import { IDX_LAYER_SEARCH } from '../../constants/layer-index';
 
-import * as jsapi from '../jsapi';
-import env from '../env';
+import { jsapi } from '../../constants/geomap-utils';
 
 let inst;
 const ID_GROUP_LAYER = 'layer-search-group';
@@ -21,7 +20,7 @@ const ID_LABEL_LAYER = 'layer-search-label';
 
 const DRAW_SYMBOL = {
   type: 'picture-marker',
-  url: './images/svg_location_red.png',
+  url: './images/busline/svg_location_red.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',
@@ -29,7 +28,7 @@ const DRAW_SYMBOL = {
 
 const HIGHLIGHT_SYMBOL = {
   type: 'picture-marker',
-  url: './images/svg_location_highlight.png',
+  url: './images/busline/svg_location_highlight.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',
@@ -47,7 +46,7 @@ const BUFFER_SYMBOL = {
 
 const PIN_SYMBOL = {
   type: 'picture-marker',
-  url: './images/pin.png',
+  url: './images/busline/pin.png',
   width: '32px',
   height: '32px',
   yoffset: '16px',
@@ -224,9 +223,9 @@ class SearchGraphicUtil {
         x: res.geometry.x,
         y: res.geometry.y,
         spatialReference:
-          env.getParamAgs().view.spatialReference === '102100'
+          window.agsGlobal.view.spatialReference === '102100'
             ? { wkid: 4326 }
-            : env.getParamAgs().view.spatialReference,
+            : window.agsGlobal.view.spatialReference,
       };
 
       const [Graphic] = await jsapi.load(['esri/Graphic']);
@@ -355,9 +354,9 @@ class SearchGraphicUtil {
           radiusUnit: 'meters',
           center: point.geometry,
           spatialReference:
-            env.getParamAgs().view.spatialReference === '102100'
+            window.agsGlobal.view.spatialReference === '102100'
               ? { wkid: 4326 }
-              : env.getParamAgs().view.spatialReference,
+              : window.agsGlobal.view.spatialReference,
         }),
         symbol: BUFFER_SYMBOL,
       })
@@ -376,7 +375,7 @@ class SearchGraphicUtil {
         type: 'point',
         x: res.geometry.x,
         y: res.geometry.y,
-        spatialReference: env.getParamAgs().view.spatialReference,
+        spatialReference: window.agsGlobal.view.spatialReference,
       };
       lyr.add(
         new Graphic({

@@ -1,0 +1,289 @@
+.leftPanel {
+  /*width: 425px;*/
+  position: absolute;
+  /* left: 300px; */
+  /* top: 20px; */
+  /* bottom: 15px; */
+  z-index: 999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  flex: none;
+  height: 38px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  pointer-events: all;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.resultContainer {
+  margin-top: 5px;
+  position: absolute;
+  /* bottom: 0px; */
+  flex: none;
+  overflow: auto;
+  width: 100%;
+  /* height: 100%; */
+  top: 40px;
+  overflow-x: hidden;
+}
+
+.input {
+  flex: auto;
+  height: 100%;
+  border: none;
+}
+
+.inputgroup {
+  flex: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.inputhint {
+  background: #ececec;
+  color: #666;
+  padding: 0 10px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+
+.dirselector {
+  flex: auto;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.dirbtnwrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /*background: #f8f8f8;*/
+  border-radius: 0;
+  /*border-top: rgba(143, 141, 141, 0.26) 1px solid;*/
+  /*border-bottom: rgba(143, 141, 141, 0.26) 1px solid;*/
+}
+
+.dirbtnstub {
+  flex: none;
+  height: 38px;
+  width: 1px;
+  background: #eee;
+  border: none;
+  box-sizing: border-box;
+}
+
+.dirbtn {
+  flex: auto;
+  color: #3385ff;
+  border: none;
+  border-radius: 0px;
+  height: 38px;
+  width: 38px;
+  font-size: 20px;
+  background-color: #f8f8f8;
+}
+
+.dirclosebtn {
+  flex: auto;
+  color: #999999;
+  border: none;
+  border-radius: 0;
+  height: 38px;
+  width: 38px;
+  font-size: 20px;
+}
+
+.searchbtn {
+  flex: none;
+  color: #7c8196;
+  border: none;
+  border-radius: 0;
+  height: 38px;
+  width: 38px;
+  font-size: 20px;
+}
+
+.controlBtn {
+  color: #1870ff;
+  padding: 8px 6px;
+  float: right;
+}
+
+.controlBtn:hover {
+  /* color:white; */
+  font-weight: bold;
+}
+
+.typeContainer {
+  position: absolute;
+  top: 38px;
+  /* left: 1px; */
+  width: 395px;
+  height: auto;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 99999;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.categoryItem {
+  padding: 10px 6px;
+  font-size: 90%;
+  text-decoration: none;
+  display: inline-block;
+  color: #5f6477;
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.categoryItem:after {
+  content: '';
+  display: block;
+  z-index: 9;
+  visibility: visible;
+  width: 1px;
+  background: #e8e8e8;
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  right: -1px;
+  margin-right: 1px
+}
+
+.searchBoxType {
+  box-sizing: border-box;
+  padding: 9px 5px 9px 12px;
+  line-height: 20px;
+  font-size: 14px;
+  height: 38px;
+  color: #999;
+  position: relative;
+  float: left;
+  border-right: none;
+  /*border-left: 1px solid rgba(143, 141, 141, 0.26);*/
+  /*border-top: 1px solid rgba(143, 141, 141, 0.26);*/
+  /*border-bottom: 1px solid rgba(143, 141, 141, 0.26);*/
+  background: white;
+}
+
+.searchBoxTypeName {
+  box-sizing: border-box;
+  border: 0;
+  padding: 2px 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  line-height: 20px;
+  font-size: 14px;
+  height: 38px;
+  color: #333;
+  position: relative;
+  width: 100%;
+  float: none;
+}
+
+.moreBtnIcon {
+  /* float: right; */
+}
+
+.collapseTitleDiv {
+  display: inline-block;
+  width: 99.5%;
+  height: 45px;
+  overflow: hidden;
+  position: absolute;
+  background: #fff !important;
+  z-index: 100;
+  box-sizing: border-box;
+  padding: 10px;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+  cursor: pointer;
+  -webkit-transition: color 2s;
+  transition: color 2s;
+  pointer-events: auto;
+  color: #3385ff;
+}
+
+.hideCollapseTitleDiv {
+  width: 100%;
+  height: 45px;
+  overflow: hidden;
+  position: absolute;
+  background: #fff !important;
+  z-index: 100;
+  box-sizing: border-box;
+  padding: 10px;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+  cursor: pointer;
+  -webkit-transition: color 2s;
+  transition: color 2s;
+  display: none;
+  color: #fff;
+}
+
+.resultPanelOpen {
+  flex: 0 1 auto;
+  /* margin-top: 4px; */
+  width: 395px;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ddd;
+  /* position: absolute; */
+  bottom: 10px;
+  /* top: 10px; */
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+  -webkit-transition: max-height 1.5s;
+  transition: max-height 1.5s;
+  max-height: 5000px;
+
+  display: inline-block;
+}
+
+.resultPanelClose {
+  flex: 0 1 auto;
+  margin-top: 4px;
+  width: 395px;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ddd;
+  position: absolute;
+  bottom: 10px;
+  top: 40px;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+  -webkit-transition: max-height .4s;
+  transition: max-height .4s;
+  max-height: 45px;
+
+  display: none;
+  overflow: hidden;
+}
+
+.detailPanel {
+  margin-top: 5px;
+  position: absolute;
+  bottom: 0px;
+  flex: none;
+  overflow: auto;
+  width: 100%;
+  /* height: 100%; */
+  top: 40px;
+  overflow-x: hidden;
+  pointer-events: all;
+}

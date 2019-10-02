@@ -1,38 +1,46 @@
 .wrap {
   flex: 0 1 auto;
-  margin-top: 4px;
-  width: 368px;
+  /* margin-top: 4px; */
+  /* width: 395px; */
   pointer-events: all;
   display: flex;
   flex-direction: column;
+  /* overflow: auto; */
+  /*background: rgba(59, 59, 59, 0.8);*/
+  background: white;
+  border: 1px solid #ddd;
+  /* height: 86%; */
+  /* position: absolute; */
+  /* bottom: 10px;
+    top: 40px; */
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
 }
 
 .bar {
-  flex: none;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 10px;
-  background: white;
+  /* color: rgb(255, 255, 255); */
+  padding: 8px 12px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  background: #fff !important;
+  border-bottom: 1px solid #eee;
 }
 
 .returnIcon {
-  color: #3285ff;
+  /*color: #000;*/
 }
 
 .barText {
-  color: #666;
+  color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   margin-left: 10px;
 }
 
 .content {
-  flex: auto;
-  margin-top: 4px;
-  background: white;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .itemtitle {
@@ -58,17 +66,26 @@
   padding: 15px;
 }
 
-.itemdesc > section {
+.itemdesc>section {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.itemdesc > section > h2 {
+.itemdesc>section>h2 {
   flex: none;
 }
 
-.itemdesc > section > p {
+.itemdesc>section>p {
   flex: auto;
   margin-left: 15px;
+}
+
+.itemDetailContent {
+  background: #fff;
+}
+
+.viewMileageMapIcon {
+  float: right;
+  /*font-size: 19px;*/
 }

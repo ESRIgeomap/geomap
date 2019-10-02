@@ -1,3 +1,13 @@
 {
-  "extends": "eslint-config-geomap"
+  "extends": "eslint-config-umi",
+  "plugins": [
+    "react-hooks"
+  ],
+  "globals": {
+    "echarts": true,
+    "THREE": true
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error"
+  }
 }

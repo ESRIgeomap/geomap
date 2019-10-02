@@ -1,0 +1,36 @@
+.settingdiv {
+    height: 50px;
+    .leftsetting {
+      height: 50px;
+      display: inline;
+      width:100px;
+      line-height: 50px;
+      float: left;
+      text-align: center;
+    }
+    .rightsetting {
+      height: 50px;
+      display: inline;
+      line-height: 50px;
+      width:220px;
+      float: left;
+      .fillcolor {
+        margin-top: 9px;
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+      
+      .popover {
+        position: fixed;
+        z-index: 999;
+        .cover {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+  }  

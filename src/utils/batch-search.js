@@ -1,5 +1,4 @@
-import * as jsapi from './jsapi';
-import env from './env';
+import { jsapi } from '../constants/geomap-utils';
 
 import { queryPoi, queryNearbyPoi } from '../services/tianditu/searchpoi';
 
@@ -90,28 +89,32 @@ export default class BatchSearch {
     const result = await queryPoi(keyword, '15', bound, '0');
     if (result && result.data) {
       const { pois } = result.data;
-      this.results = pois.map(poi => {
-        const coordArr = poi.lonlat.split(' ');
-        const geom = webMercatorUtils.lngLatToXY(+coordArr[0], +coordArr[1]);
-        return new Graphic({
-          attributes: {
-            name: poi.name,
-            address: poi.address,
-          },
-          symbol: {
-            type: 'simple-marker',
-            color: 'red',
-          },
-          geometry: {
-            type: 'point',
-            x: geom[0],
-            y: geom[1],
-            spatialReference: {
-              wkid: 102100,
+      if (pois) {
+        this.results = pois.map(poi => {
+          const coordArr = poi.lonlat.split(' ');
+          const geom = webMercatorUtils.lngLatToXY(+coordArr[0], +coordArr[1]);
+          return new Graphic({
+            attributes: {
+              name: poi.name,
+              address: poi.address,
             },
-          },
+            symbol: {
+              type: 'simple-marker',
+              color: 'red',
+            },
+            geometry: {
+              type: 'point',
+              x: geom[0],
+              y: geom[1],
+              spatialReference: {
+                wkid: 102100,
+              },
+            },
+          });
         });
-      });
+      } else {
+        this.results = [];
+      }
     }
     // this.results = arrResult.reduce((prev, curr) => prev.concat(curr.features), []);
 
@@ -171,29 +174,33 @@ export default class BatchSearch {
     const result = await queryNearbyPoi(keyword, `${lonlat[0]},${lonlat[1]}`, '11', bound, '0');
     if (result && result.data) {
       const { pois } = result.data;
-      this.results = pois.map(poi => {
-        const coordArr = poi.lonlat.split(' ');
-        const geom = webMercatorUtils.lngLatToXY(+coordArr[0], +coordArr[1]);
+      if (pois) {
+        this.results = pois.map(poi => {
+          const coordArr = poi.lonlat.split(' ');
+          const geom = webMercatorUtils.lngLatToXY(+coordArr[0], +coordArr[1]);
 
-        return new Graphic({
-          attributes: {
-            name: poi.name,
-            address: poi.address,
-          },
-          symbol: {
-            type: 'simple-marker',
-            color: 'red',
-          },
-          geometry: {
-            type: 'point',
-            x: geom[0],
-            y: geom[1],
-            spatialReference: {
-              wkid: 102100,
+          return new Graphic({
+            attributes: {
+              name: poi.name,
+              address: poi.address,
             },
-          },
+            symbol: {
+              type: 'simple-marker',
+              color: 'red',
+            },
+            geometry: {
+              type: 'point',
+              x: geom[0],
+              y: geom[1],
+              spatialReference: {
+                wkid: 102100,
+              },
+            },
+          });
         });
-      });
+      } else {
+        this.results = [];
+      }
     }
     return this.results;
   }
@@ -212,7 +219,7 @@ export default class BatchSearch {
             distance: tolerence,
             units: 'meters',
             where: serv.catquery.replace('$code$', keyword),
-            outSpatialReference: env.getParamAgs().view.spatialReference,
+            outSpatialReference: window.agsGlobal.view.spatialReference,
           })
         )
       )

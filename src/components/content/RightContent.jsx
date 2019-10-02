@@ -1,0 +1,93 @@
+import { connect } from 'dva';
+import _ from 'lodash';
+import { ScrollContent } from '../layout';
+
+import ClosePanel from './ClosePanel';
+
+import * as Widgets from '../widgets';
+import { ACTION_MAP_PRINT_3D } from '../../constants/action-types';
+import Measure2DBox from '../measure2dbox';
+
+const RightContent = ({ dispatch, toolbar, maxHeight, Lightshadow }) => {
+  function clear() {
+    dispatch({ type: 'toolbar/updateCurrentView', payload: null });
+  }
+
+  function renderContent() {
+    switch (toolbar.current) {
+      case 'measure-line-2d': {
+        return (
+          <ClosePanel title="2D 测距" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureLine2D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-area-2d': {
+        return (
+          <ClosePanel title="2D 测面" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureArea2D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'legend': {
+        return (
+          <ClosePanel title="地图图例" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.Legend view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-line-3d': {
+        return (
+          <ClosePanel title="3D 测距" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureLine3D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-area-3d': {
+        return (
+          <ClosePanel title="3D 测面" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.MeasureArea3D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'print-map-2d': {
+        return (
+          <ClosePanel title="2D 打印" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.PrintMap2D view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'view-clip-map': {
+        return (
+          <ClosePanel title="截屏" maxHeight={maxHeight} onClose={clear}>
+            <Widgets.ViewClipMap view={_.get(window.agsGlobal, 'view')} />
+          </ClosePanel>
+        );
+      }
+      case 'measure-2d-box': {        
+        return (
+          <Measure2DBox
+            view={_.get(window.agsGlobal, 'view')}
+            // visible={toolbar.measure2dboxVisible}
+            onClose={() => {
+              dispatch({ type: 'toolbar/updateCurrentView', payload: null });
+            }}
+          />
+        );
+      }
+      default:
+        break;
+    }
+
+    return null;
+  }
+
+  return renderContent();
+};
+
+export default connect(({ toolbar, Lightshadow }) => {
+  return {
+    toolbar,
+    Lightshadow,
+  };
+})(RightContent);

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as jsapi from '../jsapi';
+import { jsapi } from '../../constants/geomap-utils';
 
 const ZOOM_LABEL_VISIBLE = 11;
 const SCALE_LABEL_VISIBLE = 5000;

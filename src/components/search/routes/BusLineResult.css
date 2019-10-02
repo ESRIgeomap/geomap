@@ -1,0 +1,230 @@
+.wrap {
+  flex: 0 1 auto;
+  margin-top: 4px;
+  width: 395px;
+  background: #fff;
+  pointer-events: all;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.headerWrap {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+.lineStationIcon {
+  display: inline-block;
+  background-image: url(../images/icons.png);
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+}
+
+.lineSubject {
+  color: #000;
+}
+
+.lineSubjectTitle {
+  color: #3285ff;
+  font-size: 14px;
+}
+
+.lineSubjectSep {
+  color: #3285ff;
+  margin: 0 2px;
+}
+
+.lineDesc {
+  margin-top: 4px;
+  color: #000;
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lineDescSep {
+  margin: 0 12px;
+}
+
+.lineDetailWrap {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.lineDetailBusWrap {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* background: #f0f6ff; */
+}
+
+.lineDetailIcon {
+  flex: none;
+  width: 40px;
+  text-align: center;
+}
+
+.lineDetailStartIconWrap {
+  width: 3px;
+  background: #e6e6e6;
+  position: absolute;
+  top: 15px;
+  bottom: 0;
+  left: 15px;
+}
+
+.lineDetailEndIconWrap {
+  width: 3px;
+  color: white;
+  background: #e6e6e6;
+  position: absolute;
+  top: 0;
+  bottom: 15px;
+  left: 15px;
+}
+
+.lineDetailBusIconWrap {
+  width: 3px;
+  background: #b1cffc;
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 15px;
+}
+
+.lineDetailStartIcon {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+}
+
+.lineDetailEndIcon {
+  position: absolute;
+  bottom: 15px;
+  left: 5px;
+}
+
+.lineDetailBusIcon {
+  position: absolute;
+  top: 56px;
+  left: 5px;
+}
+
+.lineDetailBusLine {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  color: #3285ff;
+  font-size: 14px;
+}
+
+.lineDetailBusLineSolution {
+  margin-left: 25px;
+  /* height: 70px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.lineDetailBusLineSolution > span {
+  margin-bottom: 4px;
+}
+
+.lineDetailWalkIconWrap {
+  width: 3px;
+  background: #e6e6e6;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+}
+.lineDetailWalkIcon {
+  position: absolute;
+    top: 13px;
+    left: 5px;
+    width: 26px;
+}
+
+.lineDetailContentWrap {
+  flex: auto;
+  padding: 15px 0 15px 25px;
+}
+
+.lineDetailStartContent {
+  margin-left: 25px;
+  font-weight: bold;
+  font-size: 14px;
+  /*color: rgba(255, 255, 255, 0.5);*/
+  font-family: 'Microsoft YaHei';
+}
+
+.lineDetailStartWalk {
+}
+
+.startEndIcon {
+  display: inline-block;
+  width: 12px;
+  height: 11px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  margin-left: 3px;
+}
+
+.segIcon {
+  display: inline-block;
+  background-image: url(../images/icons.png);
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+}
+
+.lineDetailContent {
+  flex: auto;
+}
+
+.lineDetailSegment {
+  margin-left: 25px;
+  font-size: 12px;
+  /* color: rgba(255, 255, 255, 0.5);; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  /* border-bottom: 1px solid #fcfcff; */
+}
+
+:global(.busline-result-collapse) {
+  margin: 12px 0;
+  border: none;
+  background: white;
+}
+
+:global(.busline-result-collapse) > :global(.ant-collapse-item) {
+  /* background: #f0f6ff; */
+  margin: 15px 15px 0 15px;
+  box-sizing: border-box;
+  border: 1px solid #ececec;
+}
+
+:global(.busline-result-collapse)
+  > :global(.ant-collapse-item)
+  > :global(.ant-collapse-header) {
+  padding: 12px 12px 12px;
+}
+
+:global(.busline-result-collapse)
+  > :global(.ant-collapse-item)
+  > :global(.ant-collapse-header)
+  > :global(.ant-collapse-arrow) {
+  left: unset;
+  right: 20px;
+  top: 34px;
+  color: #666;
+}

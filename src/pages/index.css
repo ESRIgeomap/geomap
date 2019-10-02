@@ -15,15 +15,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color:#505360;
+  background-color: #505360;
 }
 
-
-.title{
-  display:block;
+.title {
+  display: block;
   font-size: 20px;
-  color:white;
-  float:right;
+  color: white;
+  float: right;
 }
 
 .actionContainer {
@@ -32,7 +31,6 @@
   flex-direction: row;
   align-items: center;
 }
-
 
 .btn {
   margin: 0 10px;
@@ -48,16 +46,31 @@
   position: relative;
 }
 
-.viewsplitDiv {
-  flex: auto;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  position: relative;
-}
-
 .viewDiv > div {
   flex: auto;
+}
+
+.viewDiv .componentBasemap {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  right: 10px;
+  bottom: 25px;
+  z-index: 1;
+}
+
+.viewDiv .componentZoom {
+  position: absolute;
+  bottom: 100px;
+  right: 10px;
+  z-index: 1;
+}
+
+.viewDiv .componentCompass {
+  position: absolute;
+  bottom: 190px;
+  right: 0;
+  z-index: 12;
 }
 
 .fenpingDiv {
@@ -91,4 +104,21 @@
   /* left: 30px; */
   bottom: 100px;
   z-index: 100;
+}
+
+.exitroll {
+  position: absolute;
+  top: 76px;
+  left: 70px;
+  z-index: 200000;
+}
+
+.mapRightWrap {
+  position: absolute;
+  top: 70px;
+  bottom: 10px;
+  right: 50px;
+  width: 360px;
+  z-index: 10;
+  pointer-events: none;
 }

@@ -1,0 +1,48 @@
+@panelHeight: 835px;
+@titleHeight: 36px;
+.wrap {
+  position: absolute;
+  right: 85px;
+  top: 116px;
+  //bottom: 65px;
+  background: #ffffff;
+  // border: 1px solid rgba(129, 129, 129, 0.6);
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1px 2px 1px;
+  width: 425px;
+  // height: @panelHeight;
+  // overflow-y: auto;
+  .title {
+    font-size: 15px;
+    width: 100%;
+    line-height: 20px;
+    border-radius: 4px 4px 0 0;
+    padding: 8px 12px;
+    color: #fff;
+    background: #1870ff !important;
+    border: none;
+    height: @titleHeight;
+    .close {
+      float: right;
+      font-size: 16px;
+      color: #ffffff;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .content {
+    // padding-bottom: -50px;
+    width: 100%;
+    // height: @panelHeight - @titleHeight;
+    overflow-y: auto;
+    // color:#fff;
+    
+  }  
+}
+.editTool {
+  position: absolute;
+  right:650px;
+  top:22px;
+
+}

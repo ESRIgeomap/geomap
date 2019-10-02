@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Icon } from 'antd';
+import { Icon, Table } from 'antd';
 import * as SearchConsts from '../../constants/search';
 
 import styles from './SearchResultDetail.css';
@@ -12,9 +12,7 @@ class SearchResultDetail extends React.Component {
     }
 
     if (this.props.restype === SearchConsts.LIST_RESULT_QUERY) {
-      return this.props.search.nearbypoi.attributes[
-        window.poiCfg[0].locationField
-      ];
+      return this.props.search.nearbypoi.attributes[window.poiCfg[0].locationField];
     }
 
     return '';
@@ -38,11 +36,8 @@ class SearchResultDetail extends React.Component {
     if (this.props.restype === SearchConsts.LIST_RESULT_FIND) {
       return this.props.search.poi.attributes[window.poiCfg[0].displayField];
     }
-
     if (this.props.restype === SearchConsts.LIST_RESULT_QUERY) {
-      return this.props.search.nearbypoi.attributes[
-        window.poiCfg[0].displayField
-      ];
+      return this.props.search.nearbypoi.attributes[window.poiCfg[0].displayField];
     }
     return null;
   }
@@ -64,6 +59,7 @@ class SearchResultDetail extends React.Component {
         ) : null}
         <div className={styles.content}>
           <div className={styles.itemtitle}>{this.renderTitle()}</div>
+
           {this.renderBar()}
           <div className={styles.itemdesc}>
             <section>
@@ -79,6 +75,6 @@ class SearchResultDetail extends React.Component {
   }
 }
 
-export default connect(({ search }) => {
-  return { search };
+export default connect(({ search, spacequery }) => {
+  return { search, spacequery };
 })(SearchResultDetail);

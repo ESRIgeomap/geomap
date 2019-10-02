@@ -1,0 +1,23 @@
+.searchResultCollapsePanel{
+    position: absolute;
+    top: 114px;
+    left: 15px;
+    width: 397px;
+    /* z-index: 9; */
+    bottom: 15px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
+}
+
+.collapsePanel{
+    background: transparent !important; 
+}
+.panelCloseBtn{
+    float: right;
+    line-height: 26px;
+}
+.panelTitleReturn{
+    color: #3385ff;
+    cursor: pointer;
+}
