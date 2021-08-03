@@ -19,7 +19,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-document-title": "^2.0.3",
     "react-github-button": "^0.1.11",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "@types/arcgis-js-api": "^4.9.0",
